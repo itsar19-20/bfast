@@ -1,5 +1,7 @@
 # B-Fast
 
+![B-Fast](docs/images/b-fast.png "B-fast")
+
 Progetto iniziato mercoledì 11 dicembre 2019.
 
 ## Componenti del gruppo
