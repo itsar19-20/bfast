@@ -1,0 +1,5 @@
+accesso al pannello di controllo ma in questo caso del nuovo piano hosting > accesso a phpMyAdmin) e differisce unicamente per la sezione da consultare nella dashboard phpMyAdmin,
+ovvero Importa (Import).
+Anche in questo frangente possiamo lasciare le impostazioni di default. Clicchiamo sul bottone Seleziona File (Choose File) e dalla finestra di dialogo che si aprirà sfogliamo 
+le cartelle del nostro computer fin quando non avremo raggiunto quella con il file .SQL precedentemente salvato. Ora non ci resta che selezionarlo e dare l’ok. 
+Clicchiamo infine sul bottone Go a fondo pagina per ultimare la procedura di importazione del database.
