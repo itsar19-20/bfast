@@ -14,7 +14,7 @@
         <properties>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/b.fast?serverTimezone=America/Los_Angeles"/>
-            <property name="javax.persistence.jdbc.driver" value="org.eclipse.persistence.internal.jpa.deployment.JarFileArchive"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -30,7 +30,7 @@ public class LoginControllerUtente extends HttpServlet {
 			throws ServletException, IOException {
 		AutenticazioneUtente au = new AutenticazioneUtente();
 		Utente b = au.login(request.getParameter("mail"), request.getParameter("password"));
-		if (b != null) {
+		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/ok.html").forward(request, response);
