@@ -1,0 +1,8 @@
+New -> maven project -> maven webapp
+Configure -> Convert to JPA -> stabiliamo la connessione al db
+Settare le librerie
+JPA Tools -> generate entity from Tables -> crea un pacchetto(va messo dentro src/main/Java) -> all'interno classi riferite alle entità
+creare il pacchetto utils dove al su interno base della connessione alle entità
+creare il pacchetto business lo sviluppo di tutti i singoli use case
+controllers abbiamo uniamo la parte HTML con Java
+HTML 
