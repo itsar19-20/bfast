@@ -1,0 +1,4 @@
+Quando si va a modificare il db dobbiamo ricaricarlo qua su git
+N.B. bisogna avvisare quando modifichiamo il db
+Per prendere il DB modificato basta andare su piano hosting > accesso a phpMyAdmin) e differisce unicamente per la sezione da consultare nella dashboard phpMyAdmin,
+ovvero Esporta e selezionare come formato SQL.
