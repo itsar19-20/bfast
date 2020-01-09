@@ -35,8 +35,6 @@ public class Bar implements Serializable {
 
 	private String password;
 
-	private String posizione;
-
 	private float valutazione;
 
 	//bi-directional many-to-one association to Menu
@@ -122,14 +120,6 @@ public class Bar implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPosizione() {
-		return this.posizione;
-	}
-
-	public void setPosizione(String posizione) {
-		this.posizione = posizione;
 	}
 
 	public float getValutazione() {
