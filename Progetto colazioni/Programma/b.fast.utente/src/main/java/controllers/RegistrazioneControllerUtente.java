@@ -36,7 +36,7 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 			e.printStackTrace();
 		}
 		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
+			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}

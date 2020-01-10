@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
 public class Utente implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	
@@ -115,5 +116,12 @@ public class Utente implements Serializable {
 
 		return ordine;
 	}
+	
+	@Override
+	public String toString() {
+		return "Utente [cognome=" + cognome + ", email=" + email + ", nascità=" + nascità + ", nome=" + nome
+				+ ", password=" + password + ", telefono=" + telefono + ", ordines=" + ordines + "]";
+	}
+
 
 }

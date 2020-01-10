@@ -13,21 +13,16 @@
 <body>
 	<!-- main -->
 		<h1>Creative SignUp Form</h1>
-				<form class="form-signin" action="/registrazione" method="post">
-					  <label for="inputUser" class="sr-only">Nome</label>
-					  <input type="text" id="inputUser" class="form-control" placeholder="nome" required autofocus name="mail"></br>
-					  <label for="inputPassword" class="sr-only">Cognome</label>
-					  <input type="text" id="inputPassword" class="form-control" placeholder="cognome" required name="cognome"></br>
-					  <label for="inputPassword" class="sr-only">Nascita</label>
-					  <input type="text" id="inputPassword" class="form-control" placeholder="nascita" required name="nascita"></br>
-					  <label for="inputPassword" class="sr-only">Telefono</label>
-					  <input type="text" id="inputPassword" class="form-control" placeholder="telefono" required name="telefono"></br>
-					  <label for="inputPassword" class="sr-only">mail</label>
-					  <input type="text" id="inputPassword" class="form-control" placeholder="mail" required name="mail"></br>
-					  <label for="inputPassword" class="sr-only">password</label>
-					  <input type="password" id="inputPassword" class="form-control" placeholder="pass" required name="pass"></br>
-					  <label for="inputPassword" class="sr-only">Conferma password</label>
-					  <input type="password" id="inputPassword" class="form-control" placeholder="copass" required name="copass"></br>
+				<form class="form-signin" action="registrazione" method="get">
+					  Nome: <input type="text" name="nome" autofocus><br>
+  					  Cognome: <input type="text" name="cognome"><br>
+  					  Nascita: <input type="text" name="nascita" autofocus><br>
+  					  Telefono: <input type="text" name="telefono"><br>
+  					  Mail: <input type="text" name="mail" autofocus><br>
+  					  <label for="inputPassword" class="sr-only">Password</label>
+	  				  <input type="password" id="inputPassword" class="form-control" placeholder="pass" required name="pass">
+	  				  <label for="inputPassword" class="sr-only">Conferma Password</label>
+	  				  <input type="password" id="inputPassword" class="form-control" placeholder="copass" required name="copass">
 					<input type="submit" value="SIGNUP">
 				</form>
 				</body>
