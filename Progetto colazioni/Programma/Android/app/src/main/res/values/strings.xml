@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">b.fast(Utente)</string>
+    <string name="password_dimenticata"> <u>Password dimenticata</u> </string>
+    <string name="bfast">BFast</string>
+    <string name="button">Sign In</string>
+    <string name="devi_registrati"><u>Devi registrati</u></string>
+    <string name="todo">TODO</string>
+</resources>

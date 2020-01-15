@@ -1,0 +1,12 @@
+Fasi del progetto in eclipse
+1 Creazione maven project  -> webapp
+2 convertire il java project in un JPA
+3 abilitare tutte le librerie
+4 creare le classi dalle tabelle del db nel pacchetto model
+5 creare il JPA utils(dove andiamo a mettere tutte le cose utili per il programma es.collegamento al db).
+6 fare il pacchetto business dove andiamo a collegare il db a java
+7 fare il pacchetto controllers dove colleghiamo html a java e mandiamo i dati al business
+8 sviluppare la pagina webapp
+
+
+Ripetere i passi 6-7-8 per tutto il progetto
