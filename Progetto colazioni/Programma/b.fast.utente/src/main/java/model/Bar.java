@@ -26,6 +26,7 @@ public class Bar implements Serializable {
 
 	private String indirizzo;
 
+
 	private String nome;
 
 
@@ -85,6 +86,7 @@ public class Bar implements Serializable {
 		return this.indirizzo;
 	}
 
+
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
@@ -96,6 +98,7 @@ public class Bar implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 
 
 	public String getOrarioApertura() {

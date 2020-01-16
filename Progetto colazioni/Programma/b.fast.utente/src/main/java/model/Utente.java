@@ -13,20 +13,27 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
 public class Utente implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
-	
+
+
 	private String cognome;
+
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="`Data di nascita`")
+	private Date data_di_nascita;
 
 	@Id
 	private String email;
+
 
 
 	@Temporal(TemporalType.DATE)
 	private Date nascità;
 
 	private String nome;
+
 
 	private String password;
 
@@ -41,6 +48,7 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
+
 	public String getCognome() {
 		return this.cognome;
 	}
@@ -49,6 +57,15 @@ public class Utente implements Serializable {
 		this.cognome = cognome;
 	}
 
+
+
+	public Date getData_di_nascita() {
+		return this.data_di_nascita;
+	}
+
+	public void setData_di_nascita(Date data_di_nascita) {
+		this.data_di_nascita = data_di_nascita;
+	}
 
 	public String getEmail() {
 		return this.email;
@@ -77,6 +94,7 @@ public class Utente implements Serializable {
 	}
 
 
+
 	public String getPassword() {
 		return this.password;
 	}
@@ -84,6 +102,7 @@ public class Utente implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 	public int getTelefono() {
@@ -116,12 +135,5 @@ public class Utente implements Serializable {
 
 		return ordine;
 	}
-	
-	@Override
-	public String toString() {
-		return "Utente [cognome=" + cognome + ", email=" + email + ", nascità=" + nascità + ", nome=" + nome
-				+ ", password=" + password + ", telefono=" + telefono + ", ordines=" + ordines + "]";
-	}
-
 
 }

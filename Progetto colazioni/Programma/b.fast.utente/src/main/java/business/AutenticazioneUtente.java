@@ -19,8 +19,13 @@ public class AutenticazioneUtente {
 				_return = null;
 			}
 		}
+		corrente(_return);
 		em.close();
 		return _return;
+	}
+	
+	public Utente corrente(Utente ut) {
+		return ut;
 	}
 
 }

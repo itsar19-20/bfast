@@ -27,6 +27,7 @@ public class RegistrazioneUtente {
 			}
 			
 		}
+		corrente(_return);
 		return _return;
 	}
 
@@ -46,4 +47,7 @@ public class RegistrazioneUtente {
 	    return v;
 	}
 	
+	public Utente corrente(Utente ut) {
+		return ut;
+	}
 }

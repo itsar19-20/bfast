@@ -16,15 +16,12 @@ public class Appartiene implements Serializable {
 	@Id
 	private int id;
 
+	private int IDprFK;
+
 	//bi-directional many-to-one association to Menu
 	@ManyToOne
 	@JoinColumn(name="IDmeFK")
 	private Menu menu;
-
-	//bi-directional many-to-one association to Prodotto
-	@ManyToOne
-	@JoinColumn(name="IDprFK")
-	private Prodotto prodotto;
 
 	public Appartiene() {
 	}
@@ -37,20 +34,20 @@ public class Appartiene implements Serializable {
 		this.id = id;
 	}
 
+	public int getIDprFK() {
+		return this.IDprFK;
+	}
+
+	public void setIDprFK(int IDprFK) {
+		this.IDprFK = IDprFK;
+	}
+
 	public Menu getMenu() {
 		return this.menu;
 	}
 
 	public void setMenu(Menu menu) {
 		this.menu = menu;
-	}
-
-	public Prodotto getProdotto() {
-		return this.prodotto;
-	}
-
-	public void setProdotto(Prodotto prodotto) {
-		this.prodotto = prodotto;
 	}
 
 }
