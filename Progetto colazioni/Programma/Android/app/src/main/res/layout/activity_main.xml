@@ -75,15 +75,14 @@
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
-        android:background="@android:color/holo_red_light"
+        android:background="@drawable/mybutton"
         android:shadowRadius="@android:integer/config_shortAnimTime"
         android:text="@string/button"
-        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3"
@@ -95,12 +94,14 @@
         android:layout_height="25dp"
         android:layout_marginTop="32dp"
         android:text="@string/devi_registrati"
+        android:onClick="onClick"
+        android:clickable="true"
         android:textColor="#115E99"
         android:textColorLink="#115E99"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

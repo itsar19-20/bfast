@@ -2,9 +2,10 @@ package com.ifts.bfastutente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.*;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,5 +13,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView tv = findViewById(R.id.textView2);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_registrazione);
+            }
+        });
     }
 }
