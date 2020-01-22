@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import business.AutenticazioneUtente;
+import business.PasswordDimenticata;
 import business.Ordini;
-import business.CambioPassword;
 import model.Utente;
 
-@WebServlet("/login")
-public class LoginControllerUtente extends HttpServlet {
+@WebServlet("/PasswordDimenticata")
+public class ControllerPasswordDimenticata extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginControllerUtente() {
+	public ControllerPasswordDimenticata() {
 		super();
 	}
 
@@ -30,15 +29,11 @@ public class LoginControllerUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AutenticazioneUtente au = new AutenticazioneUtente();
-		Utente b = au.login(request.getParameter("mail"), request.getParameter("password"));
+		PasswordDimenticata au = new PasswordDimenticata();
+		Utente b = au.cambio(request.getParameter("mail"), request.getParameter("password"),request.getParameter("copassword"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			CambioPassword cp = new CambioPassword();
-			cp.utente(request.getParameter("mail"));
-			Ordini o = new Ordini();
-			o.utente(request.getParameter("mail"));
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

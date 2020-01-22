@@ -11,10 +11,10 @@ import utils.JPAUtil;
 
 public class RegistrazioneUtente {
 
-	Utente _return;
+	
 	public Utente registrazione(String nome,String cognome,String nascita,String telefono,String mail,String pass,String copass) throws ParseException
 	{
-		_return = null;
+		Utente _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Utente.class, mail);
 		if (_return == null) {
@@ -28,7 +28,6 @@ public class RegistrazioneUtente {
 			}
 			
 		}
-		corrente();
 		return _return;
 	}
 
@@ -48,7 +47,4 @@ public class RegistrazioneUtente {
 	    return v;
 	}
 	
-	public Utente corrente() {
-		return this._return;
-	}
 }

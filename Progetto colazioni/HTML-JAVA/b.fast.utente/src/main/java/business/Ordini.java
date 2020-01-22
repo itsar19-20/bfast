@@ -12,26 +12,24 @@ import business.AutenticazioneUtente;
 
 public class Ordini {
 
+	Utente _return; 
 	Ordine o;
 	public Ordini finale() {
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Ordine o = new Ordine();
-		Utente u = utente();
-		o.setUtente(u);
+		o.setUtente(_return);
 		corrente();
 		return null;
 	}
 	
-	private Utente utente() {
-		Utente u =new Utente();
-		AutenticazioneUtente at = new AutenticazioneUtente();
-		u=at.corrente();
-		if(u == null){
-			RegistrazioneUtente ut = new RegistrazioneUtente();
-			u= ut.corrente();
-		}
-		return u;
+	
+	public Utente utente(String mail) {
+		Utente _return = null;
+		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+		_return = em.find(Utente.class, mail);
+		this._return = _return;
+		return _return;
 	}
+	
 	
 	public Ordine corrente() {
 		return this.o;

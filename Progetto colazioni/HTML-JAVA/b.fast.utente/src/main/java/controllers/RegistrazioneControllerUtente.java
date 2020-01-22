@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import business.RegistrazioneUtente;
 import model.Utente;
+import business.CambioPassword;
+import business.Ordini;
 
 @WebServlet("/registrazione")
 public class RegistrazioneControllerUtente extends HttpServlet{
@@ -38,6 +40,10 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
+			CambioPassword cp = new CambioPassword();
+			cp.utente(request.getParameter("mail"));
+			Ordini o = new Ordini();
+			o.utente(request.getParameter("mail"));
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

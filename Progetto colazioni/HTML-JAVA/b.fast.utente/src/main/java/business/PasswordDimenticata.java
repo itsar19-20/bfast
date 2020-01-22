@@ -6,22 +6,21 @@ import model.Utente;
 import utils.JPAUtil;
 
 
-public class AutenticazioneUtente {
+public class PasswordDimenticata {
 
-	public Utente login(String mail, String password) {
-		Utente _return = null;
-		// cerco l'utente nel DB
-
+	Utente _return; 
+	public Utente cambio(String mail,String password, String Copassword) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Utente.class, mail);
 		if (_return != null) {
-			// utente trovato; controllo la password
 			if (!password.contentEquals(_return.getPassword())) {
-				_return = null;
+				_return.setPassword(password);
+				em.getTransaction().begin();
+				em.persist(_return);
+				em.getTransaction().commit();			
 			}
 		}
-		em.close();
 		return _return;
 	}
-
+	
 }
