@@ -4,36 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
     tools:context=".MainActivity"><![CDATA[
 
     " />
+
+
+
+
+
+
 
     ]]>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="135dp"
-        android:layout_height="100dp"
+        android:layout_width="178dp"
+        android:layout_height="161dp"
         android:layout_gravity="center"
+        android:layout_marginTop="88dp"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="122dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/bfast"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round2" />
 
     <EditText
         android:id="@+id/editText2"
@@ -43,6 +38,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/email"
+        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -58,6 +54,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
+        android:textColorHint="#0829E2"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textAlignment="center"
@@ -70,13 +67,14 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/mybutton"
         android:shadowRadius="@android:integer/config_shortAnimTime"
         android:text="@string/button"
+        android:textColor="#FCFAFA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Sign In" />
 
@@ -84,52 +82,56 @@
         android:id="@+id/editText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/conferma_password"
+        android:textColorHint="#0829E2"
         android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/data_di_nascita"
+        android:textColorHint="#0829E2"
         android:inputType="date"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nome"
+        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/editText8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/cognome"
+        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/editText6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
