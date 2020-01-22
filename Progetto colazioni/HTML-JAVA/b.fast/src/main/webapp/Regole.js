@@ -1,4 +1,4 @@
-function validazione (e){
+/*function validazione (e){
     e.preventDefault();
     var emailUser = document.getElementById('emailV').value;
     var emailRGEX =/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
@@ -7,8 +7,8 @@ function validazione (e){
 
     if(emailResult == false)
     {
-        alert('Please enter a valid email address');
+        alert('Email non esistente!');
         return false;
     }
     return document.forms[0].submit();
-}
+}*/

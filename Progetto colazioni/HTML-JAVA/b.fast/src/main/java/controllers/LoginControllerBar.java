@@ -29,7 +29,7 @@ public class LoginControllerBar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		AutenticazioneBar am = new AutenticazioneBar();
-		Bar b = am.login(request.getParameter("emailV"), request.getParameter("password"));
+		Bar b = am.login(request.getParameter("ID"), request.getParameter("password"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

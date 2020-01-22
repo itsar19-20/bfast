@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="it-it">
+<meta charset="utf-8">
 
 <head>
     <title>Bfast</title>
@@ -50,7 +51,7 @@
     </div>
 
 
-    <form action="/login" method="POST">
+    <form class="form-signin" action="login" method="post">
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
@@ -60,16 +61,13 @@
                 <div class="login-form">
                     <!--UserName-->
                     <div class="control-group">
-                        <input type="text" id="emailV" class="login-field" value="" placeholder="username" name="username" style="width: 100%;">
-                        <label class="login-field-icon fui-user" for="login-name"></label>
+                        <input type="text" id="ID" class="login-field"  placeholder="ID" name="ID" required autofocus name="ID" style="width: 100%;">
                     </div>
                     <!--Password-->
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="password" name="password" style="width: 100%;"> 
-                        <label class="login-field-icon fui-lock" for="login-pass"></label>
+                        <input type="password" id="password" class="login-field" placeholder="password" name="password" required name="password" style="width: 100%;"> 
                     </div>
-
-                    <input type="button" onclick="validazione(event);" value="Log in" class="btn btn-primary btn-large btn-block">
+                    <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
 
                 </div>
 
