@@ -31,6 +31,8 @@ body {
     position: absolute;
     text-align: center;
     vertical-align: middle;
+    margin-bottom: 300px;
+    
 
 }
 
@@ -48,7 +50,7 @@ body {
     transition: 0.25s;
     display: block;
     width: 250px;
-    margin: 0 auto;
+    margin: 0 auto;    
 }
 
 .btn:hover {
@@ -61,9 +63,10 @@ body {
 }
 
 .login-screen {
+	margin-top: 100px;
     background-color: #FFF;
     padding: 20px;
-    border-radius: 5px
+    border-radius: 5px    
 }
 
 .app-title {

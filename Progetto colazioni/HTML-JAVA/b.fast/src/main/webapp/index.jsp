@@ -45,11 +45,10 @@
 
 
     <div class="btn-group">
-        <button id="Cliente" type="button" class="btn btn-primary">Customer</button>       
         <button id="Ristorante" type="button" class="btn btn-primary">Bar</button>
-        <button id="Fattorino" type="button" class="btn btn-primary">Delivery man</button>
     </div>
-
+    
+    <img src="logo.png" alt="Bfast" style="width:200px;height:200px;left:200px;right:200px;">
 
     <form class="form-signin" action="login" method="post">
         <div class="login">
