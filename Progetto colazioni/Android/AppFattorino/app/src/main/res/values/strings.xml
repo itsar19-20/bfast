@@ -3,4 +3,12 @@
     <string name="BFast">BFast</string>
     <string name="button">button</string>
     <string name="todo">todo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="conferma_password">Conferma Password</string>
+    <string name="data_di_nascita">Data di nascita</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
+    <string name="password_dimenticata"><u>Password dimenticata?</u></string>
+    <string name="vuoi_candidarti"><u>Vuoi candidarti?</u></string>
 </resources>
