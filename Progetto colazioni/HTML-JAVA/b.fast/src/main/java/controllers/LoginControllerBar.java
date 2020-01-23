@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import business.AutenticazioneBar;
 import model.Bar;
@@ -15,6 +16,8 @@ import model.Bar;
 public class LoginControllerBar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	HttpServletRequest req = null;
+	HttpSession ses = req.getSession(true);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -33,6 +36,8 @@ public class LoginControllerBar extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
+			String id = request.getParameter("ID");
+			req.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}
