@@ -8,8 +8,8 @@ import utils.JPAUtil;
 
 public class PasswordDimenticata {
 
-	Utente _return; 
 	public Utente cambio(String mail,String password, String Copassword) {
+		Utente _return; 
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Utente.class, mail);
 		if (_return != null) {

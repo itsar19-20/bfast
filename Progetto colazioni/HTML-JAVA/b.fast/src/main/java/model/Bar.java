@@ -81,6 +81,7 @@ public class Bar implements Serializable {
 		this.immagine = immagine;
 	}
 
+
 	public String getIndirizzo() {
 		return this.indirizzo;
 	}
@@ -93,10 +94,10 @@ public class Bar implements Serializable {
 		return this.nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getOrarioApertura() {
 		return this.orarioApertura;

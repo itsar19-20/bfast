@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 09, 2020 alle 10:18
+-- Creato il: Gen 23, 2020 alle 17:19
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `appartiene` (
   `ID` int(8) NOT NULL,
-  `IDprFK` int(8) NOT NULL,
-  `IDmeFK` int(8) NOT NULL
+  `IDmeFK` int(8) NOT NULL,
+  `IDprFK` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -70,8 +70,8 @@ INSERT INTO `bar` (`ID`, `IDmeFK`, `Nome`, `indirizzo`, `OrarioApertura`, `Orari
 
 CREATE TABLE `contiene` (
   `ID` int(8) NOT NULL,
+  `IDprFK` varchar(50) NOT NULL DEFAULT '0',
   `IDorFK` int(8) NOT NULL DEFAULT '0',
-  `IDprFK` int(8) NOT NULL DEFAULT '0',
   `Quantita` int(5) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,9 +87,16 @@ CREATE TABLE `fattorino` (
   `Cognome` varchar(20) NOT NULL,
   `Nascità` date NOT NULL,
   `Password` varchar(20) NOT NULL DEFAULT '',
-  `Domanda` varchar(20) NOT NULL DEFAULT '',
+  `Domanda` varchar(20) DEFAULT '',
   `Mail` varchar(20) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `fattorino`
+--
+
+INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Domanda`, `Mail`) VALUES
+(1, 'Giorgio', 'Nesci', '1998-03-13', '111', '', 'gio@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -119,12 +126,13 @@ INSERT INTO `menu` (`ID`, `disponibilità`) VALUES
 CREATE TABLE `ordine` (
   `ID` int(11) NOT NULL,
   `IDutFK` varchar(20) NOT NULL DEFAULT '',
-  `IDfatFK` int(11) NOT NULL,
-  `IDbarFK` int(11) NOT NULL,
-  `Orario` date NOT NULL,
-  `Note` varchar(200) NOT NULL,
-  `Data` date NOT NULL,
-  `TipoPagamento` enum('Carta di credito','PayPal','A domicilio') NOT NULL
+  `IDfatFK` int(11) DEFAULT NULL,
+  `IDbarFK` int(11) DEFAULT NULL,
+  `Orario` date DEFAULT NULL,
+  `Note` varchar(200) DEFAULT NULL,
+  `Data` date DEFAULT NULL,
+  `TipoPagamento` enum('Carta di credito','PayPal','A domicilio') DEFAULT NULL,
+  `Confermato` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -134,7 +142,7 @@ CREATE TABLE `ordine` (
 --
 
 CREATE TABLE `prodotto` (
-  `ID` int(11) NOT NULL,
+  `Nome` varchar(50) NOT NULL,
   `Ingredienti` varchar(100) NOT NULL DEFAULT '0',
   `Prezzo` float NOT NULL DEFAULT '0',
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
@@ -148,12 +156,20 @@ CREATE TABLE `prodotto` (
 
 CREATE TABLE `utente` (
   `Email` varchar(20) NOT NULL,
-  `Nome` varchar(20) NOT NULL,
+  `Nome` varchar(50) NOT NULL,
   `Cognome` varchar(20) NOT NULL,
   `Nascità` date NOT NULL,
-  `Password` varchar(50) NOT NULL DEFAULT '',
-  `Telefono` int(10) NOT NULL DEFAULT '0'
+  `Password` varchar(16) NOT NULL,
+  `Telefono` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `utente`
+--
+
+INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telefono`) VALUES
+('bubu@gmail.com', 'Guglielmo', 'Strambini', '1999-12-19', '333', 34252432),
+('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '464748', 35663535);
 
 --
 -- Indici per le tabelle scaricate
@@ -164,8 +180,8 @@ CREATE TABLE `utente` (
 --
 ALTER TABLE `appartiene`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDprFK` (`IDprFK`),
-  ADD KEY `IDmFK` (`IDmeFK`);
+  ADD KEY `IDmFK` (`IDmeFK`),
+  ADD KEY `IDpr2FK` (`IDprFK`);
 
 --
 -- Indici per le tabelle `bar`
@@ -180,7 +196,7 @@ ALTER TABLE `bar`
 ALTER TABLE `contiene`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IDorFK` (`IDorFK`),
-  ADD KEY `IDpFK` (`IDprFK`);
+  ADD KEY `IDprfk` (`IDprFK`);
 
 --
 -- Indici per le tabelle `fattorino`
@@ -207,7 +223,7 @@ ALTER TABLE `ordine`
 -- Indici per le tabelle `prodotto`
 --
 ALTER TABLE `prodotto`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`Nome`);
 
 --
 -- Indici per le tabelle `utente`
@@ -229,7 +245,7 @@ ALTER TABLE `appartiene`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `contiene`
@@ -241,7 +257,7 @@ ALTER TABLE `contiene`
 -- AUTO_INCREMENT per la tabella `fattorino`
 --
 ALTER TABLE `fattorino`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
@@ -256,12 +272,6 @@ ALTER TABLE `ordine`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `prodotto`
---
-ALTER TABLE `prodotto`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Limiti per le tabelle scaricate
 --
 
@@ -270,7 +280,7 @@ ALTER TABLE `prodotto`
 --
 ALTER TABLE `appartiene`
   ADD CONSTRAINT `IDmFK` FOREIGN KEY (`IDmeFK`) REFERENCES `menu` (`ID`),
-  ADD CONSTRAINT `IDprFK` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`ID`);
+  ADD CONSTRAINT `IDpr2FK` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
 
 --
 -- Limiti per la tabella `bar`
@@ -283,7 +293,7 @@ ALTER TABLE `bar`
 --
 ALTER TABLE `contiene`
   ADD CONSTRAINT `IDorFK` FOREIGN KEY (`IDorFK`) REFERENCES `ordine` (`ID`),
-  ADD CONSTRAINT `IDpFK` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`ID`);
+  ADD CONSTRAINT `IDprfk` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
 
 --
 -- Limiti per la tabella `ordine`

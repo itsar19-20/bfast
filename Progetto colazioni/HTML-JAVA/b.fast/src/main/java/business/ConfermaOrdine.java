@@ -1,30 +1,29 @@
 package business;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
-import model.Bar;
+import model.Ordine;
 import utils.JPAUtil;
 
-public class TotaleOrdiniMensili {
+public class ConfermaOrdine {
 
 	public void Visualizza(HttpServletRequest req) {
 		String s = (String) req.getAttribute("ID");
-		Bar b = cerca(s);
+		Ordine b = cerca(s);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-				"WHERE MONTH(o.data) = MONTH(getdate()) and b.id = o.IDbarFK  ").setParameter("b.id", b.getId());
+		b.setConfermato((byte) '1');
 		em.getTransaction().begin();
-		em.persist(Ris);
+		em.persist(b);
 		em.getTransaction().commit();
 	}
 
-	public Bar cerca (String id) {
+	public Ordine cerca (String id) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Bar _return = new Bar();
+		Ordine _return = new Ordine();
 		Integer ID = Integer.parseInt(id);
-		_return = em.find(Bar.class, ID);
+		_return = em.find(Ordine.class, ID);
 		return _return;
 	}
+	
 }

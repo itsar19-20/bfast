@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import business.Prodotti;
 import model.Prodotto;;
@@ -15,6 +16,8 @@ import model.Prodotto;;
 @WebServlet("/prodotto")
 public class SelezioneProdotti extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+	HttpServletRequest req = null;
+	HttpSession ses = req.getSession(true);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

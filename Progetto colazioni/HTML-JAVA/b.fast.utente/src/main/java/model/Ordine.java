@@ -18,6 +18,8 @@ public class Ordine implements Serializable {
 	@Id
 	private int id;
 
+	private byte confermato;
+
 	@Temporal(TemporalType.DATE)
 	private Date data;
 
@@ -56,6 +58,14 @@ public class Ordine implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public byte getConfermato() {
+		return this.confermato;
+	}
+
+	public void setConfermato(byte confermato) {
+		this.confermato = confermato;
 	}
 
 	public Date getData() {

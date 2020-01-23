@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import business.CambioPassword;
 import model.Utente;
@@ -14,6 +15,8 @@ import model.Utente;
 @WebServlet("/CambioPassword")
 public class ControllerCambioPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	HttpServletRequest req = null;
+	HttpSession ses = req.getSession(true);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -29,7 +32,7 @@ public class ControllerCambioPassword extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CambioPassword au = new CambioPassword();
-		Utente b = au.cambio(request.getParameter("password"), request.getParameter("copassword"));
+		Utente b = au.cambio(req,request.getParameter("password"), request.getParameter("copassword"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

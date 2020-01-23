@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import business.RegistrazioneUtente;
 import model.Utente;
@@ -17,6 +18,8 @@ import business.Ordini;
 @WebServlet("/registrazione")
 public class RegistrazioneControllerUtente extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+	HttpServletRequest req = null;
+	HttpSession ses = req.getSession(true);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
