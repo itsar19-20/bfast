@@ -11,4 +11,6 @@
     <string name="cognome">Cognome</string>
     <string name="password_dimenticata"><u>Password dimenticata?</u></string>
     <string name="vuoi_candidarti"><u>Vuoi candidarti?</u></string>
+    <string name="id">ID</string>
+    <string name="password">Password</string>
 </resources>

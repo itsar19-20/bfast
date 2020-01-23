@@ -19,6 +19,8 @@
 
 
 
+
+
     ]]>
 
     <ImageView
@@ -26,7 +28,7 @@
         android:layout_width="279dp"
         android:layout_height="236dp"
         android:layout_gravity="center"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +42,7 @@
         android:layout_marginTop="16dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="ID  "
+        android:hint="@string/id"
         android:inputType="textEmailAddress"
         android:textColorHint="#0829E2"
         android:textAlignment="center"
@@ -55,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Password  "
+        android:hint="@string/password"
         android:textColorHint="#0829E2"
         android:importantForAutofill="no"
         android:inputType="textPassword"
@@ -86,7 +88,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/password_dimenticata"
         android:textColor="#0628F0"
         android:textColorLink="#0590A0"
@@ -99,7 +101,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="52dp"
         android:text="@string/vuoi_candidarti"
         android:textColor="#0B2EF5"
         android:textSize="18sp"

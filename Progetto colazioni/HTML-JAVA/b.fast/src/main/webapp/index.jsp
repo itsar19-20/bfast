@@ -48,7 +48,7 @@
         <button id="Ristorante" type="button" class="btn btn-primary">Bar</button>
     </div>
     
-    <img src="logo.png" alt="Bfast" style="width:200px;height:200px;left:200px;right:200px;">
+    <img src="logo.png" alt="Bfast" style="width:250px;height:250px;display: block; margin-left: auto; margin-right: auto;">
 
     <form class="form-signin" action="login" method="post">
         <div class="login">
