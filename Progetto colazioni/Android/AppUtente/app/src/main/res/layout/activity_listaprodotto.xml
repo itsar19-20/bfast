@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imglogo"
+        android:layout_width="373dp"
+        android:layout_height="55dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/ic_launcher_round4" />
+
+    <ImageView
+        android:id="@+id/imgprodotto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imglogo"
+        app:layout_constraintVertical_bias="0.161"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/todo" />
+
+    <TextView
+        android:id="@+id/idnomeprodotto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nome_prodotto"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toEndOf="@+id/imgprodotto"
+        app:layout_constraintTop_toBottomOf="@+id/imglogo"
+        app:layout_constraintVertical_bias="0.135" />
+
+    <TextView
+        android:id="@+id/idprezzo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prezzo"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toEndOf="@+id/imgprodotto"
+        app:layout_constraintTop_toBottomOf="@+id/idnomeprodotto"
+        app:layout_constraintVertical_bias="0.046" />
+
+    <TextView
+        android:id="@+id/idingredienti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/ingredienti"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgprodotto"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/idlista"
+        android:layout_width="393dp"
+        android:layout_height="114dp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:drawableBottom="@color/colorPrimaryDark"
+        android:text="@string/miele"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idingredienti"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
+        android:backgroundTint="#F7F6F6"
+        android:text="@string/back"
+        app:layout_constraintBottom_toTopOf="@+id/imgprodotto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imglogo" />
+
+    <SearchView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/idnomeprodotto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.974"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/imglogo" />
+
+    <ImageButton
+        android:id="@+id/idhome"
+        android:layout_width="42dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="36dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idlista"
+        app:layout_constraintVertical_bias="0.912"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+
+    <ImageButton
+        android:id="@+id/idaddcart"
+        android:layout_width="37dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="64dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idhome"
+        app:layout_constraintTop_toBottomOf="@+id/idlista"
+        app:layout_constraintVertical_bias="0.91"
+        tools:srcCompat="@tools:sample/avatars[2]" />
+
+    <ImageButton
+        android:id="@+id/idnotifiche"
+        android:layout_width="43dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idaddcart"
+        app:layout_constraintTop_toBottomOf="@+id/idlista"
+        app:layout_constraintVertical_bias="0.906"
+        tools:srcCompat="@tools:sample/avatars[4]"
+        android:contentDescription="@string/todo" />
+
+    <ImageButton
+        android:id="@+id/idprofilo"
+        android:layout_width="36dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idnotifiche"
+        app:layout_constraintTop_toBottomOf="@+id/idlista"
+        app:layout_constraintVertical_bias="0.917"
+        tools:srcCompat="@tools:sample/avatars[15]"
+        android:contentDescription="@string/todo" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="656dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="78dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

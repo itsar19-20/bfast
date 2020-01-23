@@ -11,4 +11,13 @@
     <string name="nome">Nome</string>
     <string name="cognome">Cognome</string>
     <string name="data_di_nascita">Data di nascita</string>
+    <string name="prezzo">Prezzo:</string>
+    <string name="back"><![CDATA[< Back]]></string>
+    <string name="ingredienti">Ingredienti</string>
+    <string name="nome_prodotto">Nome Prodotto</string>
+    <string name="miele">miele</string>
+    <string name="logout">Logout</string>
+    <string name="il_mio_profilo">il mio profilo</string>
+    <string name="chiedi_aiuto">Chiedi aiuto</string>
+    <string name="valuta_la_nostra_app">valuta la nostra app</string>
 </resources>
