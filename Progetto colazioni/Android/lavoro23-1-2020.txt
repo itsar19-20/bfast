@@ -1,0 +1,14 @@
+Usando balsamiq andiamo a sviluppare le parti di design che possiamo:
+
+Utente
+
+Vista prodotto(tranne consigliati)
+Bar
+Carrello
+Area personale
+Il mio profilo
+
+Bar 
+
+informazioni_generali
+il_mio_profilo
