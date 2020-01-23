@@ -8,7 +8,7 @@ Carrello
 Area personale
 Il mio profilo
 
-Bar 
+Fattorino
 
 informazioni_generali
 il_mio_profilo
