@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
+    android:background="#00FFEB3B"
     tools:context=".MainActivity"><![CDATA[
 
     " />
@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round2" />
+        app:srcCompat="@drawable/ic_icona" />
 
     <EditText
         android:id="@+id/editText2"
@@ -40,10 +40,10 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/email"
-        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/editText7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,10 +56,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
-        android:textColorHint="#0829E2"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -73,7 +73,8 @@
         android:background="@drawable/mybutton"
         android:shadowRadius="@android:integer/config_shortAnimTime"
         android:text="@string/button"
-        android:textColor="#FCFAFA"
+        android:textColor="#0F0F0F"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -87,9 +88,9 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/conferma_password"
-        android:textColorHint="#0829E2"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -101,9 +102,9 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/data_di_nascita"
-        android:textColorHint="#0829E2"
         android:inputType="date"
         android:textAlignment="center"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -115,9 +116,9 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/nome"
-        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/editText8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -129,9 +130,9 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/cognome"
-        android:textColorHint="#0829E2"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        android:textColorHint="#0829E2"
         app:layout_constraintBottom_toTopOf="@+id/editText6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

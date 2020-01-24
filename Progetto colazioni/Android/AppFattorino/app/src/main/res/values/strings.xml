@@ -12,5 +12,7 @@
     <string name="password_dimenticata"><u>Password dimenticata?</u></string>
     <string name="vuoi_candidarti"><u>Vuoi candidarti?</u></string>
     <string name="id">ID</string>
-    <string name="password">Password</string>
+    <string name="logout">Logout</string>
+    <string name="il_mio_profilo">Il Mio Profilo</string>
+    <string name="chiedi_aiuto">Chiedi Aiuto</string>
 </resources>
