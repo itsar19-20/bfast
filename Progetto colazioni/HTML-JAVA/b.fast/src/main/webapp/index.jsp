@@ -50,7 +50,7 @@
     
     <img src="logo.png" alt="Bfast" style="width:250px;height:250px;display: block; margin-left: auto; margin-right: auto;">
 
-    <form class="form-signin" action="login" method="post">
+    <form class="form-signin" action="login" method="get">
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
@@ -76,6 +76,7 @@
             </div>
         </div>
     </form>
+    <a href="registrazione.html" style="text-align: center;display: block;margin-left: auto; margin-right: auto;">Non sei ancora registrato?</a>
 
 
 
