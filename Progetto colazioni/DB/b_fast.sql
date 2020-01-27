@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 23, 2020 alle 17:19
+-- Creato il: Gen 27, 2020 alle 17:58
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -42,16 +42,16 @@ CREATE TABLE `appartiene` (
 
 CREATE TABLE `bar` (
   `ID` int(8) NOT NULL,
-  `IDmeFK` int(8) NOT NULL,
+  `IDmeFK` int(8) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
   `indirizzo` varchar(20) NOT NULL,
   `OrarioApertura` varchar(20) NOT NULL,
   `OrarioChiusura` varchar(20) NOT NULL,
-  `Valutazione` float NOT NULL,
+  `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `Immagine` longblob NOT NULL,
-  `Fascia` float NOT NULL
+  `Immagine` longblob,
+  `Fascia` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -60,7 +60,8 @@ CREATE TABLE `bar` (
 
 INSERT INTO `bar` (`ID`, `IDmeFK`, `Nome`, `indirizzo`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
 (1, 1, 'Bar pippo', 'via 3', '9:00', '12:00', 3, 'coca@gmail.com', '321', '', 0),
-(2, 2, 'Bar rum', 'via 9', '8:00', '20:00', 1, 'cola@gmail.com', '421', '', 0);
+(2, 2, 'Bar rum', 'via 9', '8:00', '20:00', 1, 'cola@gmail.com', '421', '', 0),
+(3, 1, 'Bar ciko', 'via cazzate 33', '4:20', '10:00', 0, 'dfagdfg@ssad.com', '333', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -101,21 +102,40 @@ INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Doman
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `indirizzo`
+--
+
+CREATE TABLE `indirizzo` (
+  `ID` int(8) NOT NULL,
+  `Via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `indirizzo`
+--
+
+INSERT INTO `indirizzo` (`ID`, `Via`) VALUES
+(1, 'Via peccato 3');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `menu`
 --
 
 CREATE TABLE `menu` (
   `ID` int(11) NOT NULL,
-  `disponibilità` int(11) NOT NULL
+  `disponibilità` int(11) NOT NULL,
+  `Filtro` varchar(50) DEFAULT 'dolce e salato'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `menu`
 --
 
-INSERT INTO `menu` (`ID`, `disponibilità`) VALUES
-(1, 7),
-(2, 8);
+INSERT INTO `menu` (`ID`, `disponibilità`, `Filtro`) VALUES
+(1, 7, 'dolce e salato'),
+(2, 8, 'dolce e salato');
 
 -- --------------------------------------------------------
 
@@ -128,10 +148,10 @@ CREATE TABLE `ordine` (
   `IDutFK` varchar(20) NOT NULL DEFAULT '',
   `IDfatFK` int(11) DEFAULT NULL,
   `IDbarFK` int(11) DEFAULT NULL,
-  `Orario` date DEFAULT NULL,
+  `IDtiFK` int(11) DEFAULT NULL,
+  `Orario` varchar(50) DEFAULT NULL,
   `Note` varchar(200) DEFAULT NULL,
   `Data` date DEFAULT NULL,
-  `TipoPagamento` enum('Carta di credito','PayPal','A domicilio') DEFAULT NULL,
   `Confermato` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -147,6 +167,26 @@ CREATE TABLE `prodotto` (
   `Prezzo` float NOT NULL DEFAULT '0',
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `tipopagamento`
+--
+
+CREATE TABLE `tipopagamento` (
+  `ID` int(8) NOT NULL,
+  `Tipo` varchar(50) COLLATE latin1_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `tipopagamento`
+--
+
+INSERT INTO `tipopagamento` (`ID`, `Tipo`) VALUES
+(1, 'Carta di credito'),
+(2, 'PayPal'),
+(3, 'Contanti');
 
 -- --------------------------------------------------------
 
@@ -205,6 +245,12 @@ ALTER TABLE `fattorino`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indici per le tabelle `indirizzo`
+--
+ALTER TABLE `indirizzo`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indici per le tabelle `menu`
 --
 ALTER TABLE `menu`
@@ -217,13 +263,20 @@ ALTER TABLE `ordine`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IDutFK` (`IDutFK`),
   ADD KEY `IDfatFK` (`IDfatFK`),
-  ADD KEY `IDbarFK` (`IDbarFK`);
+  ADD KEY `IDbarFK` (`IDbarFK`),
+  ADD KEY `IDtiFK` (`IDtiFK`);
 
 --
 -- Indici per le tabelle `prodotto`
 --
 ALTER TABLE `prodotto`
   ADD PRIMARY KEY (`Nome`);
+
+--
+-- Indici per le tabelle `tipopagamento`
+--
+ALTER TABLE `tipopagamento`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `utente`
@@ -245,7 +298,7 @@ ALTER TABLE `appartiene`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `contiene`
@@ -260,6 +313,12 @@ ALTER TABLE `fattorino`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT per la tabella `indirizzo`
+--
+ALTER TABLE `indirizzo`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
@@ -270,6 +329,12 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `ordine`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `tipopagamento`
+--
+ALTER TABLE `tipopagamento`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Limiti per le tabelle scaricate
@@ -301,6 +366,7 @@ ALTER TABLE `contiene`
 ALTER TABLE `ordine`
   ADD CONSTRAINT `IDbarFK` FOREIGN KEY (`IDbarFK`) REFERENCES `bar` (`ID`),
   ADD CONSTRAINT `IDfatFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`),
+  ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`),
   ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`);
 COMMIT;
 

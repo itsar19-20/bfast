@@ -19,6 +19,8 @@ public class Menu implements Serializable {
 
 	private int disponibilità;
 
+	private String filtro;
+
 	//bi-directional many-to-one association to Appartiene
 	@OneToMany(mappedBy="menu")
 	private List<Appartiene> appartienes;
@@ -44,6 +46,14 @@ public class Menu implements Serializable {
 
 	public void setDisponibilità(int disponibilità) {
 		this.disponibilità = disponibilità;
+	}
+
+	public String getFiltro() {
+		return this.filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 	public List<Appartiene> getAppartienes() {

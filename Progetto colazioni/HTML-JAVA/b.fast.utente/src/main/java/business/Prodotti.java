@@ -17,9 +17,9 @@ public class Prodotti {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Prodotto.class, prodotto);
 		if(_return != null) {
-			Ordini or = new Ordini();
+		/*	Ordini or = new Ordini();
 			Ordine o = or.corrente();
-			Contiene c = Inserimento(o,quantità,_return);
+			Contiene c = Inserimento(o,quantità,_return);*/ 
 		}
 		return _return;
 	}
@@ -28,7 +28,7 @@ public class Prodotti {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Contiene c = new Contiene();
 		c.setOrdine(o);
-		c.setIDprFK(_return);
+		c.setProdotto(_return);
 		int Quantita=0;
 		Quantita = Integer.parseInt(quantità);
 		c.setQuantita(Quantita);

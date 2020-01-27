@@ -16,17 +16,17 @@ public class Contiene implements Serializable {
 	@Id
 	private int id;
 
-	//bi-directional many-to-one association to Prodotto
-	@ManyToOne
-	@JoinColumn(name="IDprFK")
-	private Prodotto IDprFK;
-
 	private int quantita;
 
 	//bi-directional many-to-one association to Ordine
 	@ManyToOne
 	@JoinColumn(name="IDorFK")
 	private Ordine ordine;
+
+	//bi-directional many-to-one association to Prodotto
+	@ManyToOne
+	@JoinColumn(name="IDprFK")
+	private Prodotto prodotto;
 
 	public Contiene() {
 	}
@@ -37,14 +37,6 @@ public class Contiene implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Prodotto getIDprFK() {
-		return this.IDprFK;
-	}
-
-	public void setIDprFK(Prodotto IDprFK) {
-		this.IDprFK = IDprFK;
 	}
 
 	public int getQuantita() {
@@ -61,6 +53,14 @@ public class Contiene implements Serializable {
 
 	public void setOrdine(Ordine ordine) {
 		this.ordine = ordine;
+	}
+
+	public Prodotto getProdotto() {
+		return this.prodotto;
+	}
+
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
 	}
 
 }
