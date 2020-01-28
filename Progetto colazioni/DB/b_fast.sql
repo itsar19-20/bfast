@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 27, 2020 alle 17:58
+-- Creato il: Gen 28, 2020 alle 17:51
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -89,15 +89,16 @@ CREATE TABLE `fattorino` (
   `Nascità` date NOT NULL,
   `Password` varchar(20) NOT NULL DEFAULT '',
   `Domanda` varchar(20) DEFAULT '',
-  `Mail` varchar(20) NOT NULL DEFAULT ''
+  `Mail` varchar(20) NOT NULL DEFAULT '',
+  `Valutazione` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `fattorino`
 --
 
-INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Domanda`, `Mail`) VALUES
-(1, 'Giorgio', 'Nesci', '1998-03-13', '111', '', 'gio@gmail.com');
+INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Domanda`, `Mail`, `Valutazione`) VALUES
+(1, 'Giorgio', 'Nesci', '1998-03-13', '111', '', 'gio@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -107,15 +108,18 @@ INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Doman
 
 CREATE TABLE `indirizzo` (
   `ID` int(8) NOT NULL,
-  `Via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL
+  `PosXUT` double NOT NULL DEFAULT '0',
+  `PosYUT` double NOT NULL DEFAULT '0',
+  `PosXFA` double NOT NULL DEFAULT '0',
+  `PosYFA` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dump dei dati per la tabella `indirizzo`
 --
 
-INSERT INTO `indirizzo` (`ID`, `Via`) VALUES
-(1, 'Via peccato 3');
+INSERT INTO `indirizzo` (`ID`, `PosXUT`, `PosYUT`, `PosXFA`, `PosYFA`) VALUES
+(1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,11 +153,27 @@ CREATE TABLE `ordine` (
   `IDfatFK` int(11) DEFAULT NULL,
   `IDbarFK` int(11) DEFAULT NULL,
   `IDtiFK` int(11) DEFAULT NULL,
+  `IDinFK` int(11) DEFAULT NULL,
   `Orario` varchar(50) DEFAULT NULL,
   `Note` varchar(200) DEFAULT NULL,
   `Data` date DEFAULT NULL,
-  `Confermato` bit(1) DEFAULT b'0'
+  `Confermato` bit(1) DEFAULT b'0',
+  `ValutazioneFatt` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `preferiti`
+--
+
+CREATE TABLE `preferiti` (
+  `ID` int(8) NOT NULL,
+  `via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `civico` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `citta` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `CAP` int(8) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
@@ -167,6 +187,18 @@ CREATE TABLE `prodotto` (
   `Prezzo` float NOT NULL DEFAULT '0',
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `sceglie`
+--
+
+CREATE TABLE `sceglie` (
+  `ID` int(8) NOT NULL,
+  `IDprFK` int(8) NOT NULL DEFAULT '0',
+  `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
@@ -264,13 +296,28 @@ ALTER TABLE `ordine`
   ADD KEY `IDutFK` (`IDutFK`),
   ADD KEY `IDfatFK` (`IDfatFK`),
   ADD KEY `IDbarFK` (`IDbarFK`),
-  ADD KEY `IDtiFK` (`IDtiFK`);
+  ADD KEY `IDtiFK` (`IDtiFK`),
+  ADD KEY `IDinFK` (`IDinFK`);
+
+--
+-- Indici per le tabelle `preferiti`
+--
+ALTER TABLE `preferiti`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `prodotto`
 --
 ALTER TABLE `prodotto`
   ADD PRIMARY KEY (`Nome`);
+
+--
+-- Indici per le tabelle `sceglie`
+--
+ALTER TABLE `sceglie`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDprefeFK` (`IDprFK`),
+  ADD KEY `IDUtente` (`IDutFK`);
 
 --
 -- Indici per le tabelle `tipopagamento`
@@ -331,6 +378,18 @@ ALTER TABLE `ordine`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT per la tabella `preferiti`
+--
+ALTER TABLE `preferiti`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `sceglie`
+--
+ALTER TABLE `sceglie`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `tipopagamento`
 --
 ALTER TABLE `tipopagamento`
@@ -364,10 +423,18 @@ ALTER TABLE `contiene`
 -- Limiti per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  ADD CONSTRAINT `IDbarFK` FOREIGN KEY (`IDbarFK`) REFERENCES `bar` (`ID`),
-  ADD CONSTRAINT `IDfatFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`),
-  ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`),
-  ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`);
+  ADD CONSTRAINT `IDbarFK` FOREIGN KEY (`IDbarFK`) REFERENCES `bar` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDfatFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDinFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `sceglie`
+--
+ALTER TABLE `sceglie`
+  ADD CONSTRAINT `IDUtente` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`),
+  ADD CONSTRAINT `IDprefeFK` FOREIGN KEY (`IDprFK`) REFERENCES `preferiti` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
