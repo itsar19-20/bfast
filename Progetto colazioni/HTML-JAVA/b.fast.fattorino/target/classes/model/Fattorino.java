@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -30,20 +29,8 @@ public class Fattorino implements Serializable {
 	private String nome;
 
 	private String password;
-	
+
 	private float valutazione;
-
-	public float getValutazione() {
-		return valutazione;
-	}
-
-	public void setValutazione(float valutazione) {
-		this.valutazione = valutazione;
-	}
-
-	//bi-directional many-to-one association to Ordine
-	@OneToMany(mappedBy="fattorino")
-	private List<Ordine> ordines;
 
 	public Fattorino() {
 	}
@@ -104,26 +91,12 @@ public class Fattorino implements Serializable {
 		this.password = password;
 	}
 
-	public List<Ordine> getOrdines() {
-		return this.ordines;
+	public float getValutazione() {
+		return this.valutazione;
 	}
 
-	public void setOrdines(List<Ordine> ordines) {
-		this.ordines = ordines;
-	}
-
-	public Ordine addOrdine(Ordine ordine) {
-		getOrdines().add(ordine);
-		ordine.setFattorino(this);
-
-		return ordine;
-	}
-
-	public Ordine removeOrdine(Ordine ordine) {
-		getOrdines().remove(ordine);
-		ordine.setFattorino(null);
-
-		return ordine;
+	public void setValutazione(float valutazione) {
+		this.valutazione = valutazione;
 	}
 
 }

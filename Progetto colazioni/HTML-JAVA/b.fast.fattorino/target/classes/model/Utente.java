@@ -15,31 +15,35 @@ import java.util.List;
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-
+	@Id
+	private int id;
 
 	private String cognome;
 
+	private String cognome;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="`Data di nascita`")
 	private Date data_di_nascita;
 
-	@Id
 	private String email;
 
-
+	private String email;
 
 	@Temporal(TemporalType.DATE)
 	private Date nascità;
 
 	private String nome;
 
+	private String nome;
 
 	private String password;
 
+	private String password;
 
 	private int telefono;
 
+	private String telefono;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="utente")
@@ -48,6 +52,13 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getCognome() {
 		return this.cognome;
@@ -57,7 +68,13 @@ public class Utente implements Serializable {
 		this.cognome = cognome;
 	}
 
+	public String getCognome() {
+		return this.cognome;
+	}
 
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
 
 	public Date getData_di_nascita() {
 		return this.data_di_nascita;
@@ -75,7 +92,13 @@ public class Utente implements Serializable {
 		this.email = email;
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Date getNascità() {
 		return this.nascità;
@@ -93,7 +116,13 @@ public class Utente implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getNome() {
+		return this.nome;
+	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public String getPassword() {
 		return this.password;
@@ -103,7 +132,13 @@ public class Utente implements Serializable {
 		this.password = password;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public int getTelefono() {
 		return this.telefono;
@@ -113,6 +148,13 @@ public class Utente implements Serializable {
 		this.telefono = telefono;
 	}
 
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
 	public List<Ordine> getOrdines() {
 		return this.ordines;
