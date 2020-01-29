@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 28, 2020 alle 17:51
+-- Creato il: Gen 29, 2020 alle 14:55
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -108,18 +108,11 @@ INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Doman
 
 CREATE TABLE `indirizzo` (
   `ID` int(8) NOT NULL,
-  `PosXUT` double NOT NULL DEFAULT '0',
-  `PosYUT` double NOT NULL DEFAULT '0',
-  `PosXFA` double NOT NULL DEFAULT '0',
-  `PosYFA` double NOT NULL DEFAULT '0'
+  `via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `civico` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `citta` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
+  `CAP` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dump dei dati per la tabella `indirizzo`
---
-
-INSERT INTO `indirizzo` (`ID`, `PosXUT`, `PosYUT`, `PosXFA`, `PosYFA`) VALUES
-(1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -153,6 +146,7 @@ CREATE TABLE `ordine` (
   `IDfatFK` int(11) DEFAULT NULL,
   `IDbarFK` int(11) DEFAULT NULL,
   `IDtiFK` int(11) DEFAULT NULL,
+  `IDpoFK` int(11) DEFAULT NULL,
   `IDinFK` int(11) DEFAULT NULL,
   `Orario` varchar(50) DEFAULT NULL,
   `Note` varchar(200) DEFAULT NULL,
@@ -164,16 +158,21 @@ CREATE TABLE `ordine` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `preferiti`
+-- Struttura della tabella `posfatt`
 --
 
-CREATE TABLE `preferiti` (
+CREATE TABLE `posfatt` (
   `ID` int(8) NOT NULL,
-  `via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `civico` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `citta` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `CAP` int(8) DEFAULT NULL
+  `PosXFA` double NOT NULL DEFAULT '0',
+  `PosYFA` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `posfatt`
+--
+
+INSERT INTO `posfatt` (`ID`, `PosXFA`, `PosYFA`) VALUES
+(1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -297,12 +296,13 @@ ALTER TABLE `ordine`
   ADD KEY `IDfatFK` (`IDfatFK`),
   ADD KEY `IDbarFK` (`IDbarFK`),
   ADD KEY `IDtiFK` (`IDtiFK`),
-  ADD KEY `IDinFK` (`IDinFK`);
+  ADD KEY `IDinFK` (`IDpoFK`),
+  ADD KEY `FK_ordine_indirizzo` (`IDinFK`);
 
 --
--- Indici per le tabelle `preferiti`
+-- Indici per le tabelle `posfatt`
 --
-ALTER TABLE `preferiti`
+ALTER TABLE `posfatt`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -363,7 +363,7 @@ ALTER TABLE `fattorino`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
@@ -378,10 +378,10 @@ ALTER TABLE `ordine`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `preferiti`
+-- AUTO_INCREMENT per la tabella `posfatt`
 --
-ALTER TABLE `preferiti`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `posfatt`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `sceglie`
@@ -423,9 +423,10 @@ ALTER TABLE `contiene`
 -- Limiti per la tabella `ordine`
 --
 ALTER TABLE `ordine`
+  ADD CONSTRAINT `FK_ordine_indirizzo` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDbarFK` FOREIGN KEY (`IDbarFK`) REFERENCES `bar` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDfatFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `IDinFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDinFK` FOREIGN KEY (`IDpoFK`) REFERENCES `posfatt` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -434,7 +435,7 @@ ALTER TABLE `ordine`
 --
 ALTER TABLE `sceglie`
   ADD CONSTRAINT `IDUtente` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`),
-  ADD CONSTRAINT `IDprefeFK` FOREIGN KEY (`IDprFK`) REFERENCES `preferiti` (`ID`);
+  ADD CONSTRAINT `IDprefeFK` FOREIGN KEY (`IDprFK`) REFERENCES `indirizzo` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
