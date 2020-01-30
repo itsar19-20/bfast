@@ -25,10 +25,9 @@ public class Ordine implements Serializable {
 
 	private String note;
 
-	@Temporal(TemporalType.DATE)
-	private Date orario;
+	private String orario;
 
-	private String tipoPagamento;
+	private float valutazioneFatt;
 
 	//bi-directional many-to-one association to Contiene
 	@OneToMany(mappedBy="ordine")
@@ -48,6 +47,21 @@ public class Ordine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="IDutFK")
 	private Utente utente;
+
+	//bi-directional many-to-one association to Indirizzo
+	@ManyToOne
+	@JoinColumn(name="IDinFK")
+	private Indirizzo indirizzo;
+
+	//bi-directional many-to-one association to Posfatt
+	@ManyToOne
+	@JoinColumn(name="IDpoFK")
+	private Posfatt posfatt;
+
+	//bi-directional many-to-one association to Tipopagamento
+	@ManyToOne
+	@JoinColumn(name="IDtiFK")
+	private Tipopagamento tipopagamento;
 
 	public Ordine() {
 	}
@@ -84,20 +98,20 @@ public class Ordine implements Serializable {
 		this.note = note;
 	}
 
-	public Date getOrario() {
+	public String getOrario() {
 		return this.orario;
 	}
 
-	public void setOrario(Date orario) {
+	public void setOrario(String orario) {
 		this.orario = orario;
 	}
 
-	public String getTipoPagamento() {
-		return this.tipoPagamento;
+	public float getValutazioneFatt() {
+		return this.valutazioneFatt;
 	}
 
-	public void setTipoPagamento(String tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
+	public void setValutazioneFatt(float valutazioneFatt) {
+		this.valutazioneFatt = valutazioneFatt;
 	}
 
 	public List<Contiene> getContienes() {
@@ -144,6 +158,30 @@ public class Ordine implements Serializable {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	public Indirizzo getIndirizzo() {
+		return this.indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public Posfatt getPosfatt() {
+		return this.posfatt;
+	}
+
+	public void setPosfatt(Posfatt posfatt) {
+		this.posfatt = posfatt;
+	}
+
+	public Tipopagamento getTipopagamento() {
+		return this.tipopagamento;
+	}
+
+	public void setTipopagamento(Tipopagamento tipopagamento) {
+		this.tipopagamento = tipopagamento;
 	}
 
 }

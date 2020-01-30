@@ -27,6 +27,8 @@ public class Ordine implements Serializable {
 
 	private String orario;
 
+	private float valutazioneFatt;
+
 	//bi-directional many-to-one association to Contiene
 	@OneToMany(mappedBy="ordine")
 	private List<Contiene> contienes;
@@ -45,6 +47,16 @@ public class Ordine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="IDutFK")
 	private Utente utente;
+
+	//bi-directional many-to-one association to Indirizzo
+	@ManyToOne
+	@JoinColumn(name="IDinFK")
+	private Indirizzo indirizzo;
+
+	//bi-directional many-to-one association to Posfatt
+	@ManyToOne
+	@JoinColumn(name="IDpoFK")
+	private Posfatt posfatt;
 
 	//bi-directional many-to-one association to Tipopagamento
 	@ManyToOne
@@ -94,6 +106,14 @@ public class Ordine implements Serializable {
 		this.orario = orario;
 	}
 
+	public float getValutazioneFatt() {
+		return this.valutazioneFatt;
+	}
+
+	public void setValutazioneFatt(float valutazioneFatt) {
+		this.valutazioneFatt = valutazioneFatt;
+	}
+
 	public List<Contiene> getContienes() {
 		return this.contienes;
 	}
@@ -138,6 +158,22 @@ public class Ordine implements Serializable {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	public Indirizzo getIndirizzo() {
+		return this.indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public Posfatt getPosfatt() {
+		return this.posfatt;
+	}
+
+	public void setPosfatt(Posfatt posfatt) {
+		this.posfatt = posfatt;
 	}
 
 	public Tipopagamento getTipopagamento() {

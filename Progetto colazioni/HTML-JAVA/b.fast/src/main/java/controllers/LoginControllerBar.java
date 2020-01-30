@@ -14,10 +14,9 @@ import model.Bar;
 
 @WebServlet("/login")
 public class LoginControllerBar extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 102831973239L;
 
-	/*HttpServletRequest req = null;
-	HttpSession ses = req.getSession(true);*/
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -31,13 +30,14 @@ public class LoginControllerBar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		AutenticazioneBar am = new AutenticazioneBar();
 		Bar b = am.login(request.getParameter("ID"), request.getParameter("password"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
 			String id = request.getParameter("ID");
-			//req.setAttribute("ID",id);
+			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

@@ -16,9 +16,9 @@ import business.RegistrazioneBar;
 
 @WebServlet("/registrazione")
 public class RegistrazioneControllerUtente extends HttpServlet{
-	private static final long serialVersionUID = 1L;
-	/*HttpServletRequest req = null;
-	HttpSession ses = req.getSession(true);*/
+	private static final long serialVersionUID = 102831973239L;
+	
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -31,6 +31,7 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		RegistrazioneBar au = new RegistrazioneBar();
 		Bar b = null;
 		try {

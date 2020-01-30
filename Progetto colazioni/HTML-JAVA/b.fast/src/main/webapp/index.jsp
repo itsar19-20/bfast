@@ -77,6 +77,7 @@
         </div>
     </form>
     <a href="registrazione.html" style="text-align: center;display: block;margin-left: auto; margin-right: auto;">Non sei ancora registrato?</a>
+    <a href="mail.html" style="text-align: center;display: block;margin-left: auto; margin-right: auto;">Hai dimenticato la password?</a>
 
 
 

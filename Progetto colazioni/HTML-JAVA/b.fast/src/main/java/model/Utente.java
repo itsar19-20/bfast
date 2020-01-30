@@ -31,7 +31,6 @@ public class Utente implements Serializable {
 
 	private String nome;
 
-
 	private String password;
 
 
@@ -41,6 +40,10 @@ public class Utente implements Serializable {
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="utente")
 	private List<Ordine> ordines;
+
+	//bi-directional many-to-one association to Sceglie
+	@OneToMany(mappedBy="utente")
+	private List<Sceglie> sceglies;
 
 	public Utente() {
 	}
@@ -60,6 +63,7 @@ public class Utente implements Serializable {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+
 
 
 	public Date getData_di_nascita() {
@@ -95,6 +99,7 @@ public class Utente implements Serializable {
 		this.nome = nome;
 	}
 
+
 	public String getPassword() {
 		return this.password;
 	}
@@ -102,6 +107,7 @@ public class Utente implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 	public int getTelefono() {
@@ -133,6 +139,28 @@ public class Utente implements Serializable {
 		ordine.setUtente(null);
 
 		return ordine;
+	}
+
+	public List<Sceglie> getSceglies() {
+		return this.sceglies;
+	}
+
+	public void setSceglies(List<Sceglie> sceglies) {
+		this.sceglies = sceglies;
+	}
+
+	public Sceglie addScegly(Sceglie scegly) {
+		getSceglies().add(scegly);
+		scegly.setUtente(this);
+
+		return scegly;
+	}
+
+	public Sceglie removeScegly(Sceglie scegly) {
+		getSceglies().remove(scegly);
+		scegly.setUtente(null);
+
+		return scegly;
 	}
 
 }

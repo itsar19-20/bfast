@@ -15,25 +15,21 @@ import java.util.List;
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-
+	@Id
+	private int id;
 
 	private String cognome;
-
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="`Data di nascita`")
 	private Date data_di_nascita;
 
-	@Id
 	private String email;
-
-
 
 	@Temporal(TemporalType.DATE)
 	private Date nascità;
 
 	private String nome;
-
 
 	private String password;
 
@@ -45,9 +41,20 @@ public class Utente implements Serializable {
 	@OneToMany(mappedBy="utente")
 	private List<Ordine> ordines;
 
+	//bi-directional many-to-one association to Sceglie
+	@OneToMany(mappedBy="utente")
+	private List<Sceglie> sceglies;
+
 	public Utente() {
 	}
 
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getCognome() {
 		return this.cognome;
@@ -76,7 +83,6 @@ public class Utente implements Serializable {
 	}
 
 
-
 	public Date getNascità() {
 		return this.nascità;
 	}
@@ -92,7 +98,6 @@ public class Utente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 
 	public String getPassword() {
@@ -134,6 +139,28 @@ public class Utente implements Serializable {
 		ordine.setUtente(null);
 
 		return ordine;
+	}
+
+	public List<Sceglie> getSceglies() {
+		return this.sceglies;
+	}
+
+	public void setSceglies(List<Sceglie> sceglies) {
+		this.sceglies = sceglies;
+	}
+
+	public Sceglie addScegly(Sceglie scegly) {
+		getSceglies().add(scegly);
+		scegly.setUtente(this);
+
+		return scegly;
+	}
+
+	public Sceglie removeScegly(Sceglie scegly) {
+		getSceglies().remove(scegly);
+		scegly.setUtente(null);
+
+		return scegly;
 	}
 
 }

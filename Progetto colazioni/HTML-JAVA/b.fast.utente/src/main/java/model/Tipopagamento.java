@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,6 +18,10 @@ public class Tipopagamento implements Serializable {
 	private int id;
 
 	private String tipo;
+
+	//bi-directional many-to-one association to Ordine
+	@OneToMany(mappedBy="tipopagamento")
+	private List<Ordine> ordines;
 
 	public Tipopagamento() {
 	}
@@ -35,6 +40,28 @@ public class Tipopagamento implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public List<Ordine> getOrdines() {
+		return this.ordines;
+	}
+
+	public void setOrdines(List<Ordine> ordines) {
+		this.ordines = ordines;
+	}
+
+	public Ordine addOrdine(Ordine ordine) {
+		getOrdines().add(ordine);
+		ordine.setTipopagamento(this);
+
+		return ordine;
+	}
+
+	public Ordine removeOrdine(Ordine ordine) {
+		getOrdines().remove(ordine);
+		ordine.setTipopagamento(null);
+
+		return ordine;
 	}
 
 }

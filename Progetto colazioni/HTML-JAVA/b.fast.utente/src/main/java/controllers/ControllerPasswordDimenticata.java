@@ -31,9 +31,8 @@ public class ControllerPasswordDimenticata extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Utente u = new Utente();
 		PasswordDimenticata au = new PasswordDimenticata();
-		Utente b = au.cambio(u,request.getParameter("pass"),request.getParameter("copass"));
+		Utente b = au.cambio(req,request.getParameter("pass"),request.getParameter("copass"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

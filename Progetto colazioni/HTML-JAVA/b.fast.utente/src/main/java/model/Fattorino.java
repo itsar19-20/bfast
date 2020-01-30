@@ -31,6 +31,8 @@ public class Fattorino implements Serializable {
 
 	private String password;
 
+	private float valutazione;
+
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="fattorino")
 	private List<Ordine> ordines;
@@ -92,6 +94,14 @@ public class Fattorino implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public float getValutazione() {
+		return this.valutazione;
+	}
+
+	public void setValutazione(float valutazione) {
+		this.valutazione = valutazione;
 	}
 
 	public List<Ordine> getOrdines() {
