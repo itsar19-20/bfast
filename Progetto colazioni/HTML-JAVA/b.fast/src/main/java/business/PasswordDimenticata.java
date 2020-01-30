@@ -12,21 +12,13 @@ public class PasswordDimenticata {
 		Bar _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		if (password.equals(Copassword)) {
-			_return = cerca(s);
+			Integer ID = Integer.parseInt(s);
+			_return = em.find(Bar.class, ID);
 			em.getTransaction().begin();
 			_return.setPassword(password);
 			em.getTransaction().commit();			
-		}else {
-			_return = null;
 		}
 		return _return;
 	}
 		
-	public Bar cerca(String id) {
-		Bar _return = null;
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Integer ID = Integer.parseInt(id);
-		_return = em.find(Bar.class, ID);
-		return _return;
-	}
-}
+} 
