@@ -31,7 +31,7 @@ public class CambioMailController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		CambioMail am = new CambioMail();
-		String s= (String) ses.getAttribute("ID");
+		int s= (Integer) ses.getAttribute("ID");
 		Fattorino b = am.cambio(s,request.getParameter("mail"), request.getParameter("comail"));
 		if (b == null) {
 			request.getRequestDispatcher("/mailCambio.html").forward(request, response);

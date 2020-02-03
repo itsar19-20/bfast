@@ -8,12 +8,11 @@ import utils.JPAUtil;
 
 public class PasswordDimenticata {
 
-	public Fattorino cambio(String s,String password, String Copassword) {
+	public Fattorino cambio(int s,String password, String Copassword) {
 		Fattorino _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		if (password.equals(Copassword)) {
-			Integer ID = Integer.parseInt(s);
-			_return = em.find(Fattorino.class, ID);
+			_return = em.find(Fattorino.class, s);
 			em.getTransaction().begin();
 			_return.setPassword(password);
 			em.getTransaction().commit();			

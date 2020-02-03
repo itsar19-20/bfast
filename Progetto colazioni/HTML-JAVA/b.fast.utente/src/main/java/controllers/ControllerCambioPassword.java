@@ -15,8 +15,7 @@ import model.Utente;
 @WebServlet("/CambioPassword")
 public class ControllerCambioPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	HttpServletRequest req = null;
-	HttpSession ses = req.getSession(true);
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -31,8 +30,10 @@ public class ControllerCambioPassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		CambioPassword au = new CambioPassword();
-		Utente b = au.cambio(req,request.getParameter("password"), request.getParameter("copassword"));
+		String s= (String) ses.getAttribute("ID");
+		Utente b = au.cambio(s,request.getParameter("password"), request.getParameter("copassword"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

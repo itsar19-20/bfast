@@ -13,7 +13,7 @@ public class CambioMail {
 		Utente _return = null; 
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		if (mail.equals(Comail)) {
-			_return = em.find(Utente.class, mail);
+			_return = em.find(Utente.class, s);
 			em.getTransaction().begin();
 			_return.setEmail(mail);
 			em.getTransaction().commit();			

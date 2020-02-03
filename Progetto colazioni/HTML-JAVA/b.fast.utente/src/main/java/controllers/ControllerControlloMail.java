@@ -31,12 +31,13 @@ public class ControllerControlloMail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		ControlloMail au = new ControlloMail();
 		Utente b = au.cambio(request.getParameter("mail"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			
+			ses.setAttribute("ID",request.getParameter("mail"));
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

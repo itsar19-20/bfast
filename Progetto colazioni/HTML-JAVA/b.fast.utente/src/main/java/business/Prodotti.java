@@ -3,7 +3,6 @@ package business;
 import java.text.ParseException;
 
 import javax.persistence.EntityManager;
-import business.Ordini;
 
 import model.Ordine;
 import model.Contiene;
@@ -12,20 +11,19 @@ import utils.JPAUtil;
 
 public class Prodotti {
 
-	public Prodotto selezione(String prodotto,String quantità) throws ParseException{
+	public Contiene selezione(int id, String prodotto, String quantità) throws ParseException{
+		Contiene c = null;
 		Prodotto _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Prodotto.class, prodotto);
 		if(_return != null) {
-		/*	Ordini or = new Ordini();
-			Ordine o = or.corrente();
-			Contiene c = Inserimento(o,quantità,_return);*/ 
+			Ordine o = corrente(em,id);
+			c = Inserimento(em,o,quantità,_return);
 		}
-		return _return;
+		return c;
 	}
 	
-	public Contiene Inserimento(Ordine o,String quantità,Prodotto _return) {
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+	public Contiene Inserimento(EntityManager em,Ordine o,String quantità,Prodotto _return) {
 		Contiene c = new Contiene();
 		c.setOrdine(o);
 		c.setProdotto(_return);
@@ -37,4 +35,11 @@ public class Prodotti {
 	    em.getTransaction().commit();
 		return c;
 	}
+	
+	public Ordine corrente(EntityManager em,int id) {
+		Ordine _return = null;
+		_return = em.find(Ordine.class, id);
+		return _return;
+	}
+	
 }

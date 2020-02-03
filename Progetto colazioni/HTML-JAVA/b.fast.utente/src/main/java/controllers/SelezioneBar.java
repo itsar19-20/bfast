@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.AutenticazioneUtente;
-import model.Utente;
 
-@WebServlet("/login")
-public class LoginControllerUtente extends HttpServlet {
+@WebServlet("/CambioMail")
+public class SelezioneBar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginControllerUtente() {
+	public SelezioneBar() {
 		super();
 	}
 
@@ -28,16 +28,10 @@ public class LoginControllerUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
-		AutenticazioneUtente au = new AutenticazioneUtente();
-		Utente b = au.login(request.getParameter("mail"), request.getParameter("password"));
-		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
-		} else {
-			String id = request.getParameter("ID");
-			ses.setAttribute("ID",id);
+			HttpSession ses = request.getSession();
+			ses.setAttribute("IDb", request.getAttribute("ID"));
 			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+	
 	}
 
 	/**

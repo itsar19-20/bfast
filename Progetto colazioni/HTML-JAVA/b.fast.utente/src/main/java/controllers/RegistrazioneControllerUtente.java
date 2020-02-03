@@ -12,14 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import business.RegistrazioneUtente;
 import model.Utente;
-import business.CambioPassword;
-import business.Ordini;
+
 
 @WebServlet("/registrazione")
 public class RegistrazioneControllerUtente extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	HttpServletRequest req = null;
-	HttpSession ses = req.getSession(true);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -32,6 +29,7 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		RegistrazioneUtente au = new RegistrazioneUtente();
 		Utente b = null;
 		try {
@@ -43,10 +41,7 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
-			CambioPassword cp = new CambioPassword();
-			cp.utente(request.getParameter("mail"));
-			Ordini o = new Ordini();
-			o.utente(request.getParameter("mail"));
+			ses.setAttribute("ID",b.getEmail());
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

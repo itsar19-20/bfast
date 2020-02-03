@@ -31,7 +31,7 @@ public class CambioPasswordController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		CambioPassword am = new CambioPassword();
-		String s= (String) ses.getAttribute("ID");
+		int s= (Integer) ses.getAttribute("ID");
 		Fattorino b = am.cambio(s,request.getParameter("pass"), request.getParameter("copass"));
 		if (b == null) {
 			request.getRequestDispatcher("/passwordCambio.html").forward(request, response);

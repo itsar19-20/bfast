@@ -8,11 +8,10 @@ import utils.JPAUtil;
 
 public class ValutazioneFattorino {
 
-	public Ordini finale(HttpServletRequest req) {
+	public Ordine finale(HttpServletRequest req) {
 		String s = (String) req.getAttribute("IDo");
 		Ordine _return = cerca(s); 
-	
-		return null;
+		return _return;
 	}
 	
 	public Ordine cerca(String ID) {

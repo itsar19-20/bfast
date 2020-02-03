@@ -15,8 +15,6 @@ import model.Utente;
 @WebServlet("/PasswordDimenticataMail")
 public class ControllerPasswordDimenticata extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	HttpServletRequest req = null;
-	HttpSession ses = req.getSession(true);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -31,12 +29,13 @@ public class ControllerPasswordDimenticata extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		PasswordDimenticata au = new PasswordDimenticata();
-		Utente b = au.cambio(req,request.getParameter("pass"),request.getParameter("copass"));
+		String s= (String) ses.getAttribute("ID");
+		Utente b = au.cambio(s,request.getParameter("pass"),request.getParameter("copass"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

@@ -1,6 +1,6 @@
 package controllers;
 
-import java.io.IOException;
+import java.io.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,33 +9,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.AutenticazioneUtente;
-import model.Utente;
+import business.Ordini;
+import model.Ordine;
 
-@WebServlet("/login")
-public class LoginControllerUtente extends HttpServlet {
+@WebServlet("/prodotto")
+public class OrdiniController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginControllerUtente() {
+	public OrdiniController() {
 		super();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		AutenticazioneUtente au = new AutenticazioneUtente();
-		Utente b = au.login(request.getParameter("mail"), request.getParameter("password"));
+		int id =(Integer) ses.getAttribute("IDo");
+		Ordini au = new Ordini();
+		Ordine b = null;
+		b = au.carrello(id,request.getParameter("prodotto"), request.getParameter("quantita"));
 		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
+			request.getRequestDispatcher("/prodotto.html").forward(request, response);
 		} else {
-			String id = request.getParameter("ID");
-			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

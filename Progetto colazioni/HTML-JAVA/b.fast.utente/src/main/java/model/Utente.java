@@ -15,8 +15,6 @@ import java.util.List;
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private int id;
 
 	private String cognome;
 
@@ -24,6 +22,7 @@ public class Utente implements Serializable {
 	@Column(name="`Data di nascita`")
 	private Date data_di_nascita;
 
+	@Id
 	private String email;
 
 	@Temporal(TemporalType.DATE)
@@ -48,13 +47,6 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getCognome() {
 		return this.cognome;
