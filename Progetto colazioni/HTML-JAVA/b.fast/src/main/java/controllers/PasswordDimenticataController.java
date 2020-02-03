@@ -31,7 +31,7 @@ public class PasswordDimenticataController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		PasswordDimenticata am = new PasswordDimenticata();
-		String s= (String) ses.getAttribute("ID");
+		int s= (Integer) ses.getAttribute("ID");
 		Bar b = am.cambio(s,request.getParameter("pass"), request.getParameter("copass"));
 		if (b == null) {
 			request.getRequestDispatcher("/password.html").forward(request, response);

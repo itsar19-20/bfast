@@ -36,7 +36,8 @@ public class CercaidController extends HttpServlet {
 			request.getRequestDispatcher("/mail.html").forward(request, response);
 		} else {
 			String s = request.getParameter("ID");
-			ses.setAttribute("ID",s);
+			Integer id = Integer.parseInt(s);
+			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/password.html").forward(request, response);
 		}
 	}

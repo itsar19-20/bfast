@@ -43,6 +43,8 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
+			int id = b.getId();
+			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

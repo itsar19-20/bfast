@@ -1,6 +1,7 @@
 package controllers;
 
-import java.io.IOException;
+import java.io.*;
+import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,32 +10,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.CambioMail;
 import model.Bar;
+import business.RegistrazioneBar;
 
-@WebServlet("/mailCambio")
-public class CambioMailController extends HttpServlet {
+
+@WebServlet("/registrazione")
+public class VisualizzazioneGraficoController extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
+	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CambioMailController() {
+	public VisualizzazioneGraficoController() {
 		super();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		CambioMail am = new CambioMail();
-		int s= (Integer) ses.getAttribute("ID");
-		Bar b = am.cambio(s,request.getParameter("mail"), request.getParameter("comail"));
+		RegistrazioneBar au = new RegistrazioneBar();
+		Bar b = null;
+		try {
+			b = au.registrazione(request.getParameter("nome"), request.getParameter("indirizzo"), request.getParameter("OrarioApe"),request.getParameter("OrarioChi"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (b == null) {
-			request.getRequestDispatcher("/mailCambio.html").forward(request, response);
+			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}

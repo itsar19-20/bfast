@@ -36,7 +36,8 @@ public class LoginControllerBar extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			String id = request.getParameter("ID");
+			String id2 = request.getParameter("ID");
+			Integer id = Integer.parseInt(id2);
 			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
