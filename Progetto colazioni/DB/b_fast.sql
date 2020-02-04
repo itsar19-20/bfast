@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 04, 2020 alle 12:42
+-- Creato il: Feb 04, 2020 alle 17:49
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -189,8 +189,8 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`ID`, `disponibilità`, `Filtro`) VALUES
-(1, 7, 'dolce e salato'),
-(2, 8, 'dolce e salato');
+(1, 7, 'dolce '),
+(2, 8, ' salato');
 
 -- --------------------------------------------------------
 
@@ -347,9 +347,14 @@ CREATE TABLE `utente` (
 INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telefono`) VALUES
 ('alex@ffff.it', 'Alex', 'Rusei', '2000-05-25', '5625', 12054256),
 ('bubu@gmail.com', 'Guglielmo', 'Strambini', '1999-12-19', '333', 34252432),
+('cri@gmai.com', 'Cristiano', 'Ronaldo', '1985-02-05', 'cri00', 56423158),
 ('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '464748', 35663535),
 ('eater@gnam.com', 'Ither', 'Khaza', '2000-02-04', '45678', 35489259),
-('simo@asd.it', 'Simone', 'Barzaghi', '1997-08-24', '666', 21474836);
+('leo@gmail.com', 'Leonardo', 'DiCaprio', '1974-11-11', 't1t4n1c', 33302526),
+('nico@asd.it', 'Nicolò', 'Zaniolo', '1999-07-02', 'r0m4', 12345985),
+('sabba@ilrosso.it', 'Samuele', 'Sabbatini', '2000-11-22', '98722', 20338228),
+('simo@asd.it', 'Simone', 'Barzaghi', '1997-08-24', '666', 21474836),
+('sofia@g.it', 'Sofia', 'Goggia', '1992-11-05', 'kkk555', 66823749);
 
 --
 -- Indici per le tabelle scaricate
@@ -505,7 +510,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT per la tabella `orario`
 --
 ALTER TABLE `orario`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
