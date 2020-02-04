@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 29, 2020 alle 14:55
+-- Creato il: Feb 04, 2020 alle 12:42
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -43,10 +43,8 @@ CREATE TABLE `appartiene` (
 CREATE TABLE `bar` (
   `ID` int(8) NOT NULL,
   `IDmeFK` int(8) DEFAULT NULL,
+  `IDinFK` int(8) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
-  `indirizzo` varchar(20) NOT NULL,
-  `OrarioApertura` varchar(20) NOT NULL,
-  `OrarioChiusura` varchar(20) NOT NULL,
   `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -58,10 +56,17 @@ CREATE TABLE `bar` (
 -- Dump dei dati per la tabella `bar`
 --
 
-INSERT INTO `bar` (`ID`, `IDmeFK`, `Nome`, `indirizzo`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 1, 'Bar pippo', 'via 3', '9:00', '12:00', 3, 'coca@gmail.com', '321', '', 0),
-(2, 2, 'Bar rum', 'via 9', '8:00', '20:00', 1, 'cola@gmail.com', '421', '', 0),
-(3, 1, 'Bar ciko', 'via cazzate 33', '4:20', '10:00', 0, 'dfagdfg@ssad.com', '333', NULL, 0);
+INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
+(1, 1, 5, 'Bar pippo', 3, 'coca@gmail.com', '666', '', 0),
+(2, 2, 10, 'Bar rum', 1, 'ciao@yt.it', '432', '', 0),
+(3, 1, 2, 'Bar ciko', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
+(4, 1, 9, 'Bar Uno', 5, 'baruno@gmail.com', '123', NULL, 0),
+(5, 2, 8, 'Bar Due', 2.5, 'bardue@blabla.it', '456', NULL, 0),
+(6, 1, 4, 'Bar Tre', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
+(7, 2, 6, 'Bar Quattro', 4, 'barquattro@opop.it', '852', NULL, 0),
+(8, 1, 7, 'Bar Cinque', 4.5, 'barcinque@asd.com', '147', NULL, 0),
+(9, 2, 3, 'Bar Sei', 5, 'barsei@fgh.com', '654', NULL, 0),
+(10, 1, 1, 'Bar Sette', 3.7, 'barsette@yh.com', '321', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +93,6 @@ CREATE TABLE `fattorino` (
   `Cognome` varchar(20) NOT NULL,
   `Nascità` date NOT NULL,
   `Password` varchar(20) NOT NULL DEFAULT '',
-  `Domanda` varchar(20) DEFAULT '',
   `Mail` varchar(20) NOT NULL DEFAULT '',
   `Valutazione` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -97,8 +101,14 @@ CREATE TABLE `fattorino` (
 -- Dump dei dati per la tabella `fattorino`
 --
 
-INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Domanda`, `Mail`, `Valutazione`) VALUES
-(1, 'Giorgio', 'Nesci', '1998-03-13', '111', '', 'gio@gmail.com', NULL);
+INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Mail`, `Valutazione`) VALUES
+(1, 'Giorgio', 'Nesci', '1998-03-13', '111', 'gio@gmail.com', NULL),
+(2, 'Ither', 'Khaza', '2000-02-04', '333', 'eater@gnam.it', NULL),
+(3, 'Paolo', 'Rossi', '1989-05-30', '656', 'cicciogamer@panino.i', NULL),
+(4, 'Samuele', 'Sabatini', '2000-08-21', '121', 'rossosaba@alice.it', NULL),
+(5, 'Alberto', 'Sormani', '1995-08-01', '888', 'albi@calcetto.it', NULL),
+(6, 'Mirko ', 'Rondi', '1997-02-03', 'ferrari16', 'leclerc@gmail.it', NULL),
+(7, 'Alessandro', 'Gasparini', '1999-09-06', '420', 'kilog@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -111,8 +121,56 @@ CREATE TABLE `indirizzo` (
   `via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
   `civico` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
   `citta` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `CAP` int(8) DEFAULT NULL
+  `CAP` varchar(5) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `indirizzo`
+--
+
+INSERT INTO `indirizzo` (`ID`, `via`, `civico`, `citta`, `CAP`) VALUES
+(1, 'via uno', '12', 'Villa Guardia', '22079'),
+(2, 'via due ', '3', 'Milano', '20100'),
+(3, 'via tre', '5', 'Alezio', '73011'),
+(4, 'via quattro', '73', 'Roma', '00130'),
+(5, 'via cinque ', '56', 'Firenze', '50121'),
+(6, 'via sei', '456', 'Bologna', '40130'),
+(7, 'via sette', '963', 'Como', '22100'),
+(8, 'via otto', '321', 'Varese', '21100'),
+(9, 'via nove', '65B', 'Lomazzo', '22074'),
+(10, 'via dieci', '6C', 'Venezia', '30100');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `lavora`
+--
+
+CREATE TABLE `lavora` (
+  `ID` int(8) NOT NULL,
+  `IDorFK` int(8) NOT NULL,
+  `IDbaFK` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `lavora`
+--
+
+INSERT INTO `lavora` (`ID`, `IDorFK`, `IDbaFK`) VALUES
+(1, 1, 5),
+(6, 21, 5),
+(7, 8, 3),
+(8, 19, 8),
+(9, 11, 1),
+(10, 24, 1),
+(11, 25, 5),
+(13, 1, 9),
+(14, 20, 9),
+(15, 18, 10),
+(16, 16, 6),
+(17, 13, 4),
+(18, 25, 2),
+(19, 24, 7);
 
 -- --------------------------------------------------------
 
@@ -133,6 +191,54 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`ID`, `disponibilità`, `Filtro`) VALUES
 (1, 7, 'dolce e salato'),
 (2, 8, 'dolce e salato');
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `orario`
+--
+
+CREATE TABLE `orario` (
+  `ID` int(8) NOT NULL,
+  `OrarioApertura` varchar(50) COLLATE latin1_general_ci NOT NULL,
+  `OrarioChiusura` varchar(50) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `orario`
+--
+
+INSERT INTO `orario` (`ID`, `OrarioApertura`, `OrarioChiusura`) VALUES
+(1, '5:00', '12:00'),
+(2, '5:30', '12:00'),
+(3, '6:00', '10:00'),
+(4, '6:30', '11:30'),
+(5, '7:00', '10:00'),
+(6, '7:30', '13:00'),
+(7, '8:00', '12:00'),
+(8, '8:30', '14:00'),
+(9, '9:00', '15:00'),
+(10, '9:30', '13:00'),
+(11, '10:00', '15:00'),
+(12, '10:30', '17:00'),
+(13, '11:00', '18:00'),
+(14, '11:30', '15:00'),
+(15, '12:00', '16:00'),
+(16, '12:30', '22:00'),
+(17, '13:00', '18:00'),
+(18, '13:30', '20:00'),
+(19, '14:00', '21:00'),
+(20, '14:30', '00:00'),
+(21, '15:00', '00:00'),
+(22, '15:30', '00:00'),
+(23, '16:00', '00:00'),
+(24, '16:30', '00:00'),
+(25, '17:00', '00:00'),
+(26, '17:30', '00:00'),
+(27, '18:00', '00:00'),
+(28, '18:30', '00:00'),
+(29, '19:00', '00:00'),
+(30, '19:30', '00:00');
 
 -- --------------------------------------------------------
 
@@ -239,8 +345,11 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telefono`) VALUES
+('alex@ffff.it', 'Alex', 'Rusei', '2000-05-25', '5625', 12054256),
 ('bubu@gmail.com', 'Guglielmo', 'Strambini', '1999-12-19', '333', 34252432),
-('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '464748', 35663535);
+('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '464748', 35663535),
+('eater@gnam.com', 'Ither', 'Khaza', '2000-02-04', '45678', 35489259),
+('simo@asd.it', 'Simone', 'Barzaghi', '1997-08-24', '666', 21474836);
 
 --
 -- Indici per le tabelle scaricate
@@ -259,7 +368,8 @@ ALTER TABLE `appartiene`
 --
 ALTER TABLE `bar`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDmeFK` (`IDmeFK`);
+  ADD KEY `IDmeFK` (`IDmeFK`),
+  ADD KEY `IDindiFK` (`IDinFK`);
 
 --
 -- Indici per le tabelle `contiene`
@@ -282,9 +392,23 @@ ALTER TABLE `indirizzo`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indici per le tabelle `lavora`
+--
+ALTER TABLE `lavora`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDorarioFK` (`IDorFK`),
+  ADD KEY `IDbFK` (`IDbaFK`);
+
+--
 -- Indici per le tabelle `menu`
 --
 ALTER TABLE `menu`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indici per le tabelle `orario`
+--
+ALTER TABLE `orario`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -345,7 +469,7 @@ ALTER TABLE `appartiene`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `contiene`
@@ -357,19 +481,31 @@ ALTER TABLE `contiene`
 -- AUTO_INCREMENT per la tabella `fattorino`
 --
 ALTER TABLE `fattorino`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT per la tabella `lavora`
+--
+ALTER TABLE `lavora`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `orario`
+--
+ALTER TABLE `orario`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
@@ -410,6 +546,7 @@ ALTER TABLE `appartiene`
 -- Limiti per la tabella `bar`
 --
 ALTER TABLE `bar`
+  ADD CONSTRAINT `IDindiFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`),
   ADD CONSTRAINT `IDmeFK` FOREIGN KEY (`IDmeFK`) REFERENCES `menu` (`ID`);
 
 --
@@ -418,6 +555,13 @@ ALTER TABLE `bar`
 ALTER TABLE `contiene`
   ADD CONSTRAINT `IDorFK` FOREIGN KEY (`IDorFK`) REFERENCES `ordine` (`ID`),
   ADD CONSTRAINT `IDprfk` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
+
+--
+-- Limiti per la tabella `lavora`
+--
+ALTER TABLE `lavora`
+  ADD CONSTRAINT `IDbFK` FOREIGN KEY (`IDbaFK`) REFERENCES `bar` (`ID`),
+  ADD CONSTRAINT `IDorarioFK` FOREIGN KEY (`IDorFK`) REFERENCES `orario` (`ID`);
 
 --
 -- Limiti per la tabella `ordine`
