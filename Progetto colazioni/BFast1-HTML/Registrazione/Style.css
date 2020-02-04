@@ -109,7 +109,7 @@ body {
 }
 
 input {
-    text-align: center;
+    text-align: start;
     background-color: #ECF0F1;
     border: 2px solid transparent;
     border-radius: 3px;

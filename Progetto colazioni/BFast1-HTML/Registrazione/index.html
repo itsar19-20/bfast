@@ -77,38 +77,45 @@
                     <h1>Create your account</h1>
                 </div>
 
+                <form action="" style="border:1px solid #ccc">
                 <div class="singup-form">
 
                     <!--Nome del Locale-->
                     <div class="control-group">
-                        <input type="text" id="nomeL" placeholder="Nome del Locale" name="NameLocale"
+                        <label for="nomeL"><b>Nome del Locale </b></label>
+                        <input type="text" id="nomeL" placeholder="Nome del Locale" name="nomeL" required
                             style="width: 100%;">
                     </div>
 
                     <!--Indirizzo del Locale-->
                     <div class="control-group">
-                        <input type="text" id="indirizzoL" placeholder="Indirizzo del Locale" name="Indirizzo"
+                        <label for="indirizzoL"><b>Indirizzo</b></label>
+                        <input type="text" id="indirizzoL" placeholder="Indirizzo del Locale" name="Indirizzo" required
                             style="width: 100%;">
                     </div>
 
 
                     <!--Email-->
                     <div class="control-group">
-                        <input type="text" id="emailL" placeholder="Inserire un Email Valida" name="email"
+                        <label for="emailL"><b>Email</b></label>
+                        <input type="text" id="emailL" placeholder="Inserire un Email Valida" name="email" required
                             style="width: 100%;">
                     </div>
 
                     <!--Password-->
                     <div class="control-group">
-                        <input type="password" id="password" placeholder="Password" name="password"
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" id="password" placeholder="Password" name="password" required
                             style="width: 100%;">
                     </div>
 
                     <!--Pepeat Password-->
                     <div class="control-group">
-                        <input type="password" id="passwordR" placeholder="Repeat Password" name="password"
+                        <label for="passwordR"><b>Repeat Password</b></label>
+                        <input type="password" id="passwordR" placeholder="Repeat Password" name="passwordR" required
                             style="width: 100%;">
                     </div>
+                </form>
 
 
 
