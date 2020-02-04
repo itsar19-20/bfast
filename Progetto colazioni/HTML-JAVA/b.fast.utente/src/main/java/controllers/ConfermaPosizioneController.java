@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.AutenticazioneUtente;
-import model.Utente;
+import business.SelezionePosizione;
 
-@WebServlet("/login")
-public class LoginControllerUtente extends HttpServlet {
+
+@WebServlet("/CambioMail")
+public class ConfermaPosizioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginControllerUtente() {
+	public ConfermaPosizioneController() {
 		super();
 	}
 
@@ -28,16 +30,15 @@ public class LoginControllerUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
-		AutenticazioneUtente au = new AutenticazioneUtente();
-		Utente b = au.login(request.getParameter("mail"), request.getParameter("password"));
-		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
-		} else {
-			String id = request.getParameter("mail");
-			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			HttpSession ses = request.getSession();
+			SelezionePosizione sp = new SelezionePosizione();
+			int i = sp.Visualizza(request.getParameter("via"), request.getParameter("civico"), request.getParameter("cap"), request.getParameter("citta"));
+			if(i==0) {
+				request.getRequestDispatcher("/").forward(request, response);
+			}else {
+				ses.setAttribute("IDi", i);
+				request.getRequestDispatcher("/ok.html").forward(request, response);
+			}
 	}
 
 	/**
