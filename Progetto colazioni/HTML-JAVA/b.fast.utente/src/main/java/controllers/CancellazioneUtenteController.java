@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import business.CancellazioneUtente;
 import model.Utente;
@@ -27,8 +28,10 @@ public class CancellazioneUtenteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession ses = request.getSession();
 		CancellazioneUtente au = new CancellazioneUtente();
-		Utente b = au.login(request.getParameter("mail"));
+		String s =(String) ses.getAttribute("ID");
+		Utente b = au.login(s);
 		if (b != null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

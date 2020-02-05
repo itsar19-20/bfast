@@ -1,8 +1,7 @@
 package controllers;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,36 +9,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.GraficoOrdini;
 
-
-@WebServlet("/registrazione")
-public class VisualizzazioneGraficoController extends HttpServlet{
-	private static final long serialVersionUID = 102831973239L;
-	
-	
+@WebServlet("/login")
+public class LogoutController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public VisualizzazioneGraficoController() {
+	public LogoutController() {
 		super();
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		GraficoOrdini au = new GraficoOrdini();
-		String s =(String) ses.getAttribute("ID");
-		Query b = null;
-		b = au.Visualizza(s);
-		if (b == null) {
-			request.getRequestDispatcher("/registrazione.html").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+		ses.removeAttribute("ID");
+		request.getRequestDispatcher("/ok.html").forward(request, response);
 	}
 
 	/**

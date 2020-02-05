@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Bar;
 import business.RegistrazioneBar;
@@ -30,11 +29,10 @@ public class DashboardProva extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		HttpSession ses = request.getSession();
 		RegistrazioneBar au = new RegistrazioneBar();
 		Bar b = null;
 		try {
-			b = au.registrazione(request.getParameter("nome"), request.getParameter("indirizzo"), request.getParameter("OrarioApe"),request.getParameter("OrarioChi"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
+			b = au.registrazione(request.getParameter("nome"), request.getParameter("via"), request.getParameter("civico"), request.getParameter("cap"), request.getParameter("citta"),request.getParameter("OrarioApe"),request.getParameter("OrarioChi"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

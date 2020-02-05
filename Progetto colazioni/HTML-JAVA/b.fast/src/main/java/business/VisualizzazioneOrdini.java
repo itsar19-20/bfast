@@ -2,20 +2,19 @@ package business;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
 
 import model.Bar;
 import utils.JPAUtil;
 
 public class VisualizzazioneOrdini {
 	
-	public void storico(HttpServletRequest req) {
-		String s = (String) req.getAttribute("ID");
+	public Query storico(String s) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = cerca(s);
 		Query Ris = em.createQuery("SELECT o.ID,o.Data,o.ValutazioneFatt,i.via,i.civico,i.cap,i.citta,p.PosXFA,p.PosYFA FROM `ordine` as o,indirizzo as i,posfatt as p,bar as b"
 				+ "WHERE o.IDinFK = i.ID AND o.IDpoFK = p.ID AND o.IDfaFK = b.ID AND b.ID = id " + 
 				"").setParameter("id", b.getId());		
+		return Ris;
 	}
 	
 	public Bar cerca (String id) {

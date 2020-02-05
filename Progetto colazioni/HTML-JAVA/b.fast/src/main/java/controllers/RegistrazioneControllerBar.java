@@ -1,8 +1,8 @@
 package controllers;
 
 import java.io.*;
+import java.text.ParseException;
 
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.GraficoOrdini;
+import model.Bar;
+import business.RegistrazioneBar;
 
 
 @WebServlet("/registrazione")
-public class VisualizzazioneGraficoController extends HttpServlet{
+public class RegistrazioneControllerBar extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
 	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public VisualizzazioneGraficoController() {
+	public RegistrazioneControllerBar() {
 		super();
 	}
 	
@@ -31,13 +32,19 @@ public class VisualizzazioneGraficoController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		GraficoOrdini au = new GraficoOrdini();
-		String s =(String) ses.getAttribute("ID");
-		Query b = null;
-		b = au.Visualizza(s);
+		RegistrazioneBar au = new RegistrazioneBar();
+		Bar b = null;
+		try {
+			b = au.registrazione(request.getParameter("nome"), request.getParameter("via"), request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"), request.getParameter("OrarioApe"),request.getParameter("OrarioChi"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
+			int id = b.getId();
+			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
 	}

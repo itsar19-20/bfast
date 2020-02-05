@@ -1,8 +1,7 @@
 package controllers;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,33 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.GraficoOrdini;
+import business.CancellazioneBar;
+import model.Bar;
 
-
-@WebServlet("/registrazione")
-public class VisualizzazioneGraficoController extends HttpServlet{
+@WebServlet("/mailCambio")
+public class CancellazioneBarController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
-	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public VisualizzazioneGraficoController() {
+	public CancellazioneBarController() {
 		super();
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		GraficoOrdini au = new GraficoOrdini();
-		String s =(String) ses.getAttribute("ID");
-		Query b = null;
-		b = au.Visualizza(s);
+		CancellazioneBar am = new CancellazioneBar();
+		int s= (Integer) ses.getAttribute("ID");
+		Bar b = am.canc(s);
 		if (b == null) {
-			request.getRequestDispatcher("/registrazione.html").forward(request, response);
+			request.getRequestDispatcher("/mailCambio.html").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
