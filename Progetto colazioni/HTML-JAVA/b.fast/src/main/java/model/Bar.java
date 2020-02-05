@@ -36,6 +36,11 @@ public class Bar implements Serializable {
 
 	private float valutazione;
 
+	//bi-directional many-to-one association to Indirizzo
+	@ManyToOne
+	@JoinColumn(name="IDinFK")
+	private Indirizzo indirizzoBean;
+
 	//bi-directional many-to-one association to Menu
 	@ManyToOne
 	@JoinColumn(name="IDmeFK")
@@ -88,7 +93,6 @@ public class Bar implements Serializable {
 		this.indirizzo = indirizzo;
 	}
 
-
 	public String getNome() {
 		return this.nome;
 	}
@@ -96,7 +100,6 @@ public class Bar implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getOrarioApertura() {
 		return this.orarioApertura;
@@ -128,6 +131,14 @@ public class Bar implements Serializable {
 
 	public void setValutazione(float valutazione) {
 		this.valutazione = valutazione;
+	}
+
+	public Indirizzo getIndirizzoBean() {
+		return this.indirizzoBean;
+	}
+
+	public void setIndirizzoBean(Indirizzo indirizzoBean) {
+		this.indirizzoBean = indirizzoBean;
 	}
 
 	public Menu getMenu() {

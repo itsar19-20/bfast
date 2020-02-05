@@ -5,13 +5,18 @@
     <persistence-unit name="b.fast" transaction-type="RESOURCE_LOCAL">
     	<class>model.Appartiene</class>
     	<class>model.Bar</class>
+    	<class>model.Chiedef</class>
+    	<class>model.Chiedeu</class>
     	<class>model.Contiene</class>
+    	<class>model.Domanda</class>
     	<class>model.Fattorino</class>
     	<class>model.Indirizzo</class>
     	<class>model.Menu</class>
     	<class>model.Ordine</class>
     	<class>model.Posfatt</class>
+    	<class>model.Possiede</class>
     	<class>model.Prodotto</class>
+    	<class>model.Risposta</class>
     	<class>model.Sceglie</class>
     	<class>model.Tipopagamento</class>
     	<class>model.Utente</class>

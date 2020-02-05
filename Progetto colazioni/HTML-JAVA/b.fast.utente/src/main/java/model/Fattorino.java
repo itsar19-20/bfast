@@ -20,8 +20,6 @@ public class Fattorino implements Serializable {
 
 	private String cognome;
 
-	private String domanda;
-
 	private String mail;
 
 	@Temporal(TemporalType.DATE)
@@ -36,6 +34,10 @@ public class Fattorino implements Serializable {
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="fattorino")
 	private List<Ordine> ordines;
+
+	//bi-directional many-to-one association to Chiedef
+	@OneToMany(mappedBy="fattorino")
+	private List<Chiedef> chiedefs;
 
 	public Fattorino() {
 	}
@@ -54,14 +56,6 @@ public class Fattorino implements Serializable {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-	public String getDomanda() {
-		return this.domanda;
-	}
-
-	public void setDomanda(String domanda) {
-		this.domanda = domanda;
 	}
 
 	public String getMail() {
@@ -124,6 +118,28 @@ public class Fattorino implements Serializable {
 		ordine.setFattorino(null);
 
 		return ordine;
+	}
+
+	public List<Chiedef> getChiedefs() {
+		return this.chiedefs;
+	}
+
+	public void setChiedefs(List<Chiedef> chiedefs) {
+		this.chiedefs = chiedefs;
+	}
+
+	public Chiedef addChiedef(Chiedef chiedef) {
+		getChiedefs().add(chiedef);
+		chiedef.setFattorino(this);
+
+		return chiedef;
+	}
+
+	public Chiedef removeChiedef(Chiedef chiedef) {
+		getChiedefs().remove(chiedef);
+		chiedef.setFattorino(null);
+
+		return chiedef;
 	}
 
 }

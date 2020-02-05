@@ -3,18 +3,6 @@
     xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="b.fast" transaction-type="RESOURCE_LOCAL">
-    	<class>model.Appartiene</class>
-    	<class>model.Bar</class>
-    	<class>model.Contiene</class>
-    	<class>model.Fattorino</class>
-    	<class>model.Indirizzo</class>
-    	<class>model.Menu</class>
-    	<class>model.Ordine</class>
-    	<class>model.Posfatt</class>
-    	<class>model.Prodotto</class>
-    	<class>model.Sceglie</class>
-    	<class>model.Tipopagamento</class>
-    	<class>model.Utente</class>
         <properties>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/b.fast?serverTimezone=America/Los_Angeles"/>

@@ -16,15 +16,15 @@ public class Sceglie implements Serializable {
 	@Id
 	private int id;
 
-	//bi-directional many-to-one association to Utente
-	@ManyToOne
-	@JoinColumn(name="IDutFK")
-	private Utente utente;
-
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDprFK")
 	private Indirizzo indirizzo;
+
+	//bi-directional many-to-one association to Utente
+	@ManyToOne
+	@JoinColumn(name="IDutFK")
+	private Utente utente;
 
 	public Sceglie() {
 	}
@@ -37,20 +37,20 @@ public class Sceglie implements Serializable {
 		this.id = id;
 	}
 
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
 	public Indirizzo getIndirizzo() {
 		return this.indirizzo;
 	}
 
 	public void setIndirizzo(Indirizzo indirizzo) {
 		this.indirizzo = indirizzo;
+	}
+
+	public Utente getUtente() {
+		return this.utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 }

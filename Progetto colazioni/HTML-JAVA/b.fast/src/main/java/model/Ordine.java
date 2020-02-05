@@ -43,11 +43,6 @@ public class Ordine implements Serializable {
 	@JoinColumn(name="IDfatFK")
 	private Fattorino fattorino;
 
-	//bi-directional many-to-one association to Utente
-	@ManyToOne
-	@JoinColumn(name="IDutFK")
-	private Utente utente;
-
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDinFK")
@@ -62,6 +57,11 @@ public class Ordine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="IDtiFK")
 	private Tipopagamento tipopagamento;
+
+	//bi-directional many-to-one association to Utente
+	@ManyToOne
+	@JoinColumn(name="IDutFK")
+	private Utente utente;
 
 	public Ordine() {
 	}
@@ -152,14 +152,6 @@ public class Ordine implements Serializable {
 		this.fattorino = fattorino;
 	}
 
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
 	public Indirizzo getIndirizzo() {
 		return this.indirizzo;
 	}
@@ -182,6 +174,14 @@ public class Ordine implements Serializable {
 
 	public void setTipopagamento(Tipopagamento tipopagamento) {
 		this.tipopagamento = tipopagamento;
+	}
+
+	public Utente getUtente() {
+		return this.utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 }

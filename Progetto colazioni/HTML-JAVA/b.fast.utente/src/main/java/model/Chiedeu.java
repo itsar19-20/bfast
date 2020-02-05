@@ -5,28 +5,28 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the sceglie database table.
+ * The persistent class for the chiedeu database table.
  * 
  */
 @Entity
-@NamedQuery(name="Sceglie.findAll", query="SELECT s FROM Sceglie s")
-public class Sceglie implements Serializable {
+@NamedQuery(name="Chiedeu.findAll", query="SELECT c FROM Chiedeu c")
+public class Chiedeu implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
 
-	//bi-directional many-to-one association to Indirizzo
+	//bi-directional many-to-one association to Domanda
 	@ManyToOne
-	@JoinColumn(name="IDprFK")
-	private Indirizzo indirizzo;
+	@JoinColumn(name="IDdoFK")
+	private Domanda domanda;
 
 	//bi-directional many-to-one association to Utente
 	@ManyToOne
 	@JoinColumn(name="IDutFK")
 	private Utente utente;
 
-	public Sceglie() {
+	public Chiedeu() {
 	}
 
 	public int getId() {
@@ -37,12 +37,12 @@ public class Sceglie implements Serializable {
 		this.id = id;
 	}
 
-	public Indirizzo getIndirizzo() {
-		return this.indirizzo;
+	public Domanda getDomanda() {
+		return this.domanda;
 	}
 
-	public void setIndirizzo(Indirizzo indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setDomanda(Domanda domanda) {
+		this.domanda = domanda;
 	}
 
 	public Utente getUtente() {
