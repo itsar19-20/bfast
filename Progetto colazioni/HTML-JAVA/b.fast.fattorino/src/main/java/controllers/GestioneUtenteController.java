@@ -7,19 +7,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import business.AutenticazioneFattorino;
-import model.Fattorino;
 
-@WebServlet("/login")
-public class OnlineController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+@WebServlet("/mailCambio")
+public class GestioneUtenteController extends HttpServlet {
+	private static final long serialVersionUID = 102831973239L;
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public OnlineController() {
+	public GestioneUtenteController() {
 		super();
 	}
 
@@ -29,17 +26,7 @@ public class OnlineController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
-		AutenticazioneFattorino am = new AutenticazioneFattorino();
-		Fattorino b = am.login(request.getParameter("ID"), request.getParameter("password"));
-		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
-		} else {
-			String id2 = request.getParameter("ID");
-			Integer id = Integer.parseInt(id2);
-			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+		request.getRequestDispatcher("/ok.html").forward(request, response);
 	}
 
 	/**

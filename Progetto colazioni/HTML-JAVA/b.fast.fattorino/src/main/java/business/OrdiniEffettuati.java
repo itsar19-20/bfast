@@ -2,20 +2,19 @@ package business;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
 
 import model.Fattorino;
 import utils.JPAUtil;
 
 public class OrdiniEffettuati {
 	
-	public void storico(HttpServletRequest req) {
-		String s = (String) req.getAttribute("ID");
+	public Query storico(String s) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Fattorino f = cerca(s);
 		Query Ris = em.createQuery("SELECT o.ID,o.Data,o.ValutazioneFatt,i.via,i.civico,i.cap,i.citta,p.PosXFA,p.PosYFA FROM `ordine` as o,indirizzo as i,posfatt as p,fattorino as f"
 				+ "WHERE o.IDinFK = i.ID AND o.IDpoFK = p.ID AND o.IDfaFK = f.ID AND f.ID = id " + 
-				"").setParameter("f.ID", f.getId());		
+				"").setParameter("f.ID", f.getId());
+		return Ris;
 	}
 	
 	public Fattorino cerca (String id) {
