@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 05, 2020 alle 12:10
+-- Creato il: Feb 05, 2020 alle 15:58
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -117,6 +117,15 @@ CREATE TABLE `domanda` (
   `ID` int(8) NOT NULL,
   `domanda` varchar(50) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `domanda`
+--
+
+INSERT INTO `domanda` (`ID`, `domanda`) VALUES
+(1, 'Come effettuare l\'ordine?'),
+(2, 'Come effettuare il pagamento?'),
+(3, 'Come contattare il fattorino?');
 
 -- --------------------------------------------------------
 
@@ -262,6 +271,29 @@ CREATE TABLE `prodotto` (
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `prodotto`
+--
+
+INSERT INTO `prodotto` (`Nome`, `Ingredienti`, `Prezzo`, `Tipo`) VALUES
+('avocado toast', 'pane,avocado', 3.5, 'bevande'),
+('brioche', 'farina,uova,latte,lievito,burro', 2.5, 'dolce'),
+('caffe', 'caffe', 0.6, 'bevande'),
+('cappuccino', 'caffe,latte', 0.8, 'bevande'),
+('cheesecake', 'burro,mascarpone', 2.6, 'dolce'),
+('croissant', 'farina,uova,lievito,latte', 2, 'dolce'),
+('crostata alla frutta', 'farina,uova,zucchero', 1.2, 'dolce'),
+('frenchtoast', 'pane,uova,latte,cannella', 3.5, 'dolce'),
+('muffin', 'farina,uova,latte,lievito,burro', 2, 'dolce'),
+('pancake', 'farina,latte,uova,lievito', 3.5, 'dolce'),
+('pancetta', 'pancetta', 1, 'salato'),
+('pasticciotto', 'farina,uova,strutto,burro', 1, 'dolce'),
+('succo di arancia', 'arancia', 0.8, 'bevande'),
+('tiramisù', 'savoiardi,mascarpone,uova,cacao,zucchero', 2, 'dolce'),
+('torta al cioccolato', 'cacao,farina,uova,latte,lievito,burro', 2, 'dolce'),
+('torta alle mele', 'mele,farina,uova,latte,lievito,olio,limone', 1, 'dolce'),
+('uova', 'uova', 1, 'salato');
+
 -- --------------------------------------------------------
 
 --
@@ -272,6 +304,13 @@ CREATE TABLE `risposta` (
   `ID` int(8) NOT NULL,
   `Risposta` varchar(50) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `risposta`
+--
+
+INSERT INTO `risposta` (`ID`, `Risposta`) VALUES
+(1, 'Contatta il nostro numero verde 800.800.157');
 
 -- --------------------------------------------------------
 
@@ -500,7 +539,7 @@ ALTER TABLE `contiene`
 -- AUTO_INCREMENT per la tabella `domanda`
 --
 ALTER TABLE `domanda`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `fattorino`
@@ -542,7 +581,7 @@ ALTER TABLE `possiede`
 -- AUTO_INCREMENT per la tabella `risposta`
 --
 ALTER TABLE `risposta`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `sceglie`
