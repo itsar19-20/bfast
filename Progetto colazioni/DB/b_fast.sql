@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 04, 2020 alle 17:49
+-- Creato il: Feb 05, 2020 alle 10:43
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -71,6 +71,30 @@ INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `Valutazione`, `email`, `pa
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `chiedef`
+--
+
+CREATE TABLE `chiedef` (
+  `ID` int(8) NOT NULL,
+  `IDfatFK` int(8) NOT NULL DEFAULT '0',
+  `IDdoFK` int(8) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `chiedeu`
+--
+
+CREATE TABLE `chiedeu` (
+  `ID` int(8) NOT NULL,
+  `IDdoFK` int(8) NOT NULL DEFAULT '0',
+  `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `contiene`
 --
 
@@ -80,6 +104,17 @@ CREATE TABLE `contiene` (
   `IDorFK` int(8) NOT NULL DEFAULT '0',
   `Quantita` int(5) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `domanda`
+--
+
+CREATE TABLE `domanda` (
+  `ID` int(8) NOT NULL,
+  `domanda` varchar(50) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
@@ -283,6 +318,18 @@ INSERT INTO `posfatt` (`ID`, `PosXFA`, `PosYFA`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `possiede`
+--
+
+CREATE TABLE `possiede` (
+  `ID` int(8) NOT NULL,
+  `IDdoFK` int(8) NOT NULL,
+  `IDriFK` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `prodotto`
 --
 
@@ -292,6 +339,17 @@ CREATE TABLE `prodotto` (
   `Prezzo` float NOT NULL DEFAULT '0',
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `risposta`
+--
+
+CREATE TABLE `risposta` (
+  `ID` int(8) NOT NULL,
+  `Risposta` varchar(50) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
@@ -377,12 +435,34 @@ ALTER TABLE `bar`
   ADD KEY `IDindiFK` (`IDinFK`);
 
 --
+-- Indici per le tabelle `chiedef`
+--
+ALTER TABLE `chiedef`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDfattFK` (`IDfatFK`),
+  ADD KEY `IDdomFK` (`IDdoFK`);
+
+--
+-- Indici per le tabelle `chiedeu`
+--
+ALTER TABLE `chiedeu`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDdoFK` (`IDdoFK`),
+  ADD KEY `IDuttFK` (`IDutFK`);
+
+--
 -- Indici per le tabelle `contiene`
 --
 ALTER TABLE `contiene`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IDorFK` (`IDorFK`),
   ADD KEY `IDprfk` (`IDprFK`);
+
+--
+-- Indici per le tabelle `domanda`
+--
+ALTER TABLE `domanda`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `fattorino`
@@ -435,10 +515,24 @@ ALTER TABLE `posfatt`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indici per le tabelle `possiede`
+--
+ALTER TABLE `possiede`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDdomaFK` (`IDdoFK`),
+  ADD KEY `IDrisFK` (`IDriFK`);
+
+--
 -- Indici per le tabelle `prodotto`
 --
 ALTER TABLE `prodotto`
   ADD PRIMARY KEY (`Nome`);
+
+--
+-- Indici per le tabelle `risposta`
+--
+ALTER TABLE `risposta`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `sceglie`
@@ -477,9 +571,27 @@ ALTER TABLE `bar`
   MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT per la tabella `chiedef`
+--
+ALTER TABLE `chiedef`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `chiedeu`
+--
+ALTER TABLE `chiedeu`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `domanda`
+--
+ALTER TABLE `domanda`
   MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
 
 --
@@ -525,6 +637,18 @@ ALTER TABLE `posfatt`
   MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT per la tabella `possiede`
+--
+ALTER TABLE `possiede`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `risposta`
+--
+ALTER TABLE `risposta`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT per la tabella `sceglie`
 --
 ALTER TABLE `sceglie`
@@ -555,6 +679,20 @@ ALTER TABLE `bar`
   ADD CONSTRAINT `IDmeFK` FOREIGN KEY (`IDmeFK`) REFERENCES `menu` (`ID`);
 
 --
+-- Limiti per la tabella `chiedef`
+--
+ALTER TABLE `chiedef`
+  ADD CONSTRAINT `IDdomFK` FOREIGN KEY (`IDdoFK`) REFERENCES `domanda` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDfattFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `chiedeu`
+--
+ALTER TABLE `chiedeu`
+  ADD CONSTRAINT `IDdoFK` FOREIGN KEY (`IDdoFK`) REFERENCES `domanda` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDuttFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Limiti per la tabella `contiene`
 --
 ALTER TABLE `contiene`
@@ -578,6 +716,13 @@ ALTER TABLE `ordine`
   ADD CONSTRAINT `IDinFK` FOREIGN KEY (`IDpoFK`) REFERENCES `posfatt` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limiti per la tabella `possiede`
+--
+ALTER TABLE `possiede`
+  ADD CONSTRAINT `IDdomaFK` FOREIGN KEY (`IDdoFK`) REFERENCES `domanda` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `IDrisFK` FOREIGN KEY (`IDriFK`) REFERENCES `risposta` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `sceglie`
