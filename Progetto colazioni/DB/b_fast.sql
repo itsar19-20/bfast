@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 05, 2020 alle 10:43
+-- Creato il: Feb 05, 2020 alle 12:10
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -45,6 +45,8 @@ CREATE TABLE `bar` (
   `IDmeFK` int(8) DEFAULT NULL,
   `IDinFK` int(8) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
+  `OrarioApertura` varchar(20) NOT NULL,
+  `OrarioChiusura` varchar(20) NOT NULL,
   `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -56,17 +58,17 @@ CREATE TABLE `bar` (
 -- Dump dei dati per la tabella `bar`
 --
 
-INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 1, 5, 'Bar pippo', 3, 'coca@gmail.com', '666', '', 0),
-(2, 2, 10, 'Bar rum', 1, 'ciao@yt.it', '432', '', 0),
-(3, 1, 2, 'Bar ciko', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
-(4, 1, 9, 'Bar Uno', 5, 'baruno@gmail.com', '123', NULL, 0),
-(5, 2, 8, 'Bar Due', 2.5, 'bardue@blabla.it', '456', NULL, 0),
-(6, 1, 4, 'Bar Tre', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
-(7, 2, 6, 'Bar Quattro', 4, 'barquattro@opop.it', '852', NULL, 0),
-(8, 1, 7, 'Bar Cinque', 4.5, 'barcinque@asd.com', '147', NULL, 0),
-(9, 2, 3, 'Bar Sei', 5, 'barsei@fgh.com', '654', NULL, 0),
-(10, 1, 1, 'Bar Sette', 3.7, 'barsette@yh.com', '321', NULL, 0);
+INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
+(1, 1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '666', '', 0),
+(2, 2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
+(3, 1, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
+(4, 1, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
+(5, 2, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', NULL, 0),
+(6, 1, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
+(7, 2, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', NULL, 0),
+(8, 1, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
+(9, 2, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
+(10, 1, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -178,38 +180,6 @@ INSERT INTO `indirizzo` (`ID`, `via`, `civico`, `citta`, `CAP`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `lavora`
---
-
-CREATE TABLE `lavora` (
-  `ID` int(8) NOT NULL,
-  `IDorFK` int(8) NOT NULL,
-  `IDbaFK` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dump dei dati per la tabella `lavora`
---
-
-INSERT INTO `lavora` (`ID`, `IDorFK`, `IDbaFK`) VALUES
-(1, 1, 5),
-(6, 21, 5),
-(7, 8, 3),
-(8, 19, 8),
-(9, 11, 1),
-(10, 24, 1),
-(11, 25, 5),
-(13, 1, 9),
-(14, 20, 9),
-(15, 18, 10),
-(16, 16, 6),
-(17, 13, 4),
-(18, 25, 2),
-(19, 24, 7);
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `menu`
 --
 
@@ -226,54 +196,6 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`ID`, `disponibilità`, `Filtro`) VALUES
 (1, 7, 'dolce '),
 (2, 8, ' salato');
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `orario`
---
-
-CREATE TABLE `orario` (
-  `ID` int(8) NOT NULL,
-  `OrarioApertura` varchar(50) COLLATE latin1_general_ci NOT NULL,
-  `OrarioChiusura` varchar(50) COLLATE latin1_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dump dei dati per la tabella `orario`
---
-
-INSERT INTO `orario` (`ID`, `OrarioApertura`, `OrarioChiusura`) VALUES
-(1, '5:00', '12:00'),
-(2, '5:30', '12:00'),
-(3, '6:00', '10:00'),
-(4, '6:30', '11:30'),
-(5, '7:00', '10:00'),
-(6, '7:30', '13:00'),
-(7, '8:00', '12:00'),
-(8, '8:30', '14:00'),
-(9, '9:00', '15:00'),
-(10, '9:30', '13:00'),
-(11, '10:00', '15:00'),
-(12, '10:30', '17:00'),
-(13, '11:00', '18:00'),
-(14, '11:30', '15:00'),
-(15, '12:00', '16:00'),
-(16, '12:30', '22:00'),
-(17, '13:00', '18:00'),
-(18, '13:30', '20:00'),
-(19, '14:00', '21:00'),
-(20, '14:30', '00:00'),
-(21, '15:00', '00:00'),
-(22, '15:30', '00:00'),
-(23, '16:00', '00:00'),
-(24, '16:30', '00:00'),
-(25, '17:00', '00:00'),
-(26, '17:30', '00:00'),
-(27, '18:00', '00:00'),
-(28, '18:30', '00:00'),
-(29, '19:00', '00:00'),
-(30, '19:30', '00:00');
 
 -- --------------------------------------------------------
 
@@ -477,23 +399,9 @@ ALTER TABLE `indirizzo`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indici per le tabelle `lavora`
---
-ALTER TABLE `lavora`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDorarioFK` (`IDorFK`),
-  ADD KEY `IDbFK` (`IDbaFK`);
-
---
 -- Indici per le tabelle `menu`
 --
 ALTER TABLE `menu`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indici per le tabelle `orario`
---
-ALTER TABLE `orario`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -607,22 +515,10 @@ ALTER TABLE `indirizzo`
   MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT per la tabella `lavora`
---
-ALTER TABLE `lavora`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT per la tabella `orario`
---
-ALTER TABLE `orario`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
@@ -698,13 +594,6 @@ ALTER TABLE `chiedeu`
 ALTER TABLE `contiene`
   ADD CONSTRAINT `IDorFK` FOREIGN KEY (`IDorFK`) REFERENCES `ordine` (`ID`),
   ADD CONSTRAINT `IDprfk` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
-
---
--- Limiti per la tabella `lavora`
---
-ALTER TABLE `lavora`
-  ADD CONSTRAINT `IDbFK` FOREIGN KEY (`IDbaFK`) REFERENCES `bar` (`ID`),
-  ADD CONSTRAINT `IDorarioFK` FOREIGN KEY (`IDorFK`) REFERENCES `orario` (`ID`);
 
 --
 -- Limiti per la tabella `ordine`
