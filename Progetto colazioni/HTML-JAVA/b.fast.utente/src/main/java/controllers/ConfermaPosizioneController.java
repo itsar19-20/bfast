@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.SelezionePosizione;
 
 
-@WebServlet("/CambioMail")
+@WebServlet("/Posizione")
 public class ConfermaPosizioneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

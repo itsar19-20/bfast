@@ -15,7 +15,7 @@ import business.Prodotti;
 import model.Contiene;
 import model.Ordine;
 
-@WebServlet("/prodotto")
+@WebServlet("/selezioneprodotto")
 public class SelezioneProdotti extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 

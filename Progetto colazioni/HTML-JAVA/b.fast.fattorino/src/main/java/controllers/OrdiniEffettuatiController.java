@@ -13,7 +13,7 @@ import javax.persistence.Query;
 
 import business.OrdiniEffettuati;
 
-@WebServlet("/registrazione")
+@WebServlet("/ordiniEffettuati")
 public class OrdiniEffettuatiController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	/**

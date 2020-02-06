@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import business.GraficoOrdini;
 
 
-@WebServlet("/registrazione")
+@WebServlet("/grafico")
 public class VisualizzazioneGraficoController extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
 	

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.PasswordDimenticata;
 import model.Utente;
 
-@WebServlet("/PasswordDimenticataMail")
+@WebServlet("/PasswordDimenticataPassword")
 public class ControllerPasswordDimenticata extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.CancellazioneFattorino;
 import model.Fattorino;
 
-@WebServlet("/mailCambio")
+@WebServlet("/cancellazioneFattorino")
 public class CancellazioneFattorinoController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	

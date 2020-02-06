@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/mailCambio")
+@WebServlet("/andareOnline")
 public class AndareOnlineController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	

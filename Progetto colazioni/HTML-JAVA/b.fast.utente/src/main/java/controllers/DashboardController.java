@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.Ordini;
 import model.Ordine;
 
-@WebServlet("/CambioMail")
+@WebServlet("/dashboard")
 public class DashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
