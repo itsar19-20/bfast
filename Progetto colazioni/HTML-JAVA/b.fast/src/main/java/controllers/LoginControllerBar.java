@@ -30,6 +30,15 @@ public class LoginControllerBar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		AutenticazioneBar am = new AutenticazioneBar();
 		Bar b = am.login(request.getParameter("ID"), request.getParameter("password"));
@@ -41,14 +50,5 @@ public class LoginControllerBar extends HttpServlet {
 			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

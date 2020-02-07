@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.PasswordDimenticata;
 import model.Bar;
 
-@WebServlet("/password")
+@WebServlet("/PasswordDimenticata/password")
 public class PasswordDimenticataController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	
@@ -34,7 +34,7 @@ public class PasswordDimenticataController extends HttpServlet {
 		int s= (Integer) ses.getAttribute("ID");
 		Bar b = am.cambio(s,request.getParameter("pass"), request.getParameter("copass"));
 		if (b == null) {
-			request.getRequestDispatcher("/password.html").forward(request, response);
+			request.getRequestDispatcher("../PasswordDimenticata/cambio.html").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/ok.html").forward(request, response);
 		}

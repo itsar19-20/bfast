@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.CercaID;
 import model.Bar;
 
-@WebServlet("/mail")
+@WebServlet("/PasswordDimenticata/id")
 public class CercaidController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 
@@ -33,12 +33,12 @@ public class CercaidController extends HttpServlet {
 		CercaID am = new CercaID();
 		Bar b = am.cambio(request.getParameter("ID"));
 		if (b == null) {
-			request.getRequestDispatcher("/mail.html").forward(request, response);
+			request.getRequestDispatcher("../PasswordDimenticata/index.html").forward(request, response);
 		} else {
 			String s = request.getParameter("ID");
 			Integer id = Integer.parseInt(s);
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/password.html").forward(request, response);
+			request.getRequestDispatcher("../PasswordDimenticata/cambio.html").forward(request, response);
 		}
 	}
 

@@ -47,37 +47,37 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="../">Home</a>
+						<a class="nav-link" href="../HomePage/index.html">Home</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../Registrazione/index.html" >Sign Up</a>
-					</li>
+	
 				</ul>
 			</div>
         </nav>
         <!--End Navigation-->
 
 
-    <form action="login" method="POST">
+    <form action="/login" method="POST">
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
-                    <h1>Sign in to BFast</h1>
+                    <h1>Cambia Password</h1>
                 </div>
 
                 <div class="login-form">
-                    <!--UserName-->
-                    <div class="control-group">
-                        <input type="text" id="ID" class="login-field" value="" placeholder="ID" name="ID" required autofocus name="ID" style="width: 100%;">
-                        <label class="login-field-icon fui-user" for="login-name"></label>
-                    </div>
+				
                     <!--Password-->
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Password" name="password" required autofocus name="password" style="width: 100%;"> 
+                        <input type="password" id="password" class="login-field" value="" placeholder="Nuova Password" name="pass" style="width: 100%;"> 
+                        <label class="login-field-icon fui-lock" for="login-pass"></label>
+                    </div>
+					
+				 <!--CoPassword-->
+                    <div class="control-group">
+                        <input type="password" id="password" class="login-field" value="" placeholder="Conferma Password" name="copass" style="width: 100%;"> 
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
 
-                    <input type="submit" onclick="validazione(event);" value="Sign in" class="btn btn-primary btn-large btn-block">
+                    <input type="button" onclick="validazione(event);" value="Continua" class="btn btn-primary btn-large btn-block">
 
                 </div>
 
@@ -87,8 +87,6 @@
             </div>
         </div>
     </form>
-    
-    <a href="../PasswordDimenticata/index.html" style="text-align: center;display: block;margin-left: auto; margin-right: auto;">Hai dimenticato la password?</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
