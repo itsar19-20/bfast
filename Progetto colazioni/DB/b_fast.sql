@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 05, 2020 alle 15:58
+-- Creato il: Feb 07, 2020 alle 17:58
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -45,8 +45,8 @@ CREATE TABLE `bar` (
   `IDmeFK` int(8) DEFAULT NULL,
   `IDinFK` int(8) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
-  `OrarioApertura` varchar(20) NOT NULL,
-  `OrarioChiusura` varchar(20) NOT NULL,
+  `OrarioApertura` varchar(20) DEFAULT NULL,
+  `OrarioChiusura` varchar(20) DEFAULT NULL,
   `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `bar` (
 --
 
 INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '666', '', 0),
+(1, 1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '333', '', 0),
 (2, 2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
 (3, 1, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
 (4, 1, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
@@ -68,7 +68,8 @@ INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioCh
 (7, 2, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', NULL, 0),
 (8, 1, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
 (9, 2, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
-(10, 1, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0);
+(10, 1, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0),
+(11, NULL, NULL, 'Bar toro', NULL, NULL, 0, 'lautoro@martinez.com', '10', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -257,6 +258,13 @@ CREATE TABLE `possiede` (
   `IDdoFK` int(8) NOT NULL,
   `IDriFK` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `possiede`
+--
+
+INSERT INTO `possiede` (`ID`, `IDdoFK`, `IDriFK`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -515,7 +523,7 @@ ALTER TABLE `appartiene`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT per la tabella `chiedef`
@@ -575,7 +583,7 @@ ALTER TABLE `posfatt`
 -- AUTO_INCREMENT per la tabella `possiede`
 --
 ALTER TABLE `possiede`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `risposta`
