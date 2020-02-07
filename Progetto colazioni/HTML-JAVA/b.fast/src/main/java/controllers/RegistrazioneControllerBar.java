@@ -14,7 +14,7 @@ import model.Bar;
 import business.RegistrazioneBar;
 
 
-@WebServlet("/registrazione")
+@WebServlet("/Registrazione/registrazione")
 public class RegistrazioneControllerBar extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
 	
@@ -35,13 +35,13 @@ public class RegistrazioneControllerBar extends HttpServlet{
 		RegistrazioneBar au = new RegistrazioneBar();
 		Bar b = null;
 		try {
-			b = au.registrazione(request.getParameter("nome"), request.getParameter("via"), request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"), request.getParameter("OrarioApe"),request.getParameter("OrarioChi"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
+			b = au.registrazione(request.getParameter("nome"),request.getParameter("mail"),request.getParameter("pass"), request.getParameter("copass"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (b == null) {
-			request.getRequestDispatcher("/registrazione.html").forward(request, response);
+			request.getRequestDispatcher("../Registrazione/index.html").forward(request, response);
 		} else {
 			int id = b.getId();
 			ses.setAttribute("ID",id);

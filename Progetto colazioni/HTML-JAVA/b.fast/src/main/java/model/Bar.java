@@ -24,7 +24,6 @@ public class Bar implements Serializable {
 	@Lob
 	private byte[] immagine;
 
-	private String indirizzo;
 
 	private String nome;
 
@@ -85,13 +84,6 @@ public class Bar implements Serializable {
 		this.immagine = immagine;
 	}
 
-	public String getIndirizzo() {
-		return this.indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
 
 	public String getNome() {
 		return this.nome;
@@ -100,6 +92,7 @@ public class Bar implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 
 	public String getOrarioApertura() {
 		return this.orarioApertura;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.AutenticazioneBar;
 import model.Bar;
 
-@WebServlet("/login")
+@WebServlet("/Login/login")
 public class LoginControllerBar extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 
@@ -34,7 +34,7 @@ public class LoginControllerBar extends HttpServlet {
 		AutenticazioneBar am = new AutenticazioneBar();
 		Bar b = am.login(request.getParameter("ID"), request.getParameter("password"));
 		if (b == null) {
-			request.getRequestDispatcher("/").forward(request, response);
+			request.getRequestDispatcher("../Login/index.html").forward(request, response);
 		} else {
 			String id2 = request.getParameter("ID");
 			Integer id = Integer.parseInt(id2);
