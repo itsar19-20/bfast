@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2020 alle 17:58
+-- Creato il: Feb 10, 2020 alle 15:16
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -25,24 +25,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `appartiene`
---
-
-CREATE TABLE `appartiene` (
-  `ID` int(8) NOT NULL,
-  `IDmeFK` int(8) NOT NULL,
-  `IDprFK` varchar(50) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `bar`
 --
 
 CREATE TABLE `bar` (
   `ID` int(8) NOT NULL,
-  `IDmeFK` int(8) DEFAULT NULL,
   `IDinFK` int(8) DEFAULT NULL,
   `Nome` varchar(20) NOT NULL,
   `OrarioApertura` varchar(20) DEFAULT NULL,
@@ -58,18 +45,18 @@ CREATE TABLE `bar` (
 -- Dump dei dati per la tabella `bar`
 --
 
-INSERT INTO `bar` (`ID`, `IDmeFK`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '333', '', 0),
-(2, 2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
-(3, 1, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
-(4, 1, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
-(5, 2, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', NULL, 0),
-(6, 1, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
-(7, 2, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', NULL, 0),
-(8, 1, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
-(9, 2, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
-(10, 1, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0),
-(11, NULL, NULL, 'Bar toro', NULL, NULL, 0, 'lautoro@martinez.com', '10', NULL, 0);
+INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
+(1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '333', '', 0),
+(2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
+(3, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
+(4, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
+(5, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', NULL, 0),
+(6, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
+(7, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', NULL, 0),
+(8, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
+(9, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
+(10, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0),
+(11, NULL, 'Bar toro', NULL, NULL, 0, 'lautoro@martinez.com', '10', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -93,6 +80,18 @@ CREATE TABLE `chiedeu` (
   `ID` int(8) NOT NULL,
   `IDdoFK` int(8) NOT NULL DEFAULT '0',
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `classificato`
+--
+
+CREATE TABLE `classificato` (
+  `ID` int(8) NOT NULL,
+  `IDbaFK` int(8) DEFAULT NULL,
+  `IDfiFK` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
@@ -160,6 +159,27 @@ INSERT INTO `fattorino` (`ID`, `Nome`, `Cognome`, `Nascità`, `Password`, `Mail`
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `filtro`
+--
+
+CREATE TABLE `filtro` (
+  `ID` int(8) NOT NULL,
+  `Tipo` varchar(50) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `filtro`
+--
+
+INSERT INTO `filtro` (`ID`, `Tipo`) VALUES
+(1, 'Salato'),
+(2, 'Dolce'),
+(3, 'Cocktail'),
+(4, 'Tabacchino');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `indirizzo`
 --
 
@@ -194,18 +214,11 @@ INSERT INTO `indirizzo` (`ID`, `via`, `civico`, `citta`, `CAP`) VALUES
 --
 
 CREATE TABLE `menu` (
-  `ID` int(11) NOT NULL,
-  `disponibilità` int(11) NOT NULL,
-  `Filtro` varchar(50) DEFAULT 'dolce e salato'
+  `ID` int(8) NOT NULL,
+  `IDbaFK` int(8) NOT NULL,
+  `IDprFK` varchar(50) NOT NULL DEFAULT '',
+  `Disponibilita` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `menu`
---
-
-INSERT INTO `menu` (`ID`, `disponibilità`, `Filtro`) VALUES
-(1, 7, 'dolce '),
-(2, 8, ' salato');
 
 -- --------------------------------------------------------
 
@@ -388,19 +401,10 @@ INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telef
 --
 
 --
--- Indici per le tabelle `appartiene`
---
-ALTER TABLE `appartiene`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDmFK` (`IDmeFK`),
-  ADD KEY `IDpr2FK` (`IDprFK`);
-
---
 -- Indici per le tabelle `bar`
 --
 ALTER TABLE `bar`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDmeFK` (`IDmeFK`),
   ADD KEY `IDindiFK` (`IDinFK`);
 
 --
@@ -418,6 +422,14 @@ ALTER TABLE `chiedeu`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IDdoFK` (`IDdoFK`),
   ADD KEY `IDuttFK` (`IDutFK`);
+
+--
+-- Indici per le tabelle `classificato`
+--
+ALTER TABLE `classificato`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDfiFK` (`IDfiFK`),
+  ADD KEY `IDbFK` (`IDbaFK`);
 
 --
 -- Indici per le tabelle `contiene`
@@ -440,6 +452,12 @@ ALTER TABLE `fattorino`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indici per le tabelle `filtro`
+--
+ALTER TABLE `filtro`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indici per le tabelle `indirizzo`
 --
 ALTER TABLE `indirizzo`
@@ -449,7 +467,9 @@ ALTER TABLE `indirizzo`
 -- Indici per le tabelle `menu`
 --
 ALTER TABLE `menu`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDmFK` (`IDbaFK`),
+  ADD KEY `IDpr2FK` (`IDprFK`);
 
 --
 -- Indici per le tabelle `ordine`
@@ -514,12 +534,6 @@ ALTER TABLE `utente`
 --
 
 --
--- AUTO_INCREMENT per la tabella `appartiene`
---
-ALTER TABLE `appartiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
@@ -535,6 +549,12 @@ ALTER TABLE `chiedef`
 -- AUTO_INCREMENT per la tabella `chiedeu`
 --
 ALTER TABLE `chiedeu`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `classificato`
+--
+ALTER TABLE `classificato`
   MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
 
 --
@@ -556,6 +576,12 @@ ALTER TABLE `fattorino`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT per la tabella `filtro`
+--
+ALTER TABLE `filtro`
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
@@ -565,7 +591,7 @@ ALTER TABLE `indirizzo`
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
@@ -608,18 +634,10 @@ ALTER TABLE `tipopagamento`
 --
 
 --
--- Limiti per la tabella `appartiene`
---
-ALTER TABLE `appartiene`
-  ADD CONSTRAINT `IDmFK` FOREIGN KEY (`IDmeFK`) REFERENCES `menu` (`ID`),
-  ADD CONSTRAINT `IDpr2FK` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
-
---
 -- Limiti per la tabella `bar`
 --
 ALTER TABLE `bar`
-  ADD CONSTRAINT `IDindiFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`),
-  ADD CONSTRAINT `IDmeFK` FOREIGN KEY (`IDmeFK`) REFERENCES `menu` (`ID`);
+  ADD CONSTRAINT `IDindiFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`);
 
 --
 -- Limiti per la tabella `chiedef`
@@ -636,11 +654,25 @@ ALTER TABLE `chiedeu`
   ADD CONSTRAINT `IDuttFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Limiti per la tabella `classificato`
+--
+ALTER TABLE `classificato`
+  ADD CONSTRAINT `IDbFK` FOREIGN KEY (`IDbaFK`) REFERENCES `bar` (`ID`),
+  ADD CONSTRAINT `IDfiFK` FOREIGN KEY (`IDfiFK`) REFERENCES `filtro` (`ID`);
+
+--
 -- Limiti per la tabella `contiene`
 --
 ALTER TABLE `contiene`
   ADD CONSTRAINT `IDorFK` FOREIGN KEY (`IDorFK`) REFERENCES `ordine` (`ID`),
   ADD CONSTRAINT `IDprfk` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
+
+--
+-- Limiti per la tabella `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `IDbar` FOREIGN KEY (`IDbaFK`) REFERENCES `bar` (`ID`),
+  ADD CONSTRAINT `IDpr2FK` FOREIGN KEY (`IDprFK`) REFERENCES `prodotto` (`Nome`);
 
 --
 -- Limiti per la tabella `ordine`
