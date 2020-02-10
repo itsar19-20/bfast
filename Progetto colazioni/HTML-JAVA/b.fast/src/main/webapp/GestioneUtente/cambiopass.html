@@ -56,7 +56,7 @@
         <!--End Navigation-->
 
 
-    <form action="/login" method="POST">
+    <form action="passwordCambio" method="POST">
         <div class="login">
             <div class="login-screen">
                 <div class="app-title">
@@ -67,17 +67,17 @@
 				
                     <!--Password-->
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Nuova Password" name="pass" style="width: 100%;"> 
+                        <input type="password" id="password" class="login-field" value="" placeholder="Nuova Password" name="pass" required autofocus name="pass"style="width: 100%;"> 
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
 					
 				 <!--CoPassword-->
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Conferma Password" name="copass" style="width: 100%;"> 
+                        <input type="password" id="password" class="login-field" value="" placeholder="Conferma Password" name="copass" required autofocus name="copass"style="width: 100%;"> 
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
 
-                    <input type="button" onclick="validazione(event);" value="Continua" class="btn btn-primary btn-large btn-block">
+                    <input type="submit" onclick="validazione(event);" value="Continua" class="btn btn-primary btn-large btn-block">
 
                 </div>
 
