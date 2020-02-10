@@ -15,8 +15,10 @@ import java.util.List;
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	
+
+
 	private String cognome;
+
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="`Data di nascita`")
@@ -25,6 +27,7 @@ public class Utente implements Serializable {
 	@Id
 	private String email;
 
+
 	@Temporal(TemporalType.DATE)
 	private Date nascità;
 
@@ -32,7 +35,15 @@ public class Utente implements Serializable {
 
 	private String password;
 
+	public int getTelefono() {
+		return telefono;
+	}
+
 	private int telefono;
+
+	//bi-directional many-to-one association to Chiedeu
+	@OneToMany(mappedBy="utente")
+	private List<Chiedeu> chiedeus;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="utente")
@@ -41,10 +52,6 @@ public class Utente implements Serializable {
 	//bi-directional many-to-one association to Sceglie
 	@OneToMany(mappedBy="utente")
 	private List<Sceglie> sceglies;
-
-	//bi-directional many-to-one association to Chiedeu
-	@OneToMany(mappedBy="utente")
-	private List<Chiedeu> chiedeus;
 
 	public Utente() {
 	}
@@ -75,7 +82,6 @@ public class Utente implements Serializable {
 		this.email = email;
 	}
 
-
 	public Date getNascità() {
 		return this.nascità;
 	}
@@ -92,22 +98,39 @@ public class Utente implements Serializable {
 		this.nome = nome;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getPassword() {
 		return this.password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public int getTelefono() {
-		return this.telefono;
-	}
-
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
+	}
+
+
+	public List<Chiedeu> getChiedeus() {
+		return this.chiedeus;
+	}
+
+	public void setChiedeus(List<Chiedeu> chiedeus) {
+		this.chiedeus = chiedeus;
+	}
+
+	public Chiedeu addChiedeus(Chiedeu chiedeus) {
+		getChiedeus().add(chiedeus);
+		chiedeus.setUtente(this);
+
+		return chiedeus;
+	}
+
+	public Chiedeu removeChiedeus(Chiedeu chiedeus) {
+		getChiedeus().remove(chiedeus);
+		chiedeus.setUtente(null);
+
+		return chiedeus;
 	}
 
 	public List<Ordine> getOrdines() {
@@ -152,28 +175,6 @@ public class Utente implements Serializable {
 		scegly.setUtente(null);
 
 		return scegly;
-	}
-
-	public List<Chiedeu> getChiedeus() {
-		return this.chiedeus;
-	}
-
-	public void setChiedeus(List<Chiedeu> chiedeus) {
-		this.chiedeus = chiedeus;
-	}
-
-	public Chiedeu addChiedeus(Chiedeu chiedeus) {
-		getChiedeus().add(chiedeus);
-		chiedeus.setUtente(this);
-
-		return chiedeus;
-	}
-
-	public Chiedeu removeChiedeus(Chiedeu chiedeus) {
-		getChiedeus().remove(chiedeus);
-		chiedeus.setUtente(null);
-
-		return chiedeus;
 	}
 
 }

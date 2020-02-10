@@ -24,6 +24,7 @@ public class Bar implements Serializable {
 	@Lob
 	private byte[] immagine;
 
+	private String indirizzo;
 
 	private String nome;
 
@@ -41,13 +42,16 @@ public class Bar implements Serializable {
 	private Indirizzo indirizzoBean;
 
 	//bi-directional many-to-one association to Menu
-	@ManyToOne
-	@JoinColumn(name="IDmeFK")
-	private Menu menu;
+	@OneToMany(mappedBy="bar")
+	private List<Menu> menus;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="bar")
 	private List<Ordine> ordines;
+
+	//bi-directional many-to-one association to Classificato
+	@OneToMany(mappedBy="bar")
+	private List<Classificato> classificatos;
 
 	public Bar() {
 	}
@@ -84,6 +88,13 @@ public class Bar implements Serializable {
 		this.immagine = immagine;
 	}
 
+	public String getIndirizzo() {
+		return this.indirizzo;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
 
 	public String getNome() {
 		return this.nome;
@@ -92,7 +103,6 @@ public class Bar implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getOrarioApertura() {
 		return this.orarioApertura;
@@ -134,12 +144,26 @@ public class Bar implements Serializable {
 		this.indirizzoBean = indirizzoBean;
 	}
 
-	public Menu getMenu() {
-		return this.menu;
+	public List<Menu> getMenus() {
+		return this.menus;
 	}
 
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+
+	public Menu addMenus(Menu menus) {
+		getMenus().add(menus);
+		menus.setBar(this);
+
+		return menus;
+	}
+
+	public Menu removeMenus(Menu menus) {
+		getMenus().remove(menus);
+		menus.setBar(null);
+
+		return menus;
 	}
 
 	public List<Ordine> getOrdines() {
@@ -162,6 +186,28 @@ public class Bar implements Serializable {
 		ordine.setBar(null);
 
 		return ordine;
+	}
+
+	public List<Classificato> getClassificatos() {
+		return this.classificatos;
+	}
+
+	public void setClassificatos(List<Classificato> classificatos) {
+		this.classificatos = classificatos;
+	}
+
+	public Classificato addClassificato(Classificato classificato) {
+		getClassificatos().add(classificato);
+		classificato.setBar(this);
+
+		return classificato;
+	}
+
+	public Classificato removeClassificato(Classificato classificato) {
+		getClassificatos().remove(classificato);
+		classificato.setBar(null);
+
+		return classificato;
 	}
 
 }

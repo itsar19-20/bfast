@@ -33,11 +33,6 @@ public class Ordine implements Serializable {
 	@OneToMany(mappedBy="ordine")
 	private List<Contiene> contienes;
 
-	//bi-directional many-to-one association to Indirizzo
-	@ManyToOne
-	@JoinColumn(name="IDinFK")
-	private Indirizzo indirizzo;
-
 	//bi-directional many-to-one association to Bar
 	@ManyToOne
 	@JoinColumn(name="IDbarFK")
@@ -47,6 +42,11 @@ public class Ordine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="IDfatFK")
 	private Fattorino fattorino;
+
+	//bi-directional many-to-one association to Indirizzo
+	@ManyToOne
+	@JoinColumn(name="IDinFK")
+	private Indirizzo indirizzo;
 
 	//bi-directional many-to-one association to Posfatt
 	@ManyToOne
@@ -136,14 +136,6 @@ public class Ordine implements Serializable {
 		return contiene;
 	}
 
-	public Indirizzo getIndirizzo() {
-		return this.indirizzo;
-	}
-
-	public void setIndirizzo(Indirizzo indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-
 	public Bar getBar() {
 		return this.bar;
 	}
@@ -158,6 +150,14 @@ public class Ordine implements Serializable {
 
 	public void setFattorino(Fattorino fattorino) {
 		this.fattorino = fattorino;
+	}
+
+	public Indirizzo getIndirizzo() {
+		return this.indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
 	}
 
 	public Posfatt getPosfatt() {

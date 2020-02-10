@@ -9,7 +9,7 @@ import utils.JPAUtil;
 public class VisualizzazioneBar {
 		Bar b = new Bar();
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Query Ris = em.createQuery("SELECT * FROM `bar` as b,menu as m WHERE m.ID = b.IDmeFK and m.Filtro = \"dolce e salato\"\r\n" + 
+		Query Ris = em.createQuery("SELECT * FROM `bar` as b,menu as m WHERE m.ID = b.IDmeFK \n" + 
 				"");		
 }
 

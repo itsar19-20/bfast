@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -17,17 +16,17 @@ public class Menu implements Serializable {
 	@Id
 	private int id;
 
-	private int disponibilità;
-
-	private String filtro;
-
-	//bi-directional many-to-one association to Appartiene
-	@OneToMany(mappedBy="menu")
-	private List<Appartiene> appartienes;
+	private byte disponibilita;
 
 	//bi-directional many-to-one association to Bar
-	@OneToMany(mappedBy="menu")
-	private List<Bar> bars;
+	@ManyToOne
+	@JoinColumn(name="IDbaFK")
+	private Bar bar;
+
+	//bi-directional many-to-one association to Prodotto
+	@ManyToOne
+	@JoinColumn(name="IDprFK")
+	private Prodotto prodotto;
 
 	public Menu() {
 	}
@@ -40,64 +39,28 @@ public class Menu implements Serializable {
 		this.id = id;
 	}
 
-	public int getDisponibilità() {
-		return this.disponibilità;
+	public byte getDisponibilita() {
+		return this.disponibilita;
 	}
 
-	public void setDisponibilità(int disponibilità) {
-		this.disponibilità = disponibilità;
+	public void setDisponibilita(byte disponibilita) {
+		this.disponibilita = disponibilita;
 	}
 
-	public String getFiltro() {
-		return this.filtro;
+	public Bar getBar() {
+		return this.bar;
 	}
 
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
+	public void setBar(Bar bar) {
+		this.bar = bar;
 	}
 
-	public List<Appartiene> getAppartienes() {
-		return this.appartienes;
+	public Prodotto getProdotto() {
+		return this.prodotto;
 	}
 
-	public void setAppartienes(List<Appartiene> appartienes) {
-		this.appartienes = appartienes;
-	}
-
-	public Appartiene addAppartiene(Appartiene appartiene) {
-		getAppartienes().add(appartiene);
-		appartiene.setMenu(this);
-
-		return appartiene;
-	}
-
-	public Appartiene removeAppartiene(Appartiene appartiene) {
-		getAppartienes().remove(appartiene);
-		appartiene.setMenu(null);
-
-		return appartiene;
-	}
-
-	public List<Bar> getBars() {
-		return this.bars;
-	}
-
-	public void setBars(List<Bar> bars) {
-		this.bars = bars;
-	}
-
-	public Bar addBar(Bar bar) {
-		getBars().add(bar);
-		bar.setMenu(this);
-
-		return bar;
-	}
-
-	public Bar removeBar(Bar bar) {
-		getBars().remove(bar);
-		bar.setMenu(null);
-
-		return bar;
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
 	}
 
 }

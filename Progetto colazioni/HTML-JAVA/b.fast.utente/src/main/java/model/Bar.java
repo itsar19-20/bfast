@@ -41,10 +41,13 @@ public class Bar implements Serializable {
 	@JoinColumn(name="IDinFK")
 	private Indirizzo indirizzoBean;
 
+	//bi-directional many-to-one association to Classificato
+	@OneToMany(mappedBy="bar")
+	private List<Classificato> classificatos;
+
 	//bi-directional many-to-one association to Menu
-	@ManyToOne
-	@JoinColumn(name="IDmeFK")
-	private Menu menu;
+	@OneToMany(mappedBy="bar")
+	private List<Menu> menus;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="bar")
@@ -101,6 +104,7 @@ public class Bar implements Serializable {
 		this.nome = nome;
 	}
 
+
 	public String getOrarioApertura() {
 		return this.orarioApertura;
 	}
@@ -141,12 +145,48 @@ public class Bar implements Serializable {
 		this.indirizzoBean = indirizzoBean;
 	}
 
-	public Menu getMenu() {
-		return this.menu;
+	public List<Classificato> getClassificatos() {
+		return this.classificatos;
 	}
 
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setClassificatos(List<Classificato> classificatos) {
+		this.classificatos = classificatos;
+	}
+
+	public Classificato addClassificato(Classificato classificato) {
+		getClassificatos().add(classificato);
+		classificato.setBar(this);
+
+		return classificato;
+	}
+
+	public Classificato removeClassificato(Classificato classificato) {
+		getClassificatos().remove(classificato);
+		classificato.setBar(null);
+
+		return classificato;
+	}
+
+	public List<Menu> getMenus() {
+		return this.menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+
+	public Menu addMenus(Menu menus) {
+		getMenus().add(menus);
+		menus.setBar(this);
+
+		return menus;
+	}
+
+	public Menu removeMenus(Menu menus) {
+		getMenus().remove(menus);
+		menus.setBar(null);
+
+		return menus;
 	}
 
 	public List<Ordine> getOrdines() {

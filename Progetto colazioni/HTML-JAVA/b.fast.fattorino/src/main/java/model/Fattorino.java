@@ -31,13 +31,13 @@ public class Fattorino implements Serializable {
 
 	private float valutazione;
 
-	//bi-directional many-to-one association to Ordine
-	@OneToMany(mappedBy="fattorino")
-	private List<Ordine> ordines;
-
 	//bi-directional many-to-one association to Chiedef
 	@OneToMany(mappedBy="fattorino")
 	private List<Chiedef> chiedefs;
+
+	//bi-directional many-to-one association to Ordine
+	@OneToMany(mappedBy="fattorino")
+	private List<Ordine> ordines;
 
 	public Fattorino() {
 	}
@@ -98,28 +98,6 @@ public class Fattorino implements Serializable {
 		this.valutazione = valutazione;
 	}
 
-	public List<Ordine> getOrdines() {
-		return this.ordines;
-	}
-
-	public void setOrdines(List<Ordine> ordines) {
-		this.ordines = ordines;
-	}
-
-	public Ordine addOrdine(Ordine ordine) {
-		getOrdines().add(ordine);
-		ordine.setFattorino(this);
-
-		return ordine;
-	}
-
-	public Ordine removeOrdine(Ordine ordine) {
-		getOrdines().remove(ordine);
-		ordine.setFattorino(null);
-
-		return ordine;
-	}
-
 	public List<Chiedef> getChiedefs() {
 		return this.chiedefs;
 	}
@@ -140,6 +118,28 @@ public class Fattorino implements Serializable {
 		chiedef.setFattorino(null);
 
 		return chiedef;
+	}
+
+	public List<Ordine> getOrdines() {
+		return this.ordines;
+	}
+
+	public void setOrdines(List<Ordine> ordines) {
+		this.ordines = ordines;
+	}
+
+	public Ordine addOrdine(Ordine ordine) {
+		getOrdines().add(ordine);
+		ordine.setFattorino(this);
+
+		return ordine;
+	}
+
+	public Ordine removeOrdine(Ordine ordine) {
+		getOrdines().remove(ordine);
+		ordine.setFattorino(null);
+
+		return ordine;
 	}
 
 }

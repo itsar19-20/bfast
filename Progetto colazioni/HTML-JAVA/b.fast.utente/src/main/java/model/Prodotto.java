@@ -23,13 +23,13 @@ public class Prodotto implements Serializable {
 
 	private String tipo;
 
-	//bi-directional many-to-one association to Appartiene
-	@OneToMany(mappedBy="prodotto")
-	private List<Appartiene> appartienes;
-
 	//bi-directional many-to-one association to Contiene
 	@OneToMany(mappedBy="prodotto")
 	private List<Contiene> contienes;
+
+	//bi-directional many-to-one association to Menu
+	@OneToMany(mappedBy="prodotto")
+	private List<Menu> menus;
 
 	public Prodotto() {
 	}
@@ -66,28 +66,6 @@ public class Prodotto implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<Appartiene> getAppartienes() {
-		return this.appartienes;
-	}
-
-	public void setAppartienes(List<Appartiene> appartienes) {
-		this.appartienes = appartienes;
-	}
-
-	public Appartiene addAppartiene(Appartiene appartiene) {
-		getAppartienes().add(appartiene);
-		appartiene.setProdotto(this);
-
-		return appartiene;
-	}
-
-	public Appartiene removeAppartiene(Appartiene appartiene) {
-		getAppartienes().remove(appartiene);
-		appartiene.setProdotto(null);
-
-		return appartiene;
-	}
-
 	public List<Contiene> getContienes() {
 		return this.contienes;
 	}
@@ -108,6 +86,28 @@ public class Prodotto implements Serializable {
 		contiene.setProdotto(null);
 
 		return contiene;
+	}
+
+	public List<Menu> getMenus() {
+		return this.menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+
+	public Menu addMenus(Menu menus) {
+		getMenus().add(menus);
+		menus.setProdotto(this);
+
+		return menus;
+	}
+
+	public Menu removeMenus(Menu menus) {
+		getMenus().remove(menus);
+		menus.setProdotto(null);
+
+		return menus;
 	}
 
 }
