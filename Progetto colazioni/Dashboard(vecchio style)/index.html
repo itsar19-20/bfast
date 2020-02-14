@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="it-it">
+
+<head>
+    <title>Bfast</title>
+
+
+
+    <meta charset="utf-8">
+
+    <!-- Serve per ottimizzare prima i dispositi mobili e poi in base alla necessità utilizzando 
+                le query multimediali CSS. 
+                Per garantire il rendering corretto e lo zoom tattile per tutti i dispositivi  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Collegamento con Style.css -->
+    <link rel="stylesheet" type="text/css" href="Style.css">
+
+</head>
+
+
+
+
+
+
+<body>
+
+
+    <!--
+        <div class="btn-group">
+            <button id="Cliente" type="button" class="btn btn-primary">Customer</button>       
+            <button id="Ristorante" type="button" class="btn btn-primary">Ristorante</button>
+            <button id="Fattorino" type="button" class="btn btn-primary">Delivery man</button>
+        </div>
+    -->
+		<!--Navigation-->
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			<a class="navbar-brand" href="#"> <img src="../img/logo4.png"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!--<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="../HomePage/index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../Registrazione/index.html" >Sign Up</a>
+					</li>
+				</ul>
+			</div>-->
+        </nav>
+        <!--End Navigation-->
+		
+	<div class="container-fluid" id="container_main">
+	<div class="row">
+			<nav class="bg-light d-md-block">
+				<div class="sidebar-sticky col-md-2">
+					<h5 id="nomeAdmin">
+						Ciao</h5>
+					<!--Inizia la lista delle scelte per l'admin-->
+					<ul class="nav flex-column border-left pl-3">
+						<li class="nav-item"><a class="nav-link navListUtenti" href="/gas/utenti.html"> <span
+									data-feather="home"></span> Utenti
+								<span class="sr-only"></span>
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListFlusso" href="/gas/flusso.html"> <span
+									data-feather="file"></span> Flusso
+								Giornaliero
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListNotizie" href="/gas/notizie.html"> <span
+									data-feather="shopping-cart"></span>
+								Notizie
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListRecensioni" href="/gas/recensioni.html"> <span
+									data-feather="users"></span> Recensioni
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListStatistiche" href="/gas/statistiche.html"> <span
+									data-feather="layers"></span>
+								Statistiche
+							</a></li>
+					</ul>
+				</div>
+			</nav>
+
+	
+
+		
+	<div class="col-md-10 align-middle contenitore mx-auto mt-5 d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 justify-content-around">	
+	
+	
+	<div class="login m-1 p-auto">
+		<div class="login-screen2">
+		<form action="/login" method="POST">
+        
+            
+                <div class="app-title">
+                    <h1>Ordini giornalieri</h1>
+                </div>
+
+                <div class="login-form">
+
+                    <input type="button" onclick="validazione(event);" value="Sign in" class="btn btn-primary btn-large btn-block">
+				</div>
+
+
+
+        
+		</form>
+	</div>
+	</div>
+	<div class="login m-1 p-auto">
+	<form action="/login" method="POST">
+        
+            <div class="login-screen2">
+                <div class="app-title">
+                    <h1>Ordini mensili</h1>
+                </div>
+
+                <div class="login-form">
+
+                    <input type="button" onclick="validazione(event);" value="Sign in" class="btn btn-primary btn-large btn-block">
+
+                </div>
+
+
+
+
+            </div>
+       
+    </form>
+	 </div>
+	 <div class="login m-1 p-auto">
+	<form action="/login" method="POST">
+        
+            <div class="login-screen3">
+                <div class="app-title">
+                    <h1>Ordini da confermare</h1>
+                </div>
+
+                <div class="login-form">
+                  
+                    <input type="button" onclick="validazione(event);" value="Sign in" class="btn btn-primary btn-large btn-block">
+
+                </div>
+
+
+
+
+            </div>
+        
+    </form>
+	</div>
+	</div>
+	</div>
+</div>
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script src="Regole.js"></script>
+
+
+
+</body>
+
+</html>
