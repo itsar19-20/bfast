@@ -56,32 +56,67 @@
 			</div>-->
         </nav>
         <!--End Navigation-->
+		
+	<div class="container-fluid" id="container_main">
+	<div class="row">
+			<nav class="bg-light d-md-block">
+				<div class="sidebar-sticky col-md-2">
+					<h5 id="nomeAdmin">
+						Ciao</h5>
+					<!--Inizia la lista delle scelte per l'admin-->
+					<ul class="nav flex-column border-left pl-3">
+						<li class="nav-item"><a class="nav-link navListUtenti" href="/gas/utenti.html"> <span
+									data-feather="home"></span> Utenti
+								<span class="sr-only"></span>
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListFlusso" href="/gas/flusso.html"> <span
+									data-feather="file"></span> Flusso
+								Giornaliero
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListNotizie" href="/gas/notizie.html"> <span
+									data-feather="shopping-cart"></span>
+								Notizie
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListRecensioni" href="/gas/recensioni.html"> <span
+									data-feather="users"></span> Recensioni
+							</a></li>
+						<li class="nav-item"><a class="nav-link navListStatistiche" href="/gas/statistiche.html"> <span
+									data-feather="layers"></span>
+								Statistiche
+							</a></li>
+					</ul>
+				</div>
+			</nav>
+
+	
 
 		
-	<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">	
-
-    <form action="/login" method="POST>
-        <div class="login">
-            <div class="login-screen">
+	<div class="col-md-10 align-middle contenitore mx-auto mt-5 d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 justify-content-around">	
+	
+	
+	<div class="login m-1 p-auto">
+		<div class="login-screen2">
+		<form action="/login" method="POST">
+        
+            
                 <div class="app-title">
-                    <h1>Ordini Giornalieri</h1>
+                    <h1>Ordini giornalieri</h1>
                 </div>
 
                 <div class="login-form">
 
                     <input type="button" onclick="validazione(event);" value="Sign in" class="btn btn-primary btn-large btn-block">
-
-                </div>
-
+				</div>
 
 
 
-            </div>
         
-    </form>
-	
+		</form>
+	</div>
+	</div>
+	<div class="login m-1 p-auto">
 	<form action="/login" method="POST">
-        <div class="login2">
+        
             <div class="login-screen2">
                 <div class="app-title">
                     <h1>Ordini mensili</h1>
@@ -97,11 +132,12 @@
 
 
             </div>
-        </div>
+       
     </form>
-	
+	 </div>
+	 <div class="login m-1 p-auto">
 	<form action="/login" method="POST">
-        <div class="login3">
+        
             <div class="login-screen3">
                 <div class="app-title">
                     <h1>Ordini da confermare</h1>
@@ -117,10 +153,12 @@
 
 
             </div>
-        </div>
+        
     </form>
 	</div>
-	
+	</div>
+	</div>
+</div>
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
