@@ -84,11 +84,11 @@ body {
 */
 
 .login {
-    margin: 20px auto;
+    margin-top: 200px;
     width: 300px;
 }
 
-.login-screen {
+.login-screen2 {
     background-color: #FFF;
     padding: 20px;
     border-radius: 5px
