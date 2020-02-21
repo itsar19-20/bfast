@@ -1,54 +1,87 @@
 package com.ifts.bfastutente;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 
-        public class MainActivity extends FragmentActivity {
-            // coordinate su cui centrare la mappa
-            private final LatLng CENTER_POINT=new LatLng(41.91, 12.40);
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    private MapView mapView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, "pk.eyJ1IjoiYWxleHJ1c2VpIiwiYSI6ImNrNncxNjVxcjA3NGczbHF2cWFmZXgwOWUifQ.QnAyNsLTjGpWzZqBAp2uig");
+        setContentView(R.layout.activity_main);
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            protected void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_main);
-                TextView tv = findViewById(R.id.textView2);
-                tv.setOnClickListener(new View.OnClickListener() {
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
                     @Override
-                    public void onClick(View v) {
+                    public void onStyleLoaded(@NonNull Style style) {
+
+                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
+
 
                     }
-                }); {
-                // ottieni il controllo del fragment su cui caricare la mappa
-                GoogleMap map=((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-                // centra la mappa su CENTER_POINT, con zoom 5
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(CENTER_POINT, 5));
-                map.setMyLocationEnabled(true);
-                // livello di zoom = 10 ; durata animazione = 1000 millisecondi
-                map.animateCamera(CameraUpdateFactory.zoomTo(10), 1000, null);
-                map.addMarker(new MarkerOptions().position(CENTER_POINT));
-                MarkerOptions markerOpt = new MarkerOptions()
-                        .position(CENTER_POINT)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_icona));
-                map.addMarker(markerOpt);
-                map.addMarker(new MarkerOptions()
-                        .position(CENTER_POINT)
-                        .title("Ecco il mio marker")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_icona))
-                );
+                });
             }
+        });
+    }
 
-            }
-        }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    public void onClick(View view) {
+    }
+}
