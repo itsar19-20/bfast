@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Bar;
-import business.RegistrazioneBar;
+import business.CambioIndirizzoOrario;
 
 
-@WebServlet("/GestioneIndirizzoOrario/ConfermaRegistrazione")
-public class ConfermaRegistrazione extends HttpServlet{
+@WebServlet("/GestioneIndirizzoOrario/orario")
+public class CambioOrario extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
 	
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ConfermaRegistrazione() {
+	public CambioOrario() {
 		super();
 	}
 	
@@ -40,12 +40,12 @@ public class ConfermaRegistrazione extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		RegistrazioneBar au = new RegistrazioneBar();
+		CambioIndirizzoOrario au = new CambioIndirizzoOrario();
 		String s = (String) ses.getAttribute("ID"); 
 		Bar b = null;
-		b = au.Conregistrazione(s,request.getParameter("orarioap"),request.getParameter("orarioch"),request.getParameter("via"),request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"));
+		b = au.orario(s,request.getParameter("orarioap"),request.getParameter("orarioch"));
 		if (b == null) {
-			request.getRequestDispatcher("../GestioneIndirizzoOrario/SetInizio.html").forward(request, response);
+			request.getRequestDispatcher("../GestioneIndirizzoOrario/index.html").forward(request, response);
 		} else {
 			int id = b.getId();
 			ses.setAttribute("ID",id);
