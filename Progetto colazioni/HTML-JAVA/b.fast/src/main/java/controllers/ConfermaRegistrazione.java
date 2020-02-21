@@ -46,7 +46,7 @@ public class ConfermaRegistrazione extends HttpServlet{
 		Bar b = null;
 		b = au.Conregistrazione(s,request.getParameter("orarioap"),request.getParameter("orarioch"),request.getParameter("via"),request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"));
 		if (b == null) {
-			request.getRequestDispatcher("../Registrazione/index.html").forward(request, response);
+			request.getRequestDispatcher("../GestioneIndirizzoOrario/index.html").forward(request, response);
 		} else {
 			int id = b.getId();
 			ses.setAttribute("ID",id);

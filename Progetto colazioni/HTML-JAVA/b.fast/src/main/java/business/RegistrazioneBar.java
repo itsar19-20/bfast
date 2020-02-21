@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import model.Bar;
+import model.Indirizzo;
 import utils.JPAUtil;
 
 public class RegistrazioneBar {
@@ -47,7 +48,14 @@ public class RegistrazioneBar {
 		if (_return != null) {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
+			Indirizzo i = null;
 			int id = cerca( via,  civico, citta,  cap);
+			if(id==0) {
+				i = creazione( via,  civico, citta,  cap);
+			}else {
+				i = em.find(Indirizzo.class, id);
+			}			
+			_return.setIndirizzoBean(i);
 		}
 		return _return;
 	}
@@ -60,4 +68,19 @@ public class RegistrazioneBar {
 		int id=Ris.executeUpdate();
 		return id;
 	}
+	
+	
+	public Indirizzo creazione(String via, String civico,String citta, String cap) {
+		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+		Indirizzo _return = new Indirizzo();
+		_return.setCap(cap);
+		_return.setCivico(civico);
+		_return.setVia(via);
+		_return.setCitta(citta);
+		em.getTransaction().begin();
+	    em.persist(_return);
+	    em.getTransaction().commit();
+		return _return;
+	}
+	
 }
