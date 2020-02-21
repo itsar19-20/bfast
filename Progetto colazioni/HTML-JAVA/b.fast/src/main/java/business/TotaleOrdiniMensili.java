@@ -1,30 +1,33 @@
 package business;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
 
 import model.Bar;
+import model.Ordine;
 import utils.JPAUtil;
 
 public class TotaleOrdiniMensili {
-
-	public void Visualizza(HttpServletRequest req) {
-		String s = (String) req.getAttribute("ID");
-		Bar b = cerca(s);
+	
+	public int  Visualizza(int id) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+		Bar b = em.find(Bar.class, id);
 		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
 				"WHERE MONTH(o.data) = MONTH(getdate()) and b.id = o.IDbarFK  ").setParameter("b.id", b.getId());
-		em.getTransaction().begin();
-		em.persist(Ris);
-		em.getTransaction().commit();
-	}
+		return Ris.executeUpdate();
+		}
 
-	public Bar cerca (String id) {
+	public List<Ordine> PagVisualizza(int id){
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Bar _return = new Bar();
-		Integer ID = Integer.parseInt(id);
-		_return = em.find(Bar.class, ID);
-		return _return;
+		Bar b = em.find(Bar.class, id);
+		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
+				"WHERE MONTH(o.data) = MONTH(getdate()) and b.id = o.IDbarFK  ").setParameter("b.id", b.getId());
+		List<Ordine> lista = Ris.getResultList(); 
+		return lista;
 	}
 }
+
+
+
