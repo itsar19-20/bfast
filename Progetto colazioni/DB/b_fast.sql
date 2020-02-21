@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 10, 2020 alle 15:16
+-- Creato il: Feb 21, 2020 alle 17:43
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -46,7 +46,7 @@ CREATE TABLE `bar` (
 --
 
 INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 5, 'Bar pippo', '', '', 3, 'coca@gmail.com', '333', '', 0),
+(1, 5, 'Bar pippo', '13:00', '2:00', 3, 'prova@gmail.com', '333', '', 0),
 (2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
 (3, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
 (4, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
@@ -56,7 +56,9 @@ INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `
 (8, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
 (9, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
 (10, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0),
-(11, NULL, 'Bar toro', NULL, NULL, 0, 'lautoro@martinez.com', '10', NULL, 0);
+(31, NULL, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', NULL, 0),
+(32, NULL, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', NULL, 0),
+(33, NULL, 'Bar ciko', NULL, NULL, 0, 'dfagdfg@ssad.com', '232', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -205,7 +207,10 @@ INSERT INTO `indirizzo` (`ID`, `via`, `civico`, `citta`, `CAP`) VALUES
 (7, 'via sette', '963', 'Como', '22100'),
 (8, 'via otto', '321', 'Varese', '21100'),
 (9, 'via nove', '65B', 'Lomazzo', '22074'),
-(10, 'via dieci', '6C', 'Venezia', '30100');
+(10, 'via dieci', '6C', 'Venezia', '30100'),
+(11, 'Via monte paschi', '23', 'Firenze', '24325'),
+(15, 'Via monte paschi 3', '23', 'Firenze', '24325'),
+(16, 'Via monte paschi 5', '23', 'Firenze', '24325');
 
 -- --------------------------------------------------------
 
@@ -537,7 +542,7 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT per la tabella `chiedef`
@@ -585,7 +590,7 @@ ALTER TABLE `filtro`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
