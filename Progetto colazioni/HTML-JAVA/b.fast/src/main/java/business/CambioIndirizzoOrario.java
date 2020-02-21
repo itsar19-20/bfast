@@ -9,7 +9,7 @@ import utils.JPAUtil;
 
 public class CambioIndirizzoOrario {
 
-	public Bar indirizzo(String s, String via, String civico, String citta, String cap) {
+	public Bar indirizzo(int s, String via, String civico, String citta, String cap) {
 		Bar _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);
@@ -27,7 +27,7 @@ public class CambioIndirizzoOrario {
 	}
 
 
-	public Bar orario(String s, String oraap, String orach) {
+	public Bar orario(int s, String oraap, String orach) {
 		Bar _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);

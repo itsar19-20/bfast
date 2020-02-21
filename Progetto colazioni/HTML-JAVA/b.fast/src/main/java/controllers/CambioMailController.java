@@ -36,7 +36,7 @@ public class CambioMailController extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/mailCambio.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
 		}
 	}
 

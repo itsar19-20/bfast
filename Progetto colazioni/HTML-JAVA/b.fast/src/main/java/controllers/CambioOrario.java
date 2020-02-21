@@ -41,7 +41,7 @@ public class CambioOrario extends HttpServlet{
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		CambioIndirizzoOrario au = new CambioIndirizzoOrario();
-		String s = (String) ses.getAttribute("ID"); 
+		int s = (Integer) ses.getAttribute("ID"); 
 		Bar b = null;
 		b = au.orario(s,request.getParameter("orarioap"),request.getParameter("orarioch"));
 		if (b == null) {
@@ -49,7 +49,7 @@ public class CambioOrario extends HttpServlet{
 		} else {
 			int id = b.getId();
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
 		}
 	}
 }

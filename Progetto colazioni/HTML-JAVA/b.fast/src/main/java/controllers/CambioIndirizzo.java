@@ -41,7 +41,7 @@ public class CambioIndirizzo extends HttpServlet{
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		CambioIndirizzoOrario au = new CambioIndirizzoOrario();
-		String s = (String) ses.getAttribute("ID"); 
+		int s = (Integer) ses.getAttribute("ID"); 
 		Bar b = null;
 		b = au.indirizzo(s,request.getParameter("via"),request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"));
 		if (b == null) {
