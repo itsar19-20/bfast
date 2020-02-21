@@ -45,7 +45,7 @@
     <h5 class="h1 text-center" id="datiApp">Grazie per esserti registrato</h5>
     <h5 class="h1 text-center" id="datiApp">Completa la tua registrazione con:</h5>
 
-    <form action="/login" method="POST">
+    <form action="/ConfermaRegistrazione" method="POST">
         <div class="login2">
             <div class="login-screen2">
                 <div class="app-title">
@@ -55,28 +55,32 @@
                 <div class="login-form">
                     <!--UserName-->
                     <div class="control-group">
-                        <input type="text" id="emailV" class="login-field" value="" placeholder="Orario" name="orario" style="width: 100%;">
+                        <input type="text" id="emailV" class="login-field" value="" placeholder="Orario Apertura" name="orarioap" style="width: 100%;">
+                        <label class="login-field-icon fui-user" for="login-name"></label>
+                    </div>
+                    <div class="control-group">
+                        <input type="text" id="emailV" class="login-field" value="" placeholder="Orario Chiusura" name="orarioch" style="width: 100%;">
                         <label class="login-field-icon fui-user" for="login-name"></label>
                     </div>
                     <!--Password-->
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Via" name="via" style="width: 100%;">
+                        <input type="text" id="password" class="login-field" value="" placeholder="Via" name="via" style="width: 100%;">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Civico" name="civico" style="width: 100%;">
+                        <input type="text" id="password" class="login-field" value="" placeholder="Civico" name="civico" style="width: 100%;">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="Città" name="citta" style="width: 100%;">
+                        <input type="text" id="password" class="login-field" value="" placeholder="Città" name="citta" style="width: 100%;">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
                     <div class="control-group">
-                        <input type="password" id="password" class="login-field" value="" placeholder="CAP" name="cap" style="width: 100%;">
+                        <input type="text" id="password" class="login-field" value="" placeholder="CAP" name="cap" style="width: 100%;">
                         <label class="login-field-icon fui-lock" for="login-pass"></label>
                     </div>
 
-                    <input type="button" onclick="validazione(event);" value="Conferma" class="btn btn-primary btn-large btn-block">
+                    <input type="submit" onclick="validazione(event);" value="Conferma" class="btn btn-primary btn-large btn-block">
 
                 </div>
 
