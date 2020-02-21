@@ -39,16 +39,14 @@ public class RegistrazioneBar {
 
 
 
-	public Bar Conregistrazione(String s, String orarioap, String orarioch, String via, String civico,
-			String citta, String cap) {
+	public Indirizzo Conregistrazione(int s, String orarioap, String orarioch, String via, String civico,String citta, String cap) {
 		Bar _return = null;
+		Indirizzo i = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		int ID = Integer.parseInt(s);
-		_return = em.find(Bar.class, ID);
+		_return = em.find(Bar.class, s);
 		if (_return != null) {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
-			Indirizzo i = null;
 			int id = cerca( via,  civico, citta,  cap);
 			if(id==0) {
 				i = creazione( via,  civico, citta,  cap);
@@ -57,7 +55,7 @@ public class RegistrazioneBar {
 			}			
 			_return.setIndirizzoBean(i);
 		}
-		return _return;
+		return i;
 	}
 	
 	public int cerca(String via, String civico,String citta, String cap) {

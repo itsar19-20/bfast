@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.CambioMail;
 import model.Bar;
 
-@WebServlet("/mailCambio")
+@WebServlet("/GestioneUtente/mail")
 public class CambioMailController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	

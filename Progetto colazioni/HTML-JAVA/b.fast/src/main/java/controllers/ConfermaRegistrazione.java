@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Bar;
+import model.Indirizzo;
 import business.RegistrazioneBar;
 
 
-@WebServlet("/GestioneIndirizzoOrario/ConfermaRegistrazione")
+@WebServlet("/Registrazione/ConfermaRegistrazione")
 public class ConfermaRegistrazione extends HttpServlet{
 	private static final long serialVersionUID = 102831973239L;
 	
@@ -41,8 +41,8 @@ public class ConfermaRegistrazione extends HttpServlet{
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		RegistrazioneBar au = new RegistrazioneBar();
-		String s = (String) ses.getAttribute("ID"); 
-		Bar b = null;
+		int s = (Integer) ses.getAttribute("ID"); 
+		Indirizzo b = null;
 		b = au.Conregistrazione(s,request.getParameter("orarioap"),request.getParameter("orarioch"),request.getParameter("via"),request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"));
 		if (b == null) {
 			request.getRequestDispatcher("../GestioneIndirizzoOrario/SetInizio.html").forward(request, response);

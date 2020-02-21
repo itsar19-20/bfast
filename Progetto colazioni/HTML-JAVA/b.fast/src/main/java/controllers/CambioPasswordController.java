@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.CambioPassword;
 import model.Bar;
 
-@WebServlet("/passwordCambio")
+@WebServlet("/GestioneUtente/pass")
 public class CambioPasswordController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	
