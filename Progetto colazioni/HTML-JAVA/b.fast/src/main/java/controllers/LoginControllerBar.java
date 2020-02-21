@@ -48,7 +48,7 @@ public class LoginControllerBar extends HttpServlet {
 			String id2 = request.getParameter("ID");
 			Integer id = Integer.parseInt(id2);
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("/Dashboard/index.html").forward(request, response);
 		}
 	}
 }
