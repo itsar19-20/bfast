@@ -14,14 +14,14 @@ public class TotaleOrdiniConfermare {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
 		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-				"WHERE DAY(o.data) = DAY(getdate()) and b.id = o.IDbarFK and o.Confermato = '0' ").setParameter("b.id", b.getId());
+				"WHERE DAY(o.data) = DAY(getdate()) and ?b.id = o.IDbarFK and o.Confermato = '0' ").setParameter(1, b.getId());
 		return Ris.executeUpdate();
 		}
 	public List<Ordine> PagVisualizza(int id){
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
 		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-				"WHERE DAY(o.data) = DAY(getdate()) and b.id = o.IDbarFK and o.Confermato = '0' ").setParameter("b.id", b.getId());
+				"WHERE DAY(o.data) = DAY(getdate()) and ?b.id = o.IDbarFK and o.Confermato = '0' ").setParameter(1, b.getId());
 		List<Ordine> lista = Ris.getResultList(); 
 		return lista;
 	}

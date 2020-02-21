@@ -48,22 +48,28 @@ public class RegistrazioneBar {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
 			int id = cerca( via,  civico, citta,  cap);
-			if(id==0) {
+			if(id == 0 ) {
 				i = creazione( via,  civico, citta,  cap);
 			}else {
 				i = em.find(Indirizzo.class, id);
 			}			
 			_return.setIndirizzoBean(i);
+			em.getTransaction().begin();
+		    em.persist(_return);
+		    em.getTransaction().commit();
 		}
 		return i;
 	}
 	
 	public int cerca(String via, String civico,String citta, String cap) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Query Ris = em.createQuery("SELECT i.ID FROM `indirizzo` as i "
-				+ "WHERE i.via = \"Via\" AND i.civico = \"Civico\" AND i.citta = \"Citta\" AND i.CAP = \"CAP\""
+		int id = 0;
+		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
+				+ "WHERE i.via =:Via AND i.civico = :Civico AND i.citta = :Citta AND i.cap = :CAP"
 				+ "").setParameter("Via", via).setParameter("Civico", civico).setParameter("Citta", citta).setParameter("CAP", cap);
-		int id=Ris.executeUpdate();
+		if(Ris != null) {
+			id = Ris.getFirstResult();
+		}
 		return id;
 	}
 	

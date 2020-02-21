@@ -14,9 +14,9 @@ public class CambioIndirizzoOrario {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);
 		Indirizzo i = null;
-		int id = cerca( via,  civico, citta,  cap);
+		int id = cerca( via,  civico, citta,  cap,em);
 		if(id==0) {
-			i = creazione( via,  civico, citta,  cap);
+			i = creazione( via,  civico, citta,  cap,em);
 		}else {
 			i = em.find(Indirizzo.class, id);
 		}			
@@ -38,18 +38,19 @@ public class CambioIndirizzoOrario {
 		return _return;
 	}	
 
-	public int cerca(String via, String civico,String citta, String cap) {
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Query Ris = em.createQuery("SELECT i.ID FROM `indirizzo` as i "
-				+ "WHERE i.via = \"Via\" AND i.civico = \"Civico\" AND i.citta = \"Citta\" AND i.CAP = \"CAP\""
+	public int cerca(String via, String civico,String citta, String cap,EntityManager em) {
+		int id = 0;
+		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
+				+ "WHERE i.via =:Via AND i.civico = :Civico AND i.citta = :Citta AND i.cap = :CAP"
 				+ "").setParameter("Via", via).setParameter("Civico", civico).setParameter("Citta", citta).setParameter("CAP", cap);
-		int id=Ris.executeUpdate();
+		if(Ris != null) {
+			id = Ris.getFirstResult();
+		}
 		return id;
 	}
 	
 	
-	public Indirizzo creazione(String via, String civico,String citta, String cap) {
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+	public Indirizzo creazione(String via, String civico,String citta, String cap,EntityManager em) {
 		Indirizzo _return = new Indirizzo();
 		_return.setCap(cap);
 		_return.setCivico(civico);
