@@ -15,7 +15,7 @@ public class TotaleOrdiniMensili {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
 		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-				"WHERE MONTH(o.data) = MONTH(getdate()) and b.id = o.IDbarFK  ").setParameter("b.id", b.getId());
+				"WHERE MONTH(o.data) = MONTH(getdate()) and ?b.id = o.IDbarFK  ").setParameter("1", b.getId());
 		return Ris.executeUpdate();
 		}
 
@@ -23,7 +23,7 @@ public class TotaleOrdiniMensili {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
 		Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-				"WHERE MONTH(o.data) = MONTH(getdate()) and b.id = o.IDbarFK  ").setParameter("b.id", b.getId());
+				"WHERE MONTH(o.data) = MONTH(getdate()) and ?b.id = o.IDbarFK  ").setParameter("1", b.getId());
 		List<Ordine> lista = Ris.getResultList(); 
 		return lista;
 	}
