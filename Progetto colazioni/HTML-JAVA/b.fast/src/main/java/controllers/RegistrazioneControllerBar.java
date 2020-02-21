@@ -54,7 +54,7 @@ public class RegistrazioneControllerBar extends HttpServlet{
 		} else {
 			int id = b.getId();
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("../GestioneIndirizzoOrario/SetInizio.html").forward(request, response);
 		}
 	}
 }

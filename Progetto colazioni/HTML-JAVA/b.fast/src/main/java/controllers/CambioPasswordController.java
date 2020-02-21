@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import business.CambioPassword;
 import model.Bar;
 
-@WebServlet("/passwordCambio")
+@WebServlet("/GestioneUtente/pass")
 public class CambioPasswordController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	
@@ -36,7 +36,7 @@ public class CambioPasswordController extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/passwordCambio.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
 		}
 	}
 

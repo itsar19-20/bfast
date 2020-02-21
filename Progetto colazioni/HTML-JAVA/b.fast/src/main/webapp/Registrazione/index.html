@@ -74,7 +74,7 @@
     <!--End Navigation-->
 
 
-    <form action="/sign_up" method="POST">
+    <form action="registrazione" method="POST">
         <div class="sign_up">
             <div class="sign_up-screen">
                 <div class="app-title">
@@ -87,14 +87,7 @@
                     <!--Nome del Locale-->
                     <div class="control-group">
                         <label for="nomeL"><b>Nome del Locale </b></label>
-                        <input type="text" id="nomeL" placeholder="Nome del Locale" name="nomeL" required
-                            style="width: 100%;">
-                    </div>
-
-                    <!--Indirizzo del Locale-->
-                    <div class="control-group">
-                        <label for="indirizzoL"><b>Indirizzo</b></label>
-                        <input type="text" id="indirizzoL" placeholder="Indirizzo del Locale" name="Indirizzo" required
+                        <input type="text" id="nomeL" placeholder="Nome del Locale" name="nome" required
                             style="width: 100%;">
                     </div>
 
@@ -102,31 +95,31 @@
                     <!--Email-->
                     <div class="control-group">
                         <label for="emailL"><b>Email</b></label>
-                        <input type="text" id="emailL" placeholder="Inserire un Email Valida" name="email" required
+                        <input type="text" id="emailL" placeholder="Inserire un Email Valida" name="mail" required
                             style="width: 100%;">
                     </div>
 
                     <!--Password-->
                     <div class="control-group">
                         <label for="password"><b>Password</b></label>
-                        <input type="password" id="password" placeholder="Password" name="password" required
+                        <input type="password" id="password" placeholder="Password" name="pass" required
                             style="width: 100%;">
                     </div>
 
                     <!--Pepeat Password-->
                     <div class="control-group">
                         <label for="passwordR"><b>Repeat Password</b></label>
-                        <input type="password" id="passwordR" placeholder="Repeat Password" name="passwordR" required
+                        <input type="password" id="passwordR" placeholder="Repeat Password" name="copass" required
                             style="width: 100%;">
                     </div>
                 </form>
 
 
 
-                    <input type="button" onclick="validazione(event);" value="Create account"
+                    <input type="submit" onclick="validazione(event);" value="Create account"
                         class="btn btn-primary btn-large btn-block">
 
-                    <input type="button" onclick="validazione(event);" value="Cancel"
+                    <input type="submit" onclick="validazione(event);" value="Cancel"
                         class="btn btn-primary btn-large btn-block" style="background-color: #f44336; border-color: #f44336;">
 
                 </div>
