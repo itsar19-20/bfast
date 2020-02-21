@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <Button
         android:id="@+id/conferma"
         android:layout_width="109dp"
@@ -30,18 +31,6 @@
         app:layout_constraintHorizontal_bias="0.802"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <fragment
-        android:id="@+id/map"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="346dp"
-        android:layout_height="216dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="316dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="131dp"
@@ -59,10 +48,17 @@
         android:id="@+id/indirizzoAttuale"
         android:layout_width="318dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="88dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="181dp" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="393dp"
+        android:layout_height="273dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="298dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
