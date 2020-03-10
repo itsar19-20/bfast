@@ -1,5 +1,7 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Utente {
     private String email;
     private String nome;
