@@ -10,25 +10,32 @@ import retrofit2.http.Path;
 public interface MyApiEndpointInterface {
 
     @GET("/login")
-    Call<Utente> login(@Query("username")String usrnm, @Query("password") String pwd)
+    Call<Utente> login(@Query("mail")String mail, @Query("password") String pwd)
 
 	@GET("/registrazione")
 	Call<Utente> registrazione(@Query("username")String usrnm, @Query("password") String pwd,@Query("username")String usrnm, @Query("password") String pwd)
 	
-	@GET("/Cancellazione")
-	
-	
+	@GET("/CancellazioneUtente")
+	Call<Utente> Cancellazione(@Query("mail")String mail, @Query("password") String pwd)
+
 	@GET("/ConfermaPosizione")
 	
 	
-	@GET("/CambioMail")
+	@GET("/ConfermaMail")
+	Call<Utente> ConfermaMail(@Query("mail")String mail)
+
 	
+	@GET("/CambioMail")
+	Call<Utente> CambioMail(@Query("mail")String mail, @Query("mail") String mail)
+
 	
 	@GET("/CambioPassword")
-	
+	Call<Utente> CambioPassword(@Query("password")String pass, @Query("copassword") String copass)
+
 	
 	@GET("/PasswordDimenticata")
-	
+	Call<Utente> login(@Query("mail")String mail)
+
 	
 	@GET("/Ordini")
 	
