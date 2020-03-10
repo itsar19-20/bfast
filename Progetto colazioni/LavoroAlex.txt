@@ -1,0 +1,11 @@
+Fattorino
+Ordine
+Chiedef
+Domanda
+Possiede
+Risposta
+Tipopagamento
+Posfatt
+Indirizzo
+Bar
+(Contiene - Prodotto ?)
