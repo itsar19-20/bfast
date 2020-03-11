@@ -1,15 +1,25 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Bar {
 
-    private int id;
     private int idIndirizzo;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("nome")
     private String nome;
+    @SerializedName("orarioApertura")
     private String orarioApertura;
+    @SerializedName("orarioChiusura")
     private String orarioChiusura;
+    @SerializedName("calutazione")
     private float valutazione;
+    @SerializedName("email")
     private String email;
+    @SerializedName("password")
     private String password;
+    @SerializedName("fascia")
     private float fascia;
     
     @Override

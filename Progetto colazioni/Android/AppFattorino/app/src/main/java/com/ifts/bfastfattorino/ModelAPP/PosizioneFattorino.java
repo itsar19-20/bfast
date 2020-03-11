@@ -1,13 +1,24 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PosizioneFattorino {
 
+    @SerializedName("id")
     private int id;
-
+    @SerializedName("posXFA")
     private double posXFA;
-
+    @SerializedName("posYFA")
     private double posYFA;
 
+    @Override
+    public String toString() {
+        return "PosizioneFattorino{" +
+                "id=" + id +
+                ", posXFA=" + posXFA +
+                ", posYFA=" + posYFA +
+                '}';
+    }
 
     public int getId() {
         return this.id;
