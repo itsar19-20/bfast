@@ -1,23 +1,39 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Fattorino implements Serializable {
 
+    @SerializedName("id")
     private int id;
-
+    @SerializedName("cognome")
     private String cognome;
-
+    @SerializedName("mail")
     private String mail;
-
-    private Date nascità;
-
+    @SerializedName("nacita")
+    private Date nascita;
+    @SerializedName("nome")
     private String nome;
-
+    @SerializedName("password")
     private String password;
-
+    @SerializedName("valutazione")
     private float valutazione;
+
+    @Override
+    public String toString() {
+        return "Fattorino{" +
+                "id=" + id +
+                ", cognome='" + cognome + '\'' +
+                ", mail='" + mail + '\'' +
+                ", nascita=" + nascita +
+                ", nome='" + nome + '\'' +
+                ", password='" + password + '\'' +
+                ", valutazione=" + valutazione +
+                '}';
+    }
 
     public Fattorino() {
     }
@@ -46,12 +62,12 @@ public class Fattorino implements Serializable {
         this.mail = mail;
     }
 
-    public Date getNascità() {
-        return this.nascità;
+    public Date getNascita() {
+        return this.nascita;
     }
 
-    public void setNascità(Date nascità) {
-        this.nascità = nascità;
+    public void setNascita(Date nascita) {
+        this.nascita = nascita;
     }
 
     public String getNome() {
