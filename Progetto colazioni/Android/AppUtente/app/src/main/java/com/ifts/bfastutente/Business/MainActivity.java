@@ -1,15 +1,22 @@
+package com.ifts.bfastutente.Business;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private MapView mapView;
@@ -39,42 +46,42 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-     b1 = findViewById(R.id.login);
-     t1 = findViewById(R.id.textView2);
-     t2 = findViewById(R.id.textView3);
-     b1.setOnClickListener(new View.OnClickListener() {
+        b1 = findViewById(R.id.login);
+        t1 = findViewById(R.id.textView2);
+        t2 = findViewById(R.id.textView3);
+        b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-		EditText text1 = findViewById(R.id.editText2);
-		EditText text2 = findViewById(R.id.editText3);
-                Call<User> call = apiService.login(text1, text2);
-		call.enqueue(new Callback<User>() {
-		    @Override
-		    public void onResponse(Response<User> response) {
-		        int statusCode = response.code();
-		        User user = response.body();  
+                EditText text1 = findViewById(R.id.editText2);
+                EditText text2 = findViewById(R.id.editText3);
+                Call<Utente> call = apiService.login(text1, text2);
+                call.enqueue(new Callback<Utente>() {
+                    @Override
+                    public void onResponse(Response<Utente> response) {
+                        int statusCode = response.code();
+                        User user = response.body();
 
-	    }
+                    }
 
-		    @Override
+                    @Override
 
-		    public void onFailure(Throwable t) {
+                    public void onFailure(Throwable t) {
 
-		        // Log error richiesta fallita
+                        // Log error richiesta fallita
 
-    }
+                    }
 
-}
-}
+                }
+            }
         })
-      t1.setOnClickListener(new View.OnClickListener() {
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent reg= new Intent(MainActivity.this, RegistrazioneActivity.class);
                 startActivity(reg);
             }
         })
-     t2.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cambia = new Intent(MainActivity.this, pswDimenticata.class);

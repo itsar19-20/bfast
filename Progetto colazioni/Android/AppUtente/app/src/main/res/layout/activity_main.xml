@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00252323"
     android:backgroundTint="#00FFFFFF"
-    tools:context=".MainActivity">
+    tools:context=".Business.MainActivity">
 
 
     <TextView

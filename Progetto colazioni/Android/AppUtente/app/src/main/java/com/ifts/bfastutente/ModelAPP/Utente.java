@@ -3,10 +3,13 @@ package com.ifts.bfastutente.ModelAPP;
 import com.google.gson.annotations.SerializedName;
 
 public class Utente {
+    @SerializedName("mail")
     private String email;
+    @SerializedName("nome")
     private String nome;
     private String cognome;
     private int telefono;
+    @SerializedName("password")
     private String pass;
     private long nascita;
 
