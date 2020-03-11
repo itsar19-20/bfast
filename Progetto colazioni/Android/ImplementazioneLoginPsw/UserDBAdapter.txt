@@ -1,0 +1,70 @@
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.ifts.dbandroid.model.User;
+
+public class UserDBAdapter {
+
+    private Context context;
+    private SQLiteDatabase database;
+    private DatabaseHelper dbHelper;
+    public static final String DB_NAME = "Utente";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_NAME = "nome";
+    public static final String KEY_LASNAME = "cognome";
+    public static final String KEY_TELEFONO = "telefono";
+    public static final String KEY_NASCITA = "nascita";
+
+    public UserDBAdapter (Context context) {
+        this.context = context;
+    }
+
+    public UserDBAdapter open() throws SQLException {
+        dbHelper = new DatabaseHelper(context);
+        database = dbHelper.getWritableDatabase();
+        return this;
+    }
+    public void close() {
+        dbHelper.close();
+        database.close();
+    }
+    private ContentValues createContentValues(String email, String password, String nome, String cognome,String telefono,String nascita) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_PASSWORD, password);
+        values.put(KEY_NAME, nome);
+        values.put(KEY_LASNAME, cognome);
+	values.put(KEY_TELEFONO, telefono);
+	values.put(KEY_NASCITA, nascita);
+        return values;
+    }
+
+    public long addUser (String email, String password, String nome, String cognome,String telefono,String nascita) {
+        ContentValues values = createContentValues(email, password, nome, cognome,telefono,nascita);
+        return database.insertOrThrow("user", null, values);
+    }
+
+    public Cursor getUserLogin(String username) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_EMAIL, KEY_PASSWORD},
+                KEY_EMAIL + "= '" + email + "'", null, null, null, null, null);
+        return cursor;
+    }
+
+
+    public boolean updateUser(String email, String password, String nome, String cognome,String telefono,String nascita) {
+        ContentValues updateValues = createContentValues(email, password, nome, cognome,telefono,nascita);
+        return database.update("user", updateValues, KEY_EMAIL + "=" + email, null) > 0;
+    }
+
+
+    public boolean deleteUser(Integer id) {
+        return database.delete("user", KEY_EMAIL + "=" + email, null) >0;
+    }
+
+
+
+}
