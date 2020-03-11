@@ -7,10 +7,13 @@ public class Utente {
     private String email;
     @SerializedName("nome")
     private String nome;
+    @SerializedName("cognome")
     private String cognome;
+    @SerializedName("telefono")
     private int telefono;
     @SerializedName("password")
     private String pass;
+    @SerializedName("nascita")
     private long nascita;
 
     @Override

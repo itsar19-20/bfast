@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,16 +60,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Response<Utente> response) {
                         int statusCode = response.code();
-                        User user = response.body();
+                        Utente user = response.body();
 
                     }
 
                     @Override
-
                     public void onFailure(Throwable t) {
-
                         // Log error richiesta fallita
-
+                        Toast.makeText(MainActivity.this, "Errore nel login", Toast.LENGTH_LONG).show();
                     }
 
                 }
