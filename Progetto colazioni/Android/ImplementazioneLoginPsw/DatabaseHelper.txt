@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "database.db";
     private static final int DB_VERSION = 1;
-    private static final String DB_CREATE = "create table Utente (id integer primary key autoincrement, email text not null unique, " +
+    private static final String DB_CREATE = "create table Utente (email text not null primary key, " +
             "password text not null, nome text not null, cognome text not null,telefono integer not null,nascita Date not null);";
 
     public DatabaseHelper(Context context) {
