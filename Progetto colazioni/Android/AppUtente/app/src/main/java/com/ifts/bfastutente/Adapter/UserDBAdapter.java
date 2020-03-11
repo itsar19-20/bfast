@@ -12,12 +12,13 @@ public class UserDBAdapter {
     private Context context;
     private SQLiteDatabase database;
     private DatabaseHelper dbHelper;
-    public static final String DB_NAME = "user";
-    public static final String KEY_USERID = "_id";
-    public static final String KEY_USERNAME = "username";
+    public static final String DB_NAME = "Utente";
+    public static final String KEY_MAIL = "mail";
+    public static final String KEY_TELEFONO = "telefono";
     public static final String KEY_PASSWORD = "password";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_LASNAME = "lastName";
+    public static final String KEY_NOME = "nome";
+    public static final String KEY_COGNOME = "cognome";
+    public static final String KEY_NASCITA = "nascita";
 
     public UserDBAdapter (Context context) {
         this.context = context;
@@ -32,45 +33,42 @@ public class UserDBAdapter {
         dbHelper.close();
         database.close();
     }
-    private ContentValues createContentValues(String username, String password, String nome, String lastName) {
+    private ContentValues createContentValues(String mail, String password, String nome, String cognome,String telefono,String nascita) {
         ContentValues values = new ContentValues();
-        values.put(KEY_USERNAME, username);
+        values.put(KEY_MAIL, mail);
         values.put(KEY_PASSWORD, password);
-        values.put(KEY_NAME, nome);
-        values.put(KEY_LASNAME, lastName);
+        values.put(KEY_NOME, nome);
+        values.put(KEY_COGNOME, cognome);
+        values.put(KEY_TELEFONO, telefono);
+        values.put(KEY_NASCITA, nascita);
         return values;
     }
 
-    public long addUser (String username, String password, String name, String lastName) {
-        ContentValues values = createContentValues(username, password, name, lastName);
+    public long addUser (String mail, String password, String nome, String cognome,String telefono,String nascita) {
+        ContentValues values = createContentValues(mail, password, nome, cognome,telefono,nascita);
         return database.insertOrThrow("user", null, values);
     }
 
-    public Cursor getUserLogin(String username) {
-        Cursor cursor = database.query(true, "user", new String[] { KEY_USERNAME, KEY_PASSWORD},
-                KEY_USERNAME + "= '" + username + "'", null, null, null, null, null);
+    public Cursor getUserLogin(String mail) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
+                KEY_MAIL + "= '" + mail + "'", null, null, null, null, null);
         return cursor;
     }
 
 
-    public boolean updateUser(Integer _id, String username, String password, String name, String lastName) {
-        ContentValues updateValues = createContentValues(username, password, name, lastName);
-        return database.update("user", updateValues, KEY_USERID + "=" + _id, null) > 0;
+    public boolean updateUser(String mail, String password, String nome, String cognome,String telefono,String nascita) {
+        ContentValues updateValues = createContentValues(mail, password, nome, cognome,telefono,nascita);
+        return database.update("user", updateValues, KEY_MAIL + "=" + mail, null) > 0;
     }
 
     public boolean deleteUserByUsername(String s) {
-        return database.delete("user", KEY_USERNAME + "= '" + s + "'", null) >0;
-    }
-
-    public boolean deleteUser(Integer id) {
-        return database.delete("user", KEY_USERID + "=" + id, null) >0;
+        return database.delete("user", KEY_MAIL + "= '" + s + "'", null) >0;
     }
 
     public Cursor fetchUsers() {
         return database.query("user", new String[]
-                        {KEY_USERID, KEY_USERNAME, KEY_PASSWORD, KEY_NAME, KEY_LASNAME},
+                        {KEY_MAIL, KEY_NOME, KEY_PASSWORD, KEY_COGNOME, KEY_TELEFONO,KEY_NASCITA},
                 null, null, null, null, null);
     }
-
 
 }
