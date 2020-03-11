@@ -1,4 +1,4 @@
-import androidx.appcompat.app.AppCompatActivity;
+package com.ifts.bfastutente.Business;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,9 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ifts.dbandroid.model.Utente;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity extends AppCompatActivity {
+import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.R;
+
+
+public class RegistrazioneActivity extends AppCompatActivity {
     UtenteDBAdapter udba = new UtenteDBAdapter(this);
 
     @Override
@@ -38,8 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
                     String user=etuser.getText().toString();
                     u.setNome(nome);
                     u.setCognome(cognome);
-                    u.setPassword(password);
-                    u.setUsername(user);
+                    u.setPass(password);
+                    u.setEmail(user);
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && user.length()>0) {
                         udba.open();
                         udba.addUser(user,password,nome,cognome);
