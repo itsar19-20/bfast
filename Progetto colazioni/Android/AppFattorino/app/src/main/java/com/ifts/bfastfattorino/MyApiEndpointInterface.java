@@ -1,6 +1,8 @@
 package com.ifts.bfastfattorino;
 
+import com.ifts.bfastfattorino.ModelAPP.Domanda;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.ModelAPP.Risposta;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,6 +20,7 @@ public interface MyApiEndpointInterface {
     Call<Fattorino> Cancellazione(@Query("id")String id, @Query("password") String pwd);
 
     @GET("/CercaId")
+    Call<Fattorino> CercaId (@Query("id")String id);
 
 
 
@@ -33,25 +36,35 @@ public interface MyApiEndpointInterface {
     Call<Fattorino> login(@Query("id")String id);
 
 
+    @GET("ScriviDomanda")
+    Call<Domanda> domanda(@Query("idDomanda")String idDomanda);
+
+
+    @GET("ScriviRisposta")
+    Call<Risposta> risposta(@Query("idRisposta")String idRisposta);
+
+    @GET("/ChiediAiuto")
+    Call<Fattorino> aiuto(@Query("")String);
+
+
     @GET("/OrdiniEffettuati")
+    Call<Fattorino>
 
 
     @GET("/AccettazioneOrdine")
-
-
-    @GET("/AndareOnline")
-
-
-    @GET("/AndareOffline")
-
-
-    @GET("/ChiediAiuto")
-
-
-    @GET("/GestioneUtente")
+    Call<Fattorino>
 
 
     @GET("RifiutaOrdine")
+    Call<Fattorino>
 
+
+
+    @GET("/AndareOnline")
+    Call<Fattorino>
+
+
+    @GET("/AndareOffline")
+    Call<Fattorino>
 
 }
