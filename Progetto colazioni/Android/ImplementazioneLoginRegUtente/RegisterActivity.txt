@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ifts.dbandroid.model.User;
+import com.ifts.dbandroid.model.Utente;
 
 public class RegisterActivity extends AppCompatActivity {
     UtenteDBAdapter udba = new UtenteDBAdapter(this);
