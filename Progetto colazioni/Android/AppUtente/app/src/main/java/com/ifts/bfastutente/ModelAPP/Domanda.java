@@ -5,6 +5,14 @@ public class Domanda {
     private int id;
     private String domanda;
 
+    @Override
+    public String toString() {
+        return "Domanda{" +
+                "id=" + id +
+                ", domanda='" + domanda + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -21,11 +29,5 @@ public class Domanda {
         this.domanda = domanda;
     }
 
-    @Override
-    public String toString() {
-        return "Domanda{" +
-                "id=" + id +
-                ", domanda='" + domanda + '\'' +
-                '}';
-    }
+
 }
