@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_registrazione);
             }
         });
-        b1 = findViewById(R.id.login);
+        b1 = findViewById(R.id.Registrazione);
         t1 = findViewById(R.id.textView2);
         t2 = findViewById(R.id.textView3);
         b1.setOnClickListener(new View.OnClickListener() {

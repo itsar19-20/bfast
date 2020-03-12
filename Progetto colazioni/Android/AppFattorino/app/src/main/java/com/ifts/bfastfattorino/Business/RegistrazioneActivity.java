@@ -22,30 +22,30 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
-        Button button = findViewById(R.id.BtnCreaContattto);
-        final EditText etuser = findViewById(R.id.ETUsername);
-        final EditText etnome = findViewById(R.id.ETNome);
-        final EditText etcognome = findViewById(R.id.ETCognome);
-        final EditText etpassword = findViewById(R.id.ETPassword);
+        Button button = findViewById(R.id.Registrazione);
+        final EditText etmail = findViewById(R.id.editText3);
+        final EditText etnome = findViewById(R.id.editText7);
+        final EditText etcognome = findViewById(R.id.editText8);
+        final EditText etpassword = findViewById(R.id.editText3);
+        final EditText etnascita = findViewById(R.id.editText6);
+        final EditText etconfpass = findViewById(R.id.editText5);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
 
-                    Utente u = new Utente();
+                    Fattorino u = new Fattorino();
                     String nome=etnome.getText().toString();
                     u.setNome(nome);
                     String cognome=etcognome.getText().toString();
-                    u.setNome(nome);
-                    String password=etpassword.getText().toString();
-                    u.setNome(nome);
-                    String user=etuser.getText().toString();
-                    u.setNome(nome);
                     u.setCognome(cognome);
-                    u.setPass(password);
-                    u.setEmail(user);
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && user.length()>0) {
+                    String password=etpassword.getText().toString();
+                    u.setPassword(password);
+                    String copass = etconfpass.getText().toString();
+
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && user.length()>0 && copass==password) {
                         udba.open();
                         udba.addUser(user,password,nome,cognome);
                         udba.close();
