@@ -49,9 +49,9 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     u.setPassword(password);
                     String copass = etconfpass.getText().toString();
 
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password) {
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password && nascita.length()>0 && email.length()>0) {
                         udba.open();
-                        udba.addUser(password,nome,cognome);
+                        udba.addUser(email,password,nome,cognome,nascita);
                         udba.close();
                         Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
                     } else {
