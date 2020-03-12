@@ -43,7 +43,7 @@ public class FattorinoDBAdapter {
         return values;
     }
 
-    public long addUser (String mail, String password, String nome, String cognome,Integer id,String nascita) {
+    public long addUser (String mail, String password, String nome, String cognome,String nascita) {
         ContentValues values = createContentValues(mail, password, nome, cognome,nascita);
         return database.insertOrThrow("user", null, values);
     }
