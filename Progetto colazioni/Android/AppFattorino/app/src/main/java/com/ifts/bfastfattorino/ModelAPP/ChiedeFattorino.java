@@ -1,24 +1,10 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
-import com.google.gson.annotations.SerializedName;
-
 public class ChiedeFattorino {
 
-    @SerializedName("id")
     private int id;
-    @SerializedName("domanda")
     private Domanda domanda;
-    @SerializedName("fattorino")
     private Fattorino fattorino;
-
-    @Override
-    public String toString() {
-        return "ChiedeFattorino{" +
-                "id=" + id +
-                ", domanda=" + domanda +
-                ", fattorino=" + fattorino +
-                '}';
-    }
 
     public int getId() {
         return this.id;
