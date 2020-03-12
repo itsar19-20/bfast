@@ -1,10 +1,12 @@
-package com.ifts.bfastfattorino;
+package com.ifts.bfastfattorino.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.ifts.bfastfattorino.R;
 
 public class MainActivity extends AppCompatActivity {
 
