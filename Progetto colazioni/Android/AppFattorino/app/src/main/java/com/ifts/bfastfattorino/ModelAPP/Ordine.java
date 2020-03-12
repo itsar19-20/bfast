@@ -1,47 +1,21 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
 public class Ordine {
 
+    private int id;
     private String idutfk;
     private int idfatfk;
     private int idbarfk;
     private int idtifk;
     private int idpofk;
     private int idinfk;
-    @SerializedName("id")
-    private int id;
-    @SerializedName("orario")
     private String orario;
-    @SerializedName("note")
     private String note;
-    @SerializedName("data")
     private Date data;
-    @SerializedName("confermato")
     private Byte confermato;
-    @SerializedName("valutazione")
     private float valutazione;
-
-    @Override
-    public String toString() {
-        return "Ordine{" +
-                "id=" + id +
-                ", idutfk='" + idutfk + '\'' +
-                ", idfatfk=" + idfatfk +
-                ", idbarfk=" + idbarfk +
-                ", idtifk=" + idtifk +
-                ", idpofk=" + idpofk +
-                ", idinfk=" + idinfk +
-                ", orario='" + orario + '\'' +
-                ", note='" + note + '\'' +
-                ", data=" + data +
-                ", confermato=" + confermato +
-                ", valutazione=" + valutazione +
-                '}';
-    }
 
     public int getId() {return this.id; }
     public void setId(int id) {this.id = id; }

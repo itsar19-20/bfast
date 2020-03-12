@@ -1,21 +1,9 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Risposta {
 
-    @SerializedName("id")
     private int id;
-    @SerializedName("risposta")
     private String risposta;
-
-    @Override
-    public String toString() {
-        return "Risposta{" +
-                "id=" + id +
-                ", risposta='" + risposta + '\'' +
-                '}';
-    }
 
     public int getId() {
         return id;
@@ -33,5 +21,11 @@ public class Risposta {
         this.risposta = risposta;
     }
 
-
+    @Override
+    public String toString() {
+        return "Risposta{" +
+                "id=" + id +
+                ", risposta='" + risposta + '\'' +
+                '}';
+    }
 }

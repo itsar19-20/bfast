@@ -1,39 +1,22 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 import java.util.Date;
 
 public class Fattorino implements Serializable {
 
-    @SerializedName("id")
     private int id;
-    @SerializedName("cognome")
-    private String cognome;
-    @SerializedName("mail")
-    private String mail;
-    @SerializedName("nacita")
-    private Date nascita;
-    @SerializedName("nome")
-    private String nome;
-    @SerializedName("password")
-    private String password;
-    @SerializedName("valutazione")
-    private float valutazione;
 
-    @Override
-    public String toString() {
-        return "Fattorino{" +
-                "id=" + id +
-                ", cognome='" + cognome + '\'' +
-                ", mail='" + mail + '\'' +
-                ", nascita=" + nascita +
-                ", nome='" + nome + '\'' +
-                ", password='" + password + '\'' +
-                ", valutazione=" + valutazione +
-                '}';
-    }
+    private String cognome;
+
+    private String mail;
+
+    private Date nascità;
+
+    private String nome;
+
+    private String password;
+
 
     public Fattorino() {
     }
@@ -62,12 +45,12 @@ public class Fattorino implements Serializable {
         this.mail = mail;
     }
 
-    public Date getNascita() {
-        return this.nascita;
+    public Date getNascità() {
+        return this.nascità;
     }
 
-    public void setNascita(Date nascita) {
-        this.nascita = nascita;
+    public void setNascità(Date nascità) {
+        this.nascità = nascità;
     }
 
     public String getNome() {
@@ -86,12 +69,6 @@ public class Fattorino implements Serializable {
         this.password = password;
     }
 
-    public float getValutazione() {
-        return this.valutazione;
-    }
-
-    public void setValutazione(float valutazione) {
-        this.valutazione = valutazione;
-    }
 
 }
+

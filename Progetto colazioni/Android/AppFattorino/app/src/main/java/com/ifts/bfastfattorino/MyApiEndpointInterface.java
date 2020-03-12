@@ -14,8 +14,7 @@ public interface MyApiEndpointInterface {
     Call<Fattorino> login(@Query("id")String id, @Query("password") String pwd);
 
     @GET("/registrazione")
-    Call<Fattorino> registrazione(@Query("nome")String nome, @Query("password") String password,@Query("username")String usrnm,
-                                  @Query("password") String pwd);
+    Call<Fattorino> registrazione(@Query("username")String usrnm, @Query("password") String pwd,@Query("username")String usrnm, @Query("password") String pwd);
 
     @GET("/CancellazioneFattorino")
     Call<Fattorino> Cancellazione(@Query("id")String id, @Query("password") String pwd);
@@ -26,7 +25,7 @@ public interface MyApiEndpointInterface {
 
 
     @GET("/CambioMail")
-    Call<Fattorino> CambioMail(@Query("mail")String email, @Query("mail") String mail);
+    Call<Fattorino> CambioMail(@Query("mail")String mail, @Query("mail") String mail);
 
 
     @GET("/CambioPassword")
