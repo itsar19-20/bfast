@@ -17,7 +17,6 @@ public class Fattorino implements Serializable {
 
     private String password;
 
-    private float valutazione;
 
     public Fattorino() {
     }
@@ -70,12 +69,6 @@ public class Fattorino implements Serializable {
         this.password = password;
     }
 
-    public float getValutazione() {
-        return this.valutazione;
-    }
-
-    public void setValutazione(float valutazione) {
-        this.valutazione = valutazione;
-    }
 
 }
+
