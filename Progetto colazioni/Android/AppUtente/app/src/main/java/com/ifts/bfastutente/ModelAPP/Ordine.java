@@ -1,17 +1,26 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Ordine {
-    private int id;
+
     private String idUtente;
     private int idBar;
     private int idTipoPagamento;
     private int idIndirizzo;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("orario")
     private String orario;
+    @SerializedName("note")
     private String note;
+    @SerializedName("data")
     private Date data;
+    @SerializedName("confermato")
     private byte confermato;
+    @SerializedName("valutazioneFattorino")
     private float valutazioneFattorino;
 
     @Override

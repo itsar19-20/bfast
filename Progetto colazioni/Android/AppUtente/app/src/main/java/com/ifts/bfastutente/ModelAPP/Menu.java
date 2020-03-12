@@ -1,9 +1,14 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Menu {
-    private int id;
-    private int idBar;
+
     private String idProdotto;
+    private int idBar;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("disponibilita")
     private byte disponibilita;
 
 

@@ -1,11 +1,18 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Indirizzo {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("via")
     private String via;
+    @SerializedName("civico")
     private String civico;
+    @SerializedName("citta")
     private String citta;
+    @SerializedName("cap")
     private String cap;
 
     @Override

@@ -1,11 +1,17 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Prodotto {
 
-    private String nome;
-    private String ingredienti;
     private int idOrdine;
+    @SerializedName("nome")
+    private String nome;
+    @SerializedName("ingredienti")
+    private String ingredienti;
+    @SerializedName("prezzo")
     private float prezzo;
+    @SerializedName("tipo")
     private String tipo;
 
 

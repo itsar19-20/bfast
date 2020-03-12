@@ -1,8 +1,12 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Domanda {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("domanda")
     private String domanda;
 
     @Override

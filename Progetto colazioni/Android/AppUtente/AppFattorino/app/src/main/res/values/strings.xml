@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">b.fast(fattorino)</string>
+    <string name="BFast">BFast</string>
+    <string name="button">button</string>
+    <string name="todo">todo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="conferma_password">Conferma Password</string>
+    <string name="data_di_nascita">Data di nascita</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
+    <string name="password_dimenticata"><u>Password dimenticata?</u></string>
+    <string name="vuoi_candidarti"><u>Vuoi candidarti?</u></string>
+    <string name="id">ID</string>
+    <string name="logout">Logout</string>
+    <string name="il_mio_profilo">Il Mio Profilo</string>
+    <string name="chiedi_aiuto">Chiedi Aiuto</string>
+</resources>
