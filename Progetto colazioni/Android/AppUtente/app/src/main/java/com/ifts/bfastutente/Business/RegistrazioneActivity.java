@@ -19,13 +19,16 @@ public class RegistrazioneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registrazione);
 
-        Button button = findViewById(R.id.BtnCreaContattto);
-        final EditText etuser = findViewById(R.id.ETUsername);
-        final EditText etnome = findViewById(R.id.ETNome);
-        final EditText etcognome = findViewById(R.id.ETCognome);
-        final EditText etpassword = findViewById(R.id.ETPassword);
+        Button button = findViewById(R.id.BtnLogin);
+        final EditText etemail = findViewById(R.id.ETmail);
+        final EditText etnome = findViewById(R.id.ETnome);
+        final EditText etcognome = findViewById(R.id.ETcognome);
+        final EditText etpassword = findViewById(R.id.ETpass);
+        final EditText etconfermapassword = findViewById(R.id.ETcopass);
+        final EditText etdatadinascita = findViewById(R.id.ETdata);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,15 +39,17 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     String nome=etnome.getText().toString();
                     u.setNome(nome);
                     String cognome=etcognome.getText().toString();
-                    u.setNome(nome);
+                    u.setCognome(cognome);
                     String password=etpassword.getText().toString();
                     u.setNome(nome);
-                    String user=etuser.getText().toString();
+                    String email=etemail.getText().toString();
                     u.setNome(nome);
-                    u.setCognome(cognome);
+
                     u.setPass(password);
-                    u.setEmail(user);
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && user.length()>0) {
+                    u.setEmail(email);
+                    u.set
+
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0) {
                         udba.open();
                         udba.addUser(user,password,nome,cognome);
                         udba.close();
