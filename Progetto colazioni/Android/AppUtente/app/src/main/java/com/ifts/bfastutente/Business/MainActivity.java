@@ -19,6 +19,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
     private MapView mapView;
     private Button b1;
@@ -72,21 +76,21 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-        })
+        });
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent reg= new Intent(MainActivity.this, RegistrazioneActivity.class);
                 startActivity(reg);
             }
-        })
+        });
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cambia = new Intent(MainActivity.this, pswDimenticata.class);
                 startActivity(cambia);
             }
-        })
+        });
     }
 
 

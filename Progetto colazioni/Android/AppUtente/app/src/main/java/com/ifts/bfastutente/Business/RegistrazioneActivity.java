@@ -54,7 +54,8 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     u.setNome(datadinascita);
 
 
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0) {
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0 && numeroditelefono.length()>10 &&
+                            datadinascita.length()>0 && password==confermapassword) {
                         udba.open();
                         udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
                         udba.close();

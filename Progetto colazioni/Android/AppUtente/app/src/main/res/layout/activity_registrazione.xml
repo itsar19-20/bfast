@@ -72,24 +72,23 @@
         android:textColor="#FCFAFA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ETnumero"
-        app:layout_constraintVertical_bias="0.75"
         tools:text="Sign In" />
 
     <EditText
         android:id="@+id/ETnumero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:ems="10"
         android:hint="   Numero di Telefono"
         android:inputType="phone"
         android:textAlignment="center"
         android:textColorHint="#0829E2"
+        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="529dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/ETcognome"
