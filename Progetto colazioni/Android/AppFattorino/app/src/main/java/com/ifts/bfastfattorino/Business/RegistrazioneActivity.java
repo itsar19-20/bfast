@@ -8,18 +8,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
+import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.R;
-import com.ifts.bfastutente.ModelAPP.Utente;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
-    UtenteDBAdapter udba = new UtenteDBAdapter(this);
+    FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registrazione);
 
         Button button = findViewById(R.id.BtnCreaContattto);
         final EditText etuser = findViewById(R.id.ETUsername);
