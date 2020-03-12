@@ -1,10 +1,23 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ChiedeUtente {
 
-    private int id;
     private int idDomanda;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("utente")
     private String utente;
+
+    @Override
+    public String toString() {
+        return "ChiedeUtente{" +
+                "id=" + id +
+                ", idDomanda=" + idDomanda +
+                ", utente='" + utente + '\'' +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -30,12 +43,4 @@ public class ChiedeUtente {
         this.utente = utente;
     }
 
-    @Override
-    public String toString() {
-        return "ChiedeUtente{" +
-                "id=" + id +
-                ", idDomanda=" + idDomanda +
-                ", utente='" + utente + '\'' +
-                '}';
-    }
 }

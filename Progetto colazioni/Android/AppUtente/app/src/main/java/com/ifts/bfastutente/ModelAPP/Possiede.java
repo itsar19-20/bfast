@@ -1,10 +1,22 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Possiede {
 
-    private int id;
     private int idDomanda;
     private int idRisposta;
+    @SerializedName("id")
+    private int id;
+
+    @Override
+    public String toString() {
+        return "Possiede{" +
+                "id=" + id +
+                ", idDomanda=" + idDomanda +
+                ", idRisposta=" + idRisposta +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -28,15 +40,6 @@ public class Possiede {
 
     public void setIdRisposta(int idRisposta) {
         this.idRisposta = idRisposta;
-    }
-
-    @Override
-    public String toString() {
-        return "Possiede{" +
-                "id=" + id +
-                ", idDomanda=" + idDomanda +
-                ", idRisposta=" + idRisposta +
-                '}';
     }
 
 }

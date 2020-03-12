@@ -1,10 +1,14 @@
 package com.ifts.bfastutente.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Contiene {
 
-    private int id;
     private String idProdotto;
     private int idOrdine;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("quantita")
     private int quantita;
 
     @Override
