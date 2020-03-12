@@ -41,21 +41,22 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     String cognome=etcognome.getText().toString();
                     u.setCognome(cognome);
                     String password=etpassword.getText().toString();
-                    u.setNome(nome);
+                    u.setNome(password);
+                    String confermapassword=etconfermapassword.getText().toString();
+                    u.setNome(confermapassword);
                     String email=etemail.getText().toString();
-                    u.setNome(nome);
+                    u.setNome(email);
+                    String datadinascita=etdatadinascita.getText().toString();
+                    u.setNome(datadinascita);
 
-                    u.setPass(password);
-                    u.setEmail(email);
-                    u.set
 
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0) {
                         udba.open();
-                        udba.addUser(user,password,nome,cognome);
+                        udba.addUser(email,password,confermapassword,nome,cognome,datadinascita);
                         udba.close();
-                        Toast.makeText(RegisterActivity.this, "Creazione avvenuta per " + u.getUsername(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta per " + u.getUsername(), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception e) {
