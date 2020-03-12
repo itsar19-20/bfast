@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        b1 = findViewById(R.id.login);
+        b1 = findViewById(R.id.BtnLogin);
         t1 = findViewById(R.id.textView2);
         t2 = findViewById(R.id.textView3);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text1 = findViewById(R.id.editText2);
-                EditText text2 = findViewById(R.id.editText3);
+                EditText text1 = findViewById(R.id.ETmail);
+                EditText text2 = findViewById(R.id.ETpass);
                 Call<Utente> call = apiService.login(text1, text2);
                 call.enqueue(new Callback<Utente>() {
                     @Override

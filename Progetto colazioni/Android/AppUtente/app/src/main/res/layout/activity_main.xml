@@ -38,7 +38,7 @@
         app:srcCompat="@drawable/ic_icona" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/ETmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/ETpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -68,10 +68,10 @@
         android:textColorHint="#0829E2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/ETmail" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/BtnLogin"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"
@@ -85,7 +85,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/ETpass"
         tools:text="Sign In" />
 
     <TextView
@@ -102,6 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
+        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

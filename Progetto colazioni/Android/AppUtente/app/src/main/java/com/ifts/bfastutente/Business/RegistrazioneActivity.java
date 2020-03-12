@@ -19,13 +19,16 @@ public class RegistrazioneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_registrazione);
 
-        Button button = findViewById(R.id.BtnCreaContattto);
-        final EditText etuser = findViewById(R.id.ETUsername);
-        final EditText etnome = findViewById(R.id.ETNome);
-        final EditText etcognome = findViewById(R.id.ETCognome);
-        final EditText etpassword = findViewById(R.id.ETPassword);
+        Button button = findViewById(R.id.BtnLogin);
+        final EditText etemail = findViewById(R.id.ETmail);
+        final EditText etnome = findViewById(R.id.ETnome);
+        final EditText etcognome = findViewById(R.id.ETcognome);
+        final EditText etpassword = findViewById(R.id.ETpass);
+        final EditText etconfermapassword = findViewById(R.id.ETcopass);
+        final EditText etdatadinascita = findViewById(R.id.ETdata);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,21 +39,24 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     String nome=etnome.getText().toString();
                     u.setNome(nome);
                     String cognome=etcognome.getText().toString();
-                    u.setNome(nome);
-                    String password=etpassword.getText().toString();
-                    u.setNome(nome);
-                    String user=etuser.getText().toString();
-                    u.setNome(nome);
                     u.setCognome(cognome);
-                    u.setPass(password);
-                    u.setEmail(user);
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && user.length()>0) {
+                    String password=etpassword.getText().toString();
+                    u.setNome(password);
+                    String confermapassword=etconfermapassword.getText().toString();
+                    u.setNome(confermapassword);
+                    String email=etemail.getText().toString();
+                    u.setNome(email);
+                    String datadinascita=etdatadinascita.getText().toString();
+                    u.setNome(datadinascita);
+
+
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0) {
                         udba.open();
-                        udba.addUser(user,password,nome,cognome);
+                        udba.addUser(email,password,confermapassword,nome,cognome,datadinascita);
                         udba.close();
-                        Toast.makeText(RegisterActivity.this, "Creazione avvenuta per " + u.getUsername(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta per " + u.getUsername(), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception e) {
