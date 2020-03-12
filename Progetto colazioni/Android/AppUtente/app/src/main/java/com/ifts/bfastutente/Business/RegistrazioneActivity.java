@@ -8,12 +8,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.R;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
-    UtenteDBAdapter udba = new UtenteDBAdapter(this);
+    UserDBAdapter udba = new UserDBAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         final EditText etpassword = findViewById(R.id.ETpass);
         final EditText etconfermapassword = findViewById(R.id.ETcopass);
         final EditText etdatadinascita = findViewById(R.id.ETdata);
+        final EditText etnumeroditelefono = findViewById(R.id.ETnumero);
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -48,19 +50,21 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     u.setNome(email);
                     String datadinascita=etdatadinascita.getText().toString();
                     u.setNome(datadinascita);
+                    String numeroditelefono=etnumeroditelefono.getText().toString();
+                    u.setNome(datadinascita);
 
 
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0) {
                         udba.open();
-                        udba.addUser(email,password,confermapassword,nome,cognome,datadinascita);
+                        udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
                         udba.close();
-                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta per " + u.getUsername(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta per " , Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(RegisterActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
