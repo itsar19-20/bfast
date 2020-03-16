@@ -12,7 +12,7 @@ public class FattorinoDBAdapter {
     private Context context;
     private SQLiteDatabase database;
     private DatabaseHelper dbHelper;
-    public static final String DB_NAME = "Utente";
+    public static final String DB_NAME = "Fattorino";
     public static final String KEY_MAIL = "mail";
     public static final String KEY_ID = "id";
     public static final String KEY_PASSWORD = "password";
