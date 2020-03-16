@@ -46,7 +46,7 @@ public class Fattorino implements Serializable {
     }
 
     public String getNascità() {
-        return this.nascità;
+        return String.valueOf(this.nascità);
     }
 
     public void setNascità(Date nascità) {

@@ -20,7 +20,7 @@ public class FattorinoDBAdapter {
     public static final String KEY_COGNOME = "cognome";
     public static final String KEY_NASCITA = "nascita";
 
-    public FattorinoDBAdapter (CambioPassword context) {
+    public FattorinoDBAdapter (Context context) {
         this.context = context;
     }
 
