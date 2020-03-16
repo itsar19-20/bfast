@@ -22,7 +22,7 @@ public class UserDBAdapter {
     public static final String KEY_COGNOME = "cognome";
     public static final String KEY_NASCITA = "nascita";
 
-    public UserDBAdapter (CancellazioneUtente context) {
+    public UserDBAdapter (Context context) {
         this.context = context;
     }
 

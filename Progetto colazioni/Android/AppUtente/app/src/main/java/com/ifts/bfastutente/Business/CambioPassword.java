@@ -1,9 +1,13 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Context;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 
-    public class CambioPassword {
+    public class CambioPassword extends AppCompatActivity {
 
         UserDBAdapter udba = new UserDBAdapter(this);
         public Utente cambio(String mail,String password, String Copassword) {
