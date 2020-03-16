@@ -7,12 +7,12 @@ import com.ifts.bfastfattorino.ModelAPP.Domanda;
 
 import java.text.ParseException;
 
-public class ScriviDomanda {
+public class ScriviDomanda extends AppCompatActivity {
 
 
-    public Domanda registrazione extends AppCompatActivity (String testo) throws ParseException
+    public Domanda registrazione  (String testo) throws ParseException
     {
-        DomandaDBAdapter ddb = new DomandaDBAdapter(this);
+        DomandaDBAdapter ddb = new DomandaDBAdapter();
         Domanda _return = null;
         String Ris = ("SELECT d.ID FROM Domanda as d \r\n" +
                 "WHERE d.domanda = \"testo\";")/*.setParameter("testo", testo)*/;
