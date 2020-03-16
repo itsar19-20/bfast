@@ -31,17 +31,28 @@ public class OrdineDBAdapter {
         database.close();
     }
 
-    private ContentValues createContentValues(String note, String data, String confermato, String valutazione) {
+    private ContentValues createContentValuesCarrello(String note, String data) {
         ContentValues values = new ContentValues();
         values.put(KEY_NOTE, note);
         values.put(KEY_DATA, data);
-        values.put(KEY_CONFERMATO, confermato);
-        values.put(KEY_VALUTAZIONE, valutazione);
+        return values;
+    }
+
+    private ContentValues createContentValuesUtente(String note, String data, String confermato, String valutazione) {
+        ContentValues values = new ContentValues();
         return values;
     }
 
     public long addUser (String note, String data, String confermato, String valutazione) {
-        ContentValues values = createContentValues(note, data, confermato, valutazione);
-        return database.insertOrThrow("user", null, values);
+        ContentValues values = createContentValuesUtente(note, data, confermato, valutazione);
+        return database.insertOrThrow("Ordine", null, values);
     }
+
+
+
+    public long finecarrello(String note,String data){
+        ContentValues values = createContentValuesCarrello(note, data);
+        return database.insertOrThrow("Ordine", null, values);
+    }
+
 }
