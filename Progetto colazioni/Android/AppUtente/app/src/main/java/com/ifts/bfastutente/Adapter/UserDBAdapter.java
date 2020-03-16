@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.ifts.bfastutente.Business.CambioMail;
+
 public class UserDBAdapter {
 
     private Context context;
@@ -20,7 +22,7 @@ public class UserDBAdapter {
     public static final String KEY_COGNOME = "cognome";
     public static final String KEY_NASCITA = "nascita";
 
-    public UserDBAdapter (Context context) {
+    public UserDBAdapter (CambioMail context) {
         this.context = context;
     }
 
@@ -56,8 +58,10 @@ public class UserDBAdapter {
     }
 
 
-    public boolean updateUser(String mail, String password, String nome, String cognome,String telefono,String nascita) {
-        ContentValues updateValues = createContentValues(mail, password, nome, cognome,telefono,nascita);
+    public boolean updateUser(String mail, String password, String nome, String cognome, int telefono, long nascita) {
+        String tel = Integer.toString(telefono);
+        String nas = Integer.toString((int) nascita);
+        ContentValues updateValues = createContentValues(mail, password, nome, cognome,tel,nas);
         return database.update("user", updateValues, KEY_MAIL + "=" + mail, null) > 0;
     }
 
