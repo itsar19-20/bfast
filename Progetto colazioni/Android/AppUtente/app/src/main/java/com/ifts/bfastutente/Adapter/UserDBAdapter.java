@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ifts.bfastutente.Business.CambioMail;
+import com.ifts.bfastutente.Business.CancellazioneUtente;
 
 public class UserDBAdapter {
 
@@ -22,7 +22,7 @@ public class UserDBAdapter {
     public static final String KEY_COGNOME = "cognome";
     public static final String KEY_NASCITA = "nascita";
 
-    public UserDBAdapter (CambioMail context) {
+    public UserDBAdapter (CancellazioneUtente context) {
         this.context = context;
     }
 
