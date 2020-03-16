@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.Business.CambioPassword;
 
 public class FattorinoDBAdapter {
 
@@ -20,7 +20,7 @@ public class FattorinoDBAdapter {
     public static final String KEY_COGNOME = "cognome";
     public static final String KEY_NASCITA = "nascita";
 
-    public FattorinoDBAdapter (Context context) {
+    public FattorinoDBAdapter (CambioPassword context) {
         this.context = context;
     }
 
