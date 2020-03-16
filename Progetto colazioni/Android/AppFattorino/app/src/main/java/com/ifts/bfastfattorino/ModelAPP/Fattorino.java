@@ -45,7 +45,7 @@ public class Fattorino implements Serializable {
         this.mail = mail;
     }
 
-    public Date getNascità() {
+    public String getNascità() {
         return this.nascità;
     }
 
