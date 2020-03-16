@@ -1,10 +1,12 @@
 package com.ifts.bfastfattorino.Business;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
-public class CambioPassword {
+public class CambioPassword extends AppCompatActivity {
 
     public Fattorino cambio(int s, String password, String Copassword) {
         FattorinoDBAdapter udba = new FattorinoDBAdapter(this);

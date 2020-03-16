@@ -1,10 +1,12 @@
 package com.ifts.bfastfattorino.Business;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
-public class CambioMail {
+public class CambioMail extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
     public Fattorino cambio(String mail, String Comail) {
         Fattorino _return = null;
