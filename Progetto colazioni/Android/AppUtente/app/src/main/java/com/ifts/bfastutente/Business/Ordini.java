@@ -4,21 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.OrdineDBAdapter;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
+import com.ifts.bfastutente.ModelAPP.Bar;
 import com.ifts.bfastutente.ModelAPP.Ordine;
+import com.ifts.bfastutente.ModelAPP.Utente;
 
-    public class Ordini extends AppCompatActivity {
+public class Ordini extends AppCompatActivity {
 
 
         public Ordine creazione(String idu) {
             Ordine o = new Ordine();
+            Utente u = null;
             UserDBAdapter udba = new UserDBAdapter(this);
-            //cerca utente
+            OrdineDBAdapter odb = new OrdineDBAdapter(this);
+            u = (Utente) udba.getUserLogin(idu);
+            odb.addUser(u.getEmail());
             return o;
         }
 
         public Ordine bar(int ido,int idb) {
             Ordine o = null;
+            Bar b = null;
+            OrdineDBAdapter odb = new OrdineDBAdapter(this);
             //cerca bar e ordine
+            odb.addBar(b.getId());
             return o;
         }
 
