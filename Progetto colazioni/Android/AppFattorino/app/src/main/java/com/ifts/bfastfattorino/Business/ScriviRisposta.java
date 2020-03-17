@@ -2,17 +2,22 @@ package com.ifts.bfastfattorino.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.Adapter.PossiedeDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
+import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.ModelAPP.Possiede;
 import com.ifts.bfastfattorino.ModelAPP.Risposta;
 
 import retrofit2.http.Query;
 
 public class ScriviRisposta extends AppCompatActivity {
+    FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
-    public Risposta registrazione(int domanda, String testo) {
+    public Risposta registrazione(int domanda, String testo, Integer id) {
         Risposta _return = null;
+        _return= (Risposta) udba.getUserLogin(id);
+
         //EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
        String Ris=("SELECT r.ID FROM Risposta as r \r\n" +
                 "WHERE r.Risposta = \"testo\";") /*.setParameter("testo", testo)*/;
