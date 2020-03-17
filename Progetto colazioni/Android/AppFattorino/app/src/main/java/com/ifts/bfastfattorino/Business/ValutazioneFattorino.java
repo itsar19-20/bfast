@@ -1,10 +1,16 @@
 package com.ifts.bfastfattorino.Business;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
+import com.ifts.bfastfattorino.ModelAPP.Domanda;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
-public class ValutazioneFattorino {
-    public String valutazione(String s) {
-        //EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+public class ValutazioneFattorino extends AppCompatActivity {
+    FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
+
+    public String valutazione(Integer s) {
+
         Fattorino f = cerca(s);
         String Ris = ("SELECT AVG(o.ValutazioneFatt) FROM `ordine` as o,fattorino as f"
                 + "WHERE o.IDfaFK = f.ID" +
@@ -12,11 +18,10 @@ public class ValutazioneFattorino {
         return Ris;
     }
 
-    public Fattorino cerca (String id) {
-        //EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+    public Fattorino cerca (Integer id) {
+
         Fattorino _return = new Fattorino();
-        Integer ID = Integer.parseInt(id);
-       // cerca utente
+        _return= (Fattorino) udba.getUserLogin(id);
         return _return;
     }
 }
