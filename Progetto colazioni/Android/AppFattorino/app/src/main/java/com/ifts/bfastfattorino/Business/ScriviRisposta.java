@@ -2,6 +2,7 @@ package com.ifts.bfastfattorino.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastfattorino.Adapter.PossiedeDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
 import com.ifts.bfastfattorino.ModelAPP.Possiede;
 import com.ifts.bfastfattorino.ModelAPP.Risposta;
@@ -27,13 +28,16 @@ public class ScriviRisposta extends AppCompatActivity {
     }
 
     private void scrivi(int domanda,Risposta _return) {
+        PossiedeDBAdapter pdb= new PossiedeDBAdapter();
         Possiede p = new Possiede();
-      Domanda d = Domanda, domanda;
-        p.setDomanda(d);
-         p.setRisposta(_return);
-            em.getTransaction().begin();
-            em.persist(p);
-             em.getTransaction().commit();
+      Domanda d = new Domanda();
+        p.setIdDomanda(d.getId());
+         p.setIdRisposta(_return.getId());
+         pdb.open();
+         pdb.addConnessione(d.getDomanda(),_return.getRisposta());
+         pdb.close();
+
+
     }
 
 
