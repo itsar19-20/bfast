@@ -8,10 +8,11 @@ import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
 public class CambioPassword extends AppCompatActivity {
 
-    public Fattorino cambio(int s, String password, String Copassword) {
+    public Fattorino cambio(int s, String password, String Copassword, Integer id) {
         FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
         Fattorino _return = null;
-        //fattorino corrente
+        _return= (Fattorino) udba.getUserLogin(id);
+
         if (password.equals(Copassword)) {
             _return.setPassword(password);
             udba.open();
