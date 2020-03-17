@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 21, 2020 alle 17:43
--- Versione del server: 10.1.37-MariaDB
--- Versione PHP: 7.2.12
+-- Creato il: Mar 17, 2020 alle 12:36
+-- Versione del server: 10.1.36-MariaDB
+-- Versione PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `b.fast`
+-- Database: `b_fast`
 --
 
 -- --------------------------------------------------------
@@ -72,6 +72,14 @@ CREATE TABLE `chiedef` (
   `IDdoFK` int(8) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dump dei dati per la tabella `chiedef`
+--
+
+INSERT INTO `chiedef` (`ID`, `IDfatFK`, `IDdoFK`) VALUES
+(1, 1, 2),
+(2, 7, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +92,13 @@ CREATE TABLE `chiedeu` (
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+--
+-- Dump dei dati per la tabella `chiedeu`
+--
+
+INSERT INTO `chiedeu` (`ID`, `IDdoFK`, `IDutFK`) VALUES
+(1, 1, 'cri@gmai.com');
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +110,15 @@ CREATE TABLE `classificato` (
   `IDbaFK` int(8) DEFAULT NULL,
   `IDfiFK` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dump dei dati per la tabella `classificato`
+--
+
+INSERT INTO `classificato` (`ID`, `IDbaFK`, `IDfiFK`) VALUES
+(1, 8, 2),
+(2, 1, 3),
+(3, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -548,19 +572,19 @@ ALTER TABLE `bar`
 -- AUTO_INCREMENT per la tabella `chiedef`
 --
 ALTER TABLE `chiedef`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `chiedeu`
 --
 ALTER TABLE `chiedeu`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `classificato`
 --
 ALTER TABLE `classificato`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `contiene`
