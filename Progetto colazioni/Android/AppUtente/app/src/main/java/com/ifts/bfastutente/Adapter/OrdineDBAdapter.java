@@ -42,13 +42,20 @@ public class OrdineDBAdapter {
         ContentValues values = new ContentValues();
         return values;
     }
+    private ContentValues createContentValuesBar(String note) {
+        ContentValues values = new ContentValues();
+        return values;
+    }
 
     public long addUser (String note, String data, String confermato, String valutazione) {
         ContentValues values = createContentValuesUtente(note, data, confermato, valutazione);
         return database.insertOrThrow("Ordine", null, values);
     }
 
-
+    public long addBar (String note) {
+        ContentValues values = createContentValuesBar(note);
+        return database.insertOrThrow("Ordine", null, values);
+    }
 
     public long finecarrello(String note,String data){
         ContentValues values = createContentValuesCarrello(note, data);

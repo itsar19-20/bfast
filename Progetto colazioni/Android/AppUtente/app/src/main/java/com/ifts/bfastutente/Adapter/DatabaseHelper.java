@@ -10,7 +10,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE = "create table Utente (email text primary key , nome text not null unique, " +
             "password text not null, cognome text not null, telefono int not null,nascita Date not null);";
     private static final String DB_CREATE2 = "create table Ordine (id int primary key autoincrement, orario text not null unique, " +
-            "note text not null, data Date not null, confermato bit not null,valutazioneFatt float not null);";
+            "note text not null, data Date not null, confermato bit not null,valutazioneFatt float not null," +
+            " FOREIGN KEY (\"+idUser+\") REFERENCES \"+Utente+\"(\"+email+\"), FOREIGN KEY (\"+idBar+\") REFERENCES \"+Bar+\"(\"+id+\"));";
     private static final String DB_CREATE3 = "create table Domanda (id integer primary key autoincrement, testo text not null unique);";
     private static final String DB_CREATE4 = "create table Risposta (id integer primary key autoincrement, testo text not null unique);";
 
@@ -34,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Risposta");
         onCreate(db);
     }
+
 
 
 }
