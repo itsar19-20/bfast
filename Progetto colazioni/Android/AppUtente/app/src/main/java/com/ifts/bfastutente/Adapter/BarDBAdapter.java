@@ -2,6 +2,7 @@ package com.ifts.bfastutente.Adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -49,4 +50,17 @@ public class BarDBAdapter {
         ContentValues values = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
         return database.insertOrThrow("Bar", null, values);
     }
+
+    public Cursor getBarLogin(String mail) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
+                KEY_MAIL + "= '" + mail + "'", null, null, null, null, null);
+        return cursor;
+    }
+
+
+    public boolean updateBar(String mail, String password, String nome, String valutazioni, String ape, String chi,String fascia) {
+        ContentValues updatevalues = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
+        return database.update("user", updatevalues, KEY_MAIL + "=" + mail, null) > 0;
+    }
+
 }

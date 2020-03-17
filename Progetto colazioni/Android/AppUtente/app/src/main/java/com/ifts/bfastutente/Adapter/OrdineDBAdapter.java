@@ -45,7 +45,7 @@ public class OrdineDBAdapter {
         values.put(KEY_UTENTE, utente);
         return values;
     }
-    private ContentValues createContentValuesBar(String bar) {
+    private ContentValues createContentValuesBar(int bar) {
         ContentValues values = new ContentValues();
         values.put(KEY_BAR, bar);
         return values;
@@ -56,7 +56,7 @@ public class OrdineDBAdapter {
         return database.insertOrThrow("Ordine", null, values);
     }
 
-    public long addBar (String note) {
+    public long addBar (int note) {
         ContentValues values = createContentValuesBar(note);
         return database.insertOrThrow("Ordine", null, values);
     }
