@@ -1,6 +1,6 @@
 # B-Fast
 
-![B-Fast](Progetto colazioni/logo/b-fast.png "B-fast")
+![B-Fast](b-fast.png "B-fast")
 
 Progetto iniziato mercoledì 11 dicembre 2019.
 
