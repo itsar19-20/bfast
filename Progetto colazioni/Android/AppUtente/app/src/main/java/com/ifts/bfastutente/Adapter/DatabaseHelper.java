@@ -12,6 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE2 = "create table Ordine (id int primary key autoincrement, orario text not null unique, " +
             "note text not null, data Date not null, confermato bit not null,valutazioneFatt float not null);";
     private static final String DB_CREATE3 = "create table Domanda (id integer primary key autoincrement, testo text not null unique);";
+    private static final String DB_CREATE4 = "create table Risposta (id integer primary key autoincrement, testo text not null unique);";
 
 
     public DatabaseHelper(Context context) {
@@ -22,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE);
         db.execSQL(DB_CREATE2);
         db.execSQL(DB_CREATE3);
+        db.execSQL(DB_CREATE4);
     }
 
     @Override
@@ -29,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Utente");
         db.execSQL("DROP TABLE IF EXISTS Ordine");
         db.execSQL("DROP TABLE IF EXISTS Domanda");
+        db.execSQL("DROP TABLE IF EXISTS Risposta");
         onCreate(db);
     }
 
