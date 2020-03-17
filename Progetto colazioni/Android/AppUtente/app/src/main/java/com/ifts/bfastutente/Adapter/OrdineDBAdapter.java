@@ -2,6 +2,7 @@ package com.ifts.bfastutente.Adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -65,5 +66,12 @@ public class OrdineDBAdapter {
         ContentValues values = createContentValuesCarrello(note, data);
         return database.insertOrThrow("Ordine", null, values);
     }
+
+    public Cursor getOrdineLogin(Integer id) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID},
+                KEY_ID + "= '" + id + "'", null, null, null, null, null);
+        return cursor;
+    }
+
 
 }

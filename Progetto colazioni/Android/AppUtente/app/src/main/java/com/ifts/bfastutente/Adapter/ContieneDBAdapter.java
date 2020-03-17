@@ -27,14 +27,14 @@ public class ContieneDBAdapter {
         dbHelper.close();
         database.close();
     }
-    private ContentValues createContentValues(int ordine, int prodotto) {
+    private ContentValues createContentValues(int ordine, String prodotto) {
         ContentValues values = new ContentValues();
         values.put(KEY_ORDINE,ordine);
         values.put(KEY_PRODOTTO,prodotto);
         return values;
     }
 
-    public long addConnessione (int ordine,int prodotto) {
+    public long addConnessione (int ordine,String prodotto) {
         ContentValues values = createContentValues(ordine,prodotto);
         return database.insertOrThrow("Possiede", null, values);
     }
