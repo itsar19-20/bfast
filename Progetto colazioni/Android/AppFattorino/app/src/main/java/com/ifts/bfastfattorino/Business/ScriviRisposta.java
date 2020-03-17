@@ -28,15 +28,15 @@ public class ScriviRisposta extends AppCompatActivity {
 
     private void scrivi(int domanda,Risposta _return) {
         Possiede p = new Possiede();
-       // Domanda d = Domanda, domanda;
-        //p.setDomanda(d);
-       // p.setRisposta(_return);
-        //em.getTransaction().begin();
-        //em.persist(p);
-        //em.getTransaction().commit();
+      Domanda d = Domanda, domanda;
+        p.setDomanda(d);
+         p.setRisposta(_return);
+            em.getTransaction().begin();
+            em.persist(p);
+             em.getTransaction().commit();
     }
 
 
 
 }
-}
+

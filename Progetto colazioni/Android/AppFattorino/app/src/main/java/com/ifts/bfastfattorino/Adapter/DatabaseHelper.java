@@ -10,6 +10,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE = "create table Fattorino (id integer primary key autoincrement, nome text not null unique, " +
             "password text not null, cognome text not null, telefono int not null,nascita Date not null);";
     private static final String DB_CREATE2 = "create table Domanda (id integer primary key autoincrement, testo text not null unique);";
+    private static final String DB_CREATE3 = "create table Risposta (id integer primary key autoincrement, testo text not null unique);";
+    private static final String DB_CREATE4 = "create table Possiede (id integer primary key autoincrement," +
+            "FOREIGN KEY(\"+idDom+\") REFERENCES \"+Domanda+\"(\"+id+\"), FOREIGN KEY(\"+idRis+\") REFERENCES \"+Risposta+\"(\"+id+\"));";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -18,12 +21,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DB_CREATE);
         db.execSQL(DB_CREATE2);
+        db.execSQL(DB_CREATE3);
+        db.execSQL(DB_CREATE4);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Fattorino");
         db.execSQL("DROP TABLE IF EXISTS Domanda");
+        db.execSQL("DROP TABLE IF EXISTS Risposta");
+        db.execSQL("DROP TABLE IF EXISTS Possiede");
         onCreate(db);
     }
 

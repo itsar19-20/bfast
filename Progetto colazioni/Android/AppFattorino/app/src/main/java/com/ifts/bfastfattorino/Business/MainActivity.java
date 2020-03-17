@@ -44,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 EditText text2 = findViewById(R.id.editText3);
                 Call<Fattorino> call = apiService.login(text1, text2);
                 call.enqueue(new Callback<Fattorino>() {
+
                     @Override
                     public void onResponse(Response<Fattorino> response) {
                         int statusCode = response.code();
-                        Utente user = response.body();
+                        Fattorino user = response.body();
 
                     }
 
