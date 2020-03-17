@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ifts.bfastfattorino.Business.CambioPassword;
+import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
 public class FattorinoDBAdapter {
 
@@ -51,6 +52,7 @@ public class FattorinoDBAdapter {
     public Cursor getUserLogin(Integer id) {
         Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
                 KEY_ID + "= '" + id + "'", null, null, null, null, null);
+
         return cursor;
     }
 

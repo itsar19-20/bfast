@@ -6,11 +6,13 @@ import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
 public class pswDimenticata extends AppCompatActivity {
+    FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
-    public Fattorino cambio(int s, String password, String Copassword) {
+    public Fattorino cambio(int s, String password, String Copassword, Integer id) {
 
         Fattorino _return = null;
-        FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
+        _return= (Fattorino) udba.getUserLogin(id);
+
         // cerca utente
         if (password.equals(Copassword)) {
             udba.open();

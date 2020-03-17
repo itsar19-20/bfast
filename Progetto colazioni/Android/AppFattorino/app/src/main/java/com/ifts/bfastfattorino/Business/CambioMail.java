@@ -8,9 +8,9 @@ import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 
 public class CambioMail extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
-    public Fattorino cambio(String mail, String Comail) {
+    public Fattorino cambio(String mail, String Comail, Integer id) {
         Fattorino _return = null;
-        //fattorino corrente
+        _return= (Fattorino) udba.getUserLogin(id);
         if (mail.equals(Comail)) {
             _return.setMail(mail);
             udba.open();
