@@ -10,8 +10,8 @@ public class CancellazioneUtente extends AppCompatActivity {
         public Utente login(String mail) {
             Utente _return = null;
             UserDBAdapter udba = new UserDBAdapter(this);
-           // cerca utente
-           if (_return != null) {
+            _return = (Utente) udba.getUserLogin(mail);
+            if (_return != null) {
                udba.open();
                udba.deleteUserByUsername(_return.getEmail());
                udba.close();

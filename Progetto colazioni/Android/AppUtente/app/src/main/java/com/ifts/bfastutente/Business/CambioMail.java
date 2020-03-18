@@ -10,7 +10,7 @@ public class CambioMail extends AppCompatActivity {
     UserDBAdapter udba = new UserDBAdapter(this);
     public Utente cambio(String mail, String Comail) {
         Utente _return = null;
-        //utente corrente
+        _return = (Utente) udba.getUserLogin(mail);
         if (mail.equals(Comail)) {
             _return.setEmail(mail);
             udba.open();

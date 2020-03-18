@@ -1,7 +1,5 @@
 package com.ifts.bfastutente.Business;
 
-import android.content.Context;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
@@ -12,6 +10,7 @@ import com.ifts.bfastutente.ModelAPP.Utente;
         UserDBAdapter udba = new UserDBAdapter(this);
         public Utente cambio(String mail,String password, String Copassword) {
             Utente _return = null;
+            _return = (Utente) udba.getUserLogin(mail);
             if (password.equals(Copassword)) {
                 _return.setPass(password);
                 udba.open();
