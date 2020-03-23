@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.Sessioni.Session;
 
 public class CancellazioneUtente extends AppCompatActivity {
 
-        public Utente login(String mail) {
+        public Utente login() {
+            String mail = Session.getMailUt();
             Utente _return = null;
             UserDBAdapter udba = new UserDBAdapter(this);
             _return = (Utente) udba.getUserLogin(mail);

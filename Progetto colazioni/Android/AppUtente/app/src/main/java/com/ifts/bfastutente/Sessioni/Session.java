@@ -17,7 +17,7 @@ public class Session {
         prefs.edit().putString("mail", mail).commit();
     }
 
-    public String getMailUt() {
+    public static String getMailUt() {
         String mail = prefs.getString("mail","");
         return mail;
     }
