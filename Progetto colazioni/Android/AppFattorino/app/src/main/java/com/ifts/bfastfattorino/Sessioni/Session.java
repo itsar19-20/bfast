@@ -17,7 +17,7 @@ public class Session {
         prefs.edit().putString("id", String.valueOf(id)).commit();
     }
 
-    public int getIDfatt() {
+    public static int getIDfatt() {
         String id = prefs.getString("id","");
         Integer ID = Integer.parseInt(id);
         return ID;

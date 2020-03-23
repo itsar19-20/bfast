@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.Sessioni.Session;
 
 public class CambioMail extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
-    public Fattorino cambio(String mail, String Comail, Integer id) {
+    public Fattorino cambio(String mail, String Comail) {
+        Integer id = Session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
         if (mail.equals(Comail)) {
