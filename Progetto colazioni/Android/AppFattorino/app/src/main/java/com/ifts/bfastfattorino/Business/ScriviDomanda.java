@@ -5,17 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ifts.bfastfattorino.Adapter.DomandaDBAdapter;
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
-import com.ifts.bfastfattorino.ModelAPP.Risposta;
-import com.ifts.bfastfattorino.Sessioni.Session;
-
-import java.text.ParseException;
+import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 public class ScriviDomanda extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
     public Domanda registrazione  (String testo)
     {
-        Integer id = Session.getIDfatt();
+        Integer id = SessionFat.getIDfatt();
         DomandaDBAdapter ddb = new DomandaDBAdapter();
         Domanda _return = null;
         _return= (Domanda) udba.getUserLogin(id);

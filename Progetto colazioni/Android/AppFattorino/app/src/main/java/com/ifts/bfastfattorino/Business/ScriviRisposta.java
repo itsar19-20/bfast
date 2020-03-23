@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.Adapter.PossiedeDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
-import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.ModelAPP.Possiede;
 import com.ifts.bfastfattorino.ModelAPP.Risposta;
-import com.ifts.bfastfattorino.Sessioni.Session;
-
-import retrofit2.http.Query;
+import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 public class ScriviRisposta extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
     public Risposta registrazione(int domanda, String testo) {
-        Integer id = Session.getIDfatt();
+        Integer id = SessionFat.getIDfatt();
         Risposta _return = null;
         _return= (Risposta) udba.getUserLogin(id);
 
