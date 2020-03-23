@@ -52,6 +52,12 @@ public class OrdineDBAdapter {
         return values;
     }
 
+    private ContentValues createContentValuesValutazione(float valtazione) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_VALUTAZIONE,valtazione);
+        return values;
+    }
+
     public long addUser (String utente) {
         ContentValues values = createContentValuesUtente(utente);
         return database.insertOrThrow("Ordine", null, values);
@@ -71,6 +77,11 @@ public class OrdineDBAdapter {
         Cursor cursor = database.query(true, "user", new String[] { KEY_ID},
                 KEY_ID + "= '" + id + "'", null, null, null, null, null);
         return cursor;
+    }
+
+    public long setValutazioneOrdine(float valtazione){
+        ContentValues values = createContentValuesValutazione(valtazione);
+        return database.insertOrThrow("Ordine", null, values);
     }
 
 
