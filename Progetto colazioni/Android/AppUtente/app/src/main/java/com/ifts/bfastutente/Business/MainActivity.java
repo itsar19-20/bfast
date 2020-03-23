@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.R;
+import com.ifts.bfastutente.Sessioni.SessionUte;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button b1;
     private TextView t1;
     private TextView t2;
+    private SessionUte session;
 
 
     @Override
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text1 = findViewById(R.id.ETmail);
+                final EditText text1 = findViewById(R.id.ETmail);
                 EditText text2 = findViewById(R.id.ETpass);
                 Call<Utente> call = apiService.login(text1, text2);
                 call.enqueue(new Callback<Utente>() {
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Response<Utente> response) {
                         int statusCode = response.code();
                         Utente user = response.body();
-
+                        session.setMailUt(text1.toString());
                     }
 
                     @Override

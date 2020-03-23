@@ -2,6 +2,7 @@ package com.ifts.bfastutente.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastutente.Adapter.BarDBAdapter;
 import com.ifts.bfastutente.Adapter.OrdineDBAdapter;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Bar;
@@ -24,16 +25,17 @@ public class Ordini extends AppCompatActivity {
             OrdineDBAdapter odb = new OrdineDBAdapter(this);
             u = (Utente) udba.getUserLogin(mail);
             odb.addUser(u.getEmail());
+            session3.setIDOrd(o.getId());
             return o;
         }
 
         public Ordine bar() {
-            Ordine o = null;
-            Bar b = null;
             int ido = session3.getIDOrd();
             int idb = session2.getIDBar();
             OrdineDBAdapter odb = new OrdineDBAdapter(this);
-            //cerca bar e ordine
+            BarDBAdapter bdb = new BarDBAdapter(this);
+            Bar b = (Bar) bdb.getBarLogin(idb);
+            Ordine o = (Ordine) odb.getOrdineLogin(ido);
             odb.addBar(b.getId());
             return o;
         }
@@ -41,14 +43,11 @@ public class Ordini extends AppCompatActivity {
         public Ordine carrello(String orario,String Note) {
             int ido = session3.getIDOrd();
             OrdineDBAdapter odb = new OrdineDBAdapter(this);
-            Ordine o = null;
-            //cerca ordine
+            Ordine o = (Ordine) odb.getOrdineLogin(ido);
             odb.open();
             odb.finecarrello(Note,orario);
             odb.close();
             return o;
         }
-
-
     }
 

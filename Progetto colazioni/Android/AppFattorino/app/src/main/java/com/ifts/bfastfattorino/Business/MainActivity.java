@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.R;
+import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button b1;
     private TextView t1;
     private TextView t2;
+    private SessionFat session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text1 = findViewById(R.id.editText2);
+                final EditText text1 = findViewById(R.id.editText2);
                 EditText text2 = findViewById(R.id.editText3);
                 Call<Fattorino> call = apiService.login(text1, text2);
                 call.enqueue(new Callback<Fattorino>() {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Response<Fattorino> response) {
                         int statusCode = response.code();
                         Fattorino user = response.body();
-
+                        session.setIDfatt(Integer.parseInt(text1.toString()));
                     }
 
                     @Override

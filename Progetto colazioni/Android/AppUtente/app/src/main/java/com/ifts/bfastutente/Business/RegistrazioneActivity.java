@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.R;
+import com.ifts.bfastutente.Sessioni.SessionUte;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
     UserDBAdapter udba = new UserDBAdapter(this);
+    private SessionUte session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0 && numeroditelefono.length()>10 &&
                             datadinascita.length()>0 && password==confermapassword) {
+                        session.setMailUt(email);
                         udba.open();
                         udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
                         udba.close();
