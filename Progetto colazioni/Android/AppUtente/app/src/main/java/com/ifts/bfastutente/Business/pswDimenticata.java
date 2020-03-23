@@ -4,10 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.Sessioni.Session;
 
 public class pswDimenticata extends AppCompatActivity {
-    public Utente cambio(String mail, String password, String Copassword) {
-
+    public Utente cambio(String password, String Copassword) {
+        String mail = Session.getMailUt();
         Utente _return = null;
         UserDBAdapter udba = new UserDBAdapter(this);
         _return = (Utente) udba.getUserLogin(mail);

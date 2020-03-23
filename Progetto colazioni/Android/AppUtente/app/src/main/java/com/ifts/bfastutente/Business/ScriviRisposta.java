@@ -29,7 +29,7 @@ public class ScriviRisposta extends AppCompatActivity {
         PossiedeDBAdapter pdb= new PossiedeDBAdapter();
         Possiede p = new Possiede();
         Domanda d = new Domanda();
-        p.setIdDomanda(d.getId());
+        p.setIdDomanda(domanda);
         p.setIdRisposta(_return.getId());
         pdb.open();
         pdb.addConnessione(d.getDomanda(),_return.getRisposta());
