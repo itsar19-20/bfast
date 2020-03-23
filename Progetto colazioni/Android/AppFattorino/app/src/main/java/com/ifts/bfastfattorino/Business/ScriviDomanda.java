@@ -31,7 +31,7 @@ public class ScriviDomanda extends AppCompatActivity {
 
             return _return;
         }else {
-          //  _return =em.find(Domanda.class, Ris.getFirstResult());
+          _return = (Domanda) ddb.getRisposta(ris.getColumnIndex(String.valueOf(0)));
             return _return;
         }
     }
