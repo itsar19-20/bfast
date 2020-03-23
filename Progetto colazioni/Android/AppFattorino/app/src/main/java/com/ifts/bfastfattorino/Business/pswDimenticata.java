@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.Sessioni.Session;
 
 public class pswDimenticata extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
-    public Fattorino cambio(int s, String password, String Copassword, Integer id) {
-
+    public Fattorino cambio(String password, String Copassword) {
+        Integer id = Session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
 

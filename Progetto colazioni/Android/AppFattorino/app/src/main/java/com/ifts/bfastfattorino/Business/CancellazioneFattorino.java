@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.Sessioni.Session;
 
 public class CancellazioneFattorino extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
-    public Fattorino canc(int mail, Integer id) {
+    public Fattorino canc() {
+        Integer id = Session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
 
