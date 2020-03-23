@@ -4,21 +4,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class Session {
+public class SessionBar {
 
     private SharedPreferences prefs;
 
-    public Session(Context cntx) {
+    public SessionBar(Context cntx) {
         // TODO Auto-generated constructor stub
         prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
     }
 
-    public void setMailUt(String mail) {
-        prefs.edit().putString("mail", mail).commit();
+    public void setIDBar(Integer id) {
+        prefs.edit().putString("id", String.valueOf(id)).commit();
     }
 
-    public static String getMailUt() {
-        String mail = prefs.getString("mail","");
-        return mail;
+    public int getIDBar() {
+        String id = prefs.getString("id","");
+        Integer ID = Integer.parseInt(id);
+        return ID;
     }
 }

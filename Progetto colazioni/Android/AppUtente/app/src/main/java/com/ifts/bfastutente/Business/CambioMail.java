@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 
+
 public class CambioMail extends AppCompatActivity {
+
     UserDBAdapter udba = new UserDBAdapter(this);
     public Utente cambio(String mail, String Comail) {
         Utente _return = null;
