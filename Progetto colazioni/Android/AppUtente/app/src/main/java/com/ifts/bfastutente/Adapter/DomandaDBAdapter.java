@@ -2,6 +2,7 @@ package com.ifts.bfastutente.Adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -40,5 +41,11 @@ public class DomandaDBAdapter {
 
     public boolean deleteFattorino(Integer id) {
         return database.delete("user", KEY_ID + "=" + id, null) >0;
+    }
+
+    public Cursor getRisposta(Integer id) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID},
+                KEY_ID + "= '" + id + "'", null, null, null, null, null);
+        return cursor;
     }
 }

@@ -2,6 +2,7 @@ package com.ifts.bfastfattorino.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.MyApiEndpointInterface;
 import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView t1;
     private TextView t2;
     private SessionFat session;
+    private Dialog retrofit;
+    MyApiEndpointInterface apiService = retrofit.create(MyApiEndpointInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
