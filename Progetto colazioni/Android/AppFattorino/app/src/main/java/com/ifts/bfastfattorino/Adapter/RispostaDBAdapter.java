@@ -2,6 +2,7 @@ package com.ifts.bfastfattorino.Adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -36,6 +37,12 @@ public class RispostaDBAdapter {
     public long addUser (String testo) {
         ContentValues values = createContentValues(testo);
         return database.insertOrThrow("user", null, values);
+    }
+
+    public Cursor getRisposta(Integer id) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID},
+                KEY_ID + "= '" + id + "'", null, null, null, null, null);
+        return cursor;
     }
 
     public boolean deleteFattorino(Integer id) {

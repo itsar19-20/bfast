@@ -25,7 +25,7 @@ public class ScriviDomanda extends AppCompatActivity {
 
         Cursor ris = db.rawQuery("SELECT d.ID FROM Domanda as d WHERE d.domanda ="+testo,null);
 
-        if (ris!=null && ris.moveToFirst()) {
+        if (ris==null) {
             _return = new Domanda();
             _return.setDomanda(testo);
 
