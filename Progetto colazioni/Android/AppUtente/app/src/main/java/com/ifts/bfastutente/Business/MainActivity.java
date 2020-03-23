@@ -1,5 +1,6 @@
 package com.ifts.bfastutente.Business;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.MyApiEndpointInterface;
 import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -30,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView t1;
     private TextView t2;
     private SessionUte session;
-
+    private Dialog retrofit;
+    MyApiEndpointInterface apiService = retrofit.create(MyApiEndpointInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
