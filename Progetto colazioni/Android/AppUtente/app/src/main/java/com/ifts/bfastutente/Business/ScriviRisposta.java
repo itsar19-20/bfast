@@ -1,26 +1,31 @@
 package com.ifts.bfastutente.Business;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.PossiedeDBAdapter;
+import com.ifts.bfastutente.Adapter.RispostaAdapter;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Possiede;
 import com.ifts.bfastutente.ModelAPP.Risposta;
 
 public class ScriviRisposta extends AppCompatActivity {
+    private SQLiteDatabase db;
 
     public Risposta registrazione(int domanda, String testo) {
         Risposta _return = null;
-        //EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-       String Ris=("SELECT r.ID FROM Risposta as r \r\n" +
-                "WHERE r.Risposta = \"testo\";") /*.setParameter("testo", testo)*/;
-        if (Ris == null) {
+        RispostaAdapter rba = new RispostaAdapter();
+
+        Cursor ris = db.rawQuery("SELECT r.ID FROM Risposta as r WHERE r.Risposta =" +testo,null);
+        if (ris == null) {
             _return = new Risposta();
             _return.setRisposta(testo);
 
             return _return;
         }else {
-           // _return =em.find(Risposta.class, Ris.getFirstResult());
+            _return = (Risposta) rba.getRisposta(ris.getInt(0));
             return _return;
         }
     }
@@ -35,8 +40,5 @@ public class ScriviRisposta extends AppCompatActivity {
         pdb.addConnessione(d.getDomanda(),_return.getRisposta());
         pdb.close();
     }
-
-
-
 }
 

@@ -24,7 +24,6 @@ public class ScriviRisposta extends AppCompatActivity {
         _return= (Risposta) udba.getUserLogin(id);
         RispostaDBAdapter rba = new RispostaDBAdapter();
 
-        //EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
         Cursor ris = db.rawQuery("SELECT r.ID FROM Risposta as r WHERE r.Risposta =" +testo,null);
         if (ris == null) {
             _return = new Risposta();
