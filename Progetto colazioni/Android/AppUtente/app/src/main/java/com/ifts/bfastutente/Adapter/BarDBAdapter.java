@@ -51,9 +51,9 @@ public class BarDBAdapter {
         return database.insertOrThrow("Bar", null, values);
     }
 
-    public Cursor getBarLogin(String mail) {
+    public Cursor getBarLogin(int id ) {
         Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
-                KEY_MAIL + "= '" + mail + "'", null, null, null, null, null);
+                KEY_MAIL + "= '" + id + "'", null, null, null, null, null);
         return cursor;
     }
 
