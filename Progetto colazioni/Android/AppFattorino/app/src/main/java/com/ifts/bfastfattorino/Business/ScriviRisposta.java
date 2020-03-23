@@ -8,13 +8,15 @@ import com.ifts.bfastfattorino.ModelAPP.Domanda;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.ModelAPP.Possiede;
 import com.ifts.bfastfattorino.ModelAPP.Risposta;
+import com.ifts.bfastfattorino.Sessioni.Session;
 
 import retrofit2.http.Query;
 
 public class ScriviRisposta extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
 
-    public Risposta registrazione(int domanda, String testo, Integer id) {
+    public Risposta registrazione(int domanda, String testo) {
+        Integer id = Session.getIDfatt();
         Risposta _return = null;
         _return= (Risposta) udba.getUserLogin(id);
 
@@ -36,7 +38,7 @@ public class ScriviRisposta extends AppCompatActivity {
         PossiedeDBAdapter pdb= new PossiedeDBAdapter();
         Possiede p = new Possiede();
       Domanda d = new Domanda();
-        p.setIdDomanda(d.getId());
+        p.setIdDomanda(domanda);
          p.setIdRisposta(_return.getId());
          pdb.open();
          pdb.addConnessione(d.getDomanda(),_return.getRisposta());

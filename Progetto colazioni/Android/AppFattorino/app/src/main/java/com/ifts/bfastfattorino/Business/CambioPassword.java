@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.Sessioni.Session;
 
 public class CambioPassword extends AppCompatActivity {
 
-    public Fattorino cambio(int s, String password, String Copassword, Integer id) {
+    public Fattorino cambio(int s, String password, String Copassword) {
+        Integer id = Session.getIDfatt();
         FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
