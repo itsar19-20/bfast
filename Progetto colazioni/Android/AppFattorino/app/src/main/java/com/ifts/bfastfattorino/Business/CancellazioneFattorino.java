@@ -9,9 +9,9 @@ import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 public class CancellazioneFattorino extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
-
+    private SessionFat session;
     public Fattorino canc() {
-        Integer id = SessionFat.getIDfatt();
+        Integer id = session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
 

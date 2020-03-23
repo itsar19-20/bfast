@@ -11,11 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.R;
+import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
-
+    private SessionFat session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +53,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password && nascita.length()>0 && email.length()>0) {
                         udba.open();
                         udba.addUser(email,password,nome,cognome,nascita);
+                        session.setIDfatt(u.getId());
                         udba.close();
                         Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
                     } else {

@@ -8,9 +8,9 @@ import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 
 public class CambioPassword extends AppCompatActivity {
-
+    private SessionFat session;
     public Fattorino cambio(int s, String password, String Copassword) {
-        Integer id = SessionFat.getIDfatt();
+        Integer id = session.getIDfatt();
         FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
