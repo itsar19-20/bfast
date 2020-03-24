@@ -22,7 +22,7 @@ public interface BfastUtenteApi {
     @GET("/registrazione")
     @FormUrlEncoded
     Call<Utente> registrazione(@Query("mail")String mail, @Query("password") String pwd,@Query("nome")String nome,
-                               @Query("cognome") String cognome, @Query("data") String data, @Query("copassword") String copass);
+                               @Query("cognome") String cognome, @Query("data") String data, @Query("telefono") String tel);
 
     @GET("/CancellazioneUtente")
     @FormUrlEncoded
