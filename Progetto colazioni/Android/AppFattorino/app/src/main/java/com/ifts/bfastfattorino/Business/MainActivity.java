@@ -20,8 +20,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/*import webService.AndroidWebService;
-import webService.MyApiEndpointInterface;*/
 
 public class MainActivity extends AppCompatActivity {
 

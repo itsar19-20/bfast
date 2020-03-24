@@ -13,7 +13,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUtils {
-    //questo serve per fare il Parse della data dal DB
     Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
         public Date deserialize(JsonElement json, Type typeofT, JsonDeserializationContext context) throws JsonParseException {
             return new Date(json.getAsLong());
@@ -21,7 +20,7 @@ public class RetrofitUtils {
     }).create();
 
     private static RetrofitUtils instance = null;
-    public static final String BASE_URL = "http://192.168.1.27:8080/bfastfattorino/";
+    public static final String BASE_URL = "http://192.168.1.27:8080/b_fast/";
     private BfastFattorinoApi Bfast;
     public static RetrofitUtils getInstance() {
         if (instance == null) {
@@ -29,20 +28,20 @@ public class RetrofitUtils {
         }
         return instance;
     }
-    private RetrofitUtils() {
 
-        // Implement a method to build your retrofit
+    private RetrofitUtils() {
         buildRetrofit();
     }
+
     private void buildRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        // Build your services once
         this.Bfast = retrofit.create(BfastFattorinoApi.class);
     }
+
     public BfastFattorinoApi getBfastFattorinoApi() {
         return this.Bfast;
     }

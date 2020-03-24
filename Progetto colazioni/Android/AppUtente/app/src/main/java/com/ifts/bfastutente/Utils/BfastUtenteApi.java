@@ -88,9 +88,13 @@ public interface BfastUtenteApi {
     Call<Risposta> ScriviRisposta(@Query("testo")String testo);
 
 
-    @GET("CercaDomanda")
+    @GET("/CercaDomanda")
     @FormUrlEncoded
     Call<Domanda> CercaDomanda(@Query("domanda")String domanda);
+
+    @GET("/ValutazioneFattorino")
+    @FormUrlEncoded
+    Call<Ordine> ValutazioneFattorino(@Query("valutazione")String valutazione);
 
 
 }
