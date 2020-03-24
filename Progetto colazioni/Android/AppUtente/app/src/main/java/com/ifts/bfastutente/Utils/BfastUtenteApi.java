@@ -26,7 +26,7 @@ public interface BfastUtenteApi {
 
     @GET("/CancellazioneUtente")
     @FormUrlEncoded
-    Call<Utente> Cancellazione(@Query("mail")String mail, @Query("password") String pwd);
+    Call<Utente> Cancellazione(@Query("mail")String mail);
 
 
     @GET("/ConfermaMail")
