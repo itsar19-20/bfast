@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.BarDBAdapter;
 import com.ifts.bfastutente.Adapter.OrdineDBAdapter;
+import com.ifts.bfastutente.Adapter.PagamentoDBAdapter;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Bar;
 import com.ifts.bfastutente.ModelAPP.Ordine;
+import com.ifts.bfastutente.ModelAPP.Pagamento;
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.Sessioni.SessionBar;
 import com.ifts.bfastutente.Sessioni.SessionOrdine;
@@ -20,7 +22,9 @@ import retrofit2.Response;
 
 public class Ordini extends AppCompatActivity {
 
-        private SessionUte session;
+    final PagamentoDBAdapter pdb = new PagamentoDBAdapter();
+    final OrdineDBAdapter odb = new OrdineDBAdapter(this);
+    private SessionUte session;
     private SessionBar session2;
     private SessionOrdine session3;
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
@@ -51,7 +55,6 @@ public class Ordini extends AppCompatActivity {
         public Ordine bar() {
             int ido = session3.getIDOrd();
             int idb = session2.getIDBar();
-            final OrdineDBAdapter odb = new OrdineDBAdapter(this);
             BarDBAdapter bdb = new BarDBAdapter(this);
             final Bar b = (Bar) bdb.getBarLogin(idb);
             Ordine o = (Ordine) odb.getOrdineLogin(ido);
@@ -74,14 +77,14 @@ public class Ordini extends AppCompatActivity {
 
         public Ordine carrello(final String orario, int paga, final String Note) {
             int ido = session3.getIDOrd();
-            final OrdineDBAdapter odb = new OrdineDBAdapter(this);
             Ordine o = (Ordine) odb.getOrdineLogin(ido);
+            final Pagamento p = (Pagamento) pdb.getPagamento(paga);
             Call<Ordine> call = apiService.ordiniCa(orario, paga, Note);
             call.enqueue(new Callback<Ordine>() {
                              @Override
                              public void onResponse(Call<Ordine> call, Response<Ordine> response) {
                                  odb.open();
-                                 odb.finecarrello(Note,orario);
+                                 odb.finecarrello(Note,orario,p.getId());
                                  odb.close();
                              }
 

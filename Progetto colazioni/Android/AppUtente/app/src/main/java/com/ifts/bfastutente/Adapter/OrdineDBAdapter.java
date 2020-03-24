@@ -19,6 +19,7 @@ public class OrdineDBAdapter {
     public static final String KEY_VALUTAZIONE = "valutazione";
     public static final String KEY_UTENTE = "idUser";
     public static final String KEY_BAR = "idBar";
+    public static final String KEY_PAGAMENTO = "pagamento";
 
     public OrdineDBAdapter (Context context) {
         this.context = context;
@@ -34,10 +35,11 @@ public class OrdineDBAdapter {
         database.close();
     }
 
-    private ContentValues createContentValuesCarrello(String note, String data) {
+    private ContentValues createContentValuesCarrello(String note, String data,int pagamento) {
         ContentValues values = new ContentValues();
         values.put(KEY_NOTE, note);
         values.put(KEY_DATA, data);
+        values.put(KEY_PAGAMENTO,pagamento);
         return values;
     }
 
@@ -68,8 +70,8 @@ public class OrdineDBAdapter {
         return database.insertOrThrow("Ordine", null, values);
     }
 
-    public long finecarrello(String note,String data){
-        ContentValues values = createContentValuesCarrello(note, data);
+    public long finecarrello(String note,String data,int pagamento){
+        ContentValues values = createContentValuesCarrello(note, data,pagamento);
         return database.insertOrThrow("Ordine", null, values);
     }
 
