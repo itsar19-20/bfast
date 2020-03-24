@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.R;
@@ -23,6 +24,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    FattorinoDBAdapter fdb = new FattorinoDBAdapter(this);
     private Button b1;
     private TextView t1;
     private TextView t2;
@@ -53,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
-                        int statusCode = response.code();
-                        Fattorino user = response.body();
-                        session.setIDfatt(Integer.parseInt(text1.toString()));
+                        int id = Integer.parseInt(text1.toString());
+                        Fattorino f = (Fattorino) fdb.getUserLogin(id);
+                        session.setIDfatt(id);
                     }
 
                     @Override

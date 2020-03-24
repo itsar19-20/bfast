@@ -12,6 +12,12 @@ import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
 import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
+import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
+import com.ifts.bfastfattorino.Utils.RetrofitUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
+        final BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
         Button button = findViewById(R.id.Registrazione);
         final EditText etmail = findViewById(R.id.editText3);
         final EditText etnome = findViewById(R.id.editText7);
@@ -38,23 +45,35 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 try {
 
                     Fattorino u = new Fattorino();
-                    String nome=etnome.getText().toString();
+                    final String nome=etnome.getText().toString();
                     u.setNome(nome);
-                    String cognome=etcognome.getText().toString();
+                    final String cognome=etcognome.getText().toString();
                     u.setCognome(cognome);
-                    String nascita=etcognome.getText().toString();
+                    final String nascita=etcognome.getText().toString();
                     u.setCognome(nascita);
-                    String email=etmail.getText().toString();
+                    final String email=etmail.getText().toString();
                     u.setCognome(email);
-                    String password=etpassword.getText().toString();
+                    final String password=etpassword.getText().toString();
                     u.setPassword(password);
                     String copass = etconfpass.getText().toString();
 
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password && nascita.length()>0 && email.length()>0) {
-                        udba.open();
-                        udba.addUser(email,password,nome,cognome,nascita);
-                        session.setIDfatt(u.getId());
-                        udba.close();
+                        Call<Fattorino> call = apiService.registrazione(email,password,nome,cognome,nascita);
+                        call.enqueue(new Callback<Fattorino>() {
+                                         @Override
+                                         public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
+                                             Fattorino f = response.body();
+                                             udba.open();
+                                             udba.addUser(email,password,nome,cognome,nascita);
+                                             udba.close();
+                                             session.setIDfatt(f.getId());
+                                         }
+
+                                         @Override
+                                         public void onFailure(Call<Fattorino> call, Throwable t) {
+
+                                         }
+                                     });
                         Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();

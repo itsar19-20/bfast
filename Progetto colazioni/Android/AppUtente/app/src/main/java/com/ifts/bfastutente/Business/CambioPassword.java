@@ -23,7 +23,7 @@ public class CambioPassword extends AppCompatActivity {
             Utente _return = null;
             _return = (Utente) udba.getUserLogin(mail);
             if (password.equals(Copassword)) {
-                Call<Utente> call = apiService.CambioPassword(password, Copassword);
+                Call<Utente> call = apiService.CambioPassword(password);
                 final Utente final_return = _return;
                 call.enqueue(new Callback<Utente>() {
                                  @Override

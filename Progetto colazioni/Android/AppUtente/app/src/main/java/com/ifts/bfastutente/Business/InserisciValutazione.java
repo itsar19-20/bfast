@@ -26,8 +26,7 @@ public class InserisciValutazione extends AppCompatActivity {
         final OrdineDBAdapter odb = new OrdineDBAdapter(this);
         String mail = session.getMailUt();
         Utente user = (Utente) udb.getUserLogin(mail);
-        String val = Float.toString(valutazione);
-        Call<Ordine> call = apiService.ValutazioneFattorino(val);
+        Call<Ordine> call = apiService.ValutazioneFattorino(valutazione);
         call.enqueue(new Callback<Ordine>() {
                          @Override
                          public void onResponse(Call<Ordine> call, Response<Ordine> response) {

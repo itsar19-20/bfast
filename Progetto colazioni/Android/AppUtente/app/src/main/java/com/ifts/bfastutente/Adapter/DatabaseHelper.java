@@ -11,7 +11,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "password text not null, cognome text not null, telefono int not null,nascita Date not null);";
     private static final String DB_CREATE2 = "create table Ordine (id int primary key autoincrement, orario text not null unique, " +
             "note text not null, data Date not null, confermato bit not null,valutazioneFatt float not null," +
-            " FOREIGN KEY (\"+idUser+\") REFERENCES \"+Utente+\"(\"+email+\"), FOREIGN KEY (\"+idBar+\") REFERENCES \"+Bar+\"(\"+id+\"));";
+            " FOREIGN KEY (\"+idUser+\") REFERENCES \"+Utente+\"(\"+email+\"), FOREIGN KEY (\"+idBar+\") REFERENCES \"+Bar+\"(\"+id+\")," +
+            "FOREIGN KEY (\"+idTipoPagamento+\") REFERENCES \"+Pagamento+\"(\"+id+\"));";
     private static final String DB_CREATE3 = "create table Domanda (id integer primary key autoincrement, testo text not null unique);";
     private static final String DB_CREATE4 = "create table Risposta (id integer primary key autoincrement, testo text not null unique);";
     private static final String DB_CREATE5 = "create table Bar (id int primary key autoincrement, nome text not null unique, " +
@@ -21,7 +22,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE7 = "create table Contiene (id integer primary key autoincrement," +
             "FOREIGN KEY(\"+idOrd+\") REFERENCES \"+Ordine+\"(\"+id+\"), FOREIGN KEY(\"+idPro+\") REFERENCES \"+Prodotto+\"(\"+id+\"));";
     private static final String DB_CREATE8 = "create table Prodotto (nome text primary key ," +
-            "ingrediente text not null, costo float not null,tipo text not null,);";
+            "ingrediente text not null, costo float not null,tipo text not null);";
+    private static final String DB_CREATE9 = "create table Indirizzo (id integer primary key autoincrement,via text not null ," +
+            "numero text not null, cap text not null,citta text not null,civico text not null);";
+    private static final String DB_CREATE10 = "create table Pagamento (id int primary key autoincrement, tipo text not null unique);";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -36,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE6);
         db.execSQL(DB_CREATE8);
         db.execSQL(DB_CREATE7);
+        db.execSQL(DB_CREATE9);
+        db.execSQL(DB_CREATE10);
     }
 
     @Override
@@ -48,6 +54,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Possiede");
         db.execSQL("DROP TABLE IF EXISTS Prodotto");
         db.execSQL("DROP TABLE IF EXISTS Contiene");
+        db.execSQL("DROP TABLE IF EXISTS Indirizzo");
+        db.execSQL("DROP TABLE IF EXISTS Pagamento");
         onCreate(db);
     }
 

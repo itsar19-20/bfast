@@ -6,8 +6,11 @@ import java.util.Date;
 
 public class Ordine {
 
+    @SerializedName("utente")
     private String idUtente;
+    @SerializedName("bar")
     private int idBar;
+    @SerializedName("pagamento")
     private int idTipoPagamento;
     private int idIndirizzo;
     @SerializedName("id")

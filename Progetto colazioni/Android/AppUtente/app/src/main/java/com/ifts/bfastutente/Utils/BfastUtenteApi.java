@@ -1,10 +1,9 @@
 package com.ifts.bfastutente.Utils;
 
-import com.ifts.bfastutente.ModelAPP.Bar;
+import com.ifts.bfastutente.ModelAPP.Contiene;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
 import com.ifts.bfastutente.ModelAPP.Ordine;
-import com.ifts.bfastutente.ModelAPP.Prodotto;
 import com.ifts.bfastutente.ModelAPP.Risposta;
 import com.ifts.bfastutente.ModelAPP.Utente;
 
@@ -36,65 +35,55 @@ public interface BfastUtenteApi {
 
     @GET("/CambioMail")
     @FormUrlEncoded
-    Call<Utente> CambioMail(@Query("mail")String mail, @Query("comail") String comail);
+    Call<Utente> CambioMail(@Query("mail")String mail);
 
 
     @GET("/CambioPassword")
     @FormUrlEncoded
-    Call<Utente> CambioPassword(@Query("password")String pass, @Query("copassword") String copass);
+    Call<Utente> CambioPassword(@Query("password")String pass);
 
 
     @GET("/PasswordDimenticata")
     @FormUrlEncoded
-    Call<Utente> PasswordDimeticata(@Query("newpasswoerd")String newpass);
+    Call<Utente> PasswordDimeticata(@Query("password")String pass);
 
 
-    @GET("/Ordini")
+    @GET("/OrdiniUtente")
     @FormUrlEncoded
-    Call<Ordine> ordini(@Query("orario")String orario, @Query("note")String note,@Query("data")String data,
-                        @Query("confermato")String confermato,@Query("valutazioneFttorino")String valutazioneFattorino);
+    Call<Ordine> ordiniUt(@Query("id")Integer id, @Query("utente")String idut);
 
-
-    @GET("/SelezioneBar")
+    @GET("/OrdiniBar")
     @FormUrlEncoded
-    Call<Bar> SelezioneBar(@Query("nome")String nome, @Query("orarioApertura")String orarioApertura, @Query("orarioChiusura")String orarioChiusura,
-                           @Query("valutazione")float valutazione, @Query("email")String email,
-                           @Query("password")String password, @Query("fascia")float fascia);
+    Call<Ordine> ordiniBa(@Query("bar")Integer id);
 
+    @GET("/OrdiniCarrello")
+    @FormUrlEncoded
+    Call<Ordine> ordiniCa(@Query("orario")String orario, @Query("pagamento")int id,@Query("note")String note);
 
     @GET("/SelezionePosizione")
     @FormUrlEncoded
-    Call<Indirizzo> SelezionePosozione(@Query("via")String via, @Query("civico")String civico, @Query("citta")String citta,
+    Call<Indirizzo> SelezionePosizione(@Query("via")String via, @Query("civico")String civico, @Query("citta")String citta,
                                        @Query("cap")String cap);
-
 
     @GET("/ConfermaPosizione")
     @FormUrlEncoded
-    Call<Indirizzo> ConfermaPosizione(@Query("posizione")String posizione);
-
+    Call<Indirizzo> ConfermaPosizione(@Query("id")int posizione);
 
     @GET("/SelezioneProdotti")
     @FormUrlEncoded
-    Call<Prodotto> SelezioneProdotto(@Query("nome")String nome, @Query("ingredienti")String ingredienti, @Query("prezzo")float prezzo,
-                                     @Query("tipo")String tipo);
+    Call<Contiene> SelezioneProdotto(@Query("ordine")int id, @Query("prodotto")String nome,@Query("quantita") int quantita);
 
     @GET("/ScriviDomanda")
     @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("testo")String testo);
 
-
     @GET("/ScriviRisposta")
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo")String testo);
 
-
-    @GET("/CercaDomanda")
-    @FormUrlEncoded
-    Call<Domanda> CercaDomanda(@Query("domanda")String domanda);
-
     @GET("/ValutazioneFattorino")
     @FormUrlEncoded
-    Call<Ordine> ValutazioneFattorino(@Query("valutazione")String valutazione);
+    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino")float valutazione);
 
 
 }
