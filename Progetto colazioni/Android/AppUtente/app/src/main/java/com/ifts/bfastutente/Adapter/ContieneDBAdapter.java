@@ -13,6 +13,7 @@ public class ContieneDBAdapter {
     public static final String KEY_ORDINE = "idOrd";
     public static final String KEY_PRODOTTO = "idPro";
     public static final String KEY_ID = "id";
+    public static final String KEY_QUANTITA= "quantita";
 
     public void ContieneDBAdapter(Context context) {
         this.context = context;
@@ -27,15 +28,16 @@ public class ContieneDBAdapter {
         dbHelper.close();
         database.close();
     }
-    private ContentValues createContentValues(int ordine, String prodotto) {
+    private ContentValues createContentValues(int ordine, String prodotto,int quantita) {
         ContentValues values = new ContentValues();
         values.put(KEY_ORDINE,ordine);
         values.put(KEY_PRODOTTO,prodotto);
+        values.put(KEY_QUANTITA,quantita);
         return values;
     }
 
-    public long addConnessione (int ordine,String prodotto) {
-        ContentValues values = createContentValues(ordine,prodotto);
+    public long addConnessione (int ordine,String prodotto,int quantita) {
+        ContentValues values = createContentValues(ordine,prodotto,quantita);
         return database.insertOrThrow("Possiede", null, values);
     }
 

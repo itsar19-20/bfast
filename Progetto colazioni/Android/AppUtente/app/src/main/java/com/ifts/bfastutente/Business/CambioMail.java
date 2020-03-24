@@ -22,7 +22,7 @@ public class CambioMail extends AppCompatActivity {
         Utente _return = null;
         _return = (Utente) udba.getUserLogin(mail);
         if (mail.equals(Comail)) {
-            Call<Utente> call = apiService.CambioMail(mail, Comail);
+            Call<Utente> call = apiService.CambioMail(mail);
             final Utente final_return = _return;
             call.enqueue(new Callback<Utente>() {
                              @Override

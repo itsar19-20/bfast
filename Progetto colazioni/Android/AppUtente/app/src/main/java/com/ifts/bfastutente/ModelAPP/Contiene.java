@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Contiene {
 
+    @SerializedName("prodotto")
     private String idProdotto;
+    @SerializedName("ordine")
     private int idOrdine;
     @SerializedName("id")
     private int id;

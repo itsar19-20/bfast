@@ -53,7 +53,6 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password && nascita.length()>0 && email.length()>0) {
                         udba.open();
                         udba.addUser(email,password,nome,cognome,nascita);
-                        session.setIDfatt(u.getId());
                         udba.close();
                         Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
                     } else {
