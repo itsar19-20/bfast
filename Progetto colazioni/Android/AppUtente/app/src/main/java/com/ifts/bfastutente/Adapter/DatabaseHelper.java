@@ -21,7 +21,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE7 = "create table Contiene (id integer primary key autoincrement," +
             "FOREIGN KEY(\"+idOrd+\") REFERENCES \"+Ordine+\"(\"+id+\"), FOREIGN KEY(\"+idPro+\") REFERENCES \"+Prodotto+\"(\"+id+\"));";
     private static final String DB_CREATE8 = "create table Prodotto (nome text primary key ," +
-            "ingrediente text not null, costo float not null,tipo text not null,);";
+            "ingrediente text not null, costo float not null,tipo text not null);";
+    private static final String DB_CREATE9 = "create table Indirizzo (id integer primary key autoincrement,via text not null ," +
+            "numero text not null, cap text not null,citta text not null,civico text not null);";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -36,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE6);
         db.execSQL(DB_CREATE8);
         db.execSQL(DB_CREATE7);
+        db.execSQL(DB_CREATE9);
     }
 
     @Override
@@ -48,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Possiede");
         db.execSQL("DROP TABLE IF EXISTS Prodotto");
         db.execSQL("DROP TABLE IF EXISTS Contiene");
+        db.execSQL("DROP TABLE IF EXISTS Indirizzo");
         onCreate(db);
     }
 
