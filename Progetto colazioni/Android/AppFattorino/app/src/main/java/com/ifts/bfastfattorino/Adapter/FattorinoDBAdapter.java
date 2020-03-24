@@ -50,7 +50,7 @@ public class FattorinoDBAdapter {
     }
 
     public Cursor getUserLogin(Integer id) {
-        Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID, KEY_PASSWORD},
                 KEY_ID + "= '" + id + "'", null, null, null, null, null);
 
         return cursor;

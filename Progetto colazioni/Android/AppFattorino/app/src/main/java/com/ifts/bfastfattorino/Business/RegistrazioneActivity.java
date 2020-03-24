@@ -62,9 +62,11 @@ public class RegistrazioneActivity extends AppCompatActivity {
                         call.enqueue(new Callback<Fattorino>() {
                                          @Override
                                          public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
+                                             Fattorino f = response.body();
                                              udba.open();
                                              udba.addUser(email,password,nome,cognome,nascita);
                                              udba.close();
+                                             session.setIDfatt(f.getId());
                                          }
 
                                          @Override

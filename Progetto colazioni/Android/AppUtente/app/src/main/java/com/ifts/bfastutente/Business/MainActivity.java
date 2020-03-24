@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
@@ -27,6 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    final UserDBAdapter udb = new UserDBAdapter(this);
     private MapView mapView;
     private Button b1;
     private TextView t1;
@@ -67,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 call.enqueue(new Callback<Utente>() {
                     @Override
                     public void onResponse(Call<Utente> call, Response<Utente> response) {
-                        int statusCode = response.code();
-                        Utente user = response.body();
+                        Utente u = (Utente) udb.getUserLogin(text1.toString());
                         session.setMailUt(text1.toString());
                     }
 
