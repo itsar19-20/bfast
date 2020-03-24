@@ -18,9 +18,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InserisciValutazione extends AppCompatActivity {
+
     private SessionUte session;
     private SQLiteDatabase db;
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+
     public void inserisci(final float valutazione){
         UserDBAdapter udb = new UserDBAdapter(this);
         final OrdineDBAdapter odb = new OrdineDBAdapter(this);
