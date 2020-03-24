@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Business.CambioMail" />
+        <activity android:name=".Business.CambioPassword" />
+        <activity android:name=".Business.CancellazioneFattorino" />
+        <activity android:name=".Business.pswDimenticata" />
+        <activity android:name=".Business.RegistrazioneActivity" />
+        <activity android:name=".Business.ScriviDomanda" />
+        <activity android:name=".Business.ScriviRisposta" />
+        <activity android:name=".Business.ValutazioneFattorino" />
     </application>
 
 </manifest>
