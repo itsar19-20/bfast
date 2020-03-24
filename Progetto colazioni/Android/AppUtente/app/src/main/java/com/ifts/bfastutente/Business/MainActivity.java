@@ -1,6 +1,5 @@
 package com.ifts.bfastutente.Business;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.ModelAPP.Utente;
-import com.ifts.bfastutente.MyApiEndpointInterface;
 import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
+import com.ifts.bfastutente.Utils.BfastUtenteApi;
+import com.ifts.bfastutente.Utils.RetrofitUtils;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView t1;
     private TextView t2;
     private SessionUte session;
-    private Dialog retrofit;
-    MyApiEndpointInterface apiService = retrofit.create(MyApiEndpointInterface.class);
+    BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +63,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final EditText text1 = findViewById(R.id.ETmail);
                 EditText text2 = findViewById(R.id.ETpass);
-                Call<Utente> call = apiService.login(text1, text2);
+                Call<Utente> call = apiService.login(text1.toString(), text2.toString());
                 call.enqueue(new Callback<Utente>() {
                     @Override
-                    public void onResponse(Response<Utente> response) {
+                    public void onResponse(Call<Utente> call, Response<Utente> response) {
                         int statusCode = response.code();
                         Utente user = response.body();
                         session.setMailUt(text1.toString());
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
-                        // Log error richiesta fallita
+                    public void onFailure(Call<Utente> call, Throwable t) {
                         Toast.makeText(MainActivity.this, "Errore nel login", Toast.LENGTH_LONG).show();
                     }
 
-                }
+                });
             }
         });
         t1.setOnClickListener(new View.OnClickListener() {
