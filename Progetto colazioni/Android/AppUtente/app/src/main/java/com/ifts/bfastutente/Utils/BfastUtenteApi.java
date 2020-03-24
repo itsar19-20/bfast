@@ -1,6 +1,5 @@
 package com.ifts.bfastutente.Utils;
 
-import com.ifts.bfastutente.ModelAPP.Bar;
 import com.ifts.bfastutente.ModelAPP.Contiene;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
@@ -61,24 +60,14 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Ordine> ordiniCa(@Query("orario")String orario, @Query("pagamento")int id,@Query("note")String note);
 
-
-    @GET("/SelezioneBar")
-    @FormUrlEncoded
-    Call<Bar> SelezioneBar(@Query("nome")String nome, @Query("orarioApertura")String orarioApertura, @Query("orarioChiusura")String orarioChiusura,
-                           @Query("valutazione")float valutazione, @Query("email")String email,
-                           @Query("password")String password, @Query("fascia")float fascia);
-
-
     @GET("/SelezionePosizione")
     @FormUrlEncoded
-    Call<Indirizzo> SelezionePosozione(@Query("via")String via, @Query("civico")String civico, @Query("citta")String citta,
+    Call<Indirizzo> SelezionePosizione(@Query("via")String via, @Query("civico")String civico, @Query("citta")String citta,
                                        @Query("cap")String cap);
-
 
     @GET("/ConfermaPosizione")
     @FormUrlEncoded
-    Call<Indirizzo> ConfermaPosizione(@Query("posizione")String posizione);
-
+    Call<Indirizzo> ConfermaPosizione(@Query("id")int posizione);
 
     @GET("/SelezioneProdotti")
     @FormUrlEncoded
@@ -88,15 +77,9 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("testo")String testo);
 
-
     @GET("/ScriviRisposta")
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo")String testo);
-
-
-    @GET("/CercaDomanda")
-    @FormUrlEncoded
-    Call<Domanda> CercaDomanda(@Query("domanda")String domanda);
 
     @GET("/ValutazioneFattorino")
     @FormUrlEncoded

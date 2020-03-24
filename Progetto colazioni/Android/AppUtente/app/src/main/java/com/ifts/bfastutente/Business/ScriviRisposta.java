@@ -10,11 +10,19 @@ import com.ifts.bfastutente.Adapter.RispostaAdapter;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Possiede;
 import com.ifts.bfastutente.ModelAPP.Risposta;
+import com.ifts.bfastutente.Utils.BfastUtenteApi;
+import com.ifts.bfastutente.Utils.RetrofitUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ScriviRisposta extends AppCompatActivity {
     private SQLiteDatabase db;
+    BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+    final PossiedeDBAdapter pdb= new PossiedeDBAdapter();
 
-    public Risposta registrazione(int domanda, String testo) {
+    public Risposta registrazione(final int domanda, String testo) {
         Risposta _return = null;
         RispostaAdapter rba = new RispostaAdapter();
 
@@ -22,23 +30,30 @@ public class ScriviRisposta extends AppCompatActivity {
         if (ris == null) {
             _return = new Risposta();
             _return.setRisposta(testo);
+            Call<Risposta> call = apiService.ScriviRisposta(testo);
+            final Risposta final_return = _return;
+            call.enqueue(new Callback<Risposta>() {
+                @Override
+                public void onResponse(Call<Risposta> call, Response<Risposta> response) {
+                    Possiede p = new Possiede();
+                    Domanda d = new Domanda();
+                    p.setIdDomanda(domanda);
+                    p.setIdRisposta(final_return.getId());
+                    pdb.open();
+                    pdb.addConnessione(d.getDomanda(), final_return.getRisposta());
+                    pdb.close();
+                }
 
+                @Override
+                public void onFailure(Call<Risposta> call, Throwable t) {
+
+                }
+            });
             return _return;
         }else {
             _return = (Risposta) rba.getRisposta(ris.getInt(0));
             return _return;
         }
-    }
-
-    private void scrivi(int domanda, Risposta _return) {
-        PossiedeDBAdapter pdb= new PossiedeDBAdapter();
-        Possiede p = new Possiede();
-        Domanda d = new Domanda();
-        p.setIdDomanda(domanda);
-        p.setIdRisposta(_return.getId());
-        pdb.open();
-        pdb.addConnessione(d.getDomanda(),_return.getRisposta());
-        pdb.close();
     }
 }
 
