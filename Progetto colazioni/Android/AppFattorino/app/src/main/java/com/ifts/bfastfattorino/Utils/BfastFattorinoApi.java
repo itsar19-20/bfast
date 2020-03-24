@@ -32,8 +32,7 @@ public interface BfastFattorinoApi {
 
     @GET("/CancellazioneFattorino")
     @FormUrlEncoded
-    Call<Fattorino> Cancellazione(@Field("id")String id,
-                                  @Field("password") String pwd);
+    Call<Fattorino> Cancellazione(@Field("id")int id);
 
     @GET("/CercaId")
     @FormUrlEncoded
@@ -43,12 +42,12 @@ public interface BfastFattorinoApi {
 
     @GET("/CambioMail")
     @FormUrlEncoded
-    Call<Fattorino> CambioMail(@Query("mail")String mail, @Query("comail") String comail);
+    Call<Fattorino> CambioMail(@Query("mail")String mail);
 
 
     @GET("/CambioPassword")
     @FormUrlEncoded
-    Call<Fattorino> CambioPassword(@Query("password")String pass, @Query("copassword") String copass);
+    Call<Fattorino> CambioPassword(@Query("password")String pass);
 
 
     @GET("/PasswordDimenticata")
