@@ -25,19 +25,12 @@ public interface BfastFattorinoApi {
 
     @GET("/registrazione")
     @FormUrlEncoded
-    Call<Fattorino> registrazione(@Field("nome")String nome,
-                                  @Field("cognome")String cognome,
-                                  @Field("data")String data,
-                                  @Field("password")String pwd);
+    Call<Fattorino> registrazione(@Query("mail")String mail, @Query("password") String pwd,@Query("nome")String nome,
+                                  @Query("cognome") String cognome, @Query("data") String data);
 
     @GET("/CancellazioneFattorino")
     @FormUrlEncoded
     Call<Fattorino> Cancellazione(@Field("id")int id);
-
-    @GET("/CercaId")
-    @FormUrlEncoded
-    Call<Fattorino> CercaId (@Query("id")String id);
-
 
 
     @GET("/CambioMail")
@@ -52,22 +45,19 @@ public interface BfastFattorinoApi {
 
     @GET("/PasswordDimenticata")
     @FormUrlEncoded
-    Call<Fattorino> login(@Query("id")String id);
+    Call<Fattorino> PasswordDimenticata(@Query("id")int id);
 
 
     @GET("ScriviDomanda")
     @FormUrlEncoded
-    Call<Domanda> domanda(@Query("idDomanda")String idDomanda);
+    Call<Domanda> ScriviDomanda(@Query("idDomanda")String idDomanda);
 
 
     @GET("ScriviRisposta")
     @FormUrlEncoded
-    Call<Risposta> risposta(@Query("idRisposta")String idRisposta);
+    Call<Risposta> ScriviRisposta(@Query("idRisposta")String idRisposta);
 
-    /*@GET("/ChiediAiuto")
-    @FormUrlEncoded
-    Call<Fattorino> aiuto(@Query("")String);
-
+    /*
 
    @GET("/OrdiniEffettuati")
     @FormUrlEncoded
