@@ -12,6 +12,12 @@ import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
 import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
+import com.ifts.bfastutente.Utils.BfastUtenteApi;
+import com.ifts.bfastutente.Utils.RetrofitUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RegistrazioneActivity extends AppCompatActivity {
@@ -24,6 +30,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
+        final BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
         Button button = findViewById(R.id.BtnLogin);
         final EditText etemail = findViewById(R.id.ETmail);
         final EditText etnome = findViewById(R.id.ETnome);
@@ -40,29 +47,40 @@ public class RegistrazioneActivity extends AppCompatActivity {
                 try {
 
                     Utente u = new Utente();
-                    String nome=etnome.getText().toString();
+                    final String nome=etnome.getText().toString();
                     u.setNome(nome);
-                    String cognome=etcognome.getText().toString();
+                    final String cognome=etcognome.getText().toString();
                     u.setCognome(cognome);
-                    String password=etpassword.getText().toString();
+                    final String password=etpassword.getText().toString();
                     u.setNome(password);
                     String confermapassword=etconfermapassword.getText().toString();
                     u.setNome(confermapassword);
-                    String email=etemail.getText().toString();
+                    final String email=etemail.getText().toString();
                     u.setNome(email);
-                    String datadinascita=etdatadinascita.getText().toString();
+                    final String datadinascita=etdatadinascita.getText().toString();
                     u.setNome(datadinascita);
-                    String numeroditelefono=etnumeroditelefono.getText().toString();
+                    final String numeroditelefono=etnumeroditelefono.getText().toString();
                     u.setNome(datadinascita);
 
 
                     if (nome.length()>0 && cognome.length()>0 && password.length()>0 && email.length()>0 && numeroditelefono.length()>10 &&
                             datadinascita.length()>0 && password==confermapassword) {
-                        session.setMailUt(email);
-                        udba.open();
-                        udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
-                        udba.close();
-                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta per " , Toast.LENGTH_LONG).show();
+                        Call<Utente> call = apiService.registrazione(email,password,nome,cognome,datadinascita,numeroditelefono);
+                        call.enqueue(new Callback<Utente>() {
+                                         @Override
+                                         public void onResponse(Call<Utente> call, Response<Utente> response) {
+                                             session.setMailUt(email);
+                                             udba.open();
+                                             udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
+                                             udba.close();
+                                             Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta", Toast.LENGTH_LONG).show();
+                                         }
+
+                                         @Override
+                                         public void onFailure(Call<Utente> call, Throwable t) {
+                                             Toast.makeText(RegistrazioneActivity.this, "Errore nella creazione dell'utente" , Toast.LENGTH_LONG).show();
+                                         }
+                                     });
                     } else {
                         Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     }

@@ -2,7 +2,6 @@ package com.ifts.bfastfattorino.Business;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,13 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
-import com.ifts.bfastfattorino.MyApiEndpointInterface;
+import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
+import com.ifts.bfastfattorino.Utils.RetrofitUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView t1;
     private TextView t2;
     private SessionFat session;
-    private Dialog retrofit;
-    MyApiEndpointInterface apiService = retrofit.create(MyApiEndpointInterface.class);
+    BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +48,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final EditText text1 = findViewById(R.id.editText2);
                 EditText text2 = findViewById(R.id.editText3);
-                Call<Fattorino> call = apiService.login(text1, text2);
+                Call<Fattorino> call = apiService.login(text1.toString(), text2.toString());
                 call.enqueue(new Callback<Fattorino>() {
 
                     @Override
-                    public void onResponse(Response<Fattorino> response) {
+                    public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
                         int statusCode = response.code();
                         Fattorino user = response.body();
                         session.setIDfatt(Integer.parseInt(text1.toString()));
                     }
 
                     @Override
-                    public void onFailure(Throwable t) {
-                        // Log error richiesta fallita
+                    public void onFailure(Call<Fattorino> call, Throwable t) {
                         Toast.makeText(MainActivity.this, "Errore nel login", Toast.LENGTH_LONG).show();
                     }
 
-                }
+                });
             }
         });
         t1.setOnClickListener(new View.OnClickListener() {
