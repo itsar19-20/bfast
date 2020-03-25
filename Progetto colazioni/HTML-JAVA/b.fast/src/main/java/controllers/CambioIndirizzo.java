@@ -43,7 +43,7 @@ public class CambioIndirizzo extends HttpServlet{
 		CambioIndirizzoOrario au = new CambioIndirizzoOrario();
 		int s = (Integer) ses.getAttribute("ID"); 
 		Bar b = null;
-		b = au.indirizzo(s,request.getParameter("via"),request.getParameter("civico"), request.getParameter("citta"), request.getParameter("cap"));
+		b = au.indirizzo(s,request.getParameter("x"),request.getParameter("y"));
 		if (b == null) {
 			request.getRequestDispatcher("../GestioneIndirizzoOrario/index.html").forward(request, response);
 		} else {
