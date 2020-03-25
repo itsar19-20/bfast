@@ -39,7 +39,7 @@ public class RegistrazioneBar {
 
 
 
-	public Indirizzo Conregistrazione(int s, String orarioap, String orarioch, String via, String civico,String citta, String cap) {
+	public Indirizzo Conregistrazione(int s, String orarioap, String orarioch, double x, double y) {
 		Bar _return = null;
 		Indirizzo i = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
@@ -47,9 +47,9 @@ public class RegistrazioneBar {
 		if (_return != null) {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
-			int id = cerca( via,  civico, citta,  cap);
+			int id = cerca(x, y);
 			if(id == 0 ) {
-				i = creazione( via,  civico, citta,  cap);
+				i = creazione( x, y);
 			}else {
 				i = em.find(Indirizzo.class, id);
 			}			
@@ -61,7 +61,7 @@ public class RegistrazioneBar {
 		return i;
 	}
 	
-	public int cerca(String via, String civico,String citta, String cap) {
+	public int cerca(double x, double y) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		int id = 0;
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
@@ -74,13 +74,11 @@ public class RegistrazioneBar {
 	}
 	
 	
-	public Indirizzo creazione(String via, String civico,String citta, String cap) {
+	public Indirizzo creazione(double x, double y) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Indirizzo _return = new Indirizzo();
-		_return.setCap(cap);
-		_return.setCivico(civico);
-		_return.setVia(via);
-		_return.setCitta(citta);
+		_return.setY(y);
+		_return.setX(x);
 		em.getTransaction().begin();
 	    em.persist(_return);
 	    em.getTransaction().commit();
