@@ -1,23 +1,17 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Indirizzo {
 
+    @SerializedName("id")
     private int id;
-    private String via;
-    private String civico;
-    private String citta;
-    private String cap;
+    @SerializedName("x")
+    double x;
+    @SerializedName("y")
+    private double y;
 
-    @Override
-    public String toString() {
-        return "Indirizzo{" +
-                "id=" + id +
-                ", via='" + via + '\'' +
-                ", civico='" + civico + '\'' +
-                ", citta='" + citta + '\'' +
-                ", cap='" + cap + '\'' +
-                '}';
-    }
+
 
     public int getId() {
         return id;
@@ -27,35 +21,19 @@ public class Indirizzo {
         this.id = id;
     }
 
-    public String getVia() {
-        return via;
+    public double getX() {
+        return x;
     }
 
-    public void setVia(String via) {
-        this.via = via;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public String getCivico() {
-        return civico;
+    public double getY() {
+        return y;
     }
 
-    public void setCivico(String civico) {
-        this.civico = civico;
-    }
-
-    public String getCitta() {
-        return citta;
-    }
-
-    public void setCitta(String citta) {
-        this.citta = citta;
-    }
-
-    public String getCap() {
-        return cap;
-    }
-
-    public void setCap(String cap) {
-        this.cap = cap;
+    public void setY(double y) {
+        this.y = y;
     }
 }

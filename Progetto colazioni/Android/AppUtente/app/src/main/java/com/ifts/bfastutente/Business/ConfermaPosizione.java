@@ -1,5 +1,8 @@
 package com.ifts.bfastutente.Business;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
@@ -13,19 +16,15 @@ import retrofit2.Response;
 public class ConfermaPosizione extends AppCompatActivity {
 
         BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+    private SQLiteDatabase db;
 
-        public int Visualizza(final String via, final String civico, final String cap, final String citta) {
+        public int Visualizza(final double x, final double y) {
 
-            String Ris = ("SELECT i.ID FROM inditizzo as i\r\n" +
-            "WHERE i.via = Via AND i.civico = Civico AND i.citta = Citta AND i.CAP = cap");/*.setParameter("Via", via).setParameter("Civico", civico)
-            .setParameter("cap", cap).setParameter("Citta", citta).getSingleResult()*/
+            Cursor Ris = db.rawQuery("SELECT i.ID FROM inditizzo as WHERE i.x ="+x+ " AND i.y ="+ y,null);
+
             if(Ris == null) {
                 Indirizzo i = new Indirizzo();
-                i.setCap(cap);
-                i.setCitta(citta);
-                i.setCivico(civico);
-                i.setVia(via);
-                Call<Indirizzo> call = apiService.SelezionePosizione(via, civico, cap, citta);
+                Call<Indirizzo> call = apiService.SelezionePosizione(x,y);
                 call.enqueue(new Callback<Indirizzo>() {
                                  @Override
                                  public void onResponse(Call<Indirizzo> call, Response<Indirizzo> response) {
@@ -39,7 +38,7 @@ public class ConfermaPosizione extends AppCompatActivity {
                              });
                 return i.getId();
             }else {
-                int i = Integer.parseInt(Ris);
+                int i = Integer.parseInt(Ris.toString());
                 Call<Indirizzo> call = apiService.ConfermaPosizione(i);
                 call.enqueue(new Callback<Indirizzo>() {
                     @Override

@@ -17,8 +17,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "FOREIGN KEY(\"+idDom+\") REFERENCES \"+Domanda+\"(\"+id+\"), FOREIGN KEY(\"+idFat+\") REFERENCES \"+Fattorino+\"(\"+id+\"));";
     private static final String DB_CREATE6 = "create table Pagamento (id integer primary key autoincrement, Tipo text not null unique);";
     private static final String DB_CREATE7 = "create table PosozioneFattorino (id integer primary key autoincrement, PosX text not null unique,Posy text not null unique);";
-    private static final String DB_CREATE8 = "create table Indirizzo (id integer primary key autoincrement,via text not null ," +
-            "numero text not null, cap text not null,citta text not null,civico text not null);";
+    private static final String DB_CREATE8 = "create table Indirizzo (id integer primary key autoincrement,x double not null ," +
+            "y double not null);";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
