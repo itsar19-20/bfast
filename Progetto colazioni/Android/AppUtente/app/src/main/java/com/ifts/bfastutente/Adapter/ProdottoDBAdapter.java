@@ -57,12 +57,12 @@ public class ProdottoDBAdapter {
         ContentValues updatevalues = createContentValues(ingrediente, costo, tipo);
         return database.update("user", updatevalues, KEY_NOME + "=" + nome, null) > 0;
     }
-    public List<Integer> getIdProdotto() {
-        List<Integer> _return = new ArrayList<>();
-        String query = "select Indirizzo.id from Indirizzo,Bar WHERE Bar.IDinFK = indirizzo.ID;;";
+    public List<String> getIdProdotto() {
+        List<String> _return = new ArrayList<>();
+        String query = "select Indirizzo.id from Indirizzo,Bar WHERE Bar.IDinFK = indirizzo.ID;";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            _return.add(cursor.getInt(0));
+            _return.add(cursor.getString(0));
         }
         return _return;
     }

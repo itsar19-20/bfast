@@ -66,12 +66,12 @@ public class BarDBAdapter {
         ContentValues updatevalues = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
         return database.update("user", updatevalues, KEY_MAIL + "=" + mail, null) > 0;
     }
-    public List<String> getIdIndirizzo() {
-        List<String> _return = new ArrayList<>();
+    public List<Integer> getIdIndirizzo() {
+        List<Integer> _return = new ArrayList<>();
         String query = "select Prodotto.Nome from Prodotto,Bar,Menu WHERE Bar.ID = Menu.IDbaFK AND Menu.IDprFK = Prodotto.Nome ";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            _return.add(cursor.getString(0));
+            _return.add(cursor.getInt(0));
         }
         return _return;
     }

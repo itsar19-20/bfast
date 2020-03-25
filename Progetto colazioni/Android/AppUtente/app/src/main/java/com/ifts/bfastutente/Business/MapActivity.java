@@ -1,21 +1,28 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ifts.bfastutente.Adapter.BarDBAdapter;
+import com.ifts.bfastutente.ModelAPP.Indirizzo;
 import com.ifts.bfastutente.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    BarDBAdapter bdb = new BarDBAdapter(this);
+    Marker markerUtente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +37,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        List<Integer> indirizzo = new ArrayList<>();
+        indirizzo = bdb.getIdIndirizzo();
+        for (int i = 0; i < indirizzo.size(); i ++) {
+            Indirizzo in = null;
+            in.setId(indirizzo.get(i));
+            double latitude = in.getX();
+            double longitude= in.getY();
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLng location = new LatLng(latitude, longitude);
+            markerOptions.position(location);
+            mMap.addMarker(markerOptions);
+        }
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
 
-                MarkerOptions markerOptions = new MarkerOptions();
+                if(markerUtente == null){
 
-                markerOptions.position(latLng);
-
-                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
-                // Clears the previously touched position
-                mMap.clear();
-
-                // Animating to the touched position
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                // Placing a marker on the touched position
-                mMap.addMarker(markerOptions);
+                }else{
+                    markerUtente.remove();
+                }
+                markerUtente = mMap.addMarker(new MarkerOptions().position(latLng).title("Posizione selezionata"));
                 double lat = latLng.latitude;
                 double lng = latLng.longitude;
                 ConfermaPosizione cp = new ConfermaPosizione();
@@ -60,7 +71,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        //intent verso la lista dei prodotti
+        Intent bar = new Intent(MapActivity.this, ListaProdotti.class);
+        startActivity(bar);
         return false;
     }
 
