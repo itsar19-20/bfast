@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BarDBAdapter {
     private Context context;
     private SQLiteDatabase database;
@@ -19,6 +22,7 @@ public class BarDBAdapter {
     public static final String KEY_VALUTAZIONE = "valutazione";
     public static final String KEY_APERTURA = "oraApe";
     public static final String KEY_CHIUSURA = "oraChi";
+    public static final String KEY_INDIRIZZO = "indirizzo";
 
 
     public BarDBAdapter (Context context) {
@@ -61,6 +65,15 @@ public class BarDBAdapter {
     public boolean updateBar(String mail, String password, String nome, String valutazioni, String ape, String chi,String fascia) {
         ContentValues updatevalues = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
         return database.update("user", updatevalues, KEY_MAIL + "=" + mail, null) > 0;
+    }
+    public List<String> getIdIndirizzo() {
+        List<String> _return = new ArrayList<>();
+        String query = "select Prodotto.Nome from Prodotto,Bar,Menu WHERE Bar.ID = Menu.IDbaFK AND Menu.IDprFK = Prodotto.Nome ";
+        Cursor cursor = database.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            _return.add(cursor.getString(0));
+        }
+        return _return;
     }
 
 }
