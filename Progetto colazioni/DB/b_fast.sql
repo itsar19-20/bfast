@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 17, 2020 alle 12:36
+-- Creato il: Mar 25, 2020 alle 14:03
 -- Versione del server: 10.1.36-MariaDB
 -- Versione PHP: 7.2.10
 
@@ -211,30 +211,28 @@ INSERT INTO `filtro` (`ID`, `Tipo`) VALUES
 
 CREATE TABLE `indirizzo` (
   `ID` int(8) NOT NULL,
-  `via` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `civico` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `citta` varchar(50) COLLATE latin1_general_ci DEFAULT NULL,
-  `CAP` varchar(5) COLLATE latin1_general_ci DEFAULT NULL
+  `x` double NOT NULL DEFAULT '0',
+  `y` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dump dei dati per la tabella `indirizzo`
 --
 
-INSERT INTO `indirizzo` (`ID`, `via`, `civico`, `citta`, `CAP`) VALUES
-(1, 'via uno', '12', 'Villa Guardia', '22079'),
-(2, 'via due ', '3', 'Milano', '20100'),
-(3, 'via tre', '5', 'Alezio', '73011'),
-(4, 'via quattro', '73', 'Roma', '00130'),
-(5, 'via cinque ', '56', 'Firenze', '50121'),
-(6, 'via sei', '456', 'Bologna', '40130'),
-(7, 'via sette', '963', 'Como', '22100'),
-(8, 'via otto', '321', 'Varese', '21100'),
-(9, 'via nove', '65B', 'Lomazzo', '22074'),
-(10, 'via dieci', '6C', 'Venezia', '30100'),
-(11, 'Via monte paschi', '23', 'Firenze', '24325'),
-(15, 'Via monte paschi 3', '23', 'Firenze', '24325'),
-(16, 'Via monte paschi 5', '23', 'Firenze', '24325');
+INSERT INTO `indirizzo` (`ID`, `x`, `y`) VALUES
+(1, 33, 0),
+(2, 234, 0),
+(3, 65, 0),
+(4, 0, 0),
+(5, 0, 0),
+(6, 0, 0),
+(7, 0, 0),
+(8, 0, 0),
+(9, 0, 0),
+(10, 0, 0),
+(11, 0, 0),
+(15, 0, 0),
+(16, 0, 0);
 
 -- --------------------------------------------------------
 
