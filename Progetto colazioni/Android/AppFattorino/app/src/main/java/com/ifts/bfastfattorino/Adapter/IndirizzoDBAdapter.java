@@ -11,10 +11,8 @@ public class IndirizzoDBAdapter {
     private DatabaseHelper dbHelper;
     public static final String DB_NAME = "Indirizzo";
     public static final String KEY_ID = "id";
-    public static final String KEY_VIA = "via";
-    public static final String KEY_CIVICO = " civico";
-    public static final String KEY_CAP= "cap";
-    public static final String KEY_CITTA = "citta";
+    public static final String KEY_X = "x";
+    public static final String KEY_Y = " y";;
 
     public void IndirizzoDBAdapter(Context context) {
         this.context = context;
@@ -30,17 +28,15 @@ public class IndirizzoDBAdapter {
         database.close();
     }
 
-    private ContentValues createContentValues(String via, String civico, String citta,String cap) {
+    private ContentValues createContentValues(double x, double y) {
         ContentValues values = new ContentValues();
-        values.put(KEY_VIA, via);
-        values.put(KEY_CIVICO, civico);
-        values.put(KEY_CITTA, citta);
-        values.put(KEY_CAP,cap);
+        values.put(KEY_X, x);
+        values.put(KEY_Y, y);
         return values;
     }
 
-    public long addIndirizzo (String via, String civico, String citta,String cap) {
-        ContentValues values = createContentValues(via,civico,citta,cap);
+    public long addIndirizzo (double x, double y) {
+        ContentValues values = createContentValues(x,y);
         return database.insertOrThrow("Indirizzo", null, values);
     }
 

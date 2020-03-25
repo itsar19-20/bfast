@@ -62,8 +62,7 @@ public interface BfastUtenteApi {
 
     @GET("/SelezionePosizione")
     @FormUrlEncoded
-    Call<Indirizzo> SelezionePosizione(@Query("via")String via, @Query("civico")String civico, @Query("citta")String citta,
-                                       @Query("cap")String cap);
+    Call<Indirizzo> SelezionePosizione(@Query("x")double x, @Query("y")double y);
 
     @GET("/ConfermaPosizione")
     @FormUrlEncoded
