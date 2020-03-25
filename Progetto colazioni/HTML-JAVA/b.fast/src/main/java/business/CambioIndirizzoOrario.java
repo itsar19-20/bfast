@@ -41,8 +41,8 @@ public class CambioIndirizzoOrario {
 	public int cerca(double x, double y,EntityManager em) {
 		int id = 0;
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
-				+ "WHERE i.via =:Via AND i.civico = :Civico AND i.citta = :Citta AND i.cap = :CAP"
-				+ "").setParameter("Via", via).setParameter("Civico", civico).setParameter("Citta", citta).setParameter("CAP", cap);
+				+ "WHERE i.x =:X AND i.Y = :y"
+				+ "").setParameter("X", x).setParameter("Y", y)S;
 		if(Ris != null) {
 			id = Ris.getFirstResult();
 		}

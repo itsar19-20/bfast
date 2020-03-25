@@ -65,8 +65,8 @@ public class RegistrazioneBar {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		int id = 0;
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
-				+ "WHERE i.via =:Via AND i.civico = :Civico AND i.citta = :Citta AND i.cap = :CAP"
-				+ "").setParameter("Via", via).setParameter("Civico", civico).setParameter("Citta", citta).setParameter("CAP", cap);
+				+ "WHERE i.X =:x AND i.Y = :y"
+				+ "").setParameter("X", x).setParameter("Y", yS);
 		if(Ris != null) {
 			id = Ris.getFirstResult();
 		}
