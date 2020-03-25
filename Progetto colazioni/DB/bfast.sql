@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 25, 2020 alle 14:03
--- Versione del server: 10.1.36-MariaDB
--- Versione PHP: 7.2.10
+-- Creato il: Mar 25, 2020 alle 15:09
+-- Versione del server: 10.4.11-MariaDB
+-- Versione PHP: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `b_fast`
+-- Database: `bfast`
 --
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE `bar` (
   `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `Immagine` longblob,
+  `Immagine` longblob DEFAULT NULL,
   `Fascia` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -68,8 +68,8 @@ INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `
 
 CREATE TABLE `chiedef` (
   `ID` int(8) NOT NULL,
-  `IDfatFK` int(8) NOT NULL DEFAULT '0',
-  `IDdoFK` int(8) NOT NULL DEFAULT '0'
+  `IDfatFK` int(8) NOT NULL DEFAULT 0,
+  `IDdoFK` int(8) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -88,7 +88,7 @@ INSERT INTO `chiedef` (`ID`, `IDfatFK`, `IDdoFK`) VALUES
 
 CREATE TABLE `chiedeu` (
   `ID` int(8) NOT NULL,
-  `IDdoFK` int(8) NOT NULL DEFAULT '0',
+  `IDdoFK` int(8) NOT NULL DEFAULT 0,
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -129,8 +129,8 @@ INSERT INTO `classificato` (`ID`, `IDbaFK`, `IDfiFK`) VALUES
 CREATE TABLE `contiene` (
   `ID` int(8) NOT NULL,
   `IDprFK` varchar(50) NOT NULL DEFAULT '0',
-  `IDorFK` int(8) NOT NULL DEFAULT '0',
-  `Quantita` int(5) NOT NULL DEFAULT '0'
+  `IDorFK` int(8) NOT NULL DEFAULT 0,
+  `Quantita` int(5) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -211,8 +211,8 @@ INSERT INTO `filtro` (`ID`, `Tipo`) VALUES
 
 CREATE TABLE `indirizzo` (
   `ID` int(8) NOT NULL,
-  `x` double NOT NULL DEFAULT '0',
-  `y` double NOT NULL DEFAULT '0'
+  `x` double NOT NULL DEFAULT 0,
+  `y` double NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -220,19 +220,19 @@ CREATE TABLE `indirizzo` (
 --
 
 INSERT INTO `indirizzo` (`ID`, `x`, `y`) VALUES
-(1, 33, 0),
-(2, 234, 0),
-(3, 65, 0),
-(4, 0, 0),
-(5, 0, 0),
-(6, 0, 0),
-(7, 0, 0),
-(8, 0, 0),
-(9, 0, 0),
-(10, 0, 0),
-(11, 0, 0),
-(15, 0, 0),
-(16, 0, 0);
+(1, 40.863, 14.2767),
+(2, 41.1187, 16.852),
+(3, 38.1121, 13.3366),
+(4, 45.4773, 9.1815),
+(5, 45.4398, 12.3319),
+(6, 43.7874, 11.2499),
+(7, 40.6287, 17.9376),
+(8, 45.6362, 13.8042),
+(9, 44.5075, 11.3514),
+(10, 41.9109, 12.4818),
+(11, 44.4222, 8.9052),
+(15, 45.0781, 7.6761),
+(16, 46.0793, 11.1302);
 
 -- --------------------------------------------------------
 
@@ -276,8 +276,8 @@ CREATE TABLE `ordine` (
 
 CREATE TABLE `posfatt` (
   `ID` int(8) NOT NULL,
-  `PosXFA` double NOT NULL DEFAULT '0',
-  `PosYFA` double NOT NULL DEFAULT '0'
+  `PosXFA` double NOT NULL DEFAULT 0,
+  `PosYFA` double NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -315,7 +315,7 @@ INSERT INTO `possiede` (`ID`, `IDdoFK`, `IDriFK`) VALUES
 CREATE TABLE `prodotto` (
   `Nome` varchar(50) NOT NULL,
   `Ingredienti` varchar(100) NOT NULL DEFAULT '0',
-  `Prezzo` float NOT NULL DEFAULT '0',
+  `Prezzo` float NOT NULL DEFAULT 0,
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -368,7 +368,7 @@ INSERT INTO `risposta` (`ID`, `Risposta`) VALUES
 
 CREATE TABLE `sceglie` (
   `ID` int(8) NOT NULL,
-  `IDprFK` int(8) NOT NULL DEFAULT '0',
+  `IDprFK` int(8) NOT NULL DEFAULT 0,
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
