@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Bar {
 
+    @SerializedName("indirizzo")
     private int idIndirizzo;
     @SerializedName("id")
     private int id;

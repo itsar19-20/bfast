@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProdottoDBAdapter {
     private Context context;
     private SQLiteDatabase database;
@@ -53,6 +56,15 @@ public class ProdottoDBAdapter {
     public boolean updateBar(String nome,String ingrediente, String costo, String tipo) {
         ContentValues updatevalues = createContentValues(ingrediente, costo, tipo);
         return database.update("user", updatevalues, KEY_NOME + "=" + nome, null) > 0;
+    }
+    public List<Integer> getIdProdotto() {
+        List<Integer> _return = new ArrayList<>();
+        String query = "select Indirizzo.id from Indirizzo,Bar WHERE Bar.IDinFK = indirizzo.ID;;";
+        Cursor cursor = database.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            _return.add(cursor.getInt(0));
+        }
+        return _return;
     }
 
 }
