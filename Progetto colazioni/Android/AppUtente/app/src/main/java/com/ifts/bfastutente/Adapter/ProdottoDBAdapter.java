@@ -33,17 +33,18 @@ public class ProdottoDBAdapter {
         database.close();
     }
 
-    private ContentValues createContentValues(String ingrediente, String costo, String tipo) {
+    private ContentValues createContentValues(String nome,String ingrediente, float costo, String tipo) {
         ContentValues values = new ContentValues();
+        values.put(KEY_NOME,nome);
         values.put(KEY_INGREDIENTE, ingrediente);
         values.put(KEY_COSTO, costo);
         values.put(KEY_TIPO, tipo);
         return values;
     }
 
-    public long addBar (String ingrediente, String costo, String tipo) {
-        ContentValues values = createContentValues(ingrediente, costo, tipo);
-        return database.insertOrThrow("Bar", null, values);
+    public long addProdotto (String nome,String ingrediente, float costo, String tipo) {
+        ContentValues values = createContentValues(nome,ingrediente, costo, tipo);
+        return database.insertOrThrow("Prodotto", null, values);
     }
 
     public Cursor getProdottoLogin(String nome) {
@@ -53,8 +54,8 @@ public class ProdottoDBAdapter {
     }
 
 
-    public boolean updateBar(String nome,String ingrediente, String costo, String tipo) {
-        ContentValues updatevalues = createContentValues(ingrediente, costo, tipo);
+    public boolean updateBar(String nome,String ingrediente, float costo, String tipo) {
+        ContentValues updatevalues = createContentValues(nome,ingrediente, costo, tipo);
         return database.update("user", updatevalues, KEY_NOME + "=" + nome, null) > 0;
     }
     public List<String> getIdProdotto() {

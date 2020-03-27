@@ -50,8 +50,27 @@ public class BarDBAdapter {
         return values;
     }
 
+    private ContentValues createContentValuesInserimento(Integer id,Integer idInd,String mail, String password, String nome, float valutazioni, String ape, String chi,float fascia) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID,id);
+        values.put(KEY_INDIRIZZO,idInd);
+        values.put(KEY_VALUTAZIONE, valutazioni);
+        values.put(KEY_PASSWORD, password);
+        values.put(KEY_NOME, nome);
+        values.put(KEY_MAIL, mail);
+        values.put(KEY_APERTURA, ape);
+        values.put(KEY_CHIUSURA, chi);
+        values.put(KEY_FASCIA, fascia);
+        return values;
+    }
+
     public long addBar (String mail, String password, String nome, String valutazioni, String ape, String chi,String fascia) {
         ContentValues values = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
+        return database.insertOrThrow("Bar", null, values);
+    }
+
+    public long insBar (Integer id,Integer idInd,String mail, String password, String nome, float valutazioni, String ape, String chi,float fascia) {
+        ContentValues values = createContentValuesInserimento(id,idInd,mail, password, nome, valutazioni,ape,chi,fascia);
         return database.insertOrThrow("Bar", null, values);
     }
 
@@ -68,7 +87,17 @@ public class BarDBAdapter {
     }
     public List<Integer> getIdIndirizzo() {
         List<Integer> _return = new ArrayList<>();
-        String query = "select Prodotto.Nome from Prodotto,Bar,Menu WHERE Bar.ID = Menu.IDbaFK AND Menu.IDprFK = Prodotto.Nome ";
+        String query = "select Indirizo.id from Indirizzo,Bar WHERE Bar.IDinFK = Indirizzo.id";
+        Cursor cursor = database.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            _return.add(cursor.getInt(0));
+        }
+        return _return;
+    }
+
+    public List<Integer> getIdBar() {
+        List<Integer> _return = new ArrayList<>();
+        String query = "select Bar.id from Bar ";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
             _return.add(cursor.getInt(0));
