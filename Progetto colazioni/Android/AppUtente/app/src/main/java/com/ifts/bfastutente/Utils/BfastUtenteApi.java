@@ -1,5 +1,6 @@
 package com.ifts.bfastutente.Utils;
 
+import com.ifts.bfastutente.ModelAPP.Bar;
 import com.ifts.bfastutente.ModelAPP.Contiene;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
@@ -84,5 +85,12 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino")float valutazione);
 
+    @GET("/UpdateBar")
+    @FormUrlEncoded
+    Call List<Bar> UpdateBar();
+
+    @GET("/UpdateProdotto")
+    @FormUrlEncoded
+    Call List<Prodotto> UpdateProdotto();
 
 }
