@@ -31,4 +31,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    repositories {
+        mavenCentral()
+        maven { url 'https://mapbox.bintray.com/mapbox' }
+    }
+
+    dependencies {
+        implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
+    }
 }
