@@ -5,12 +5,17 @@ import com.ifts.bfastutente.ModelAPP.Contiene;
 import com.ifts.bfastutente.ModelAPP.Domanda;
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
 import com.ifts.bfastutente.ModelAPP.Ordine;
+import com.ifts.bfastutente.ModelAPP.Prodotto;
 import com.ifts.bfastutente.ModelAPP.Risposta;
 import com.ifts.bfastutente.ModelAPP.Utente;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface BfastUtenteApi {
@@ -85,12 +90,12 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino")float valutazione);
 
-    @GET("/UpdateBar")
+    @POST("/UpdateBar")
     @FormUrlEncoded
-    Call List<Bar> UpdateBar();
+    Call<List<Bar>> UpdateBar(@Body String bar);
 
-    @GET("/UpdateProdotto")
+    @POST("/UpdateProdotto")
     @FormUrlEncoded
-    Call List<Prodotto> UpdateProdotto();
+    Call<List<Prodotto>> UpdateProdotto(@Body Prodotto post);
 
 }

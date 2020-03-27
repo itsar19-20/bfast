@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private int idbar,idIn;
     private String email,nome,oraApe,oraChi,pass,tipo,Nome,ingre;
     private float fascia,val,prezzo;
+    private Bar b;
+    private Prodotto p;
     ProdottoDBAdapter pdb = new ProdottoDBAdapter();
     BarDBAdapter bdb = new BarDBAdapter(this);
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
@@ -64,11 +66,9 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setTitle("Aggiornando i dati...");
         idBar = new ArrayList<>();
         bdb.open();
-        pdb.open();
         idBar = bdb.getIdBar();
-        nomeProdotti = pdb.getIdProdotto();
         progressDialog.show();
-        Call<List<Bar>> callUpdateBar = apiService.PrendiBar(idBar.);
+        Call<List<Bar>> callUpdateBar = apiService.UpdateBar(b.toString());
         callUpdateBar.enqueue(new Callback<List<Bar>>() {
                                @Override
                                public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
@@ -99,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
                                }
                            });
                 bdb.close();
-                Call<List<Prodotto>> callUpdateProdotto = apiService(idBar.);
+                pdb.open();
+                nomeProdotti = pdb.getIdProdotto();
+                Call<List<Prodotto>> callUpdateProdotto = apiService.UpdateProdotto(p);
                 callUpdateProdotto.enqueue(new Callback<List<Prodotto>>() {
                                        @Override
                                        public void onResponse(Call<List<Prodotto>> call, Response<List<Prodotto>> response) {
@@ -123,12 +125,8 @@ public class MainActivity extends AppCompatActivity {
                                        public void onFailure(Call<List<Prodotto>> call, Throwable t) {
 
                                        }
-                                   }
+                                   });
 
-                    @Override
-                    public void onFailure(Call<List<Prodotto>> call, Throwable t) {
-
-                    });
                 progressDialog.dismiss();
 
 
@@ -137,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
     public void createDB(){
         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("L'operazione richiede fino a 10 secondi");
-        progressDialog.setTitle("Aggiornando i dati...");
+        progressDialog.setTitle("Preparand la tua prima esperienza..");
         idBar = new ArrayList<>();
         bdb.open();
         pdb.open();
         idBar = bdb.getIdBar();
         nomeProdotti = pdb.getIdProdotto();
         progressDialog.show();
-        Call<List<Bar>> callPrezzi = apiService.PrendiBar();
+        Call<List<Bar>> callPrezzi = apiService.UpdateBar(b.toString());
         callPrezzi.enqueue(new Callback<List<Bar>>() {
             @Override
             public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
@@ -173,6 +171,31 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        bdb.close();
+        Call<List<Prodotto>> callUpdateProdotto = apiService.UpdateProdotto(p);
+        callUpdateProdotto.enqueue(new Callback<List<Prodotto>>() {
+            @Override
+            public void onResponse(Call<List<Prodotto>> call, Response<List<Prodotto>> response) {
+                List<Prodotto> risposta = response.body();
+                for (int i = 0; i < risposta.size(); i++) {
+                        Nome = risposta.get(i).getNome();
+                        ingre = risposta.get(i).getIngredienti();
+                        prezzo = risposta.get(i).getPrezzo();
+                        tipo = risposta.get(i).getTipo();
+                        try {
+                            pdb.addProdotto(Nome, ingre, prezzo, tipo);
+                        } catch (Exception e) {
+                            System.out.println(e.getLocalizedMessage());
+                        }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Prodotto>> call, Throwable t) {
+
+            }
+        });
+
         progressDialog.dismiss();
 
     }
