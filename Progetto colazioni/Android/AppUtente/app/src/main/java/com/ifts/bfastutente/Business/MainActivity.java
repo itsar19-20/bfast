@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -95,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
                                @Override
                                public void onFailure(Call<List<Bar>> call, Throwable t) {
-
+                                   Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                                   progressDialog.dismiss();
                                }
                            });
                 bdb.close();
@@ -123,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
 
                                        @Override
                                        public void onFailure(Call<List<Prodotto>> call, Throwable t) {
-
+                                           Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                                           progressDialog.dismiss();
                                        }
                                    });
 
@@ -168,7 +171,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
-
+                Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
         bdb.close();
@@ -192,11 +196,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Prodotto>> call, Throwable t) {
-
+                Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
 
         progressDialog.dismiss();
+        pdb.close();
 
     }
 
