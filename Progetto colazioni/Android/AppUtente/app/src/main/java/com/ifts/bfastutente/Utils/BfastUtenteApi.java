@@ -20,81 +20,81 @@ import retrofit2.http.Query;
 
 public interface BfastUtenteApi {
 
-    @GET("/login")
+    @POST("login")
     @FormUrlEncoded
     Call<Utente> login(@Query("mail")String mail, @Query("password") String pwd);
 
-    @GET("/registrazione")
+    @POST("registrazione")
     @FormUrlEncoded
     Call<Utente> registrazione(@Query("mail")String mail, @Query("password") String pwd,@Query("nome")String nome,
                                @Query("cognome") String cognome, @Query("data") String data, @Query("telefono") String tel);
 
-    @GET("/CancellazioneUtente")
+    @POST("CancellazioneUtente")
     @FormUrlEncoded
     Call<Utente> Cancellazione(@Query("mail")String mail);
 
 
-    @GET("/ConfermaMail")
+    @POST("ConfermaMail")
     @FormUrlEncoded
     Call<Utente> ConfermaMail(@Query("mail")String mail);
 
 
-    @GET("/CambioMail")
+    @POST("CambioMail")
     @FormUrlEncoded
     Call<Utente> CambioMail(@Query("mail")String mail);
 
 
-    @GET("/CambioPassword")
+    @POST("CambioPassword")
     @FormUrlEncoded
     Call<Utente> CambioPassword(@Query("password")String pass);
 
 
-    @GET("/PasswordDimenticata")
+    @POST("PasswordDimenticata")
     @FormUrlEncoded
     Call<Utente> PasswordDimeticata(@Query("password")String pass);
 
 
-    @GET("/OrdiniUtente")
+    @POST("OrdiniUtente")
     @FormUrlEncoded
     Call<Ordine> ordiniUt(@Query("id")Integer id, @Query("utente")String idut);
 
-    @GET("/OrdiniBar")
+    @POST("OrdiniBar")
     @FormUrlEncoded
     Call<Ordine> ordiniBa(@Query("bar")Integer id);
 
-    @GET("/OrdiniCarrello")
+    @POST("OrdiniCarrello")
     @FormUrlEncoded
     Call<Ordine> ordiniCa(@Query("orario")String orario, @Query("pagamento")int id,@Query("note")String note);
 
-    @GET("/SelezionePosizione")
+    @POST("SelezionePosizione")
     @FormUrlEncoded
     Call<Indirizzo> SelezionePosizione(@Query("x")double x, @Query("y")double y);
 
-    @GET("/ConfermaPosizione")
+    @POST("ConfermaPosizione")
     @FormUrlEncoded
     Call<Indirizzo> ConfermaPosizione(@Query("id")int posizione);
 
-    @GET("/SelezioneProdotti")
+    @POST("SelezioneProdotti")
     @FormUrlEncoded
     Call<Contiene> SelezioneProdotto(@Query("ordine")int id, @Query("prodotto")String nome,@Query("quantita") int quantita);
 
-    @GET("/ScriviDomanda")
+    @POST("ScriviDomanda")
     @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("testo")String testo);
 
-    @GET("/ScriviRisposta")
+    @POST("ScriviRisposta")
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo")String testo);
 
-    @GET("/ValutazioneFattorino")
+    @GET("ValutazioneFattorino")
     @FormUrlEncoded
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino")float valutazione);
 
-    @POST("/UpdateBar")
+    @GET("UpdateBar")
     @FormUrlEncoded
     Call<List<Bar>> UpdateBar(@Body String bar);
 
-    @POST("/UpdateProdotto")
+    @GET("UpdateProdotto")
     @FormUrlEncoded
     Call<List<Prodotto>> UpdateProdotto(@Body Prodotto post);
 
