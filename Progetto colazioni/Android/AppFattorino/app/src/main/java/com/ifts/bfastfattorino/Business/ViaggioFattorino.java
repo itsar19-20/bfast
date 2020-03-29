@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -40,6 +41,8 @@ public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCal
     private DirectionsRoute currentRoute;
     private static final String TAG = "DirectionsActivity";
     private NavigationMapRoute navigationMapRoute;
+    private MapView mapView;
+    private MapboxMap mapboxMap;
 
     private GoogleMap mMap;
     PosizioneFattorinoDBAdapter bdb = new PosizioneFattorinoDBAdapter();
@@ -106,7 +109,6 @@ public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCal
                 .getRoute(new Callback<DirectionsResponse>() {
                     @Override
                     public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-                        // You can get the generic HTTP info about the response
                         Log.d(TAG, "Response code: " + response.code());
                         if (response.body() == null) {
                             Log.e(TAG, "No routes found, make sure you set the right user and access token.");
@@ -134,10 +136,7 @@ public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCal
                 });
     }
 
-        @Override
-        public boolean onMarkerClick(Marker marker) {
-            return false;
-        }
+
 
         @Override
         public void onPointerCaptureChanged(boolean hasCapture) {
