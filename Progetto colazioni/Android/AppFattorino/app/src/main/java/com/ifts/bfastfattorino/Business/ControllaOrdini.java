@@ -59,6 +59,7 @@ class ControllaOrdini extends AppCompatActivity {
                                      @Override
                                      public void onResponse(Call<Ordine> call, Response<Ordine> response) {
                                          odb.CreazioneFattorino(session.getIDfatt());
+
                                          Intent viaggio = new Intent(ControllaOrdini.this, ViaggioFattorino.class);
                                          startActivity(viaggio);
                                      }

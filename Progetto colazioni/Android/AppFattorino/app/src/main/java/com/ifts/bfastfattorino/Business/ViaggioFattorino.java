@@ -1,16 +1,15 @@
 package com.ifts.bfastfattorino.Business;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -24,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.ifts.bfastfattorino.Adapter.PosizioneFattorinoDBAdapter;
 import com.ifts.bfastfattorino.R;
+import com.ifts.bfastfattorino.Sessioni.SessionOrdine;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -32,21 +32,23 @@ import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 
 
+import java.lang.reflect.Array;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCallback, MapboxMap.OnMapClickListener{
-    // variables for calculating and drawing a route
     private DirectionsRoute currentRoute;
     private static final String TAG = "DirectionsActivity";
     private NavigationMapRoute navigationMapRoute;
     private MapView mapView;
     private MapboxMap mapboxMap;
+    private SessionOrdine session;
+    private SQLiteDatabase db;
+
 
     private GoogleMap mMap;
-    PosizioneFattorinoDBAdapter bdb = new PosizioneFattorinoDBAdapter();
-    Marker markerUtente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +80,21 @@ public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCal
             return;
         }
         Location loc = locManager.getLastKnownLocation(bestProvider);
-            String latMy = String.valueOf(loc.getLatitude());
-            String lngMy = String.valueOf(loc.getLongitude());
-
-            Toast.makeText(this, "Navigation", Toast.LENGTH_SHORT).show();
-            String url = "http://maps.google.com/maps?saddr=" + latMy + ","
-                    + lngMy + "&daddr=" + "18.7703500,19.4534500";
-
-            Intent navigation = new Intent(Intent.ACTION_VIEW);
-            navigation.setData(Uri.parse(url));
-
-            startActivity(navigation);
-
-
+        String latMy = String.valueOf(loc.getLatitude());
+        String lngMy = String.valueOf(loc.getLongitude());
+        Point origin = new Point();
+        origin.set(Integer.getInteger(latMy),Integer.getInteger(lngMy));
+        int id = session.getIDOrd();
+        int coord[] = new Array;
+        int count = 0;
+        Cursor ris = db.rawQuery("SELECT i.x,i.y FROM Ordine as o,Indirizzo as i WHERE o.ID =" + id + "b.ID = o.IDbarFK", null);
+        while (ris.moveToNext()) {
+            coord[count] = (ris.getInt(0));
+            count++;
+        }
+        Point destination = new Point();
+        origin.set(coord[0],coord[1]);
+        getRoute(origin,destination);
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
                 @Override
@@ -101,6 +105,7 @@ public class ViaggioFattorino extends FragmentActivity implements  OnMapReadyCal
         }
 
     private void getRoute(Point origin, Point destination) {
+
         NavigationRoute.builder(this)
                 .accessToken(Mapbox.getAccessToken())
                 .origin(origin)
