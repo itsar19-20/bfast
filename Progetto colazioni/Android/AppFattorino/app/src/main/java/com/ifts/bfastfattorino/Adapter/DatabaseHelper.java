@@ -19,6 +19,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE7 = "create table PosozioneFattorino (id integer primary key autoincrement, PosX text not null unique,Posy text not null unique);";
     private static final String DB_CREATE8 = "create table Indirizzo (id integer primary key autoincrement,x double not null ," +
             "y double not null);";
+    private static final String DB_CREATE9 = "create table Ordine (id int primary key autoincrement, orario text not null unique, " +
+            "note text not null, data Date not null, confermato bit not null,valutazioneFatt float not null," +
+            " FOREIGN KEY (\"+idUser+\") REFERENCES \"+Utente+\"(\"+email+\"), FOREIGN KEY (\"+idBar+\") REFERENCES \"+Bar+\"(\"+id+\")," +
+            "FOREIGN KEY (\"+idTipoPagamento+\") REFERENCES \"+Pagamento+\"(\"+id+\")," +
+            "FOREIGN KEY (\"+idFattorino+\") REFERENCES \"+Fattorino+\"(\"+id+\"));";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -33,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE6);
         db.execSQL(DB_CREATE7);
         db.execSQL(DB_CREATE8);
+        db.execSQL(DB_CREATE9);
     }
 
     @Override
@@ -45,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Pagamento");
         db.execSQL("DROP TABLE IF EXISTS PosozioneFattorino");
         db.execSQL("DROP TABLE IF EXISTS Indirizzo");
+        db.execSQL("DROP TABLE IF EXISTS Ordine");
         onCreate(db);
     }
 

@@ -7,10 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ifts.bfastfattorino.Adapter.OrdineDBAdapter;
+import com.ifts.bfastfattorino.ModelAPP.Ordine;
 import com.ifts.bfastfattorino.R;
+import com.ifts.bfastfattorino.Sessioni.SessionFat;
+import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
+import com.ifts.bfastfattorino.Utils.RetrofitUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class ControllaOrdini extends AppCompatActivity {
 
@@ -20,7 +30,9 @@ class ControllaOrdini extends AppCompatActivity {
     private String nomeBar;
     private Button b1,b2;
     private int count =  0;
-
+    BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
+    private SessionFat session;
+    OrdineDBAdapter odb = new OrdineDBAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +54,21 @@ class ControllaOrdini extends AppCompatActivity {
             b1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent viaggio = new Intent(ControllaOrdini.this, ViaggioFattorino.class);
-                    startActivity(viaggio);
+                    Call<Ordine> call = apiService.ConfermaOrdine(session.getIDfatt());
+                    call.enqueue(new Callback<Ordine>() {
+                                     @Override
+                                     public void onResponse(Call<Ordine> call, Response<Ordine> response) {
+                                         odb.CreazioneFattorino(session.getIDfatt());
+                                         Intent viaggio = new Intent(ControllaOrdini.this, ViaggioFattorino.class);
+                                         startActivity(viaggio);
+                                     }
+
+                                     @Override
+                                     public void onFailure(Call<Ordine> call, Throwable t) {
+
+                                     }
+                                 });
+
                 }
             });
             b2 = findViewById(R.id.button);
@@ -54,7 +79,7 @@ class ControllaOrdini extends AppCompatActivity {
                 }
             });
         }
-
+        Toast.makeText(ControllaOrdini.this, "Ordini finiti sei diventato in automatico offline", Toast.LENGTH_LONG).show();
         Intent cambio = new Intent(ControllaOrdini.this, ConfigurazioneOnline.class);
         startActivity(cambio);
     }
