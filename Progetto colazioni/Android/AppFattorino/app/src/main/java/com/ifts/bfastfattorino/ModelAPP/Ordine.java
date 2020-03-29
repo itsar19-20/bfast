@@ -1,11 +1,14 @@
 package com.ifts.bfastfattorino.ModelAPP;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Ordine {
 
     private int id;
     private String idutfk;
+    @SerializedName("fattorino")
     private int idfatfk;
     private int idbarfk;
     private int idtifk;
