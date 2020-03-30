@@ -1,5 +1,6 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +74,8 @@ public class RegistrazioneActivity extends AppCompatActivity {
                                              udba.open();
                                              udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
                                              udba.close();
-                                             Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta", Toast.LENGTH_LONG).show();
+                                             Intent log = new Intent(RegistrazioneActivity.this, MapActivity.class);
+                                             startActivity(log);
                                          }
 
                                          @Override

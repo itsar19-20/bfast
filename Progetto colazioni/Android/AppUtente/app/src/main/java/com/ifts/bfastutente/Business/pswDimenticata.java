@@ -1,5 +1,7 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
@@ -29,6 +31,8 @@ public class pswDimenticata extends AppCompatActivity {
                                  udba.open();
                                  udba.updateUser(final_return.getEmail(),password, final_return.getNome(), final_return.getCognome(), final_return.getTelefono(), final_return.getNascita());
                                  udba.close();
+                                 Intent log = new Intent(pswDimenticata.this, MapActivity.class);
+                                 startActivity(log);
                              }
 
                              @Override

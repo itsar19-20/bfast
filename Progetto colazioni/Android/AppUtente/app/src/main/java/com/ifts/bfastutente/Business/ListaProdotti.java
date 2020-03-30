@@ -44,7 +44,7 @@ class ListaProdotti extends AppCompatActivity {
         seleziona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toHome = new Intent(ListaProdotti.this, MainActivity.class);//da aggiungere activity per carello
+                Intent toHome = new Intent(ListaProdotti.this, MainActivity.class);//da aggiungere activity per carrello
                 startActivity(toHome);
             }
         });

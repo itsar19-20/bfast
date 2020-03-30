@@ -2,15 +2,16 @@ package com.ifts.bfastutente.Business;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.DomandaDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Domanda;
+import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Utils.BfastUtenteApi;
 import com.ifts.bfastutente.Utils.RetrofitUtils;
-
-import java.text.ParseException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,8 +20,11 @@ import retrofit2.Response;
 public class ScriviDomanda extends AppCompatActivity {
     private SQLiteDatabase db;
 
-    public Domanda registrazione  (final String testo) throws ParseException
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText ettesto = findViewById(R.id.ETmail);
+        final String testo = ettesto.getText().toString();
         BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
         DomandaDBAdapter ddb = new DomandaDBAdapter();
         Domanda _return = null;
@@ -40,12 +44,8 @@ public class ScriviDomanda extends AppCompatActivity {
 
                              }
                          });
-
-
-            return final_return;
         }else {
             _return = (Domanda) ddb.getRisposta(ris.getColumnIndex(String.valueOf(0)));
-            return _return;
         }
     }
 

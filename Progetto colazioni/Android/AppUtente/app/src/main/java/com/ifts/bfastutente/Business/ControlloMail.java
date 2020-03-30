@@ -1,5 +1,6 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class ControlloMail extends AppCompatActivity{
                 @Override
                 public void onResponse(Call<Utente> call, Response<Utente> response) {
                     session.setMailUt(mail);
+                    Intent cambia = new Intent(ControlloMail.this, pswDimenticata.class);
+                    startActivity(cambia);
                 }
 
                 @Override
@@ -41,5 +44,6 @@ public class ControlloMail extends AppCompatActivity{
                     Toast.makeText(ControlloMail.this, "Errore nel controllo", Toast.LENGTH_LONG).show();
                 }
             });
+
     }
 }

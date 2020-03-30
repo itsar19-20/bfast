@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<Utente> call, Response<Utente> response) {
                         Utente u = (Utente) udb.getUserLogin(text1.toString());
                         session.setMailUt(text1.toString());
+                        Intent log = new Intent(LoginActivity.this, MapActivity.class);
+                        startActivity(log);
                     }
 
                     @Override
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cambia = new Intent(LoginActivity.this, pswDimenticata.class);
+                Intent cambia = new Intent(LoginActivity.this, ControlloMail.class);
                 startActivity(cambia);
             }
         });
