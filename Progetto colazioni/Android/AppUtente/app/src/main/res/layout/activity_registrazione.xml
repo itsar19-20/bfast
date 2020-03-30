@@ -29,6 +29,12 @@
 
     ]]>
 
+    <include
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/toolbar_createActivity"
+        layout="@layout/layout_toolbar" />
+
     <EditText
         android:id="@+id/ETdata"
         android:layout_width="wrap_content"
