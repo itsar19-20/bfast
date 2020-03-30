@@ -1,5 +1,6 @@
 package com.ifts.bfastutente.Business;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ public class InserisciValutazione extends AppCompatActivity {
                          @Override
                          public void onResponse(Call<Ordine> call, Response<Ordine> response) {
                              odb.setValutazioneOrdine(valutazione);
+                             Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
+                             startActivity(fine);
                          }
 
                          @Override

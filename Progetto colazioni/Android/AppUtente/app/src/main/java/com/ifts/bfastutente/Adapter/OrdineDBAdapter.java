@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrdineDBAdapter {
 
     private Context context;
@@ -86,5 +89,15 @@ public class OrdineDBAdapter {
         return database.insertOrThrow("Ordine", null, values);
     }
 
+    public List<String> getIdProdotto(int id) {
+        List<String> _return = new ArrayList<>();
+        String query = "select Prodotto.Nome from Prodotto,Ordine,Contiene " +
+                "WHERE Prodotto.Nome = Contiene.IDprFK AND Contiene.IDorFK = Ordine.ID AND Ordine.ID ="+id;
+        Cursor cursor = database.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            _return.add(cursor.getString(0));
+        }
+        return _return;
+    }
 
 }
