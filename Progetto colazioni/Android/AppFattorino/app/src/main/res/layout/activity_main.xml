@@ -7,6 +7,12 @@
     android:background="#00FFEB3B"
     tools:context=".Business.MainActivity">
 
+    <include
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/toolbar_createActivity"
+        layout="@layout/layout_toolbar" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="279dp"

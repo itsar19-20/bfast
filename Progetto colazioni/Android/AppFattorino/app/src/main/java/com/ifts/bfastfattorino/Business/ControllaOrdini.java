@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.ifts.bfastfattorino.Adapter.OrdineDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Ordine;
@@ -50,6 +51,7 @@ class ControllaOrdini extends AppCompatActivity {
             tv1.setText(x);
             tv2.setText(y);
             tv3.setText(nomeBar);
+            odb.open();
             b1 = findViewById(R.id.button3);//confermato
             b1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,7 +61,7 @@ class ControllaOrdini extends AppCompatActivity {
                                      @Override
                                      public void onResponse(Call<Ordine> call, Response<Ordine> response) {
                                          odb.CreazioneFattorino(session.getIDfatt());
-
+                                         odb.close();
                                          Intent viaggio = new Intent(ControllaOrdini.this, ViaggioFattorino.class);
                                          startActivity(viaggio);
                                      }
@@ -83,6 +85,17 @@ class ControllaOrdini extends AppCompatActivity {
         Toast.makeText(ControllaOrdini.this, "Ordini finiti sei diventato in automatico offline", Toast.LENGTH_LONG).show();
         Intent cambio = new Intent(ControllaOrdini.this, ConfigurazioneOnline.class);
         startActivity(cambio);
+    }
+
+    public void setTooblar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_createActivity);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected void onDestroy() {
+        odb.close();
+        super.onDestroy();
     }
 
 }
