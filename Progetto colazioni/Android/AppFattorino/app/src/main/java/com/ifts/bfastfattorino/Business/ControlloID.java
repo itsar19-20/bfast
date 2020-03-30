@@ -37,7 +37,9 @@ public class ControlloID extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
-
+                session.setIDfatt(id);
+                Intent cambia = new Intent(ControlloID.this, pswDimenticata.class);
+                startActivity(cambia);
             }
 
             @Override

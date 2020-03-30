@@ -9,6 +9,7 @@ import com.ifts.bfastutente.ModelAPP.Contiene;
 import com.ifts.bfastutente.ModelAPP.Ordine;
 import com.ifts.bfastutente.ModelAPP.Prodotto;
 import com.ifts.bfastutente.Sessioni.SessionOrdine;
+import com.ifts.bfastutente.Sessioni.SessionProdotto;
 import com.ifts.bfastutente.Utils.BfastUtenteApi;
 import com.ifts.bfastutente.Utils.RetrofitUtils;
 
@@ -22,10 +23,13 @@ public class Prodotti extends AppCompatActivity {
     private SessionOrdine session3;
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     final ContieneDBAdapter cdb = new ContieneDBAdapter();
-    public Contiene selezione(String prodotto, final int quantità){
+    private SessionProdotto session;
+
+    public Contiene selezione(final int quantità){
         ProdottoDBAdapter pdb = new ProdottoDBAdapter();
         Contiene c = null;
         Prodotto _return = null;
+        String prodotto = session.getNomeProdotto();
         _return = (Prodotto) pdb.getProdottoLogin(prodotto);
         if(_return != null) {
             final Ordine o = corrente(session3.getIDOrd());

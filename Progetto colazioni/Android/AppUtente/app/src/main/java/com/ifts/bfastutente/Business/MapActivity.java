@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.ifts.bfastutente.Adapter.BarDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Indirizzo;
 import com.ifts.bfastutente.R;
+import com.ifts.bfastutente.Sessioni.SessionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private GoogleMap mMap;
     BarDBAdapter bdb = new BarDBAdapter(this);
     Marker markerUtente;
+    private Ordini or;
+    private SessionBar session;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        or.creazione();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -71,6 +76,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        session.setIDBar(id);
+        or.Selezionabar();
         Intent bar = new Intent(MapActivity.this, ListaProdotti.class);
         startActivity(bar);
         return false;

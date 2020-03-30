@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                         int id = Integer.parseInt(text1.toString());
                         Fattorino f = (Fattorino) fdb.getUserLogin(id);
                         session.setIDfatt(id);
+                        Intent cambia = new Intent(LoginActivity.this, ConfigurazioneOnline.class);
+                        startActivity(cambia);
                     }
 
                     @Override
@@ -78,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cambia = new Intent(LoginActivity.this, pswDimenticata.class);
+                Intent cambia = new Intent(LoginActivity.this, ControlloID.class);
                 startActivity(cambia);
             }
         });

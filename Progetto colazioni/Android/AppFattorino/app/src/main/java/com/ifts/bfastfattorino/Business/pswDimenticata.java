@@ -1,5 +1,7 @@
 package com.ifts.bfastfattorino.Business;
 
+import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
@@ -29,6 +31,8 @@ public class pswDimenticata extends AppCompatActivity {
                                  udba.open();
                                  udba.updateUser(_return.getMail(),password,_return.getNome(),_return.getCognome(),_return.getId(),_return.getNascità());
                                  udba.close();
+                                 Intent cambia = new Intent(pswDimenticata.this, ConfigurazioneOnline.class);
+                                 startActivity(cambia);
                              }
 
                              @Override

@@ -52,7 +52,7 @@ public class Ordini extends AppCompatActivity {
             return o;
         }
 
-        public Ordine bar() {
+        public Ordine Selezionabar() {
             int ido = session3.getIDOrd();
             int idb = session2.getIDBar();
             BarDBAdapter bdb = new BarDBAdapter(this);
