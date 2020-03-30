@@ -2,6 +2,8 @@ package com.ifts.bfastfattorino.Business;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,7 @@ import com.ifts.bfastfattorino.Adapter.RispostaDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
 import com.ifts.bfastfattorino.ModelAPP.Possiede;
 import com.ifts.bfastfattorino.ModelAPP.Risposta;
+import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.Utils.RetrofitUtils;
@@ -26,7 +29,13 @@ public class ScriviRisposta extends AppCompatActivity {
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     final PossiedeDBAdapter pdb = new PossiedeDBAdapter();
 
-    public Risposta registrazione(final int domanda, String testo) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etdomanda = findViewById(R.id.editText5);
+        final EditText ettesto = findViewById(R.id.editText7);
+        final int domanda = Integer.parseInt(etdomanda.getText().toString());
+        String testo = ettesto.getText().toString();
         Integer id = session.getIDfatt();
         Risposta _return = null;
         _return= (Risposta) udba.getUserLogin(id);
@@ -55,10 +64,8 @@ public class ScriviRisposta extends AppCompatActivity {
 
                 }
             });
-            return _return;
         }else {
            _return = (Risposta) rba.getRisposta(ris.getInt(0));
-            return _return;
         }
     }
 

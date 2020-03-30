@@ -13,11 +13,12 @@ public class ValutazioneFattorino extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
     private SQLiteDatabase db;
     private SessionFat session;
-    public Cursor valutazione() {
+    public float valutazione() {
         Integer id = session.getIDfatt();
         Fattorino f = cerca(id);
         Cursor Ris = db.rawQuery("SELECT AVG(o.ValutazioneFatt) FROM `ordine` as o,fattorino as f WHERE o.IDfaFK ="+f.getId() ,null);
-        return Ris;
+        float val = Ris.getFloat(0);
+        return val;
     }
 
     public Fattorino cerca (Integer id) {

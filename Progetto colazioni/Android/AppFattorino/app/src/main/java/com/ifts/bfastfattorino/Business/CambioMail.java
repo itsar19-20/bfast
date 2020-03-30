@@ -1,10 +1,14 @@
 package com.ifts.bfastfattorino.Business;
 
 
+import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.Utils.RetrofitUtils;
@@ -18,7 +22,13 @@ public class CambioMail extends AppCompatActivity {
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     private SessionFat session;
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
-    public Fattorino cambio(String mail, String Comail) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etemail = findViewById(R.id.editText5);
+        final EditText etcomail = findViewById(R.id.editText7);
+        final String mail = etemail.getText().toString();
+        String Comail = etcomail.getText().toString();
         Integer id = session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
@@ -41,6 +51,5 @@ public class CambioMail extends AppCompatActivity {
                          });
 
         }
-        return _return;
     }
 }

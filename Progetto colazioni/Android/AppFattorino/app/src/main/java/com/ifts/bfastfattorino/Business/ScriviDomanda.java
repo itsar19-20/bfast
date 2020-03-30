@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.EditText;
+
 import com.ifts.bfastfattorino.Adapter.DomandaDBAdapter;
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Domanda;
+import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.Utils.RetrofitUtils;
@@ -14,7 +18,7 @@ import com.ifts.bfastfattorino.Utils.RetrofitUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
+
 
 public class ScriviDomanda extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
@@ -22,8 +26,11 @@ public class ScriviDomanda extends AppCompatActivity {
     private SQLiteDatabase db;
     BfastFattorinoApi apiService  = RetrofitUtils.getInstance().getBfastFattorinoApi();
 
-    public Domanda registrazione  (final String testo)
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText ettesto = findViewById(R.id.editText5);
+        final String testo = ettesto.getText().toString();
         Integer id = session.getIDfatt();
         DomandaDBAdapter ddb = new DomandaDBAdapter();
         Domanda _return = null;
@@ -45,12 +52,8 @@ public class ScriviDomanda extends AppCompatActivity {
 
                 }
             });
-
-
-            return final_return;
         }else {
           _return = (Domanda) ddb.getRisposta(ris.getColumnIndex(String.valueOf(0)));
-            return _return;
         }
     }
 

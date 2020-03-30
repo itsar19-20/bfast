@@ -58,5 +58,11 @@ public interface BfastFattorinoApi {
     @FormUrlEncoded
     Call<Ordine> ConfermaOrdine(@Query("fattorino")int id);
 
+    @POST("ConfermaID")
+    @FormUrlEncoded
+    Call<Fattorino> ConfermoID(@Query("fattorino")int id);
+
+
+
 
 }

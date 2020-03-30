@@ -1,6 +1,8 @@
 package com.ifts.bfastfattorino.Business;
 
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
@@ -17,7 +19,9 @@ public class CancellazioneFattorino extends AppCompatActivity {
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
     private SessionFat session;
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
-    public Fattorino canc() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Integer id = session.getIDfatt();
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
@@ -42,7 +46,6 @@ public class CancellazioneFattorino extends AppCompatActivity {
                          });
 
         }
-        return _return;
     }
 
 }

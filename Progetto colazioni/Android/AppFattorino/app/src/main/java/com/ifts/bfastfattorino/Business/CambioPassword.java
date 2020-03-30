@@ -1,10 +1,14 @@
 package com.ifts.bfastfattorino.Business;
 
 
+import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastfattorino.Adapter.FattorinoDBAdapter;
 import com.ifts.bfastfattorino.ModelAPP.Fattorino;
+import com.ifts.bfastfattorino.R;
 import com.ifts.bfastfattorino.Sessioni.SessionFat;
 import com.ifts.bfastfattorino.Utils.BfastFattorinoApi;
 import com.ifts.bfastfattorino.Utils.RetrofitUtils;
@@ -16,8 +20,13 @@ import retrofit2.Response;
 public class CambioPassword extends AppCompatActivity {
     private SessionFat session;
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
-    public Fattorino cambio(String password, String Copassword) {
-        Integer id = session.getIDfatt();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etpass = findViewById(R.id.editText7);
+        final EditText etcopass = findViewById(R.id.editText5);
+        final String password = etpass.getText().toString();
+        String Copassword = etcopass.getText().toString();        Integer id = session.getIDfatt();
         final FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
         Fattorino _return = null;
         _return= (Fattorino) udba.getUserLogin(id);
@@ -41,7 +50,6 @@ public class CambioPassword extends AppCompatActivity {
                          });
 
         }
-        return _return;
     }
 
 }
