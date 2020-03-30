@@ -1,6 +1,8 @@
 package com.ifts.bfastutente.Business;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import com.ifts.bfastutente.Adapter.OrdineDBAdapter;
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Ordine;
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
 import com.ifts.bfastutente.Utils.BfastUtenteApi;
 import com.ifts.bfastutente.Utils.RetrofitUtils;
@@ -23,7 +26,11 @@ public class InserisciValutazione extends AppCompatActivity {
     private SQLiteDatabase db;
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
 
-    public void inserisci(final float valutazione){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etval = findViewById(R.id.ETmail);
+        final float valutazione = Float.valueOf(etval.getText().toString());
         UserDBAdapter udb = new UserDBAdapter(this);
         final OrdineDBAdapter odb = new OrdineDBAdapter(this);
         String mail = session.getMailUt();

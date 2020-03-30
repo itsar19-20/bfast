@@ -1,11 +1,14 @@
 package com.ifts.bfastutente.Business;
 
+import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
 import com.ifts.bfastutente.Utils.BfastUtenteApi;
 import com.ifts.bfastutente.Utils.RetrofitUtils;
@@ -18,7 +21,13 @@ public class CambioPassword extends AppCompatActivity {
         private SessionUte session;
         BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
         UserDBAdapter udba = new UserDBAdapter(this);
-        public Utente cambio(final String password, String Copassword) {
+         @Override
+        protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etpass = findViewById(R.id.ETmail);
+        final EditText etcopass = findViewById(R.id.ETnome);
+        final String password = etpass.getText().toString();
+        String Copassword = etcopass.getText().toString();
             String mail = session.getMailUt();
             Utente _return = null;
             _return = (Utente) udba.getUserLogin(mail);
@@ -39,7 +48,6 @@ public class CambioPassword extends AppCompatActivity {
                                  }
                              });
             }
-            return _return;
         }
 
 

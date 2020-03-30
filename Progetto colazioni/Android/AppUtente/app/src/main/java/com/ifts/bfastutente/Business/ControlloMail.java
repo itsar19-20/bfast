@@ -1,11 +1,14 @@
 package com.ifts.bfastutente.Business;
 
+import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ifts.bfastutente.Adapter.UserDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Utente;
+import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionUte;
 import com.ifts.bfastutente.Utils.BfastUtenteApi;
 import com.ifts.bfastutente.Utils.RetrofitUtils;
@@ -18,7 +21,11 @@ public class ControlloMail extends AppCompatActivity{
     UserDBAdapter udba = new UserDBAdapter(this);
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     private SessionUte session;
-    public Utente cambio(final String mail) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final EditText etemail = findViewById(R.id.ETmail);
+        final String mail = etemail.getText().toString();
             Utente _return = null;
             _return = (Utente) udba.getUserLogin("mail");
             Call<Utente> call = apiService.ConfermaMail(mail);
@@ -34,6 +41,5 @@ public class ControlloMail extends AppCompatActivity{
                     Toast.makeText(ControlloMail.this, "Errore nel controllo", Toast.LENGTH_LONG).show();
                 }
             });
-            return _return;
     }
 }

@@ -16,7 +16,7 @@ import retrofit2.Response;
 public class ConfermaPosizione extends AppCompatActivity {
 
         BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
-    private SQLiteDatabase db;
+        private SQLiteDatabase db;
 
         public int Visualizza(final double x, final double y) {
 
