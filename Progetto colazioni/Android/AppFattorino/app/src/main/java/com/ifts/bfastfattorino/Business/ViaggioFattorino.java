@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
-// classes needed to initialize map
 import com.ifts.bfastfattorino.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -16,13 +15,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-// classes needed to add the location component
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 
-// classes needed to add a marker
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -31,8 +28,6 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-
-// classes to calculate a route
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
@@ -43,30 +38,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.util.Log;
 
-// classes needed to launch navigation UI
 import android.view.View;
 import android.widget.Button;
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
 
 
-public class Provaviaggio extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnMapClickListener, PermissionsListener {
-    // variables for adding location layer
+public class ViaggioFattorino extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnMapClickListener, PermissionsListener {
+
     private MapView mapView;
     private MapboxMap mapboxMap;
-    // variables for adding location layer
     private PermissionsManager permissionsManager;
     private LocationComponent locationComponent;
-    // variables for calculating and drawing a route
     private DirectionsRoute currentRoute;
     private static final String TAG = "DirectionsActivity";
     private NavigationMapRoute navigationMapRoute;
-    // variables needed to initialize navigation
     private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, getString(R.string.mapbox_attributionsIconContentDescription));//mapbox_marker_icon_default
+        Mapbox.getInstance(this, getString(R.string.mapbox_marker_icon_default));
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -83,7 +74,7 @@ public class Provaviaggio extends AppCompatActivity implements OnMapReadyCallbac
 
                 addDestinationIconSymbolLayer(style);
 
-                mapboxMap.addOnMapClickListener(Provaviaggio.this);
+                mapboxMap.addOnMapClickListener(ViaggioFattorino.this);
                 button = findViewById(R.id.button);//inizio navigazione
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -93,8 +84,7 @@ public class Provaviaggio extends AppCompatActivity implements OnMapReadyCallbac
                                 .directionsRoute(currentRoute)
                                 .shouldSimulateRoute(simulateRoute)
                                 .build();
-                        // Call this method with Context from within an Activity
-                        NavigationLauncher.startNavigation(Provaviaggio.this, options);
+                        NavigationLauncher.startNavigation(ViaggioFattorino.this, options);
                     }
                 });
             }
@@ -155,7 +145,6 @@ public class Provaviaggio extends AppCompatActivity implements OnMapReadyCallbac
 
                         currentRoute = response.body().routes().get(0);
 
-                        // Draw the route on the map
                         if (navigationMapRoute != null) {
                             navigationMapRoute.removeRoute();
                         } else {
