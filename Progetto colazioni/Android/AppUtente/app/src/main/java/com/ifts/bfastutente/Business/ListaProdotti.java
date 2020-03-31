@@ -1,21 +1,23 @@
 package com.ifts.bfastutente.Business;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ifts.bfastutente.Adapter.ProdottoDBAdapter;
 import com.ifts.bfastutente.ModelAPP.Prodotto;
 import com.ifts.bfastutente.R;
 import com.ifts.bfastutente.Sessioni.SessionProdotto;
+import com.ifts.bfastutente.Utils.ListSampleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,10 @@ class ListaProdotti extends AppCompatActivity {
     EditText etAuthor, etTitle, etBody;
     ProdottoDBAdapter pdb = new ProdottoDBAdapter();
     ConstraintLayout constraintLayout;
-    FloatingActionButton seleziona;
     private SessionProdotto session;
-    private String nome;
+    private ListSampleActivity prodottoCursorAdapter;
+    private ListView listView;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +45,15 @@ class ListaProdotti extends AppCompatActivity {
             Prodotto pr = null;
             pr.setNome(prodotto.get(i));
             etNome.setText(prodotto.get(i));
-            nome = data.getString("nome");
         }
-        seleziona = findViewById(R.id.BtnLogin);//da vedere in base alla view
-        seleziona.setOnClickListener(new View.OnClickListener() {
+        prodottoCursorAdapter = new ListSampleActivity(ListaProdotti.this, pdb.fetchProdotto());
+        listView.setAdapter(prodottoCursorAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                session.setNomeProdotto(nome);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = (Cursor) prodottoCursorAdapter.getItem(position);
+                String s = cursor.getString(0);
+                session.setNomeProdotto(s);
                 Intent toHome = new Intent(ListaProdotti.this, VisualizzazioneProdotto.class);
                 startActivity(toHome);
             }

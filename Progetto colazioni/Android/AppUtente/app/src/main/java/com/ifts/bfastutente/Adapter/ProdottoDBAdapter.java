@@ -56,7 +56,7 @@ public class ProdottoDBAdapter {
 
     public boolean updateBar(String nome,String ingrediente, float costo, String tipo) {
         ContentValues updatevalues = createContentValues(nome,ingrediente, costo, tipo);
-        return database.update("user", updatevalues, KEY_NOME + "=" + nome, null) > 0;
+        return database.update("Prodotto", updatevalues, KEY_NOME + "=" + nome, null) > 0;
     }
     public List<String> getIdProdotto() {
         List<String> _return = new ArrayList<>();
@@ -67,5 +67,12 @@ public class ProdottoDBAdapter {
         }
         return _return;
     }
+
+    public Cursor fetchProdotto() {
+        return database.query("Prodotto", new String[]
+                        {KEY_NOME, KEY_INGREDIENTE, KEY_COSTO, KEY_TIPO},
+                null, null, null, null, null);
+    }
+
 
 }
