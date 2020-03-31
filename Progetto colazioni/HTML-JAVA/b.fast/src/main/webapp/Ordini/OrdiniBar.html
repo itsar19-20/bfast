@@ -1,0 +1,125 @@
+﻿<!doctype html>
+<html lang="it-it">
+
+<head>
+    <title>Bfast</title>
+
+    <meta charset="utf-8">
+
+    <!-- Serve per ottimizzare prima i dispositi mobili e poi in base alla necessità utilizzando 
+                le query multimediali CSS. 
+                Per garantire il rendering corretto e lo zoom tattile per tutti i dispositivi  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Collegamento con Style.css -->
+    <link rel="stylesheet" type="text/css" href="Style.css">
+
+</head>
+
+<body>
+
+    <!--
+        <div class="btn-group">
+            <button id="Cliente" type="button" class="btn btn-primary">Customer</button>       
+            <button id="Ristorante" type="button" class="btn btn-primary">Ristorante</button>
+            <button id="Fattorino" type="button" class="btn btn-primary">Delivery man</button>
+        </div>
+    -->
+    <!--Navigation-->
+	<div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="d-inline-flex justify-content-between w-100 align-items-center">
+				<div>
+                    <button type="button" id="sidebarCollapse" class="btn">
+                        <img src="../img/logo4.png" class="img-fluid">
+                    </button>
+				</div>					
+				</div>
+            </nav>
+    <!--End Navigation-->
+
+    </br>
+    <h5 class="h1 text-center text-white" id="datiApp" >Tutti i tuoi ordini</h5>
+
+    <form action="ConfermaRegistrazione" method="POST">
+        <div class="login2">
+            <div class="login-screen2">
+                <div class="app-title">
+                    <h1>Ordine ID 1</h1>
+                </div>
+
+                <div class="login-form">
+                    <!--UserName-->
+                    <div class="control-group">
+                        <p class="text-dark">Cibo:Caffè Croissant    Ora:8   Note:NULL </P>
+					</div>
+                   	<div class="d-flex justify-content-center">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-success">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-white text-white">
+					<input type="submit" onclick="validazione(event);" value="Rifiuta" class=" bg-danger">
+					</div>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+	    <form action="ConfermaRegistrazione" method="POST">
+        <div class="login2">
+            <div class="login-screen2">
+                <div class="app-title">
+                    <h1>Ordine ID 2</h1>
+                </div>
+
+                <div class="login-form">
+                    <!--UserName-->
+                    <div class="control-group">
+                        <p class="text-dark">Cibo:Spremuta di arance Cappuccino   Ora:10   Note:Latte di soia pls </P>
+					</div>
+ 					<div class="d-flex justify-content-center">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-success">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-white text-white">
+					<input type="submit" onclick="validazione(event);" value="Rifiuta" class=" bg-danger">
+					</div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+	    <form action="ConfermaRegistrazione" method="POST">
+        <div class="login2">
+            <div class="login-screen2">
+                <div class="app-title">
+                    <h1>Ordine ID 7</h1>
+                </div>
+
+                <div class="login-form">
+                    <!--UserName-->
+                    <div class="control-group">
+                        <p class="text-dark">Cibo:Uova e bacon         Ora:8.35   Note:Citofono Rotto!! Chiamatemi </P>
+					</div>
+					<div class="d-flex justify-content-center">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-success">
+					<input type="submit" onclick="validazione(event);" value="Conferma" class="bg-white text-white">
+					<input type="submit" onclick="validazione(event);" value="Rifiuta" class=" bg-danger">
+					</div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="Regole.js"></script>
+
+</body>
+
+</html>
