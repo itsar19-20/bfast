@@ -69,7 +69,7 @@ class ListaProdotti extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent toHome = new Intent(ListaProdotti.this, MainActivity.class);//da aggiungere activity per carrello
+                    Intent toHome = new Intent(ListaProdotti.this, Carrello.class);
                     startActivity(toHome);
             }
         });
