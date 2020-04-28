@@ -9,8 +9,10 @@ import utils.JPAUtil;
 
 public class CambioIndirizzoOrario {
 
-	public Bar indirizzo(int s, double x, double y) {
+	public Bar indirizzo(int s, String  x1, String y1) {
 		Bar _return = null;
+		double x = Double.parseDouble(x1);
+		double y = Double.parseDouble(y1);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);
 		Indirizzo i = null;
@@ -21,7 +23,7 @@ public class CambioIndirizzoOrario {
 			i = em.find(Indirizzo.class, id);
 		}			
 		em.getTransaction().begin();
-		_return.setIndirizzoBean(i);
+		_return.setIndirizzo(i);
 		em.getTransaction().commit();			
 		return _return;
 	}
@@ -42,7 +44,7 @@ public class CambioIndirizzoOrario {
 		int id = 0;
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
 				+ "WHERE i.x =:X AND i.Y = :y"
-				+ "").setParameter("X", x).setParameter("Y", y)S;
+				+ "").setParameter("X", x).setParameter("Y", y);
 		if(Ris != null) {
 			id = Ris.getFirstResult();
 		}

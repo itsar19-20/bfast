@@ -39,9 +39,11 @@ public class RegistrazioneBar {
 
 
 
-	public Indirizzo Conregistrazione(int s, String orarioap, String orarioch, double x, double y) {
+	public Indirizzo Conregistrazione(int s, String orarioap, String orarioch, String  x1, String  y1) {
 		Bar _return = null;
 		Indirizzo i = null;
+		double x = Double.parseDouble(x1);
+		double y = Double.parseDouble(y1);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);
 		if (_return != null) {
@@ -53,7 +55,7 @@ public class RegistrazioneBar {
 			}else {
 				i = em.find(Indirizzo.class, id);
 			}			
-			_return.setIndirizzoBean(i);
+			_return.setIndirizzo(i);
 			em.getTransaction().begin();
 		    em.persist(_return);
 		    em.getTransaction().commit();
@@ -66,7 +68,7 @@ public class RegistrazioneBar {
 		int id = 0;
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
 				+ "WHERE i.X =:x AND i.Y = :y"
-				+ "").setParameter("X", x).setParameter("Y", yS);
+				+ "").setParameter("X", x).setParameter("Y", y);
 		if(Ris != null) {
 			id = Ris.getFirstResult();
 		}
