@@ -49,12 +49,7 @@ public class RegistrazioneBar {
 		if (_return != null) {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
-			int id = cerca(x,y,em);
-			if(id == 0) {
-				i = creazione(x,y,em);
-			}else {
-				i = em.find(Indirizzo.class, id);
-			}			
+			i = cerca(x,y,em);		
 			_return.setIndirizzo(i);
 			em.getTransaction().begin();
 		    em.persist(_return);
@@ -63,28 +58,38 @@ public class RegistrazioneBar {
 		return _return;
 	}
 	
-	public int cerca(double x, double y,EntityManager em) {
-		int id = 0;
-		em.getTransaction().begin();
-		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
-				+ "WHERE i.x =:x AND i.y = :y"
-				+ "").setParameter("x", x).setParameter("y", y);
-		if(Ris != null) {
-			id = Ris.getFirstResult();
+	public Indirizzo cerca(double x, double y,EntityManager em) {
+        int chk=0;
+		Indirizzo i = null;
+		try {
+			em.getTransaction().begin();
+			Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
+					+ "WHERE i.x =:x AND i.y = :y"
+					+ "").setParameter("x", x).setParameter("y", y);
+			i = (Indirizzo) Ris.getSingleResult();
+			em.getTransaction().commit();
+		}catch (Exception e)
+        {
+            chk=-1;
+             System.out.println("HibernateException Occured!!"+e);
+            e.printStackTrace();
+	    }
+		finally
+		    {
+		            if(em!=null)
+		            {
+		                 em.clear();
+		                 em.close();
+		            }
+		    }
+		if(chk==0)
+		{
+		    return (i);
 		}
-		em.getTransaction().commit();
-		return id;
-	}
-	
-	
-	public Indirizzo creazione(double x, double y,EntityManager em) {
-		Indirizzo _return = new Indirizzo();
-		_return.setY(y);
-		_return.setX(x);
-		em.getTransaction().begin();
-	    em.persist(_return);
-	    em.getTransaction().commit();
-		return _return;
-	}
-	
+		else
+		{
+		    return (new Indirizzo());
+		}
+		
+		}		
 }
