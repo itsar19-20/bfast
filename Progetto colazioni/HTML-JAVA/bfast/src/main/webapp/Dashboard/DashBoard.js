@@ -7,13 +7,13 @@ $(() => {
 
 			})
 	$.ajax({
-			url: '/Bfast/StatisticheMensili',
+			url: '/Bfast/Dashboard/Mese',
 			method: 'get'
 		}).done((Mese) => {
 				alert(Mese);
 			})
 	$.ajax({
-			url: '/Bfast/OrdiniConfermare',
+			url: '/Bfast/Conf',
 			method: 'get'
 		}).done((Ordini) => {
 				Alert(Ordini)
