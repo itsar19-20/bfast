@@ -33,8 +33,8 @@ public class PaginaOrdiniConfermare extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		TotaleOrdiniConfermare am = new TotaleOrdiniConfermare();
-		/*int s= (Integer) ses.getAttribute("ID");
-		List<Ordine> t = am.PagVisualizza(s);*/
+		int s= (Integer) ses.getAttribute("ID");
+		List<Ordine> t = am.PagVisualizza(s);
         String htmlRespone = "";
         PrintWriter writer = response.getWriter();
         htmlRespone += "<!doctype html>\r\n" + 
@@ -84,9 +84,9 @@ public class PaginaOrdiniConfermare extends HttpServlet {
         		"                            </div>\r\n" + 
         		" \r\n"+
         		"                            <div class=\"login-form\">\r\n" + 
-                "<form action=\"orario\" method=\"POST\">"+
+                "<form action=\"conferma\" method=\"POST\">"+
         		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
-                "<form action=\"orario\" method=\"POST\">"+
+                "<form action=\"rifiuta\" method=\"POST\">"+
         		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Rifiuta\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" + 
         		"                            </div>\r\n" + 
         		"\r\n" + 
