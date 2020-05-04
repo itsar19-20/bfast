@@ -49,9 +49,6 @@ public class RegistrazioneBar {
 		if (_return != null) {
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
-			em.getTransaction().begin();
-		    em.persist(_return);
-		    em.getTransaction().commit();
 			int id = cerca(x,y,em);
 			if(id == 0) {
 				i = creazione(x,y,em);
@@ -59,18 +56,23 @@ public class RegistrazioneBar {
 				i = em.find(Indirizzo.class, id);
 			}			
 			_return.setIndirizzo(i);
+			em.getTransaction().begin();
+		    em.persist(_return);
+		    em.getTransaction().commit();
 		}
 		return _return;
 	}
 	
 	public int cerca(double x, double y,EntityManager em) {
 		int id = 0;
+		em.getTransaction().begin();
 		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
 				+ "WHERE i.x =:x AND i.y = :y"
 				+ "").setParameter("x", x).setParameter("y", y);
 		if(Ris != null) {
 			id = Ris.getFirstResult();
 		}
+		em.getTransaction().commit();
 		return id;
 	}
 	

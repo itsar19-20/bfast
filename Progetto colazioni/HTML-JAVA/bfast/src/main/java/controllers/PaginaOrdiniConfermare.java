@@ -82,6 +82,7 @@ public class PaginaOrdiniConfermare extends HttpServlet {
         		"                            <div class=\"app-title\">\r\n" + 
         		"                                <h1>Ordine n:"+1 +"</h1>\r\n" + 
         		"                            </div>\r\n" + 
+        		" \r\n"+
         		"                            <div class=\"login-form\">\r\n" + 
                 "<form action=\"orario\" method=\"POST\">"+
         		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
