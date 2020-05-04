@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.TotaleOrdiniGiornalieri;
 
@@ -34,8 +33,9 @@ public class PaginaOrdiniMensili extends HttpServlet {
 		TotaleOrdiniGiornalieri am = new TotaleOrdiniGiornalieri();
 		int s= (Integer) ses.getAttribute("ID");
 		int t = am.Visualizza(s);
-		ObjectMapper om = new ObjectMapper();
-		response.getWriter().append(om.writeValueAsString(t));
+        PrintWriter writer = response.getWriter();
+        String htmlRespone = "<script> alert("+t+"); window.location = '../Dashboard/index.html'  </script> ";
+        writer.println(htmlRespone);
 	}
 
 	/**

@@ -88,7 +88,9 @@ public class RegistrazioneBar {
 		}
 		else
 		{
-		    return (new Indirizzo());
+			i.setX(x);
+			i.setY(y);
+		    return (i);
 		}
 		
 		}		
