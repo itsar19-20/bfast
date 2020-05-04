@@ -21,9 +21,6 @@ public class Bar implements Serializable {
 
 	private float fascia;
 
-	@Lob
-	private byte[] immagine;
-
 	private String nome;
 
 	private String orarioApertura;
@@ -76,14 +73,6 @@ public class Bar implements Serializable {
 
 	public void setFascia(float fascia) {
 		this.fascia = fascia;
-	}
-
-	public byte[] getImmagine() {
-		return this.immagine;
-	}
-
-	public void setImmagine(byte[] immagine) {
-		this.immagine = immagine;
 	}
 
 	public String getNome() {

@@ -36,7 +36,7 @@ public class PasswordDimenticataController extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("../PasswordDimenticata/cambio.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
 		}
 	}
 
