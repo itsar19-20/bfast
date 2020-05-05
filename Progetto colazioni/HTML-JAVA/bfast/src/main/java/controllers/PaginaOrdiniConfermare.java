@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import business.TotaleOrdiniConfermare;
 import model.Ordine;
+import utils.OrdiniUtil;
 
 @WebServlet("/Dashboard/Ora")
 public class PaginaOrdiniConfermare extends HttpServlet {
@@ -34,7 +34,7 @@ public class PaginaOrdiniConfermare extends HttpServlet {
 		HttpSession ses = request.getSession();
 		TotaleOrdiniConfermare am = new TotaleOrdiniConfermare();
 		int s= (Integer) ses.getAttribute("ID");
-		List<Ordine> t = am.PagVisualizza(s);
+		OrdiniUtil[] ou = am.PagVisualizza(s);
         String htmlRespone = "";
         PrintWriter writer = response.getWriter();
         htmlRespone += "<!doctype html>\r\n" + 
@@ -77,21 +77,28 @@ public class PaginaOrdiniConfermare extends HttpServlet {
         		"					</div>	\r\n"+ 
         		"				</div>\r\n" + 
         		"            </nav>";
-        htmlRespone += "                <div class=\"login mt-50 p-auto\">\r\n" + 
-        		"                    <div class=\"login-screen2\">\r\n" + 
-        		"                            <div class=\"app-title\">\r\n" + 
-        		"                                <h1>Ordine n:"+1 +"</h1>\r\n" + 
-        		"                            </div>\r\n" + 
-        		" \r\n"+
-        		"                            <div class=\"login-form\">\r\n" + 
-                "<form action=\"conferma\" method=\"POST\">"+
-        		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
-                "<form action=\"rifiuta\" method=\"POST\">"+
-        		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Rifiuta\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" + 
-        		"                            </div>\r\n" + 
-        		"\r\n" + 
-        		"                    </div>\r\n" + 
-        		"                </div>";      
+        if(ou == null) {
+        	htmlRespone +="<p class=\"h1 text-center text-white\"> Nessun ordine da controllare";
+        }else {
+            for(int a =0;a<ou.length;a++) {
+            	htmlRespone += "                <div class=\"login mt-50 p-auto\">\r\n" + 
+                		"                    <div class=\"login-screen2\">\r\n" + 
+                		"                            <div class=\"app-title\">\r\n" + 
+                		"                                <h1>Ordine n:"+ou[a].getId() +"</h1>\r\n" + 
+                		"                            </div>\r\n" + 
+                		" <p> Prodotti:"+ou[a].getIngredienti()+"Orario"+ou[a].getOrario()+"Note"+ou[a].getNote()+"\r\n"+
+                		"                            <div class=\"login-form\">\r\n" + 
+                        "<form action=\"conferma\" method=\"POST\">"+
+                		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
+                        "<form action=\"rifiuta\" method=\"POST\">"+
+                		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Rifiuta\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" + 
+                		"                            </div>\r\n" + 
+                		"\r\n" + 
+                		"                    </div>\r\n" + 
+                		"                </div>";      
+            }
+        }
+
         htmlRespone += "    <!-- Optional JavaScript -->\r\n" + 
         		"    <!-- jQuery first, then Popper.js, then Bootstrap JS -->\r\n" + 
         		"    <script src=\"https://code.jquery.com/jquery-3.4.1.slim.min.js\" integrity=\"sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n\" crossorigin=\"anonymous\"></script>\r\n" + 

@@ -9,6 +9,7 @@ import java.util.List;
 import model.Bar;
 import model.Ordine;
 import utils.JPAUtil;
+import utils.OrdiniUtil;
 
 public class TotaleOrdiniConfermare {
 	
@@ -47,16 +48,26 @@ public class TotaleOrdiniConfermare {
 }		
 
 	
-	public List<Ordine> PagVisualizza(int id){
+	public OrdiniUtil[] PagVisualizza(int id){
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
+		List<Integer> listid = new ArrayList<Integer> (); 
+		List<String> listora = new ArrayList<String> (); 
+		List<String> listnote = new ArrayList<String> (); 
+		List<String> listing = new ArrayList<String> ();
 		List<Ordine> lista = new ArrayList<Ordine> ();
 		int chk = 0;
 		try {
 			em.getTransaction().begin();
-			Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-					"WHERE DAY(o.data) = DAY(getdate()) and :b.id = o.IDbarFK and o.Confermato = '0' ").setParameter("b.id", b.getId());
-			lista = Ris.getResultList(); 
+			Query Ris = em.createQuery("SELECT o.ID FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
+			Query Ris2 = em.createQuery("SELECT o.Orario FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
+			Query Ris3 = em.createQuery("SELECT o.Note FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
+			listid = Ris.getResultList(); 
+			listora = Ris2.getResultList();
+			listnote = Ris3.getResultList();
 			em.getTransaction().commit();
 		}catch (Exception e){
             chk=-1;
@@ -79,7 +90,15 @@ if(chk==0)
     }
     else
     {
-         return (lista);
+    	OrdiniUtil[] ou = new OrdiniUtil[lista.size()];
+    	for(int i : listid) {
+    		ou[i].setId(listid.get(i));
+        	listing.addAll(i, ingredientiquant(em,b,ou[i].getId()));
+        	ou[i].setIngredienti(listing.get(i));
+        	ou[i].setOrario(listora.get(i));
+        	ou[i].setNote(listnote.get(i));
+    	}
+    	return ou;
     }
 }
 else
@@ -89,6 +108,47 @@ else
 
 	}
 
+	private List<String> ingredientiquant(EntityManager em,Bar b,int id) {
+		int chk=0;
+		List<Integer> listquan = new ArrayList<Integer> (); 
+		List<String> listing = new ArrayList<String> ();
+		List<String> concat = new ArrayList<String> ();
+		try {
+			em.getTransaction().begin();
+			Query Ris = em.createQuery("SELECT p.Nome FROM ordine as o, bar as b,contiene as c,prodotto as p\r\n" + 
+					"WHERE o.ID = c.IDorFK AND p.Nome = c.IDprFK AND o.ID = :sel AND b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0")
+					.setParameter("numero", b.getId()).setParameter("sel", id);
+			Query Ris2 = em.createQuery("SELECT c.Quantita FROM ordine as o, bar as b,contiene as c\r\n" + 
+					"WHERE o.ID = c.IDorFK AND o.ID = :sel AND b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0")
+					.setParameter("numero", b.getId()).setParameter("sel", id);
+			listing = Ris.getResultList();
+			listquan = Ris2.getResultList(); //lista di interi
+			em.getTransaction().commit();
+		}catch (Exception e){
+            chk=-1;
+             System.out.println("HibernateException Occured!!"+e);
+            e.printStackTrace();
+    }
+	if(chk==0)
+	{
+		 if(listing.isEmpty() || listquan.isEmpty())
+		 {
+		        return (null);
+		 }
+		 else
+		 {
+			String concatena =""; 
+		    for(int i : listquan) {
+		    	concatena += listing.get(i)+listquan.get(i);
+		    }
+	    	concat.add(0,concatena);
+	    	return concat;
+		 }
+		}
+		else
+		{
+		    return (null);
+		}
+	}
+	
 }
-
-
