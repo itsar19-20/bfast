@@ -1,5 +1,8 @@
 package business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -13,8 +16,8 @@ public class CambioIndirizzoOrario {
 		Bar _return = null;
 		double x = Double.parseDouble(x1);
 		double y = Double.parseDouble(y1);
+		Indirizzo i = cerca( x, y);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Indirizzo i = cerca( x, y,em);	
 		_return = em.find(Bar.class, s);
 		em.getTransaction().begin();
 		_return.setIndirizzo(i);
@@ -34,14 +37,16 @@ public class CambioIndirizzoOrario {
 		return _return;
 	}	
 
-	public Indirizzo cerca(double x, double y,EntityManager em) {
+	public Indirizzo cerca(double x, double y) {
+		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		 int chk=0;
 			Indirizzo i = null;
-			int id = 0;
+			List<Integer> listid = new ArrayList<Integer> (); 
 			try {
 				Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
 						+ "WHERE i.x = "+x+" AND i.y = "+y+"");
-	        	id = Ris.getFirstResult();
+				listid = Ris.getResultList(); 
+				int id = listid.get(0);
 				i= em.find(Indirizzo.class, id);
 			}catch (Exception e)
 	        {
@@ -64,7 +69,7 @@ public class CambioIndirizzoOrario {
 				    return (i);
 				}catch (NullPointerException e)
 		        {
-		            System.out.println("HibernateException Occured!!"+e);
+		            System.out.println("Non riesco a creare l'indirizzo!!"+e);
 		            e.printStackTrace();
 		            return(null);
 			    }

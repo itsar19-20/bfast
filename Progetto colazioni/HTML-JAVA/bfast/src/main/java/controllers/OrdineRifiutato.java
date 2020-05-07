@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import business.SelezioneOrdine;
+import model.Ordine;
+
 
 @WebServlet("/Dashboard/rifiuta")
 public class OrdineRifiutato extends HttpServlet {
@@ -27,9 +30,18 @@ public class OrdineRifiutato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        PrintWriter writer = response.getWriter();
-        String htmlRespone = "<script> alert('Ordine rifiutato'); window.location = '../Dashboard/Ora'  </script> ";
-        writer.println(htmlRespone);
+		SelezioneOrdine or = new SelezioneOrdine();
+		Ordine o = or.rifiutato(request.getParameter("Ordine"));
+		if(o!=null) {
+	        PrintWriter writer = response.getWriter();
+	        String htmlRespone = "<script> alert('Ordine rifiutato'); window.location = '../Dashboard/Ora'  </script> ";
+	        writer.println(htmlRespone);
+		}else {
+			PrintWriter writer = response.getWriter();
+	        String htmlRespone = "<script> alert('Qualcosa è andato storto'); window.location = '../Dashboard/Ora'  </script> ";
+	        writer.println(htmlRespone);
+		}
+
 	}
 
 	/**

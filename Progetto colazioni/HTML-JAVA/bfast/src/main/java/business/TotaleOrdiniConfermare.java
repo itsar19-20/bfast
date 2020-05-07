@@ -20,7 +20,7 @@ public class TotaleOrdiniConfermare {
 		Bar b = em.find(Bar.class, id);
 		try {
 			Query Ris = em.createNativeQuery("SELECT COUNT(*)FROM ordine as o, bar as b\r\n" + 
-					"WHERE DAY(o.data) = MONTH(CURRENT_DATE) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK and o.Confermato = 0 ");
+					"WHERE b.id ="+b.getId()+"  AND b.id= o.IDbarFK and o.Confermato = 0 ");
 			numero = (Long)Ris.getSingleResult();
 		}catch (Exception e)
         {
@@ -54,10 +54,8 @@ public class TotaleOrdiniConfermare {
 		List<Integer> listid = new ArrayList<Integer> (); 
 		List<String> listora = new ArrayList<String> (); 
 		List<String> listnote = new ArrayList<String> (); 
-		List<Ordine> lista = new ArrayList<Ordine> ();
 		int chk = 0;
 		try {
-			em.getTransaction().begin();
 			Query Ris = em.createNativeQuery("SELECT o.ID FROM ordine as o, bar as b\r\n" + 
 					"WHERE b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
 			Query Ris2 = em.createNativeQuery("SELECT o.Orario FROM ordine as o, bar as b\r\n" + 
@@ -67,30 +65,22 @@ public class TotaleOrdiniConfermare {
 			listid = Ris.getResultList(); 
 			listora = Ris2.getResultList();
 			listnote = Ris3.getResultList();
-			em.getTransaction().commit();
 		}catch (Exception e){
             chk=-1;
              System.out.println("HibernateException Occured!!"+e);
             e.printStackTrace();
     }
-finally
-    {
-            if(em!=null)
-            {
-                 em.clear();
-                 em.close();
-            }
-    }
 if(chk==0)
 {
-    if(lista.isEmpty())
+    if(listid.isEmpty())
     {
         return (null);
     }
     else
     {
-    	OrdiniUtil[] ou = new OrdiniUtil[lista.size()];
-    	for(int i : listid) {
+    	int count = listid.size();
+    	OrdiniUtil[] ou = new OrdiniUtil[listid.size()];
+    	for(int i=0;i<count;i++) {
     		ou[i]= new OrdiniUtil();
     		ou[i].setId(listid.get(i));
         	ou[i].setIngredienti(ingredientiquant(em,b,ou[i].getId()));
@@ -133,9 +123,10 @@ else
 		 }
 		 else
 		 {
+		    int count = listquan.size();
 			String concatena ="";
-		    for(int i : listquan) {
-		    	concatena += listing.get(i)+listquan.get(i);
+	    	for(int i=0;i<count;i++) {
+		    	concatena += listquan.get(i)+listing.get(i)+"   ";
 		    }
 	    	return concatena;
 		 }

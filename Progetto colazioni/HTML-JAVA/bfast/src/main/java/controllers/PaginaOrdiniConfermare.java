@@ -86,16 +86,20 @@ public class PaginaOrdiniConfermare extends HttpServlet {
                 		"                            <div class=\"app-title\">\r\n" + 
                 		"                                <h1>Ordine n:"+ou[a].getId() +"</h1>\r\n" + 
                 		"                            </div>\r\n" + 
-                		" <p> Prodotti:"+ou[a].getIngredienti()+"Orario"+ou[a].getOrario()+"Note"+ou[a].getNote()+"\r\n"+
-                		"                            <div class=\"login-form\">\r\n" + 
+                		" <p> Prodotti: "+ou[a].getIngredienti()+" Orario "+ou[a].getOrario()+" Note: "+ou[a].getNote()+"\r\n"+
+                		"                            <div class=\"login-form d-flex justify-content-center\">\r\n" + 
                         "<form action=\"conferma\" method=\"POST\">"+
-                		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
+                        "<input type=\"hidden\" name=\"Ordine\" value="+ou[a].getId()+" />"+
+                		"                                <input type=\"submit\" value=\"Conferma\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" + 
+                		"<form>"+
+                        		"                                <input type=\"button\" class=\"bg-light text-white\"> </form>\r\n" + 
                         "<form action=\"rifiuta\" method=\"POST\">"+
-                		"                                <input type=\"submit\" onclick=\"validazione(event);\" value=\"Rifiuta\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" + 
+                        "<input type=\"hidden\" name=\"Ordine\" value="+ou[a].getId()+" />"+
+                		"                                <input type=\"submit\" value=\"Rifiuta\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" + 
                 		"                            </div>\r\n" + 
                 		"\r\n" + 
                 		"                    </div>\r\n" + 
-                		"                </div>";      
+                		"                </div></br>";      
             }
         }
 

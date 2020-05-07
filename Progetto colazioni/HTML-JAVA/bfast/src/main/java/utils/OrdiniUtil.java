@@ -42,4 +42,11 @@ public class OrdiniUtil {
 		this.orario = orario;
 	}
 
+	@Override
+	public String toString() {
+		return "OrdiniUtil [id=" + id + ", ingredienti=" + ingredienti + ", note=" + note + ", orario=" + orario + "]";
+	}
+	
+	
+
 }

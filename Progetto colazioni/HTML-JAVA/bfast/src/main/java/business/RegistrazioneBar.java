@@ -1,6 +1,8 @@
 package business;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -61,11 +63,12 @@ public class RegistrazioneBar {
 	public Indirizzo cerca(double x, double y,EntityManager em) {
 		 int chk=0;
 			Indirizzo i = null;
-			int id = 0;
+			List<Integer> listid = new ArrayList<Integer> (); 
 			try {
 				Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
 						+ "WHERE i.x = "+x+" AND i.y = "+y+"");
-	        	id = Ris.getFirstResult();
+				listid = Ris.getResultList(); 
+				int id = listid.get(0);
 				i= em.find(Indirizzo.class, id);
 			}catch (Exception e)
 	        {
@@ -88,12 +91,12 @@ public class RegistrazioneBar {
 				    return (i);
 				}catch (NullPointerException e)
 		        {
-		            System.out.println("HibernateException Occured!!"+e);
+		            System.out.println("Non riesco a creare l'indirizzo!!"+e);
 		            e.printStackTrace();
 		            return(null);
 			    }
 				
 			}
 			
-			}	
+			}		
 }
