@@ -14,14 +14,8 @@ public class CambioIndirizzoOrario {
 		double x = Double.parseDouble(x1);
 		double y = Double.parseDouble(y1);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+		Indirizzo i = cerca( x, y,em);	
 		_return = em.find(Bar.class, s);
-		Indirizzo i = null;
-		int id = cerca( x, y,em);
-		if(id==0) {
-			i = creazione(x,y,em);
-		}else {
-			i = em.find(Indirizzo.class, id);
-		}			
 		em.getTransaction().begin();
 		_return.setIndirizzo(i);
 		em.getTransaction().commit();			
@@ -40,27 +34,42 @@ public class CambioIndirizzoOrario {
 		return _return;
 	}	
 
-	public int cerca(double x, double y,EntityManager em) {
-		int id = 0;
-		Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
-				+ "WHERE i.x =:x AND i.y = :y"
-				+ "").setParameter("x", x).setParameter("y", y);
-		if(Ris != null) {
-			id = Ris.getFirstResult();
-		}
-		return id;
-	}
-	
-	
-	public Indirizzo creazione(double x, double y,EntityManager em) {
-		Indirizzo _return = new Indirizzo();
-		_return.setX(x);
-		_return.setY(y);
-		em.getTransaction().begin();
-	    em.persist(_return);
-	    em.getTransaction().commit();
-		return _return;
-	}
-	
-	
+	public Indirizzo cerca(double x, double y,EntityManager em) {
+		 int chk=0;
+			Indirizzo i = null;
+			int id = 0;
+			try {
+				Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
+						+ "WHERE i.x = "+x+" AND i.y = "+y+"");
+	        	id = Ris.getFirstResult();
+				i= em.find(Indirizzo.class, id);
+			}catch (Exception e)
+	        {
+	            chk=-1;
+	             System.out.println("HibernateException Occured!!"+e);
+	            e.printStackTrace();
+		    }
+			if(chk==0)
+			{
+			    return (i);
+			}
+			else
+			{
+				try {
+					i = new Indirizzo(); 
+					em.getTransaction().begin();
+					i.setX(x);
+					i.setY(y);
+					em.getTransaction().commit();
+				    return (i);
+				}catch (NullPointerException e)
+		        {
+		            System.out.println("HibernateException Occured!!"+e);
+		            e.printStackTrace();
+		            return(null);
+			    }
+				
+			}
+			
+			}		
 }

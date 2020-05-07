@@ -47,8 +47,6 @@ public class CambioOrario extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("../GestioneIndirizzoOrario/index.html").forward(request, response);
 		} else {
-			int id = b.getId();
-			ses.setAttribute("ID",id);
 			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
 		}
 	}

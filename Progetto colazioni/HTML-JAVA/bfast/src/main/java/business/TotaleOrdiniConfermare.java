@@ -54,7 +54,6 @@ public class TotaleOrdiniConfermare {
 		List<Integer> listid = new ArrayList<Integer> (); 
 		List<String> listora = new ArrayList<String> (); 
 		List<String> listnote = new ArrayList<String> (); 
-		List<String> listing = new ArrayList<String> ();
 		List<Ordine> lista = new ArrayList<Ordine> ();
 		int chk = 0;
 		try {
@@ -92,9 +91,9 @@ if(chk==0)
     {
     	OrdiniUtil[] ou = new OrdiniUtil[lista.size()];
     	for(int i : listid) {
+    		ou[i]= new OrdiniUtil();
     		ou[i].setId(listid.get(i));
-        	listing.addAll(i, ingredientiquant(em,b,ou[i].getId()));
-        	ou[i].setIngredienti(listing.get(i));
+        	ou[i].setIngredienti(ingredientiquant(em,b,ou[i].getId()));
         	ou[i].setOrario(listora.get(i));
         	ou[i].setNote(listnote.get(i));
     	}
@@ -108,11 +107,10 @@ else
 
 	}
 
-	private List<String> ingredientiquant(EntityManager em,Bar b,int id) {
+	private String ingredientiquant(EntityManager em,Bar b,int id) {
 		int chk=0;
 		List<Integer> listquan = new ArrayList<Integer> (); 
 		List<String> listing = new ArrayList<String> ();
-		List<String> concat = new ArrayList<String> ();
 		try {
 			em.getTransaction().begin();
 			Query Ris = em.createNativeQuery("SELECT p.Nome FROM ordine as o, bar as b,contiene as c,prodotto as p\r\n" + 
@@ -135,12 +133,11 @@ else
 		 }
 		 else
 		 {
-			String concatena =""; 
+			String concatena ="";
 		    for(int i : listquan) {
 		    	concatena += listing.get(i)+listquan.get(i);
 		    }
-	    	concat.add(0,concatena);
-	    	return concat;
+	    	return concatena;
 		 }
 		}
 		else

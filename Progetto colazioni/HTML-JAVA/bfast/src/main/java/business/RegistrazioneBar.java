@@ -59,39 +59,41 @@ public class RegistrazioneBar {
 	}
 	
 	public Indirizzo cerca(double x, double y,EntityManager em) {
-        int chk=0;
-		Indirizzo i = null;
-		try {
-			em.getTransaction().begin();
-			Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
-					+ "WHERE i.x =:x AND i.y = :y"
-					+ "").setParameter("x", x).setParameter("y", y);
-			i = (Indirizzo) Ris.getSingleResult();
-			em.getTransaction().commit();
-		}catch (Exception e)
-        {
-            chk=-1;
-             System.out.println("HibernateException Occured!!"+e);
-            e.printStackTrace();
-	    }
-		finally
-		    {
-		            if(em!=null)
-		            {
-		                 em.clear();
-		                 em.close();
-		            }
+		 int chk=0;
+			Indirizzo i = null;
+			int id = 0;
+			try {
+				Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
+						+ "WHERE i.x = "+x+" AND i.y = "+y+"");
+	        	id = Ris.getFirstResult();
+				i= em.find(Indirizzo.class, id);
+			}catch (Exception e)
+	        {
+	            chk=-1;
+	             System.out.println("HibernateException Occured!!"+e);
+	            e.printStackTrace();
 		    }
-		if(chk==0)
-		{
-		    return (i);
-		}
-		else
-		{
-			i.setX(x);
-			i.setY(y);
-		    return (i);
-		}
-		
-		}		
+			if(chk==0)
+			{
+			    return (i);
+			}
+			else
+			{
+				try {
+					i = new Indirizzo(); 
+					em.getTransaction().begin();
+					i.setX(x);
+					i.setY(y);
+					em.getTransaction().commit();
+				    return (i);
+				}catch (NullPointerException e)
+		        {
+		            System.out.println("HibernateException Occured!!"+e);
+		            e.printStackTrace();
+		            return(null);
+			    }
+				
+			}
+			
+			}	
 }
