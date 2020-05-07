@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.TotaleOrdiniGiornalieri;
+import business.TotaleOrdiniMensili;
 
 @WebServlet("/Dashboard/Mese")
 public class PaginaOrdiniMensili extends HttpServlet {
@@ -30,9 +30,9 @@ public class PaginaOrdiniMensili extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		TotaleOrdiniGiornalieri am = new TotaleOrdiniGiornalieri();
+		TotaleOrdiniMensili am = new TotaleOrdiniMensili();
 		int s= (Integer) ses.getAttribute("ID");
-		int t = am.Visualizza(s);
+		long t = am.Visualizza(s);
         PrintWriter writer = response.getWriter();
         String htmlRespone = "<script> alert("+t+"); window.location = '../Dashboard/index.html'  </script> ";
         writer.println(htmlRespone);

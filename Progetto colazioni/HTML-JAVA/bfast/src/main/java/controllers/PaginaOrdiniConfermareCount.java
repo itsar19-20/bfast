@@ -33,7 +33,7 @@ public class PaginaOrdiniConfermareCount extends HttpServlet {
 		HttpSession ses = request.getSession();
 		TotaleOrdiniConfermare am = new TotaleOrdiniConfermare();
 		int s= (Integer) ses.getAttribute("ID");
-		int t = am.Visualizza(s);
+		long t = am.Visualizza(s);
         PrintWriter writer = response.getWriter();
         String htmlRespone = "<script> alert("+t+"); window.location = '../Dashboard/index.html'  </script> ";
         writer.println(htmlRespone);

@@ -33,7 +33,7 @@ public class TotaleOrdiniController extends HttpServlet {
 		HttpSession ses = request.getSession();
 		TotaleOrdiniConfermare am = new TotaleOrdiniConfermare();
 		int s= (Integer) ses.getAttribute("ID");
-		int t = am.Visualizza(s);
+		long t = am.Visualizza(s);
 		ObjectMapper om = new ObjectMapper();
 		response.getWriter().append(om.writeValueAsString(t));
 	}

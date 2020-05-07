@@ -63,7 +63,7 @@ public class RegistrazioneBar {
 		Indirizzo i = null;
 		try {
 			em.getTransaction().begin();
-			Query Ris = em.createQuery("SELECT i.id FROM Indirizzo as i "
+			Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
 					+ "WHERE i.x =:x AND i.y = :y"
 					+ "").setParameter("x", x).setParameter("y", y);
 			i = (Indirizzo) Ris.getSingleResult();

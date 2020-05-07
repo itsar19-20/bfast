@@ -13,15 +13,15 @@ import utils.OrdiniUtil;
 
 public class TotaleOrdiniConfermare {
 	
-	public int  Visualizza(int id) {
+	public long  Visualizza(int id) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
         int chk=0;
-        int numero = 0;
+        long numero = 0;
 		Bar b = em.find(Bar.class, id);
 		try {
-			Query Ris = em.createQuery("SELECT COUNT(*) as conteggio FROM ordini as o, bar as b\r\n" + 
-					"WHERE DAY(o.data) = DAY(getdate()) and ?b.id = o.IDbarFK and o.Confermato = '0' ").setParameter(1, b.getId());
-			numero = (Integer)Ris.getSingleResult();
+			Query Ris = em.createNativeQuery("SELECT COUNT(*)FROM ordine as o, bar as b\r\n" + 
+					"WHERE DAY(o.data) = MONTH(CURRENT_DATE) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK and o.Confermato = 0 ");
+			numero = (Long)Ris.getSingleResult();
 		}catch (Exception e)
         {
             chk=-1;
@@ -59,12 +59,12 @@ public class TotaleOrdiniConfermare {
 		int chk = 0;
 		try {
 			em.getTransaction().begin();
-			Query Ris = em.createQuery("SELECT o.ID FROM ordine as o, bar as b\r\n" + 
-					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
-			Query Ris2 = em.createQuery("SELECT o.Orario FROM ordine as o, bar as b\r\n" + 
-					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
-			Query Ris3 = em.createQuery("SELECT o.Note FROM ordine as o, bar as b\r\n" + 
-					"WHERE b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0").setParameter("numero", b.getId());
+			Query Ris = em.createNativeQuery("SELECT o.ID FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
+			Query Ris2 = em.createNativeQuery("SELECT o.Orario FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
+			Query Ris3 = em.createNativeQuery("SELECT o.Note FROM ordine as o, bar as b\r\n" + 
+					"WHERE b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
 			listid = Ris.getResultList(); 
 			listora = Ris2.getResultList();
 			listnote = Ris3.getResultList();
@@ -115,12 +115,10 @@ else
 		List<String> concat = new ArrayList<String> ();
 		try {
 			em.getTransaction().begin();
-			Query Ris = em.createQuery("SELECT p.Nome FROM ordine as o, bar as b,contiene as c,prodotto as p\r\n" + 
-					"WHERE o.ID = c.IDorFK AND p.Nome = c.IDprFK AND o.ID = :sel AND b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0")
-					.setParameter("numero", b.getId()).setParameter("sel", id);
-			Query Ris2 = em.createQuery("SELECT c.Quantita FROM ordine as o, bar as b,contiene as c\r\n" + 
-					"WHERE o.ID = c.IDorFK AND o.ID = :sel AND b.ID = :numero AND b.ID = o.IDbarFK and o.Confermato = 0")
-					.setParameter("numero", b.getId()).setParameter("sel", id);
+			Query Ris = em.createNativeQuery("SELECT p.Nome FROM ordine as o, bar as b,contiene as c,prodotto as p\r\n" + 
+					"WHERE o.ID = c.IDorFK AND p.Nome = c.IDprFK AND o.ID = "+id+" AND b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
+			Query Ris2 = em.createNativeQuery("SELECT c.Quantita FROM ordine as o, bar as b,contiene as c\r\n" + 
+					"WHERE o.ID = c.IDorFK AND o.ID = "+id+" AND b.ID = "+b.getId()+" AND b.ID = o.IDbarFK and o.Confermato = 0");
 			listing = Ris.getResultList();
 			listquan = Ris2.getResultList(); //lista di interi
 			em.getTransaction().commit();

@@ -8,15 +8,15 @@ import utils.JPAUtil;
 
 public class TotaleOrdiniMensili {
 	
-	public int  Visualizza(int id) {
+	public long  Visualizza(int id) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
         int chk=0;
-        int numero = 0;
+        long numero = 0;
         try {
-        	Query Ris = em.createQuery("SELECT COUNT(*)FROM ordine as o, bar as b\r\n" + 
-    				"WHERE MONTH(o.data) = MONTH(CURRENT_DATE) and :b.id = o.IDbarFK  AND o.Confermato = 1").setParameter("b.id", b.getId());
-        	numero = (Integer)Ris.getSingleResult();
+        	Query Ris = em.createNativeQuery("SELECT COUNT(*)FROM ordine as o, bar as b\r\n" + 
+    				"WHERE MONTH(o.data) = MONTH(CURRENT_DATE) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK AND o.Confermato = 1");
+        	numero = (Long)Ris.getSingleResult();
         }catch (Exception e)
         {
             chk=-1;
