@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.ControlloMail;
 import model.Utente;
 
@@ -38,8 +40,9 @@ public class ControllerControlloMail extends HttpServlet {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
 			ses.setAttribute("ID",request.getParameter("mail"));
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));		}
 	}
 
 	/**

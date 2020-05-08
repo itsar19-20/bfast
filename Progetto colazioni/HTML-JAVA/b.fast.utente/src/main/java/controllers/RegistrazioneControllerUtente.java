@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.RegistrazioneUtente;
 import model.Utente;
 
@@ -29,6 +31,15 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		RegistrazioneUtente au = new RegistrazioneUtente();
 		Utente b = null;
@@ -42,16 +53,9 @@ public class RegistrazioneControllerUtente extends HttpServlet{
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
 			ses.setAttribute("ID",b.getEmail());
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

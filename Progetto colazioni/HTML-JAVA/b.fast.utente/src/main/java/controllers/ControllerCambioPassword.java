@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.CambioPassword;
 import model.Utente;
 
@@ -37,8 +39,9 @@ public class ControllerCambioPassword extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));		}
 	}
 
 	/**

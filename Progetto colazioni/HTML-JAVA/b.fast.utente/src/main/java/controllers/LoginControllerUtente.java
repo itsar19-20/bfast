@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.AutenticazioneUtente;
 import model.Utente;
 
@@ -36,7 +38,9 @@ public class LoginControllerUtente extends HttpServlet {
 		} else {
 			String id = request.getParameter("mail");
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));
 		}
 	}
 
