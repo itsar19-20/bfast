@@ -1,27 +1,27 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import business.PasswordDimenticata;
-import model.Utente;
+import business.TuttiBar;
+import model.Bar;
 
-@WebServlet("/PasswordDimenticata")
-public class ControllerPasswordDimenticata extends HttpServlet {
+@WebServlet("/TuttiBar")
+public class BarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ControllerPasswordDimenticata() {
+	public BarController() {
 		super();
 	}
 
@@ -31,10 +31,8 @@ public class ControllerPasswordDimenticata extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
-		PasswordDimenticata au = new PasswordDimenticata();
-		String s= (String) ses.getAttribute("ID");
-		Utente b = au.cambio(s,request.getParameter("pass"),request.getParameter("copass"));
+		TuttiBar au = new TuttiBar();
+		List<Bar> b = au.All();
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

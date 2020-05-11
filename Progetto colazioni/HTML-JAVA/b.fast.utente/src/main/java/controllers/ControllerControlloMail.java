@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import business.ControlloMail;
 import model.Utente;
 
-@WebServlet("/PasswordDimenticataMail")
+@WebServlet("/ConfermaMail")
 public class ControllerControlloMail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HttpServletRequest req = null;
