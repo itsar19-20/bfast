@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/ETpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textColorHighlight="#0826F1"
+        android:textColorHint="#0829E2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETconpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/conferma_password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#3F51B5"
+        android:textColorHighlight="#0826F1"
+        android:textColorHint="#0829E2"
+        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETpass" />
+
+    <Button
+        android:id="@+id/BtnLogin"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="122dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="168dp"
+        android:background="@drawable/mybutton"
+        android:shadowColor="@color/colorAccent"
+        android:shadowRadius="@android:integer/config_shortAnimTime"
+        android:text="Conferma  "
+        android:textColor="#0A0A0A"
+        android:textColorHint="#00F5EDED"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Sign In" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

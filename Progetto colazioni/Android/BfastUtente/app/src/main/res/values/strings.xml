@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BfastUtente</string>
+    <string name="password_dimenticata">password_dimenticata</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="button">button</string>
+    <string name="title_activity_map">activity_map</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="data_di_nascita">dataNascita</string>
+    <string name="cognome">cognome</string>
+    <string name="conferma_password">confermaPass</string>
+    <string name="nome">nome</string>
+    <string name="devi_registrati">deviRegistrarti</string>
+</resources>
