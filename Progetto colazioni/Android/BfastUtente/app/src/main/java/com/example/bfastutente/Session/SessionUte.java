@@ -7,14 +7,15 @@ import android.preference.PreferenceManager;
 public class SessionUte {
 
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     public SessionUte(Context cntx) {
-        // TODO Auto-generated constructor stub
-        prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
+        prefs = cntx.getSharedPreferences("Session",Context.MODE_PRIVATE);
+        editor = prefs.edit();
     }
 
     public void setMailUt(String mail) {
-        prefs.edit().putString("mail", mail).commit();
+        prefs.edit().putString("mail", mail).apply();
     }
 
     public String getMailUt() {

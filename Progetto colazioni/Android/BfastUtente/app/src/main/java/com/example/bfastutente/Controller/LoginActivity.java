@@ -53,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (!response.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Credenziali errate", Toast.LENGTH_SHORT).show();
                         }else{
-                           // sessione.setMailUt(mail);
+                            sessione = new SessionUte(LoginActivity.this);
+                            sessione.setMailUt(mail);
                             Intent log = new Intent(LoginActivity.this, MapActivity.class);
                             startActivity(log);
                         }

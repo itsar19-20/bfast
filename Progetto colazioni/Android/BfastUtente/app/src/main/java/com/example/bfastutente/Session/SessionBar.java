@@ -7,14 +7,15 @@ import android.preference.PreferenceManager;
 public class SessionBar {
 
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     public SessionBar(Context cntx) {
-        // TODO Auto-generated constructor stub
-        prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
+        prefs = cntx.getSharedPreferences("SessionBar",Context.MODE_PRIVATE);
+        editor = prefs.edit();
     }
 
     public void setIDBar(Integer id) {
-        prefs.edit().putString("id", String.valueOf(id)).commit();
+        prefs.edit().putString("id", String.valueOf(id)).apply();
     }
 
     public int getIDBar() {

@@ -1,7 +1,9 @@
 package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
+import com.example.bfastutente.Model.Domanda;
 import com.example.bfastutente.Model.Prodotto;
+import com.example.bfastutente.Model.Risposta;
 import com.example.bfastutente.Model.Utente;
 
 
@@ -46,11 +48,23 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Utente> PasswordDimeticata(@Query("password") String pass);
 
-    @GET("UpdateBar")
+    @GET("TuttiBar")
     Call<List<Bar>> UpdateBar();
 
-    @GET("UpdateProdotto")
+    @GET("TuttiProdotti")
     Call<List<Prodotto>> UpdateProdotto();
+
+    @GET("ScriviDomanda")
+    @FormUrlEncoded
+    Call<Domanda> ScriviDomanda(@Query("testo") String testo);
+
+    @GET("TrovaRisposta")
+    @FormUrlEncoded
+    Call<Risposta> TrovaRisposta(@Query("testo") String testo);
+
+    @GET("ScriviRisposta")
+    @FormUrlEncoded
+    Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
    /* @POST("OrdiniUtente")
     @FormUrlEncoded
@@ -75,14 +89,6 @@ public interface BfastUtenteApi {
     @POST("SelezioneProdotti")
     @FormUrlEncoded
     Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
-
-    @POST("ScriviDomanda")
-    @FormUrlEncoded
-    Call<Domanda> ScriviDomanda(@Query("testo") String testo);
-
-    @POST("ScriviRisposta")
-    @FormUrlEncoded
-    Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
     @GET("ValutazioneFattorino")
     @FormUrlEncoded

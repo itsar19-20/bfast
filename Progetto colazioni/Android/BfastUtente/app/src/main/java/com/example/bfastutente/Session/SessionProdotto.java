@@ -6,14 +6,15 @@ import android.preference.PreferenceManager;
 
 public class SessionProdotto {
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     public SessionProdotto(Context cntx) {
-        // TODO Auto-generated constructor stub
-        prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
+        prefs = cntx.getSharedPreferences("SessionProdotto",Context.MODE_PRIVATE);
+        editor = prefs.edit();
     }
 
     public void setNomeProdotto(String mail) {
-        prefs.edit().putString("mail", mail).commit();
+        prefs.edit().putString("prodotto", mail).apply();
     }
 
     public String getNomeProdotto() {

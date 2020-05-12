@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         idBar = new ArrayList<>();
         bdb.open();
         pdb.open();
-        idBar = bdb.getIdBar();
-        nomeProdotti = pdb.getIdProdotto();
         progressDialog.show();
         Call<List<Bar>> callPrezzi = apiService.UpdateBar();
         callPrezzi.enqueue(new Callback<List<Bar>>() {
@@ -143,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setTitle("Aggiornando i dati...");
         idBar = new ArrayList<>();
         bdb.open();
-        idBar = bdb.getIdBar();
         progressDialog.show();
         Call<List<Bar>> callUpdateBar = apiService.UpdateBar();
         callUpdateBar.enqueue(new Callback<List<Bar>>() {
