@@ -111,7 +111,7 @@ class ListaProdotti extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toHome = new Intent(ListaProdotti.this, MapActivity.class);// da reindirizzare al carrello
+                Intent toHome = new Intent(ListaProdotti.this, Carrello.class);
                 startActivity(toHome);
             }
         });

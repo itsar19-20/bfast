@@ -2,6 +2,7 @@ package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
 import com.example.bfastutente.Model.Domanda;
+import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.Model.Risposta;
 import com.example.bfastutente.Model.Utente;
@@ -66,6 +67,10 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
+    @GET("ValutazioneFattorino")
+    @FormUrlEncoded
+    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") float valutazione);
+
    /* @POST("OrdiniUtente")
     @FormUrlEncoded
     Call<Ordine> ordiniUt(@Query("id") Integer id, @Query("utente") String idut);
@@ -90,9 +95,7 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
 
-    @GET("ValutazioneFattorino")
-    @FormUrlEncoded
-    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") float valutazione);
+
 
 */
 

@@ -14,8 +14,6 @@ public class VisualizzaiRisposte {
 
 	public List<Risposta> registrazione(String testo) throws ParseException
 	{
-		Risposta _return = null;
-        int chk=0;
         List<Risposta> lista = new ArrayList<Risposta>();
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		try {
@@ -24,7 +22,6 @@ public class VisualizzaiRisposte {
 			lista = Ris.getResultList();
 		}catch (Exception e)
         {
-            chk=-1;
              System.out.println("HibernateException Occured!!"+e);
             e.printStackTrace();
 	    }
