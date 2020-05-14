@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/selezionebar")
+import business.Ordini;
+import model.Ordine;
+
+
+@WebServlet("/SelezionaBar")
 public class SelezioneBar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,8 +34,18 @@ public class SelezioneBar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			HttpSession ses = request.getSession();
-			ses.setAttribute("IDb", request.getAttribute("ID"));
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			int ido = (Integer) ses.getAttribute("ido");
+			int idbar = Integer.parseInt(request.getParameter("bar"));
+			Ordini o = new Ordini();
+			Ordine or = o.bar(ido, idbar);
+			if(or==null) {
+				
+			}else {
+				ses.setAttribute("IDb", request.getAttribute("ID"));
+				ObjectMapper om = new ObjectMapper();
+				response.setContentType("application/json");
+				response.getWriter().append(om.writeValueAsString(or));				}
+
 	
 	}
 

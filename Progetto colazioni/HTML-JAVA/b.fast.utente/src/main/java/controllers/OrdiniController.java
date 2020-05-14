@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.Ordini;
 import model.Ordine;
 
-@WebServlet("/prodotto")
+@WebServlet("/Carrello")
 public class OrdiniController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -36,8 +38,9 @@ public class OrdiniController extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/prodotto.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));			}
 	}
 
 	/**

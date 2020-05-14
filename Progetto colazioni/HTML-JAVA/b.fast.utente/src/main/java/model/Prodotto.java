@@ -31,6 +31,14 @@ public class Prodotto implements Serializable {
 	@OneToMany(mappedBy="prodotto")
 	private List<Menu> menus;
 
+	
+	
+	@Override
+	public String toString() {
+		return "Prodotto [nome=" + nome + ", ingredienti=" + ingredienti + ", prezzo=" + prezzo + ", tipo=" + tipo
+				+ "]";
+	}
+
 	public Prodotto() {
 	}
 

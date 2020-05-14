@@ -71,31 +71,25 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") float valutazione);
 
-   /* @POST("OrdiniUtente")
+   /* @POST("Inzio")
     @FormUrlEncoded
-    Call<Ordine> ordiniUt(@Query("id") Integer id, @Query("utente") String idut);
+    Call<Ordine> ordiniUt(@Query("utente") String idut);
 
-    @POST("OrdiniBar")
+    @POST("SelezioneBar")
     @FormUrlEncoded
     Call<Ordine> ordiniBa(@Query("bar") Integer id);
 
-    @POST("OrdiniCarrello")
+    @POST("Carrello")
     @FormUrlEncoded
     Call<Ordine> ordiniCa(@Query("orario") String orario, @Query("pagamento") int id, @Query("note") String note);
+
+    @POST("SelezioneProdotto")
+    @FormUrlEncoded
+    Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
 
     @POST("SelezionePosizione")
     @FormUrlEncoded
     Call<Indirizzo> SelezionePosizione(@Query("x") double x, @Query("y") double y);
-
-    @POST("ConfermaPosizione")
-    @FormUrlEncoded
-    Call<Indirizzo> ConfermaPosizione(@Query("id") int posizione);
-
-    @POST("SelezioneProdotti")
-    @FormUrlEncoded
-    Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
-
-
 
 */
 

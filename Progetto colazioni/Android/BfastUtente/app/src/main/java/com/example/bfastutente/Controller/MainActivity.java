@@ -18,6 +18,7 @@ import com.example.bfastutente.R;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.RetrofitUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,7 +174,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                if (t instanceof IOException) {
+                    Toast.makeText(MainActivity.this, "Errore di rete riprovate in futuro", Toast.LENGTH_SHORT).show();
+                    // logging probably not necessary
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server ", Toast.LENGTH_SHORT).show();
+                }
                 progressDialog.dismiss();
             }
         });
@@ -205,7 +212,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Prodotto>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
+                if (t instanceof IOException) {
+                    Toast.makeText(MainActivity.this, "Errore di rete riprovate in futuro", Toast.LENGTH_SHORT).show();
+                    // logging probably not necessary
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server ", Toast.LENGTH_SHORT).show();
+                }
                 progressDialog.dismiss();
             }
         });

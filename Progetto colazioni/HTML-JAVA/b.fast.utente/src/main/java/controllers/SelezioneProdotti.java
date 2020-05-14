@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.*;
-import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import business.Ordini;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.Prodotti;
 import model.Contiene;
-import model.Ordine;
 
-@WebServlet("/selezioneprodotto")
+@WebServlet("/SelezionaProdotto")
 public class SelezioneProdotti extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -30,30 +29,28 @@ public class SelezioneProdotti extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession ses = request.getSession();
-		int id =(Integer) ses.getAttribute("IDo");
-		Prodotti au = new Prodotti();
-		Contiene b = null;
+		int ido = (Integer)ses.getAttribute("ido");
+		Prodotti pr = new Prodotti();
+		Contiene c = null;
 		try {
-			b = au.selezione(id,request.getParameter("prodotto"), request.getParameter("quantita"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			c = pr.selezione(ido, request.getParameter("Nome"), request.getParameter("Quanita"));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (b == null) {
-			request.getRequestDispatcher("/prodotto.html").forward(request, response);
-		} else {
-			Ordini o = new Ordini();
-			int IDo = (Integer)ses.getAttribute("IDo");
-			int IDb = (Integer)ses.getAttribute("IDb");
-			Ordine or = o.bar(IDo,IDb);
-			if(or==null) {
-				request.getRequestDispatcher("/prodotto.html").forward(request, response);
-			}else {
-				request.getRequestDispatcher("/ok.html").forward(request, response);
-			}
+		if(c!=null) {
+			
+		}else {
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			try {
+				response.getWriter().append(om.writeValueAsString(c));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 		}
+
 	}
 
 	/**

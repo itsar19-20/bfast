@@ -5,11 +5,9 @@ import java.text.ParseException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.Chiedeu;
 import model.Domanda;
 import model.Possiede;
 import model.Risposta;
-import model.Utente;
 import utils.JPAUtil;
 
 public class ScriviRisposta {

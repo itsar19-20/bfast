@@ -15,7 +15,7 @@ public class TuttiBar {
 	    int chk=0;
 	    List<Bar> bar = new ArrayList<Bar>();
 	    try {
-			Query Ris = em.createNativeQuery("SELECT * FROM bar");
+	    	Query Ris = em.createNativeQuery("SELECT * FROM bar");
 			bar = Ris.getResultList();
 	    }catch (Exception e)
 	    {

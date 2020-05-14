@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Prodotto {
 
-    private int idOrdine;
     @SerializedName("nome")
     private String nome;
     @SerializedName("ingredienti")
@@ -20,7 +19,6 @@ public class Prodotto {
         return "Prodotto{" +
                 "nome='" + nome + '\'' +
                 ", ingredienti='" + ingredienti + '\'' +
-                ", idOrdine=" + idOrdine +
                 ", prezzo=" + prezzo +
                 ", tipo='" + tipo + '\'' +
                 '}';
@@ -40,14 +38,6 @@ public class Prodotto {
 
     public void setIngredienti(String ingredienti) {
         this.ingredienti = ingredienti;
-    }
-
-    public int getIdOrdine() {
-        return idOrdine;
-    }
-
-    public void setIdOrdine(int idOrdine) {
-        this.idOrdine = idOrdine;
     }
 
     public float getPrezzo() {
