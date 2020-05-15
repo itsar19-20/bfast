@@ -37,6 +37,12 @@
         <activity android:name=".Controller.pswDimenticata" />
         <activity android:name=".Controller.ControlloMail" />
         <activity android:name=".Controller.RegistrazioneActivity" />
+        <activity android:name=".Controller.ListaProdotti" />
+        <activity android:name=".Controller.CambioMail" />
+        <activity android:name=".Controller.CambioPassword" />
+        <activity android:name=".Controller.Carrello" />
+        <activity android:name=".Controller.InserisciValutazione" />
+        <activity android:name=".Controller.Ringraziamento" />
     </application>
 
 </manifest>

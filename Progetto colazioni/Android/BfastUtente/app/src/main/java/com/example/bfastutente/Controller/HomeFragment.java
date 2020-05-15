@@ -116,21 +116,15 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        try{
                             if(marker.getTitle().equals("Posizione selezionata")){
                                 Toast.makeText(getActivity(), "Seleziona un bar e non la tua attuale posizione", Toast.LENGTH_SHORT).show();
                             }else{
                                 session = new SessionBar(getActivity());
                                 int id = Integer.parseInt(marker.getTitle());
                                 session.setIDInd(id);
-                                Intent selezione = new Intent(getActivity(), ListaProdotti.class);// da reindirizzare al carrello
+                                Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
                                 startActivity(selezione);
                             }
-                        }catch(Exception e) {
-                            Toast.makeText(getActivity(), "Il bar selezionato non ha prodotti disponibili", Toast.LENGTH_SHORT).show();
-                            System.out.println("HibernateException Occured!!" + e);
-                            e.printStackTrace();
-                        }
                         return false;
                     }
                 });

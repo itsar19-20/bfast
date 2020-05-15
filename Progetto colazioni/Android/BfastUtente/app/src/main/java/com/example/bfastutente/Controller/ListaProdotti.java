@@ -16,45 +16,78 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
+import com.example.bfastutente.Session.SessionBar;
+import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.RetrofitUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-class ListaProdotti extends AppCompatActivity {
+
+public class ListaProdotti extends AppCompatActivity {
 
     ListView listview;
     List<Prodotto> lista = new ArrayList<>();
     CustomAdapter customAdapter;
     ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
+    BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+    SessionBar session;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listaprodotti);
-        setTooblar();
+        //setTooblar();
         listview = findViewById(R.id.lista);
 
-        try {
-            List<String> prodotto = new ArrayList<>();
-            prodotto = pdb.getIdProdotto();
-            for (int i = 0; i < prodotto.size(); i ++) {
-                Prodotto p = (Prodotto) pdb.getProdottoLogin(prodotto.get(i).toString());
-                lista.add(p);
+        session = new SessionBar(ListaProdotti.this);
+        String id = String.valueOf(session.getIDInd());
+        Call<List<Prodotto>> callUpdateProdotto = apiService.ProdottiBar(id);
+        callUpdateProdotto.enqueue(new Callback<List<Prodotto>>() {
+
+            @Override
+            public void onResponse(Call<List<Prodotto>> call, Response<List<Prodotto>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ListaProdotti.this, "Problemi con la rispota del server per i Prodotti", Toast.LENGTH_SHORT).show();
+                } else {
+                    lista = response.body();
+                }
             }
 
-            customAdapter = new CustomAdapter(lista,this);
+            @Override
+            public void onFailure(Call<List<Prodotto>> call, Throwable t) {
+                try {
+                    List<String> prodotto = new ArrayList<>();
+                    prodotto = pdb.getIdProdotto();
+                    for (int i = 0; i < prodotto.size(); i++) {
+                        Prodotto p = (Prodotto) pdb.getProdottoLogin(prodotto.get(i).toString());
+                        lista.add(p);
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
+                    System.out.println("HibernateException Occured!!" + e);
+                    e.printStackTrace();
+                }
+            }
+        });
 
+
+        try {
+            customAdapter = new CustomAdapter(lista, this);
             listview.setAdapter(customAdapter);
-        }catch(Exception e) {
+        } catch (Exception e) {
             Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
             System.out.println("HibernateException Occured!!" + e);
             e.printStackTrace();
         }
-
     }
 
-    public class CustomAdapter extends BaseAdapter {
+    class CustomAdapter extends BaseAdapter {
 
         private List<Prodotto> lista = new ArrayList<>();
         private List<Prodotto> lista2 = new ArrayList<>();
@@ -121,6 +154,8 @@ class ListaProdotti extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         pdb.close();
+        Intent toHome = new Intent(ListaProdotti.this, MapActivity.class);
+        startActivity(toHome);
         super.onDestroy();
     }
 

@@ -50,30 +50,42 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Utente> PasswordDimeticata(@Query("password") String pass);
 
+
     @GET("TuttiBar")
     Call<List<Bar>> UpdateBar();
+
 
     @GET("TuttiProdotti")
     Call<List<Prodotto>> UpdateProdotto();
 
+
     @GET("TuttiIndirizzi")
     Call<List<Indirizzo>> UpdateIndirizzi();
+
+
+    @GET("ProdottiBar")
+    Call<List<Prodotto>> ProdottiBar(@Query("id") String id);
+
 
     @GET("ScriviDomanda")
     @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("testo") String testo);
 
+
     @GET("TrovaRisposta")
     @FormUrlEncoded
     Call<Risposta> TrovaRisposta(@Query("testo") String testo);
+
 
     @GET("ScriviRisposta")
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
+
     @GET("ValutazioneFattorino")
     @FormUrlEncoded
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") float valutazione);
+
 
    /* @POST("Inzio")
     @FormUrlEncoded

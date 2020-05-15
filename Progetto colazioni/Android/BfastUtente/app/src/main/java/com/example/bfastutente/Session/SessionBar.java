@@ -18,6 +18,12 @@ public class SessionBar {
         prefs.edit().putString("idIn", String.valueOf(id)).apply();
     }
 
+    public int getIDInd() {
+        String id = prefs.getString("idIn","");
+        Integer ID = Integer.parseInt(id);
+        return ID;
+    }
+
     public void setIDBar(Integer id) {
         prefs.edit().putString("id", String.valueOf(id)).apply();
     }
