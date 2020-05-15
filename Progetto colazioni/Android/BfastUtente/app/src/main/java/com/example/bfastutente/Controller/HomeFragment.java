@@ -14,8 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.bfastutente.Adapter.BarDBAdapter;
+import com.example.bfastutente.Adapter.IndirizzoDBAdapter;
 import com.example.bfastutente.Model.Indirizzo;
 import com.example.bfastutente.R;
+import com.example.bfastutente.Session.SessionBar;
+import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.RetrofitUtils;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -25,15 +29,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements  OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
 
     private GoogleMap mMap;
     Marker markerUtente;
     MapView mp;
-    BarDBAdapter bdb = new BarDBAdapter(getContext());
+    Context context;
+    BarDBAdapter bdb;
+    IndirizzoDBAdapter idb;
+    Marker MarkerBar;
+    BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+    SessionBar session;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,36 +66,74 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
         mMap = googleMap;
-        try {
-            List<Integer> indirizzo = new ArrayList<>();
-            indirizzo = bdb.getIdIndirizzo();
-            for (int i = 0; i < indirizzo.size(); i ++) {
-                Indirizzo in = null;
-                in.setId(indirizzo.get(i));
-                double latitude = in.getX();
-                double longitude = in.getY();
-                MarkerOptions markerOptions = new MarkerOptions();
-                LatLng location = new LatLng(latitude, longitude);
-                markerOptions.position(location);
-                mMap.addMarker(markerOptions);
-            }
-        }catch(Exception e){
-            Toast.makeText(getActivity(), "Nessun bar attualmente disponibile", Toast.LENGTH_SHORT).show();
-            System.out.println("HibernateException Occured!!"+e);
-                e.printStackTrace();
-        }
+        context = this.getContext();
+        bdb = new BarDBAdapter(context);
+        idb = new IndirizzoDBAdapter(context);
+        bdb.open();
+        idb.open();
+            Call<List<Indirizzo>> call = apiService.UpdateIndirizzi();
+            call.enqueue(new Callback<List<Indirizzo>>() {
+                             @Override
+                             public void onResponse(Call<List<Indirizzo>> call, Response<List<Indirizzo>> response) {
+                                 if (!response.isSuccessful()) {
+                                     Toast.makeText(getActivity(), "Credenziali errate", Toast.LENGTH_SHORT).show();
+                                 }else{
+                                     try {
+                                         List<Indirizzo> indirizzo = response.body();
+                                         for (int i = 0; i < indirizzo.size(); i++) {
+                                             Indirizzo in = null;
+                                             in = indirizzo.get(i);
+                                             double latitude = in.getX();
+                                             double longitude = in.getY();
+                                             LatLng location = new LatLng(latitude, longitude);
+                                             MarkerBar = mMap.addMarker(new MarkerOptions().position(location).title(String.valueOf(in.getId())));
+                                         }
+                                     }catch(Exception e){
+                                     Toast.makeText(getActivity(), "Nessun bar attualmente disponibile", Toast.LENGTH_SHORT).show();
+                                     System.out.println("HibernateException Occured!!"+e);
+                                     e.printStackTrace();
+                                 }
+                                 }
+                             }
+
+                             @Override
+                             public void onFailure(Call<List<Indirizzo>> call, Throwable t) {
+                                 Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
+                             }
+                         });
+
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
-
-
                 if(markerUtente == null){
 
                 }else{
                     markerUtente.remove();
                 }
                 markerUtente = mMap.addMarker(new MarkerOptions().position(latLng).title("Posizione selezionata"));
+
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        try{
+                            if(marker.getTitle().equals("Posizione selezionata")){
+                                Toast.makeText(getActivity(), "Seleziona un bar e non la tua attuale posizione", Toast.LENGTH_SHORT).show();
+                            }else{
+                                session = new SessionBar(getActivity());
+                                int id = Integer.parseInt(marker.getTitle());
+                                session.setIDInd(id);
+                                Intent selezione = new Intent(getActivity(), ListaProdotti.class);// da reindirizzare al carrello
+                                startActivity(selezione);
+                            }
+                        }catch(Exception e) {
+                            Toast.makeText(getActivity(), "Il bar selezionato non ha prodotti disponibili", Toast.LENGTH_SHORT).show();
+                            System.out.println("HibernateException Occured!!" + e);
+                            e.printStackTrace();
+                        }
+                        return false;
+                    }
+                });
 
             }
         });
@@ -92,6 +143,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        session.setIDInd(Integer.parseInt(marker.getTitle()));
         try{
             Intent selezione = new Intent(getActivity(), ListaProdotti.class);// da reindirizzare al carrello
             startActivity(selezione);

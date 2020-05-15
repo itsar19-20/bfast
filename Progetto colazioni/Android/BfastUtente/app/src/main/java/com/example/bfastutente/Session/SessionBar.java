@@ -14,6 +14,10 @@ public class SessionBar {
         editor = prefs.edit();
     }
 
+    public void setIDInd(Integer id){
+        prefs.edit().putString("idIn", String.valueOf(id)).apply();
+    }
+
     public void setIDBar(Integer id) {
         prefs.edit().putString("id", String.valueOf(id)).apply();
     }

@@ -25,7 +25,7 @@ class ListaProdotti extends AppCompatActivity {
     ListView listview;
     List<Prodotto> lista = new ArrayList<>();
     CustomAdapter customAdapter;
-    ProdottoDBAdapter pdb = new ProdottoDBAdapter();
+    ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
 
 
     @Override

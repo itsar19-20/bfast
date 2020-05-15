@@ -6,23 +6,24 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.Bar;
+import model.Prodotto;
 import utils.JPAUtil;
 
-public class TuttiBar {
-	public List<Bar> All(){
+public class ProdottiBar {
+	
+	public List<Prodotto> All(String id2){
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 	    int chk=0;
-	    List<Integer> id = new ArrayList<Integer>();
-	    List<Bar> bar = new ArrayList<Bar>();
+	    int id = Integer.parseInt(id2);
+	    List<String> nome = new ArrayList<String>();
+	    List<Prodotto> pro = new ArrayList<Prodotto>();
 	    try {
-	    	Query Ris = em.createNativeQuery("SELECT b.ID FROM bar as b");
-			id = Ris.getResultList();
-			int count = id.size();
-			for(int i=0; i<count ;i++) {
-				bar.add(em.find(Bar.class, id.get(i)));
-			}
-			
+			Query Ris1 = em.createNativeQuery("SELECT p.Nome FROM prodotto as p,bar as b,menu as m WHERE b.id ="+id+"AND b.id=m.IDbaFK AND p.Nome = m.IDprFK");
+			nome = Ris1.getResultList();
+	    	int count = nome.size();
+	    	for(int i=0;i<count;i++) {
+	    		pro.add(em.find(Prodotto.class, nome.get(i)));
+	    	}
 	    }catch (Exception e)
 	    {
 	        chk=-1;
@@ -39,7 +40,7 @@ public class TuttiBar {
 		    }
 		if(chk==0)
 		{
-		    return (bar);
+		    return pro;
 		}
 		else
 		{
@@ -47,9 +48,8 @@ public class TuttiBar {
 		}
 	
 		}
-	
-	
 
-	
-	
+
 }
+
+

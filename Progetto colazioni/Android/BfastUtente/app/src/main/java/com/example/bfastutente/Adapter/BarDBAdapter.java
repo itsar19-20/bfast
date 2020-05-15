@@ -75,19 +75,19 @@ public class BarDBAdapter {
     }
 
     public Cursor getBarLogin(int id ) {
-        Cursor cursor = database.query(true, "user", new String[] { KEY_MAIL, KEY_PASSWORD},
-                KEY_MAIL + "= '" + id + "'", null, null, null, null, null);
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID, KEY_PASSWORD},
+                KEY_ID + "= '" + id + "'", null, null, null, null, null);
         return cursor;
     }
 
 
     public boolean updateBar(String mail, String password, String nome, String valutazioni, String ape, String chi,String fascia) {
         ContentValues updatevalues = createContentValues(mail, password, nome, valutazioni,ape,chi,fascia);
-        return database.update("user", updatevalues, KEY_MAIL + "=" + mail, null) > 0;
+        return database.update("bar", updatevalues, KEY_MAIL + "=" + mail, null) > 0;
     }
     public List<Integer> getIdIndirizzo() {
         List<Integer> _return = new ArrayList<>();
-        String query = "select Indirizo.id from Indirizzo,Bar WHERE Bar.IDinFK = Indirizzo.id";
+        String query = "select indirizzo.id from indirizzo,bar where bar.IDinFK = indirizzo.id;";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
             _return.add(cursor.getInt(0));
@@ -97,7 +97,7 @@ public class BarDBAdapter {
 
     public List<Integer> getIdBar() {
         List<Integer> _return = new ArrayList<>();
-        String query = "select Bar.id from Bar ";
+        String query = "select bar.id from bar ";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
             _return.add(cursor.getInt(0));

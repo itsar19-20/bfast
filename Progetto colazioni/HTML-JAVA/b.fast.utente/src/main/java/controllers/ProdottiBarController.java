@@ -1,8 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
+import business.ProdottiBar;
 import business.TuttiProdotti;
 import model.Prodotto;
 
-
-
-@WebServlet("/TuttiProdotti")
-public class ProdottiController extends HttpServlet {
+@WebServlet("/ProdottiBar")
+public class ProdottiBarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProdottiController() {
+	public ProdottiBarController() {
 		super();
 	}
 
@@ -36,8 +32,8 @@ public class ProdottiController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		TuttiProdotti au = new TuttiProdotti();
-		List<Prodotto> b = au.All();
+		ProdottiBar au = new ProdottiBar();
+		List<Prodotto> b = au.All(request.getParameter("id"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {

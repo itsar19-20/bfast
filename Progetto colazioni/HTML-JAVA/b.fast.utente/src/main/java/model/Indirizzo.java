@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -23,14 +26,17 @@ public class Indirizzo implements Serializable {
 
 	//bi-directional many-to-one association to Bar
 	@OneToMany(mappedBy="indirizzo")
+	@JsonBackReference
 	private List<Bar> bars;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="indirizzo")
+	@JsonBackReference
 	private List<Ordine> ordines;
 
 	//bi-directional many-to-one association to Sceglie
 	@OneToMany(mappedBy="indirizzo")
+	@JsonBackReference
 	private List<Sceglie> sceglies;
 
 	public Indirizzo() {

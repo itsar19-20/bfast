@@ -6,21 +6,21 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.Bar;
+import model.Indirizzo;
 import utils.JPAUtil;
 
-public class TuttiBar {
-	public List<Bar> All(){
+public class IndirizziBar {
+	public List<Indirizzo> All(){
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 	    int chk=0;
 	    List<Integer> id = new ArrayList<Integer>();
-	    List<Bar> bar = new ArrayList<Bar>();
+	    List<Indirizzo> bar = new ArrayList<Indirizzo>();
 	    try {
-	    	Query Ris = em.createNativeQuery("SELECT b.ID FROM bar as b");
+	    	Query Ris = em.createNativeQuery("select indirizzo.id from indirizzo,bar where bar.IDinFK = indirizzo.id");
 			id = Ris.getResultList();
 			int count = id.size();
 			for(int i=0; i<count ;i++) {
-				bar.add(em.find(Bar.class, id.get(i)));
+				bar.add(em.find(Indirizzo.class, id.get(i)));
 			}
 			
 	    }catch (Exception e)

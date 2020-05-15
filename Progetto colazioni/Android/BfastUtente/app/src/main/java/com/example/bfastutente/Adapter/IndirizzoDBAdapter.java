@@ -2,6 +2,7 @@ package com.example.bfastutente.Adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,9 +15,10 @@ public class IndirizzoDBAdapter {
     public static final String KEY_X = "x";
     public static final String KEY_Y = " y";;
 
-    public void IndirizzoDBAdapter(Context context) {
+    public IndirizzoDBAdapter(Context context) {
         this.context = context;
     }
+
     public IndirizzoDBAdapter open() throws SQLException {
         dbHelper = new DatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
@@ -44,5 +46,11 @@ public class IndirizzoDBAdapter {
         return database.delete("Indirizzo", KEY_ID + "= '" + id + "'", null) >0;
     }
 
+
+    public Cursor getIndirizzoLogin(int id ) {
+        Cursor cursor = database.query(true, "user", new String[] { KEY_ID},
+                KEY_ID + "= '" + id + "'", null, null, null, null, null);
+        return cursor;
+    }
 
 }

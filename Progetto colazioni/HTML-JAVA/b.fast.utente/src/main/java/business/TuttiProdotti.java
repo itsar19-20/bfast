@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.google.gson.Gson;
-
+import model.Bar;
 import model.Prodotto;
 import utils.JPAUtil;
 
@@ -23,8 +22,7 @@ public class TuttiProdotti {
 			nome = Ris1.getResultList();
 	    	int count = nome.size();
 	    	for(int i=0;i<count;i++) {
-	    		Prodotto p = em.find(Prodotto.class, nome.get(i));
-	    		pro.add(p);
+	    		pro.add(em.find(Prodotto.class, nome.get(i)));
 	    	}
 	    }catch (Exception e)
 	    {
@@ -42,7 +40,7 @@ public class TuttiProdotti {
 		    }
 		if(chk==0)
 		{
-		    return (pro);
+		    return pro;
 		}
 		else
 		{

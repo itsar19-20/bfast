@@ -51,11 +51,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Utente");
         db.execSQL("DROP TABLE IF EXISTS Ordine");
+        db.execSQL("DROP TABLE IF EXISTS Prodotto");
         db.execSQL("DROP TABLE IF EXISTS Domanda");
         db.execSQL("DROP TABLE IF EXISTS Risposta");
         db.execSQL("DROP TABLE IF EXISTS Bar");
         db.execSQL("DROP TABLE IF EXISTS Possiede");
-        db.execSQL("DROP TABLE IF EXISTS Prodotto");
         db.execSQL("DROP TABLE IF EXISTS Contiene");
         db.execSQL("DROP TABLE IF EXISTS Indirizzo");
         db.execSQL("DROP TABLE IF EXISTS Pagamento");

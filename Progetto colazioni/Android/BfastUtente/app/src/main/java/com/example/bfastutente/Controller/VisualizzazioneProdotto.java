@@ -20,7 +20,7 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
     EditText et;
     Button b1;
     private SessionProdotto session;
-    ProdottoDBAdapter pdb = new ProdottoDBAdapter();
+    ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
     private int quantita;
 
     @Override

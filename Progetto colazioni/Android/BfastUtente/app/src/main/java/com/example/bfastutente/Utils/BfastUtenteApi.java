@@ -2,6 +2,7 @@ package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
 import com.example.bfastutente.Model.Domanda;
+import com.example.bfastutente.Model.Indirizzo;
 import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.Model.Risposta;
@@ -54,6 +55,9 @@ public interface BfastUtenteApi {
 
     @GET("TuttiProdotti")
     Call<List<Prodotto>> UpdateProdotto();
+
+    @GET("TuttiIndirizzi")
+    Call<List<Indirizzo>> UpdateIndirizzi();
 
     @GET("ScriviDomanda")
     @FormUrlEncoded

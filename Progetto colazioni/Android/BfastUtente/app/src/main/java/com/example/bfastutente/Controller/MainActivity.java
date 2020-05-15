@@ -2,9 +2,8 @@ package com.example.bfastutente.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private float fascia,val,prezzo;
     private Bar b;
     private Prodotto p;
-    ProdottoDBAdapter pdb = new ProdottoDBAdapter();
+    ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
     BarDBAdapter bdb = new BarDBAdapter(this);
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     Button b1,b2;
@@ -69,13 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void createDB(){
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("L'operazione richiede fino a 10 secondi");
-        progressDialog.setTitle("Preparand la tua prima esperienza..");
         idBar = new ArrayList<>();
         bdb.open();
-        pdb.open();
-        progressDialog.show();
         Call<List<Bar>> callPrezzi = apiService.UpdateBar();
         callPrezzi.enqueue(new Callback<List<Bar>>() {
             @Override
@@ -103,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
         bdb.close();
+        pdb.open();
         Call<List<Prodotto>> callUpdateProdotto = apiService.UpdateProdotto();
         callUpdateProdotto.enqueue(new Callback<List<Prodotto>>() {
             @Override
@@ -128,21 +122,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Prodotto>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Connessione al server assente", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
 
-        progressDialog.dismiss();
         pdb.close();
 
     }
     public void updateDB() {
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("L'operazione richiede fino a 10 secondi");
-        progressDialog.setTitle("Aggiornando i dati...");
         idBar = new ArrayList<>();
         bdb.open();
-        progressDialog.show();
+        idBar = bdb.getIdBar();
         Call<List<Bar>> callUpdateBar = apiService.UpdateBar();
         callUpdateBar.enqueue(new Callback<List<Bar>>() {
             @Override
@@ -179,13 +168,13 @@ public class MainActivity extends AppCompatActivity {
                     // logging probably not necessary
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server per i bar", Toast.LENGTH_SHORT).show();
                 }
-                progressDialog.dismiss();
             }
         });
         bdb.close();
         pdb.open();
+        nomeProdotti = pdb.getIdProdotto();
         Call<List<Prodotto>> callUpdateProdotto = apiService.UpdateProdotto();
         callUpdateProdotto.enqueue(new Callback<List<Prodotto>>() {
             @Override
@@ -217,13 +206,12 @@ public class MainActivity extends AppCompatActivity {
                     // logging probably not necessary
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Problema con la comunicazione col server per i prodotti", Toast.LENGTH_SHORT).show();
                 }
-                progressDialog.dismiss();
             }
         });
 
-        progressDialog.dismiss();
+
 
 
     }

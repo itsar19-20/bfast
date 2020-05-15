@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -25,10 +28,12 @@ public class Prodotto implements Serializable {
 
 	//bi-directional many-to-one association to Contiene
 	@OneToMany(mappedBy="prodotto")
+	@JsonBackReference
 	private List<Contiene> contienes;
 
 	//bi-directional many-to-one association to Menu
 	@OneToMany(mappedBy="prodotto")
+	@JsonBackReference
 	private List<Menu> menus;
 
 	

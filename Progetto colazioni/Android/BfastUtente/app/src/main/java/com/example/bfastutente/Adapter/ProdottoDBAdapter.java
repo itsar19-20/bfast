@@ -19,7 +19,7 @@ public class ProdottoDBAdapter {
     public static final String KEY_COSTO = "costo";
     public static final String KEY_TIPO = "tipo";
 
-    public void ProdottoDBAdapter(Context context) {
+    public ProdottoDBAdapter(Context context) {
         this.context = context;
     }
 
@@ -35,7 +35,7 @@ public class ProdottoDBAdapter {
 
     public void close() {
         dbHelper.close();
-        database.close();
+       // database.close();
     }
 
     private ContentValues createContentValues(String nome,String ingrediente, float costo, String tipo) {
@@ -65,7 +65,7 @@ public class ProdottoDBAdapter {
     }
     public List<String> getIdProdotto() {
         List<String> _return = new ArrayList<>();
-        String query = "select Indirizzo.id from Indirizzo,Bar WHERE Bar.IDinFK = indirizzo.ID;";
+        String query = "select prodotto.Nome from prodotto;";
         Cursor cursor = database.rawQuery(query, null);
         while (cursor.moveToNext()) {
             _return.add(cursor.getString(0));

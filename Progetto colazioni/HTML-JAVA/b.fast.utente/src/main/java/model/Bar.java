@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -34,18 +37,22 @@ public class Bar implements Serializable {
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDinFK")
+	@JsonBackReference
 	private Indirizzo indirizzo;
 
 	//bi-directional many-to-one association to Classificato
 	@OneToMany(mappedBy="bar")
+	@JsonBackReference
 	private List<Classificato> classificatos;
 
 	//bi-directional many-to-one association to Menu
 	@OneToMany(mappedBy="bar")
+	@JsonBackReference
 	private List<Menu> menus;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="bar")
+	@JsonBackReference
 	private List<Ordine> ordines;
 
 	public Bar() {
