@@ -41,18 +41,21 @@ public class InserisciValutazione extends AppCompatActivity {
         final float valutazione = rb.getRating();
         UserDBAdapter udb = new UserDBAdapter(this);
         final OrdineDBAdapter odb = new OrdineDBAdapter(this);
+        session = new SessionUte(InserisciValutazione.this);
         String mail = session.getMailUt();
-        Utente user = (Utente) udb.getUserLogin(mail);
         bt1 = findViewById(R.id.BTNfine);
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<Ordine> call = apiService.ValutazioneFattorino(valutazione);
+                String val = String.valueOf(valutazione);
+                Call<Ordine> call = apiService.ValutazioneFattorino(val);
                 call.enqueue(new Callback<Ordine>() {
                     @Override
                     public void onResponse(Call<Ordine> call, Response<Ordine> response) {
                         if(!response.isSuccessful()){
                             Toast.makeText(InserisciValutazione.this, "Valutazione non corretta", Toast.LENGTH_LONG).show();
+                            Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
+                            startActivity(fine);
                         }else{
                             odb.setValutazioneOrdine(valutazione);
                             Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
@@ -63,6 +66,8 @@ public class InserisciValutazione extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<Ordine> call, Throwable t) {
                         Toast.makeText(InserisciValutazione.this, "Errore nella comunicazione col server", Toast.LENGTH_LONG).show();
+                        Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
+                        startActivity(fine);
                     }
                 });
             }

@@ -2,7 +2,6 @@ package com.example.bfastutente.Session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class SessionProdotto {
     private SharedPreferences prefs;
@@ -18,7 +17,7 @@ public class SessionProdotto {
     }
 
     public String getNomeProdotto() {
-        String mail = prefs.getString("mail","");
+        String mail = prefs.getString("prodotto","");
         return mail;
     }
 

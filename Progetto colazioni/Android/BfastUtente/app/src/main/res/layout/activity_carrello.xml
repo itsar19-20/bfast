@@ -7,16 +7,16 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/ETora"
+        android:id="@+id/ETorario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="156dp"
         android:ems="10"
         android:hint="Orario"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/Etnote"
@@ -36,18 +36,22 @@
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
         android:text="Paypal"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_carta"
-        tools:layout_editor_absoluteX="119dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_carta" />
 
     <CheckBox
         android:id="@+id/checkbox_carta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:onClick="onCheckboxClicked"
         android:text="Carta di credito"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="119dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <CheckBox
         android:id="@+id/checkbox_consegna"
@@ -55,8 +59,10 @@
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
         android:text="Alla consegna"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_paypal"
-        tools:layout_editor_absoluteX="119dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_paypal" />
 
     <TextView
         android:id="@+id/textView"
@@ -65,16 +71,9 @@
         android:layout_marginTop="24dp"
         android:text="Modalità di pagamento"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/ETora"
-        tools:layout_editor_absoluteX="99dp" />
-
-    <ListView
-        android:layout_width="319dp"
-        android:layout_height="231dp"
-        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ETorario" />
 
     <Button
         android:id="@+id/Etconf"
@@ -82,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:text="Conferma"
+        android:background="@drawable/mybutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

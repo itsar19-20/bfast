@@ -32,22 +32,18 @@ public interface BfastUtenteApi {
 
 
     @GET("ConfermaMail")
-    @FormUrlEncoded
     Call<Utente> ConfermaMail(@Query("mail") String mail);
 
 
     @GET("CambioMail")
-    @FormUrlEncoded
     Call<Utente> CambioMail(@Query("mail") String mail);
 
 
     @GET("CambioPassword")
-    @FormUrlEncoded
     Call<Utente> CambioPassword(@Query("password") String pass);
 
 
     @GET("PasswordDimenticata")
-    @FormUrlEncoded
     Call<Utente> PasswordDimeticata(@Query("password") String pass);
 
 
@@ -68,23 +64,19 @@ public interface BfastUtenteApi {
 
 
     @GET("ScriviDomanda")
-    @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("testo") String testo);
 
 
     @GET("TrovaRisposta")
-    @FormUrlEncoded
     Call<Risposta> TrovaRisposta(@Query("testo") String testo);
 
 
     @GET("ScriviRisposta")
-    @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
 
     @GET("ValutazioneFattorino")
-    @FormUrlEncoded
-    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") float valutazione);
+    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") String valutazione);
 
 
    /* @POST("Inzio")

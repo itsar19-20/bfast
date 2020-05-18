@@ -3,6 +3,7 @@ package com.example.bfastutente.Controller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,12 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
+import com.example.bfastutente.Session.SessionProdotto;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.RetrofitUtils;
 
@@ -36,13 +39,14 @@ public class ListaProdotti extends AppCompatActivity {
     ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     SessionBar session;
+    SessionProdotto sessionPro;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listaprodotti);
-        //setTooblar();
+        setTooblar();
         listview = findViewById(R.id.lista);
 
         session = new SessionBar(ListaProdotti.this);
@@ -56,6 +60,8 @@ public class ListaProdotti extends AppCompatActivity {
                     Toast.makeText(ListaProdotti.this, "Problemi con la rispota del server per i Prodotti", Toast.LENGTH_SHORT).show();
                 } else {
                     lista = response.body();
+                    customAdapter = new CustomAdapter(lista, ListaProdotti.this);
+                    listview.setAdapter(customAdapter);
                 }
             }
 
@@ -77,14 +83,6 @@ public class ListaProdotti extends AppCompatActivity {
         });
 
 
-        try {
-            customAdapter = new CustomAdapter(lista, this);
-            listview.setAdapter(customAdapter);
-        } catch (Exception e) {
-            Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
-            System.out.println("HibernateException Occured!!" + e);
-            e.printStackTrace();
-        }
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -116,11 +114,13 @@ public class ListaProdotti extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.list_item,null);
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.list_item,null);
 
-            tx1 = findViewById(R.id.prodotto);
-            tx2 = findViewById(R.id.ingredienti);
+            tx1 = view.findViewById(R.id.prodotto);
+            tx2 = view.findViewById(R.id.ingredienti);
 
             tx1.setText(lista2.get(position).getNome());
             tx2.setText(lista2.get(position).getIngredienti());
@@ -128,12 +128,15 @@ public class ListaProdotti extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent selezione = new Intent(ListaProdotti.this, MapActivity.class);// da reindirizzare al carrello
+                    sessionPro = new SessionProdotto(ListaProdotti.this);
+                    String nome = lista2.get(position).getNome();
+                    sessionPro.setNomeProdotto(nome);
+                    Intent selezione = new Intent(ListaProdotti.this, VisualizzazioneProdotto.class);
                     startActivity(selezione);
                 }
             });
 
-            return null;
+            return view;
         }
     }
 

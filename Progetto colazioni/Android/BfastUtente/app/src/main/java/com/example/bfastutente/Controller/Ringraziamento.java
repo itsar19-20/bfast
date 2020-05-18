@@ -21,7 +21,7 @@ public class Ringraziamento extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent fine = new Intent(Ringraziamento.this, MapActivity.class);
+                Intent fine = new Intent(Ringraziamento.this, InserisciValutazione.class);
                 startActivity(fine);
             }
         });

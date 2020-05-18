@@ -1,5 +1,6 @@
 package com.example.bfastutente.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,17 +28,18 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizzaprodotto);
-        tx = findViewById(R.id.Prodotto); //nome prodotto
-        et = findViewById(R.id.Quantita);//ingrediente
+        tx = findViewById(R.id.Prodotto);
+        et = findViewById(R.id.Quantita);
+        session = new SessionProdotto(VisualizzazioneProdotto.this);
         String nome = session.getNomeProdotto();
-        Prodotto p = (Prodotto) pdb.getProdottoLogin(nome);
         tx.setText(nome);
-        et.setText(p.getIngredienti());
         b1 = findViewById(R.id.btnconfpro);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(VisualizzazioneProdotto.this, "Aggiunto al tuo ordine", Toast.LENGTH_SHORT).show();
+                Intent selezione = new Intent(VisualizzazioneProdotto.this, ListaProdotti.class);
+                startActivity(selezione);
             }
 
 
