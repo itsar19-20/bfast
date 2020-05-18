@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -31,14 +34,18 @@ public class Utente implements Serializable {
 
 	//bi-directional many-to-one association to Chiedeu
 	@OneToMany(mappedBy="utente")
+	@JsonBackReference
 	private List<Chiedeu> chiedeus;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="utente")
+	@JsonBackReference
+
 	private List<Ordine> ordines;
 
 	//bi-directional many-to-one association to Sceglie
 	@OneToMany(mappedBy="utente")
+	@JsonBackReference
 	private List<Sceglie> sceglies;
 
 	public Utente() {

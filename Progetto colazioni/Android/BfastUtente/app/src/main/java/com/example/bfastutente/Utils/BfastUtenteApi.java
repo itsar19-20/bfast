@@ -63,7 +63,15 @@ public interface BfastUtenteApi {
     Call<List<Prodotto>> ProdottiBar(@Query("id") String id);
 
     @GET("Inzio")
-    Call<Ordine> Inizio(@Query("utente") String idut);
+    Call<Ordine> Inizio(@Query("mail") String idut);
+
+    @GET("SelezioneBar")
+    Call<Ordine> ordiniBa(@Query("ordine")String idor,@Query("bar") String idba);
+
+    @POST("SelezionePosizione")
+    @FormUrlEncoded
+    Call<Indirizzo> SelezionePosizione(@Query("ordine")String id,@Query("x") String x, @Query("y") String y);
+
 
     @GET("ScriviDomanda")
     Call<Domanda> ScriviDomanda(@Query("testo") String testo);
@@ -80,15 +88,7 @@ public interface BfastUtenteApi {
     @GET("ValutazioneFattorino")
     Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") String valutazione);
 
-
-
-
    /*
-
-    @POST("SelezioneBar")
-    @FormUrlEncoded
-    Call<Ordine> ordiniBa(@Query("bar") Integer id);
-
     @POST("Carrello")
     @FormUrlEncoded
     Call<Ordine> ordiniCa(@Query("orario") String orario, @Query("pagamento") int id, @Query("note") String note);
@@ -97,9 +97,6 @@ public interface BfastUtenteApi {
     @FormUrlEncoded
     Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
 
-    @POST("SelezionePosizione")
-    @FormUrlEncoded
-    Call<Indirizzo> SelezionePosizione(@Query("x") double x, @Query("y") double y);
 
 */
 

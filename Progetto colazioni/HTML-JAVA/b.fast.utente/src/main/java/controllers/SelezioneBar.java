@@ -34,7 +34,7 @@ public class SelezioneBar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			HttpSession ses = request.getSession();
-			int ido = (Integer) ses.getAttribute("ido");
+			int ido = Integer.parseInt(request.getParameter("ordine"));
 			int idbar = Integer.parseInt(request.getParameter("bar"));
 			Ordini o = new Ordini();
 			Ordine or = o.bar(ido, idbar);

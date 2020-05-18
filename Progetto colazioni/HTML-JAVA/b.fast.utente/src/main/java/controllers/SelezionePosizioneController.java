@@ -31,7 +31,7 @@ public class SelezionePosizioneController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		String mail = (String) ses.getAttribute("ID");
+		String mail = request.getParameter("mail");
 		ConfermaPosizione au = new ConfermaPosizione();
 		Sceglie b = null;
 		b = au.Seleziona(mail,request.getParameter("x"), request.getParameter("y"));

@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     SessionBar session;
     SessionUte sessionUte;
     SessionProdotto sessionProdotto;
-
+    SessionOrdine sessionOrdine;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         mMap.setMinZoomPreference(7);
         sessionUte = new SessionUte(getActivity());
         String mail = sessionUte.getMailUt();
-        /* Call<Ordine> call = apiService.Inizio(mail);
+        Call<Ordine> call = apiService.Inizio(mail);
         call.enqueue(new Callback<Ordine>(){
                          @Override
                          public void onResponse(Call<Ordine> call, Response<Ordine> response) {
@@ -86,6 +86,9 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                  Toast.makeText(getActivity(), "Impossibile creare l'ordine", Toast.LENGTH_SHORT).show();
                              }else{
                                  Toast.makeText(getActivity(), "Perfetto! Ordine creato", Toast.LENGTH_SHORT).show();
+                                 Ordine o = response.body();
+                                 sessionOrdine = new SessionOrdine(getActivity());
+                                 sessionOrdine.setIDOrd(o.getId());
                              }
                          }
 
@@ -93,7 +96,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                          public void onFailure(Call<Ordine> call, Throwable t) {
                              Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
                          }
-                     });*/
+                     });
         context = this.getContext();
         bdb = new BarDBAdapter(context);
         idb = new IndirizzoDBAdapter(context);
@@ -133,13 +136,15 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapClick(final LatLng latLng) {
                 if(markerUtente == null){
 
                 }else{
                     markerUtente.remove();
                 }
                 markerUtente = mMap.addMarker(new MarkerOptions().position(latLng).title("Posizione selezionata"));
+                double x = latLng.latitude;
+                double y = latLng.longitude;
 
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override

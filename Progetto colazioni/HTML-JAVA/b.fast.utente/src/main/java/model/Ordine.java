@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -31,36 +34,43 @@ public class Ordine implements Serializable {
 
 	//bi-directional many-to-one association to Contiene
 	@OneToMany(mappedBy="ordine")
+	@JsonBackReference
 	private List<Contiene> contienes;
 
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDinFK")
+	@JsonBackReference
 	private Indirizzo indirizzo;
 
 	//bi-directional many-to-one association to Bar
 	@ManyToOne
 	@JoinColumn(name="IDbarFK")
+	@JsonBackReference
 	private Bar bar;
 
 	//bi-directional many-to-one association to Fattorino
 	@ManyToOne
 	@JoinColumn(name="IDfatFK")
+	@JsonBackReference
 	private Fattorino fattorino;
 
 	//bi-directional many-to-one association to Posfatt
 	@ManyToOne
 	@JoinColumn(name="IDpoFK")
+	@JsonBackReference
 	private Posfatt posfatt;
 
 	//bi-directional many-to-one association to Tipopagamento
 	@ManyToOne
 	@JoinColumn(name="IDtiFK")
+	@JsonBackReference
 	private Tipopagamento tipopagamento;
 
 	//bi-directional many-to-one association to Utente
 	@ManyToOne
 	@JoinColumn(name="IDutFK")
+	@JsonBackReference
 	private Utente utente;
 
 	public Ordine() {

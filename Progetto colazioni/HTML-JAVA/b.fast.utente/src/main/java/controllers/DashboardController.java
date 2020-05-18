@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.Ordini;
 import model.Ordine;
 
@@ -33,13 +35,14 @@ public class DashboardController extends HttpServlet {
 		HttpSession ses = request.getSession();
 		Ordini au = new Ordini();
 		String s= (String) ses.getAttribute("ID");
-		Ordine b = au.creazione(s);
+		Ordine b = au.creazione(request.getParameter("mail"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
 			ses.setAttribute("IDo", b.getId());
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));			}
 	}
 
 	/**
