@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 25, 2020 alle 15:09
--- Versione del server: 10.4.11-MariaDB
--- Versione PHP: 7.4.1
+-- Creato il: Mag 18, 2020 alle 13:48
+-- Versione del server: 10.1.36-MariaDB
+-- Versione PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bfast`
+-- Database: `b_fast`
 --
 
 -- --------------------------------------------------------
@@ -37,7 +37,6 @@ CREATE TABLE `bar` (
   `Valutazione` float DEFAULT NULL,
   `email` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `Immagine` longblob DEFAULT NULL,
   `Fascia` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,20 +44,21 @@ CREATE TABLE `bar` (
 -- Dump dei dati per la tabella `bar`
 --
 
-INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Immagine`, `Fascia`) VALUES
-(1, 5, 'Bar pippo', '13:00', '2:00', 3, 'prova@gmail.com', '333', '', 0),
-(2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '432', '', 0),
-(3, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', NULL, 0),
-(4, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', NULL, 0),
-(5, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', NULL, 0),
-(6, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', NULL, 0),
-(7, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', NULL, 0),
-(8, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', NULL, 0),
-(9, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', NULL, 0),
-(10, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', NULL, 0),
-(31, NULL, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', NULL, 0),
-(32, NULL, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', NULL, 0),
-(33, NULL, 'Bar ciko', NULL, NULL, 0, 'dfagdfg@ssad.com', '232', NULL, 0);
+INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Fascia`) VALUES
+(1, 1, 'Bar pippo', '5', '13', 3, 'prova@gmail.com', '333', 0),
+(2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '123', 0),
+(3, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', 0),
+(4, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', 0),
+(5, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', 0),
+(6, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', 0),
+(7, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', 0),
+(8, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', 0),
+(9, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', 0),
+(10, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', 0),
+(31, 17, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', 0),
+(32, 20, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', 0),
+(33, 18, 'Bar ciko', NULL, NULL, 0, 'dfagdfg@ssad.com', '232', 0),
+(34, 21, 'prova', NULL, NULL, 0, 'nonna@diaz.com', '333', 0);
 
 -- --------------------------------------------------------
 
@@ -68,8 +68,8 @@ INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `
 
 CREATE TABLE `chiedef` (
   `ID` int(8) NOT NULL,
-  `IDfatFK` int(8) NOT NULL DEFAULT 0,
-  `IDdoFK` int(8) NOT NULL DEFAULT 0
+  `IDfatFK` int(8) NOT NULL DEFAULT '0',
+  `IDdoFK` int(8) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -88,7 +88,7 @@ INSERT INTO `chiedef` (`ID`, `IDfatFK`, `IDdoFK`) VALUES
 
 CREATE TABLE `chiedeu` (
   `ID` int(8) NOT NULL,
-  `IDdoFK` int(8) NOT NULL DEFAULT 0,
+  `IDdoFK` int(8) NOT NULL DEFAULT '0',
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -129,9 +129,20 @@ INSERT INTO `classificato` (`ID`, `IDbaFK`, `IDfiFK`) VALUES
 CREATE TABLE `contiene` (
   `ID` int(8) NOT NULL,
   `IDprFK` varchar(50) NOT NULL DEFAULT '0',
-  `IDorFK` int(8) NOT NULL DEFAULT 0,
-  `Quantita` int(5) NOT NULL DEFAULT 0
+  `IDorFK` int(8) NOT NULL DEFAULT '0',
+  `Quantita` int(5) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `contiene`
+--
+
+INSERT INTO `contiene` (`ID`, `IDprFK`, `IDorFK`, `Quantita`) VALUES
+(1, 'caffe', 1, 1),
+(2, 'brioche', 1, 1),
+(3, 'cheesecake', 2, 4),
+(4, 'pancetta', 2, 2),
+(5, 'succo di arancia', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -211,8 +222,8 @@ INSERT INTO `filtro` (`ID`, `Tipo`) VALUES
 
 CREATE TABLE `indirizzo` (
   `ID` int(8) NOT NULL,
-  `x` double NOT NULL DEFAULT 0,
-  `y` double NOT NULL DEFAULT 0
+  `x` double NOT NULL DEFAULT '0',
+  `y` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -220,19 +231,20 @@ CREATE TABLE `indirizzo` (
 --
 
 INSERT INTO `indirizzo` (`ID`, `x`, `y`) VALUES
-(1, 40.863, 14.2767),
-(2, 41.1187, 16.852),
-(3, 38.1121, 13.3366),
-(4, 45.4773, 9.1815),
-(5, 45.4398, 12.3319),
-(6, 43.7874, 11.2499),
-(7, 40.6287, 17.9376),
-(8, 45.6362, 13.8042),
-(9, 44.5075, 11.3514),
-(10, 41.9109, 12.4818),
-(11, 44.4222, 8.9052),
-(15, 45.0781, 7.6761),
-(16, 46.0793, 11.1302);
+(1, 45.784, 9),
+(2, 45.4773, 9.1815),
+(3, 46, 8.1815),
+(4, 42, 12.453),
+(5, 45, 9),
+(6, 40, 8.7),
+(7, 44, 11),
+(8, 45, 9.3),
+(9, 46, 8),
+(10, 45.5, 9.5),
+(17, 45.23, 9),
+(18, 43, 11.53),
+(20, 45, 8.97),
+(21, 45, 9.32);
 
 -- --------------------------------------------------------
 
@@ -244,8 +256,18 @@ CREATE TABLE `menu` (
   `ID` int(8) NOT NULL,
   `IDbaFK` int(8) NOT NULL,
   `IDprFK` varchar(50) NOT NULL DEFAULT '',
-  `Disponibilita` bit(1) NOT NULL DEFAULT b'1'
+  `Disponibilita` int(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `menu`
+--
+
+INSERT INTO `menu` (`ID`, `IDbaFK`, `IDprFK`, `Disponibilita`) VALUES
+(1, 1, 'succo di arancia', 1),
+(2, 1, 'cheesecake', 1),
+(3, 1, 'croissant', 1),
+(5, 1, 'torta al cioccolato', 1);
 
 -- --------------------------------------------------------
 
@@ -264,9 +286,17 @@ CREATE TABLE `ordine` (
   `Orario` varchar(50) DEFAULT NULL,
   `Note` varchar(200) DEFAULT NULL,
   `Data` date DEFAULT NULL,
-  `Confermato` bit(1) DEFAULT b'0',
+  `Confermato` int(1) DEFAULT '0',
   `ValutazioneFatt` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `ordine`
+--
+
+INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDpoFK`, `IDinFK`, `Orario`, `Note`, `Data`, `Confermato`, `ValutazioneFatt`) VALUES
+(1, 'da@gmail.com', NULL, 1, 1, 1, 7, '9:00', '', '2020-05-05', 1, NULL),
+(2, 'alex@ffff.it', NULL, 1, 1, 1, 2, '10:00', 'Non va il citofono', '2020-05-07', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,8 +306,8 @@ CREATE TABLE `ordine` (
 
 CREATE TABLE `posfatt` (
   `ID` int(8) NOT NULL,
-  `PosXFA` double NOT NULL DEFAULT 0,
-  `PosYFA` double NOT NULL DEFAULT 0
+  `PosXFA` double NOT NULL DEFAULT '0',
+  `PosYFA` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -315,7 +345,7 @@ INSERT INTO `possiede` (`ID`, `IDdoFK`, `IDriFK`) VALUES
 CREATE TABLE `prodotto` (
   `Nome` varchar(50) NOT NULL,
   `Ingredienti` varchar(100) NOT NULL DEFAULT '0',
-  `Prezzo` float NOT NULL DEFAULT 0,
+  `Prezzo` float NOT NULL DEFAULT '0',
   `Tipo` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -368,7 +398,7 @@ INSERT INTO `risposta` (`ID`, `Risposta`) VALUES
 
 CREATE TABLE `sceglie` (
   `ID` int(8) NOT NULL,
-  `IDprFK` int(8) NOT NULL DEFAULT 0,
+  `IDprFK` int(8) NOT NULL DEFAULT '0',
   `IDutFK` varchar(20) CHARACTER SET latin1 NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -419,9 +449,11 @@ INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telef
 ('eater@gnam.com', 'Ither', 'Khaza', '2000-02-04', '45678', 35489259),
 ('leo@gmail.com', 'Leonardo', 'DiCaprio', '1974-11-11', 't1t4n1c', 33302526),
 ('nico@asd.it', 'Nicolò', 'Zaniolo', '1999-07-02', 'r0m4', 12345985),
+('prova@error.com', 'prova', 'prova', '2000-11-11', '333', 43255315),
 ('sabba@ilrosso.it', 'Samuele', 'Sabbatini', '2000-11-22', '98722', 20338228),
 ('simo@asd.it', 'Simone', 'Barzaghi', '1997-08-24', '666', 21474836),
-('sofia@g.it', 'Sofia', 'Goggia', '1992-11-05', 'kkk555', 66823749);
+('sofia@g.it', 'Sofia', 'Goggia', '1992-11-05', 'kkk555', 66823749),
+('zio@zio.com', 'prova', 'pippo', '1999-12-11', '333', 4543536);
 
 --
 -- Indici per le tabelle scaricate
@@ -564,7 +596,7 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT per la tabella `chiedef`
@@ -588,7 +620,7 @@ ALTER TABLE `classificato`
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `domanda`
@@ -612,19 +644,19 @@ ALTER TABLE `filtro`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `posfatt`
@@ -664,7 +696,7 @@ ALTER TABLE `tipopagamento`
 -- Limiti per la tabella `bar`
 --
 ALTER TABLE `bar`
-  ADD CONSTRAINT `IDindiFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`);
+  ADD CONSTRAINT `IDindiFK` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `chiedef`

@@ -58,10 +58,14 @@ public class ListaProdotti extends AppCompatActivity {
             public void onResponse(Call<List<Prodotto>> call, Response<List<Prodotto>> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(ListaProdotti.this, "Problemi con la rispota del server per i Prodotti", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(response.body().size()!=0){
                     lista = response.body();
                     customAdapter = new CustomAdapter(lista, ListaProdotti.this);
                     listview.setAdapter(customAdapter);
+                }else{
+                    Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
+                    Intent selezione = new Intent(ListaProdotti.this, MapActivity.class);
+                    startActivity(selezione);
                 }
             }
 
