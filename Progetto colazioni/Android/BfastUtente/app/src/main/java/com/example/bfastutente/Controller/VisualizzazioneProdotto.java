@@ -23,6 +23,7 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
     private SessionProdotto session;
     ProdottoDBAdapter pdb = new ProdottoDBAdapter(this);
     private int quantita;
+    SessionProdotto sessionProdotto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +38,18 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(VisualizzazioneProdotto.this, "Aggiunto al tuo ordine", Toast.LENGTH_SHORT).show();
-                Intent selezione = new Intent(VisualizzazioneProdotto.this, ListaProdotti.class);
-                startActivity(selezione);
+                String check = et.getText().toString();
+                if(check.equals("")){
+                    Toast.makeText(VisualizzazioneProdotto.this, "Non hai selezionato nessuna quantita", Toast.LENGTH_SHORT).show();
+                }else{
+                    quantita =Integer.parseInt(check);
+                    Toast.makeText(VisualizzazioneProdotto.this, "Aggiunto al tuo carrello", Toast.LENGTH_SHORT).show();
+                    sessionProdotto = new SessionProdotto(VisualizzazioneProdotto.this);
+                    sessionProdotto.confermarto(1);
+                    Intent selezione = new Intent(VisualizzazioneProdotto.this, ListaProdotti.class);
+                    startActivity(selezione);
+                }
+
             }
 
 

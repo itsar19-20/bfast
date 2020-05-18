@@ -8,7 +8,7 @@ public class SessionProdotto {
     private SharedPreferences.Editor editor;
 
     public SessionProdotto(Context cntx) {
-        prefs = cntx.getSharedPreferences("SessionProdotto",Context.MODE_PRIVATE);
+        prefs = cntx.getSharedPreferences("SessionProdotto", Context.MODE_PRIVATE);
         editor = prefs.edit();
     }
 
@@ -17,8 +17,18 @@ public class SessionProdotto {
     }
 
     public String getNomeProdotto() {
-        String mail = prefs.getString("prodotto","");
+        String mail = prefs.getString("prodotto", "");
         return mail;
     }
+
+    public void confermarto(int conf) {
+        prefs.edit().putInt("conf", conf).apply();
+    }
+
+    public int getConfermato() {
+        int conf = prefs.getInt("conf",0);
+        return conf;
+    }
+
 
 }

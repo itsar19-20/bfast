@@ -70,10 +70,15 @@ public class RegistrazioneActivity extends AppCompatActivity {
                         call.enqueue(new Callback<Utente>() {
                                          @Override
                                          public void onResponse(Call<Utente> call, Response<Utente> response) {
+                                             session = new  SessionUte(RegistrazioneActivity.this);
                                              session.setMailUt(email);
-                                             udba.open();
-                                             udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
-                                             udba.close();
+                                             try{
+                                                 udba.open();
+                                                 udba.addUser(email,password,nome,cognome,numeroditelefono,datadinascita);
+                                                 udba.close();
+                                             }catch(Exception e){
+
+                                             }
                                              Intent log = new Intent(RegistrazioneActivity.this, MapActivity.class);
                                              startActivity(log);
                                          }

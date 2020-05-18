@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,19 +39,6 @@ public class Carrello extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrello);
         odb.open();
-
-        try{
-            List<String> prodotto = new ArrayList<>();
-            prodotto = odb.getIdProdotto(sessionordine.getIDOrd());
-            for (int i = 0; i < prodotto.size(); i ++) {
-                Prodotto pr = null;
-                concatenatedStarNames += prodotto.get(i);
-            }
-            t2.setText(concatenatedStarNames);
-        }catch(Exception e){
-            System.out.println("HibernateException Occured!!" + e);
-            e.printStackTrace();
-        }
 
         final EditText et1 = findViewById(R.id.ETorario);
         final EditText et2 = findViewById(R.id.Etnote);
@@ -86,14 +74,20 @@ public class Carrello extends AppCompatActivity {
             public void onClick(View v) {
                 ora = et1.getText().toString();
                 note = et2.getText().toString();
-                try{
-                    odb.finecarrello(data,note,paga);
-                }catch(Exception e){
-                    System.out.println("HibernateException Occured!!" + e);
-                    e.printStackTrace();
+                if(ora.equals("")){
+                    Toast.makeText(Carrello.this, "Immetti l'ora", Toast.LENGTH_SHORT).show();
+                }else if(!cb1.isChecked() && !cb2.isChecked() && !cb3.isChecked()) {
+                    Toast.makeText(Carrello.this, "Immetti il tipo di pagamento", Toast.LENGTH_SHORT).show();
+                }else{
+                    try{
+                        odb.finecarrello(data,note,paga);
+                    }catch(Exception e){
+                        System.out.println("HibernateException Occured!!" + e);
+                        e.printStackTrace();
+                    }
+                    Intent ringraziamento = new Intent(Carrello.this, Ringraziamento.class);
+                    startActivity(ringraziamento);
                 }
-                Intent ringraziamento = new Intent(Carrello.this, Ringraziamento.class);
-                startActivity(ringraziamento);
             }
         });
 

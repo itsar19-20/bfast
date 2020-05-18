@@ -16,10 +16,16 @@ import androidx.fragment.app.Fragment;
 import com.example.bfastutente.Adapter.BarDBAdapter;
 import com.example.bfastutente.Adapter.IndirizzoDBAdapter;
 import com.example.bfastutente.Model.Indirizzo;
+import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
+import com.example.bfastutente.Session.SessionOrdine;
+import com.example.bfastutente.Session.SessionProdotto;
+import com.example.bfastutente.Session.SessionUte;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.RetrofitUtils;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -46,7 +52,8 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     Marker MarkerBar;
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     SessionBar session;
-
+    SessionUte sessionUte;
+    SessionProdotto sessionProdotto;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -66,17 +73,38 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
         mMap = googleMap;
+        CameraUpdate point = CameraUpdateFactory.newLatLng(new LatLng(45, 9));
+        mMap.moveCamera(point);
+        mMap.setMinZoomPreference(7);
+        sessionUte = new SessionUte(getActivity());
+        String mail = sessionUte.getMailUt();
+        /* Call<Ordine> call = apiService.Inizio(mail);
+        call.enqueue(new Callback<Ordine>(){
+                         @Override
+                         public void onResponse(Call<Ordine> call, Response<Ordine> response) {
+                             if (!response.isSuccessful()) {
+                                 Toast.makeText(getActivity(), "Impossibile creare l'ordine", Toast.LENGTH_SHORT).show();
+                             }else{
+                                 Toast.makeText(getActivity(), "Perfetto! Ordine creato", Toast.LENGTH_SHORT).show();
+                             }
+                         }
+
+                         @Override
+                         public void onFailure(Call<Ordine> call, Throwable t) {
+                             Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
+                         }
+                     });*/
         context = this.getContext();
         bdb = new BarDBAdapter(context);
         idb = new IndirizzoDBAdapter(context);
         bdb.open();
         idb.open();
-            Call<List<Indirizzo>> call = apiService.UpdateIndirizzi();
-            call.enqueue(new Callback<List<Indirizzo>>() {
+            Call<List<Indirizzo>> call2 = apiService.UpdateIndirizzi();
+            call2.enqueue(new Callback<List<Indirizzo>>() {
                              @Override
                              public void onResponse(Call<List<Indirizzo>> call, Response<List<Indirizzo>> response) {
                                  if (!response.isSuccessful()) {
-                                     Toast.makeText(getActivity(), "Credenziali errate", Toast.LENGTH_SHORT).show();
+                                     Toast.makeText(getActivity(), "Non esistono bar", Toast.LENGTH_SHORT).show();
                                  }else{
                                      try {
                                          List<Indirizzo> indirizzo = response.body();
@@ -122,6 +150,8 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                 session = new SessionBar(getActivity());
                                 int id = Integer.parseInt(marker.getTitle());
                                 session.setIDInd(id);
+                                sessionProdotto = new SessionProdotto(getActivity());
+                                sessionProdotto.confermarto(0);
                                 Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
                                 startActivity(selezione);
                             }

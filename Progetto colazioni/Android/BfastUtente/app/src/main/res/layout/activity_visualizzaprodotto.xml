@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/Prodotto"
-        android:layout_width="111dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="44dp"
         android:layout_marginTop="184dp"
         android:text="TextView"
         android:textSize="24sp"

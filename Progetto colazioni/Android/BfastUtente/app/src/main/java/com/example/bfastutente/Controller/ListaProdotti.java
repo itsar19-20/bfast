@@ -151,8 +151,15 @@ public class ListaProdotti extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toHome = new Intent(ListaProdotti.this, Carrello.class);
-                startActivity(toHome);
+                sessionPro = new SessionProdotto(ListaProdotti.this);
+                int conf = sessionPro.getConfermato();
+                if(conf == 0){
+                    Toast.makeText(ListaProdotti.this, "Carrello vuoto! Scegli un prodotto", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent toHome = new Intent(ListaProdotti.this, Carrello.class);
+                    startActivity(toHome);
+                }
+
             }
         });
 
