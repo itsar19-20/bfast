@@ -31,11 +31,11 @@ public class SelezioneProdotti extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession ses = request.getSession();
-		int ido = (Integer)ses.getAttribute("ido");
+		int ido = Integer.parseInt(request.getParameter("ordine"));
 		Prodotti pr = new Prodotti();
 		Contiene c = null;
 		try {
-			c = pr.selezione(ido, request.getParameter("Nome"), request.getParameter("Quanita"));
+			c = pr.selezione(ido, request.getParameter("Nome"), request.getParameter("Quantita"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

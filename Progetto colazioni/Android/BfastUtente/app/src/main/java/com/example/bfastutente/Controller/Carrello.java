@@ -17,9 +17,16 @@ import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
 import com.example.bfastutente.Session.SessionOrdine;
+import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.OrdineJson;
+import com.example.bfastutente.Utils.RetrofitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Carrello extends AppCompatActivity {
 
@@ -33,6 +40,8 @@ public class Carrello extends AppCompatActivity {
     private int paga,idord;
     private OrdineDBAdapter odb = new OrdineDBAdapter(this);
     private CheckBox cb1,cb2,cb3;
+    BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
+    SessionOrdine sessionOrdine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +88,24 @@ public class Carrello extends AppCompatActivity {
                 }else if(!cb1.isChecked() && !cb2.isChecked() && !cb3.isChecked()) {
                     Toast.makeText(Carrello.this, "Immetti il tipo di pagamento", Toast.LENGTH_SHORT).show();
                 }else{
-                    try{
-                        odb.finecarrello(data,note,paga);
-                    }catch(Exception e){
-                        System.out.println("HibernateException Occured!!" + e);
-                        e.printStackTrace();
-                    }
+                   /* sessionOrdine = new SessionOrdine(Carrello.this);
+                    Call<OrdineJson> call = apiService.Carrello(String.valueOf(sessionOrdine.getIDOrd()),ora,String.valueOf(paga),note);
+                    call.enqueue(new Callback<OrdineJson>() {
+                                     @Override
+                                     public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                                         try {
+                                             odb.finecarrello(data, note, paga);
+                                         } catch (Exception e) {
+                                             System.out.println("HibernateException Occured!!" + e);
+                                             e.printStackTrace();
+                                         }
+                                     }
+
+                                     @Override
+                                     public void onFailure(Call<OrdineJson> call, Throwable t) {
+
+                                     }
+                                 });*/
                     Intent ringraziamento = new Intent(Carrello.this, Ringraziamento.class);
                     startActivity(ringraziamento);
                 }

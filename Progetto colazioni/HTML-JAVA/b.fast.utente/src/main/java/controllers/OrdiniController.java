@@ -31,10 +31,10 @@ public class OrdiniController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
-		int id =(Integer) ses.getAttribute("IDo");
+		int id = Integer.parseInt(request.getParameter("ordine"));
 		Ordini au = new Ordini();
 		Ordine b = null;
-		b = au.carrello(id,request.getParameter("prodotto"), request.getParameter("quantita"));
+		b = au.carrello(id,request.getParameter("orario"), request.getParameter("note"),request.getParameter("pagamento"));
 		if (b == null) {
 			request.getRequestDispatcher("/prodotto.html").forward(request, response);
 		} else {

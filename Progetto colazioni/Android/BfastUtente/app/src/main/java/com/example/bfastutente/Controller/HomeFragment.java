@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment;
 import com.example.bfastutente.Adapter.BarDBAdapter;
 import com.example.bfastutente.Adapter.IndirizzoDBAdapter;
 import com.example.bfastutente.Model.Indirizzo;
-import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
 import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
 import com.example.bfastutente.Session.SessionUte;
 import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -78,22 +78,23 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         mMap.setMinZoomPreference(7);
         sessionUte = new SessionUte(getActivity());
         String mail = sessionUte.getMailUt();
-        Call<Ordine> call = apiService.Inizio(mail);
-        call.enqueue(new Callback<Ordine>(){
+        Call<OrdineJson> call = apiService.Inizio(mail);
+        call.enqueue(new Callback<OrdineJson>(){
                          @Override
-                         public void onResponse(Call<Ordine> call, Response<Ordine> response) {
+                         public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                              if (!response.isSuccessful()) {
                                  Toast.makeText(getActivity(), "Impossibile creare l'ordine", Toast.LENGTH_SHORT).show();
                              }else{
                                  Toast.makeText(getActivity(), "Perfetto! Ordine creato", Toast.LENGTH_SHORT).show();
-                                 Ordine o = response.body();
+                                 OrdineJson o = response.body();
+                                 int id = Integer.parseInt(o.getId());
                                  sessionOrdine = new SessionOrdine(getActivity());
-                                 sessionOrdine.setIDOrd(o.getId());
+                                 sessionOrdine.setIDOrd(id);
                              }
                          }
 
                          @Override
-                         public void onFailure(Call<Ordine> call, Throwable t) {
+                         public void onFailure(Call<OrdineJson> call, Throwable t) {
                              Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
                          }
                      });
@@ -155,6 +156,38 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                 session = new SessionBar(getActivity());
                                 int id = Integer.parseInt(marker.getTitle());
                                 session.setIDInd(id);
+                                /*Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
+                                callBar.enqueue(new Callback<OrdineJson>() {
+                                                 @Override
+                                                 public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+
+                                                 }
+
+                                                 @Override
+                                                 public void onFailure(Call<OrdineJson> call, Throwable t) {
+
+                                                 }
+                                             });
+                                    LatLng pos = markerUtente.getPosition();
+                                    String x = String.valueOf(pos.latitude);
+                                    String y = String.valueOf(pos.longitude);
+                                    Call<Indirizzo> callPos = apiService.SelezionePosizione(sessionUte.getMailUt(),x,y);
+                                    callPos.enqueue(new Callback<Indirizzo>() {
+                                                 @Override
+                                                 public void onResponse(Call<Indirizzo> call, Response<Indirizzo> response) {
+                                                     if (!response.isSuccessful()) {
+                                                         Toast.makeText(getActivity(), "Impossibile trovare la posizione", Toast.LENGTH_SHORT).show();
+                                                     }else{
+                                                         Toast.makeText(getActivity(), "Perfetto! Posizione settata", Toast.LENGTH_SHORT).show();
+                                                     }
+                                                 }
+
+                                                 @Override
+                                                 public void onFailure(Call<Indirizzo> call, Throwable t) {
+                                                     Toast.makeText(getActivity(), "Impossibile collegari al server", Toast.LENGTH_SHORT).show();
+                                                 }
+                                             });*/
+
                                 sessionProdotto = new SessionProdotto(getActivity());
                                 sessionProdotto.confermarto(0);
                                 Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);

@@ -16,6 +16,7 @@ import com.example.bfastutente.Adapter.UserDBAdapter;
 import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.Model.Utente;
 import com.example.bfastutente.R;
+import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionUte;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.RetrofitUtils;
@@ -31,6 +32,8 @@ public class InserisciValutazione extends AppCompatActivity {
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     private Button bt1;
     private RatingBar rb;
+    SessionOrdine sessionOrdine;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,8 @@ public class InserisciValutazione extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String val = String.valueOf(valutazione);
-                Call<Ordine> call = apiService.ValutazioneFattorino(val);
+                sessionOrdine = new SessionOrdine(InserisciValutazione.this);
+               /*Call<Ordine> call = apiService.ValutazioneFattorino(String.valueOf(sessionOrdine.getIDOrd()),val);
                 call.enqueue(new Callback<Ordine>() {
                     @Override
                     public void onResponse(Call<Ordine> call, Response<Ordine> response) {
@@ -69,7 +73,9 @@ public class InserisciValutazione extends AppCompatActivity {
                         Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
                         startActivity(fine);
                     }
-                });
+                });*/
+                Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
+                startActivity(fine);
             }
         });
 

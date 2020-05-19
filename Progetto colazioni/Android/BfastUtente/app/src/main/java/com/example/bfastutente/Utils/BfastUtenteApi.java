@@ -1,6 +1,7 @@
 package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
+import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.Model.Domanda;
 import com.example.bfastutente.Model.Indirizzo;
 import com.example.bfastutente.Model.Ordine;
@@ -12,7 +13,6 @@ import com.example.bfastutente.Model.Utente;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -27,7 +27,6 @@ public interface BfastUtenteApi {
                                @Query("telefono") String tel,@Query("mail") String mail, @Query("pass") String pwd,@Query("copass")String copass );
 
     @POST("CancellazioneUtente")
-    @FormUrlEncoded
     Call<Utente> Cancellazione(@Query("mail") String mail);
 
 
@@ -62,42 +61,44 @@ public interface BfastUtenteApi {
     @GET("ProdottiBar")
     Call<List<Prodotto>> ProdottiBar(@Query("id") String id);
 
-    @GET("Inzio")
-    Call<Ordine> Inizio(@Query("mail") String idut);
+
+    @POST("Inzio")
+    Call<OrdineJson> Inizio(@Query("mail") String mail);
+
 
     @GET("SelezioneBar")
-    Call<Ordine> ordiniBa(@Query("ordine")String idor,@Query("bar") String idba);
+    Call<OrdineJson> SelezioneBar(@Query("ordine")String idor,@Query("bar") String idba);
+
+
+    @POST("SelezioneProdotto")
+    Call<Contiene> SelezioneProdotto(@Query("ordine") String id, @Query("Nome") String nome, @Query("Quantita") String quantita);
+
+
+    @POST("Carrello")
+    Call<OrdineJson> Carrello(@Query("ordine")String id,@Query("orario") String orario, @Query("pagamento") String idpag, @Query("note") String note);
+
 
     @POST("SelezionePosizione")
-    @FormUrlEncoded
     Call<Indirizzo> SelezionePosizione(@Query("ordine")String id,@Query("x") String x, @Query("y") String y);
+
 
 
     @GET("ScriviDomanda")
     Call<Domanda> ScriviDomanda(@Query("testo") String testo);
 
 
+
     @GET("TrovaRisposta")
     Call<Risposta> TrovaRisposta(@Query("testo") String testo);
+
 
 
     @GET("ScriviRisposta")
     Call<Risposta> ScriviRisposta(@Query("testo") String testo);
 
 
+
     @GET("ValutazioneFattorino")
-    Call<Ordine> ValutazioneFattorino(@Query("valutazioneFattorino") String valutazione);
-
-   /*
-    @POST("Carrello")
-    @FormUrlEncoded
-    Call<Ordine> ordiniCa(@Query("orario") String orario, @Query("pagamento") int id, @Query("note") String note);
-
-    @POST("SelezioneProdotto")
-    @FormUrlEncoded
-    Call<Contiene> SelezioneProdotto(@Query("ordine") int id, @Query("prodotto") String nome, @Query("quantita") int quantita);
-
-
-*/
+    Call<Ordine> ValutazioneFattorino(@Query("ordine")String id,@Query("valutazione") String valutazione);
 
 }

@@ -20,7 +20,7 @@ public class RetrofitUtils {
     }).create();
 
     private static RetrofitUtils instance = null;
-    public static final String BASE_URL = "http://192.168.1.169:8080/b.fast.utente/";  //controllate il vostro ip nel prompt
+    public static final String BASE_URL = "http://192.168.1.116:8080/b.fast.utente/";  //controllate il vostro ip nel prompt
     private BfastUtenteApi Bfast;
     public static RetrofitUtils getInstance() {
         if (instance == null) {

@@ -7,18 +7,16 @@ import model.Ordine;
 import utils.JPAUtil;
 
 public class ValutazioneFattorino {
-
-	public Ordine finale(HttpServletRequest req) {
-		String s = (String) req.getAttribute("IDo");
-		Ordine _return = cerca(s); 
-		return _return;
-	}
 	
-	public Ordine cerca(String ID) {
+	public Ordine cerca(String ID,String val2) {
 		Ordine _return = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Integer id = Integer.parseInt(ID);
 		_return = em.find(Ordine.class, id);
+		float val = Float.valueOf(val2);
+		em.getTransaction().begin();
+		_return.setValutazioneFatt(val);
+		em.getTransaction().commit();
 		return _return;
 	}
 	
