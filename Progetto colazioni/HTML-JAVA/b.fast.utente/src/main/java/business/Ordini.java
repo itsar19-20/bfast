@@ -1,6 +1,9 @@
 package business;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,7 +23,10 @@ public class Ordini {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Utente u = em.find(Utente.class, idu);
 		List<Integer> id = new ArrayList<Integer>();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date();
 		o.setUtente(u);
+		o.setData(date);
 		em.getTransaction().begin();
 	    em.persist(o);
 	    em.getTransaction().commit();

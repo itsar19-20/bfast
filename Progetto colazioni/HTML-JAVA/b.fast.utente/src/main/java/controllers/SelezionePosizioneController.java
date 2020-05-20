@@ -7,12 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.ConfermaPosizione;
-import model.Sceglie;
+import model.Ordine;
+import utils.OrdineJson;
 
 @WebServlet("/SelezionePosizione")
 public class SelezionePosizioneController extends HttpServlet{
@@ -30,14 +30,15 @@ public class SelezionePosizioneController extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		HttpSession ses = request.getSession();
 		String mail = request.getParameter("mail");
 		ConfermaPosizione au = new ConfermaPosizione();
-		Sceglie b = null;
-		b = au.Seleziona(mail,request.getParameter("x"), request.getParameter("y"));
+		Ordine b = null;
+		b = au.Seleziona(mail,request.getParameter("x"), request.getParameter("y"),request.getParameter("ordine"));
 		if (b == null) {
 			request.getRequestDispatcher("/prodotto.html").forward(request, response);
 		} else {
+			OrdineJson o = new OrdineJson();
+			o.setId(request.getParameter("ordine"));
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
 			response.getWriter().append(om.writeValueAsString(b));			}

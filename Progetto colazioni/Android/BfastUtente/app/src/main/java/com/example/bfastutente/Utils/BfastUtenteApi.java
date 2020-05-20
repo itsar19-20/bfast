@@ -1,10 +1,8 @@
 package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
-import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.Model.Domanda;
 import com.example.bfastutente.Model.Indirizzo;
-import com.example.bfastutente.Model.Ordine;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.Model.Risposta;
 import com.example.bfastutente.Model.Utente;
@@ -62,16 +60,16 @@ public interface BfastUtenteApi {
     Call<List<Prodotto>> ProdottiBar(@Query("id") String id);
 
 
-    @POST("Inzio")
+    @POST("Inizio")
     Call<OrdineJson> Inizio(@Query("mail") String mail);
 
 
-    @GET("SelezioneBar")
+    @POST("SelezionaBar")
     Call<OrdineJson> SelezioneBar(@Query("ordine")String idor,@Query("bar") String idba);
 
 
-    @POST("SelezioneProdotto")
-    Call<Contiene> SelezioneProdotto(@Query("ordine") String id, @Query("Nome") String nome, @Query("Quantita") String quantita);
+    @POST("SelezionaProdotto")
+    Call<OrdineJson> SelezioneProdotto(@Query("ordine") String id, @Query("Nome") String nome, @Query("Quantita") String quantita);
 
 
     @POST("Carrello")
@@ -99,6 +97,6 @@ public interface BfastUtenteApi {
 
 
     @GET("ValutazioneFattorino")
-    Call<Ordine> ValutazioneFattorino(@Query("ordine")String id,@Query("valutazione") String valutazione);
+    Call<OrdineJson> ValutazioneFattorino(@Query("ordine")String id,@Query("valutazione") String valutazione);
 
 }

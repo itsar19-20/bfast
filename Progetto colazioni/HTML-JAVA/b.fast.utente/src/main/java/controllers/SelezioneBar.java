@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.Ordini;
 import model.Ordine;
+import utils.OrdineJson;
 
 
 @WebServlet("/SelezionaBar")
@@ -42,9 +43,12 @@ public class SelezioneBar extends HttpServlet {
 				
 			}else {
 				ses.setAttribute("IDb", request.getAttribute("ID"));
+				OrdineJson ord = new OrdineJson();
+				ord.setId(String.valueOf(ido));
 				ObjectMapper om = new ObjectMapper();
 				response.setContentType("application/json");
-				response.getWriter().append(om.writeValueAsString(or));				}
+				response.getWriter().append(om.writeValueAsString(ord));				
+				}
 
 	
 	}

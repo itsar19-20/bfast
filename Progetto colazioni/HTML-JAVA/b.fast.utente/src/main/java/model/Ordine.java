@@ -40,19 +40,16 @@ public class Ordine implements Serializable {
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDinFK")
-	@JsonBackReference
 	private Indirizzo indirizzo;
 
 	//bi-directional many-to-one association to Bar
 	@ManyToOne
 	@JoinColumn(name="IDbarFK")
-	@JsonBackReference
 	private Bar bar;
 
 	//bi-directional many-to-one association to Fattorino
 	@ManyToOne
 	@JoinColumn(name="IDfatFK")
-	@JsonBackReference
 	private Fattorino fattorino;
 
 	//bi-directional many-to-one association to Posfatt
@@ -64,13 +61,11 @@ public class Ordine implements Serializable {
 	//bi-directional many-to-one association to Tipopagamento
 	@ManyToOne
 	@JoinColumn(name="IDtiFK")
-	@JsonBackReference
 	private Tipopagamento tipopagamento;
 
 	//bi-directional many-to-one association to Utente
 	@ManyToOne
 	@JoinColumn(name="IDutFK")
-	@JsonBackReference
 	private Utente utente;
 
 	public Ordine() {

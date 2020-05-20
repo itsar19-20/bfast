@@ -13,12 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bfastutente.Adapter.OrdineDBAdapter;
 import com.example.bfastutente.Adapter.UserDBAdapter;
-import com.example.bfastutente.Model.Ordine;
-import com.example.bfastutente.Model.Utente;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionUte;
 import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
 
 import retrofit2.Call;
@@ -52,30 +51,29 @@ public class InserisciValutazione extends AppCompatActivity {
             public void onClick(View v) {
                 String val = String.valueOf(valutazione);
                 sessionOrdine = new SessionOrdine(InserisciValutazione.this);
-               /*Call<Ordine> call = apiService.ValutazioneFattorino(String.valueOf(sessionOrdine.getIDOrd()),val);
-                call.enqueue(new Callback<Ordine>() {
+               Call<OrdineJson> call = apiService.ValutazioneFattorino(String.valueOf(sessionOrdine.getIDOrd()),val);
+                call.enqueue(new Callback<OrdineJson>() {
                     @Override
-                    public void onResponse(Call<Ordine> call, Response<Ordine> response) {
+                    public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                         if(!response.isSuccessful()){
                             Toast.makeText(InserisciValutazione.this, "Valutazione non corretta", Toast.LENGTH_LONG).show();
-                            Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
-                            startActivity(fine);
                         }else{
-                            odb.setValutazioneOrdine(valutazione);
+                            try{
+                                odb.setValutazioneOrdine(valutazione);
+                            }catch(Exception e){
+
+                            }
+                            Toast.makeText(InserisciValutazione.this, "Grazie per la sua valutazione", Toast.LENGTH_LONG).show();
                             Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
                             startActivity(fine);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Ordine> call, Throwable t) {
+                    public void onFailure(Call<OrdineJson> call, Throwable t) {
                         Toast.makeText(InserisciValutazione.this, "Errore nella comunicazione col server", Toast.LENGTH_LONG).show();
-                        Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
-                        startActivity(fine);
                     }
-                });*/
-                Intent fine = new Intent(InserisciValutazione.this, MapActivity.class);
-                startActivity(fine);
+                });
             }
         });
 

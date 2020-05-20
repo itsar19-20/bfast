@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.Prodotti;
 import model.Contiene;
+import utils.OrdineJson;
 
 @WebServlet("/SelezionaProdotto")
 public class SelezioneProdotti extends HttpServlet{
@@ -29,26 +30,19 @@ public class SelezioneProdotti extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		int ido = Integer.parseInt(request.getParameter("ordine"));
 		Prodotti pr = new Prodotti();
-		Contiene c = null;
-		try {
-			c = pr.selezione(ido, request.getParameter("Nome"), request.getParameter("Quantita"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(c!=null) {
-			
+		Contiene c = pr.selezione(ido, request.getParameter("Nome"), request.getParameter("Quantita"));
+		if(c==null) {
+			request.getRequestDispatcher("/").forward(request, response);
 		}else {
+			OrdineJson o = new OrdineJson();
+			o.setId(request.getParameter("ordine"));
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
-			try {
-				response.getWriter().append(om.writeValueAsString(c));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}	
+			response.getWriter().append(om.writeValueAsString(c));
 		}
 
 	}

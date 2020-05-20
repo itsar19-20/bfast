@@ -88,26 +88,34 @@ public class Carrello extends AppCompatActivity {
                 }else if(!cb1.isChecked() && !cb2.isChecked() && !cb3.isChecked()) {
                     Toast.makeText(Carrello.this, "Immetti il tipo di pagamento", Toast.LENGTH_SHORT).show();
                 }else{
-                   /* sessionOrdine = new SessionOrdine(Carrello.this);
+                   sessionOrdine = new SessionOrdine(Carrello.this);
                     Call<OrdineJson> call = apiService.Carrello(String.valueOf(sessionOrdine.getIDOrd()),ora,String.valueOf(paga),note);
                     call.enqueue(new Callback<OrdineJson>() {
                                      @Override
                                      public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
-                                         try {
-                                             odb.finecarrello(data, note, paga);
-                                         } catch (Exception e) {
-                                             System.out.println("HibernateException Occured!!" + e);
-                                             e.printStackTrace();
+                                         if (!response.isSuccessful()) {
+                                             Toast.makeText(Carrello.this, "Impossibile completare l'ordine", Toast.LENGTH_SHORT).show();
+                                         }else{
+                                             Toast.makeText(Carrello.this, "Il tuo ordine è stato completato", Toast.LENGTH_SHORT).show();
+
+                                             try {
+                                                 odb.finecarrello(data, note, paga);
+                                             } catch (Exception e) {
+                                                 System.out.println("HibernateException Occured!!" + e);
+                                                 e.printStackTrace();
+                                             }
+                                             Intent ringraziamento = new Intent(Carrello.this, Ringraziamento.class);
+                                             startActivity(ringraziamento);
                                          }
+
                                      }
 
                                      @Override
                                      public void onFailure(Call<OrdineJson> call, Throwable t) {
-
+                                         Toast.makeText(Carrello.this, "Impossibile connettersi col server", Toast.LENGTH_SHORT).show();
                                      }
-                                 });*/
-                    Intent ringraziamento = new Intent(Carrello.this, Ringraziamento.class);
-                    startActivity(ringraziamento);
+                                 });
+
                 }
             }
         });

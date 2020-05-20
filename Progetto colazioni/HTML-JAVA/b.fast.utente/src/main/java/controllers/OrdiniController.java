@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.Ordini;
 import model.Ordine;
+import utils.OrdineJson;
 
 @WebServlet("/Carrello")
 public class OrdiniController extends HttpServlet{
@@ -38,9 +39,11 @@ public class OrdiniController extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/prodotto.html").forward(request, response);
 		} else {
+			OrdineJson o = new OrdineJson();
+			o.setId(String.valueOf(id));
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
-			response.getWriter().append(om.writeValueAsString(b));			}
+			response.getWriter().append(om.writeValueAsString(o));			}
 	}
 
 	/**

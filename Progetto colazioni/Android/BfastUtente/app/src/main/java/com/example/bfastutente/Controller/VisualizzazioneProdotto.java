@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
-import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
 import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
 
 import retrofit2.Call;
@@ -51,11 +51,11 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
                 if(check.equals("")){
                     Toast.makeText(VisualizzazioneProdotto.this, "Non hai selezionato nessuna quantita", Toast.LENGTH_SHORT).show();
                 }else{
-                    /*sessionOrdine = new SessionOrdine(VisualizzazioneProdotto.this);
-                    Call<Contiene> call = apiService.SelezioneProdotto(String.valueOf(sessionOrdine.getIDOrd()),nome,check);
-                    call.enqueue(new Callback<Contiene>(){
+                    sessionOrdine = new SessionOrdine(VisualizzazioneProdotto.this);
+                    Call<OrdineJson> call = apiService.SelezioneProdotto(String.valueOf(sessionOrdine.getIDOrd()),nome,check);
+                    call.enqueue(new Callback<OrdineJson>(){
                         @Override
-                        public void onResponse(Call<Contiene> call, Response<Contiene> response) {
+                        public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                             if (!response.isSuccessful()) {
                                 Toast.makeText(VisualizzazioneProdotto.this, "Impossibile aggiungerlo al carrello", Toast.LENGTH_SHORT).show();
                             }else{
@@ -64,10 +64,10 @@ public class VisualizzazioneProdotto extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Contiene> call, Throwable t) {
+                        public void onFailure(Call<OrdineJson> call, Throwable t) {
                             Toast.makeText(VisualizzazioneProdotto.this, "Problema col server", Toast.LENGTH_SHORT).show();
                         }
-                    });*/
+                    });
                     quantita =Integer.parseInt(check);
                     session = new SessionProdotto(VisualizzazioneProdotto.this);
                     session.confermarto(1);

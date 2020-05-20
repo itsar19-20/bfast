@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.ValutazioneFattorino;
 import model.Ordine;
+import utils.OrdineJson;
 
 @WebServlet("/ValutazioneFattorino")
 public class ValutazioneFattorinoController extends HttpServlet {
@@ -35,9 +36,11 @@ public class ValutazioneFattorinoController extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
+			OrdineJson o = new OrdineJson();
+			o.setId(request.getParameter("ordine"));
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
-			response.getWriter().append(om.writeValueAsString(b));		}
+			response.getWriter().append(om.writeValueAsString(o));		}
 	}
 
 	/**

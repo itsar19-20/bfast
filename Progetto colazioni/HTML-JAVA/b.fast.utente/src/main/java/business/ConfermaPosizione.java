@@ -7,28 +7,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import model.Indirizzo;
+import model.Ordine;
 import model.Sceglie;
 import model.Utente;
 import utils.JPAUtil;
 
 public class ConfermaPosizione {
-	public Sceglie Seleziona(String mail,String x1,String y1) {
+	public Ordine Seleziona(String mail,String x1,String y1,String id) {
 		Indirizzo _return = null;
 		Utente u = null;
-		Sceglie s = new Sceglie();
 		double x = Double.parseDouble(x1);
 		double y = Double.parseDouble(y1);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		u = em.find(Utente.class, mail);
+		Ordine o = em.find(Ordine.class, Integer.valueOf(id));
 		if (u != null) {
 			_return = cerca(x,y,em);		
 			em.getTransaction().begin();
-			s.setUtente(u);
-			s.setIndirizzo(_return);
+			o.setIndirizzo(_return);
 		    em.getTransaction().commit();
 		}
 		
-		return s;
+		return o;
 	}
 	
 	public Indirizzo cerca(double x, double y,EntityManager em) {

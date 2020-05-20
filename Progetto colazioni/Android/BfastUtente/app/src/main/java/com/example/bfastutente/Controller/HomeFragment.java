@@ -83,9 +83,9 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                          @Override
                          public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                              if (!response.isSuccessful()) {
-                                 Toast.makeText(getActivity(), "Impossibile creare l'ordine", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(getActivity(), "Errore di sistema! Ordini non disponibili", Toast.LENGTH_SHORT).show();
                              }else{
-                                 Toast.makeText(getActivity(), "Perfetto! Ordine creato", Toast.LENGTH_SHORT).show();
+                                 Toast.makeText(getActivity(), "Benvenuto nella nostra APP seleziona pure il Bar", Toast.LENGTH_SHORT).show();
                                  OrdineJson o = response.body();
                                  int id = Integer.parseInt(o.getId());
                                  sessionOrdine = new SessionOrdine(getActivity());
@@ -156,19 +156,25 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                 session = new SessionBar(getActivity());
                                 int id = Integer.parseInt(marker.getTitle());
                                 session.setIDInd(id);
-                                /*Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
+                                Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
                                 callBar.enqueue(new Callback<OrdineJson>() {
                                                  @Override
                                                  public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
-
+                                                     if (!response.isSuccessful()) {
+                                                         Toast.makeText(getActivity(), "Impossibile selezionare il bar", Toast.LENGTH_SHORT).show();
+                                                     }else{
+                                                         sessionProdotto = new SessionProdotto(getActivity());
+                                                         sessionProdotto.confermarto(0);
+                                                         Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
+                                                         startActivity(selezione);                                                     }
                                                  }
 
                                                  @Override
                                                  public void onFailure(Call<OrdineJson> call, Throwable t) {
-
+                                                     Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
                                                  }
                                              });
-                                    LatLng pos = markerUtente.getPosition();
+                                    /*LatLng pos = markerUtente.getPosition();
                                     String x = String.valueOf(pos.latitude);
                                     String y = String.valueOf(pos.longitude);
                                     Call<Indirizzo> callPos = apiService.SelezionePosizione(sessionUte.getMailUt(),x,y);
@@ -188,10 +194,6 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                                  }
                                              });*/
 
-                                sessionProdotto = new SessionProdotto(getActivity());
-                                sessionProdotto.confermarto(0);
-                                Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
-                                startActivity(selezione);
                             }
                         return false;
                     }
