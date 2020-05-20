@@ -5,35 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00F7F6F4"
-    tools:context=".Controller.LoginActivity"><![CDATA[
-
-    " />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
+    tools:context=".Controller.LoginActivity">
 
     <EditText
         android:id="@+id/ETdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="36dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/data_di_nascita"
@@ -49,17 +27,17 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="52dp"
         android:background="@drawable/mybutton"
         android:shadowColor="@color/colorPrimary"
         android:shadowRadius="@android:integer/config_shortAnimTime"
-        android:text="@string/button"
-        android:textColor="#FCFAFA"
+        android:text="@string/Registrati"
+        android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Sign In" />
+        tools:text="@string/Registrati" />
 
     <EditText
         android:id="@+id/ETnumero"
@@ -79,7 +57,7 @@
         android:id="@+id/ETcognome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="32dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/cognome"
@@ -94,6 +72,7 @@
         android:id="@+id/ETcopass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/conferma_password"
@@ -119,13 +98,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.834" />
+        app:layout_constraintVertical_bias="0.553" />
 
     <EditText
         android:id="@+id/ETpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="52dp"
         android:ems="10"
         android:hint="@string/password"
         android:importantForAutofill="no"
@@ -140,7 +119,7 @@
         android:id="@+id/ETnome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="28dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/nome"
