@@ -24,14 +24,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/BtnLogin"
+        android:id="@+id/BtnDimenticata"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:background="@drawable/mybutton"
         android:shadowColor="@color/colorAccent"
         android:shadowRadius="@android:integer/config_shortAnimTime"
-        android:text="@string/button"
+        android:text="Conferma "
         android:textColor="#0A0A0A"
         android:textColorHint="#00F5EDED"
         android:textSize="18sp"

@@ -34,14 +34,14 @@ public class GalleryFragment extends Fragment {
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mail= new Intent(getActivity(), RegistrazioneActivity.class);
+                Intent mail= new Intent(getActivity(), CambioMail.class);
                 startActivity(mail);
             }
         });
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pass = new Intent(getActivity(), ControlloMail.class);
+                Intent pass = new Intent(getActivity(), CambioPassword.class);
                 startActivity(pass);
             }
         });

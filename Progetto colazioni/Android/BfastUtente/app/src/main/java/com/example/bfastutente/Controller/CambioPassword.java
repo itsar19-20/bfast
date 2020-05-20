@@ -2,6 +2,8 @@ package com.example.bfastutente.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,36 +24,43 @@ public class CambioPassword extends AppCompatActivity {
         private SessionUte session;
         BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
         UserDBAdapter udba = new UserDBAdapter(this);
+        Button b1;
+
          @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-             setContentView(R.layout.activity_cambiopassword);
-        final EditText etpass = findViewById(R.id.ETmail);
-        final EditText etcopass = findViewById(R.id.ETnome);
-        final String password = etpass.getText().toString();
-        String Copassword = etcopass.getText().toString();
-            String mail = session.getMailUt();
-            Utente _return = null;
-            _return = (Utente) udba.getUserLogin(mail);
-            if (password.equals(Copassword)) {
-                Call<Utente> call = apiService.CambioPassword(password);
-                final Utente final_return = _return;
-                call.enqueue(new Callback<Utente>() {
-                                 @Override
-                                 public void onResponse(Call<Utente> call, Response<Utente> response) {
-                                     final_return.setPass(password);
-                                     udba.open();
-                                     udba.updateUser(final_return.getEmail(), final_return.getPass(), final_return.getNome(), final_return.getCognome(), final_return.getTelefono(), final_return.getNascita());
-                                     udba.close();
-                                     Intent cambia = new Intent(CambioPassword.this, MapActivity.class);
-                                     startActivity(cambia);
-                                 }
-                                 @Override
-                                 public void onFailure(Call<Utente> call, Throwable t) {
-                                     Toast.makeText(CambioPassword.this, "Errore nella creazione", Toast.LENGTH_LONG).show();
-                                 }
-                             });
+        setContentView(R.layout.activity_cambiopassword);
+        final EditText etpass = findViewById(R.id.coemail);
+        final EditText etcopass = findViewById(R.id.coemail);
+         session = new SessionUte(CambioPassword.this);
+             b1.setOnClickListener(new View.OnClickListener() {
+                final String mail = session.getMailUt();
+                final String password = etpass.getText().toString();
+                final String Copassword = etcopass.getText().toString();
+                @Override
+                public void onClick(View v) {
+                    if (password.equals(Copassword)) {
+                        Call<Utente> call = apiService.CambioPassword(mail,password,Copassword);
+                        call.enqueue(new Callback<Utente>() {
+                            @Override
+                            public void onResponse(Call<Utente> call, Response<Utente> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(CambioPassword.this, "Errore nel cambio password", Toast.LENGTH_LONG).show();
+                                }else{
+                                    Intent cambia = new Intent(CambioPassword.this, MapActivity.class);
+                                    startActivity(cambia);
+                                }
+
+                            }
+                            @Override
+                            public void onFailure(Call<Utente> call, Throwable t) {
+                                Toast.makeText(CambioPassword.this, "Errore nella comunicazione col server", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                }
             }
+
+            });
         }
 
 

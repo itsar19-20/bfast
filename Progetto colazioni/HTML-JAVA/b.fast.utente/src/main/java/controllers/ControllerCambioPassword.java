@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,9 +31,8 @@ public class ControllerCambioPassword extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
 		CambioPassword au = new CambioPassword();
-		String s= (String) ses.getAttribute("ID");
+		String s= request.getParameter("mail");
 		Utente b = au.cambio(s,request.getParameter("password"), request.getParameter("copassword"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);

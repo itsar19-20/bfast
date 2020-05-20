@@ -33,15 +33,15 @@ public interface BfastUtenteApi {
 
 
     @GET("CambioMail")
-    Call<Utente> CambioMail(@Query("mail") String mail);
+    Call<Utente> CambioMail(@Query("imail") String imail,@Query("mail") String mail,@Query("comail") String comail);
 
 
     @GET("CambioPassword")
-    Call<Utente> CambioPassword(@Query("password") String pass);
+    Call<Utente> CambioPassword(@Query("mail") String mail,@Query("password") String pass,@Query("copassword") String copass);
 
 
     @GET("PasswordDimenticata")
-    Call<Utente> PasswordDimeticata(@Query("password") String pass);
+    Call<Utente> PasswordDimeticata(@Query("mail") String mail,@Query("pass") String pass,@Query("copass") String copass);
 
 
     @GET("TuttiBar")

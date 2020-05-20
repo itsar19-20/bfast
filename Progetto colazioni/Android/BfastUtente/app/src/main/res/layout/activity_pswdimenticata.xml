@@ -35,13 +35,13 @@
         android:textColor="#3F51B5"
         android:textColorHighlight="#0826F1"
         android:textColorHint="#0829E2"
-        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
+        app:layout_constraintBottom_toTopOf="@+id/BtnDimenticata"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETpass" />
 
     <Button
-        android:id="@+id/BtnLogin"
+        android:id="@+id/BtnDimenticata"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"

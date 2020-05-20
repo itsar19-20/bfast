@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/BtnLogin"
+        android:id="@+id/BtnDimenticata"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="122dp"
         android:layout_height="55dp"
@@ -71,7 +71,7 @@
         android:inputType="phone"
         android:textAlignment="center"
         android:textColorHint="#0829E2"
-        app:layout_constraintBottom_toTopOf="@+id/BtnLogin"
+        app:layout_constraintBottom_toTopOf="@+id/BtnDimenticata"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

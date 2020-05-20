@@ -32,7 +32,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
 
-        Button button = findViewById(R.id.BtnLogin);
+        Button button = findViewById(R.id.BtnDimenticata);
         final EditText etemail = findViewById(R.id.ETmail);
         final EditText etnome = findViewById(R.id.ETnome);
         final EditText etcognome = findViewById(R.id.ETcognome);

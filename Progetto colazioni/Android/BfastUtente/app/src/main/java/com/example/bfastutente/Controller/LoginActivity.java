@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        b1 = findViewById(R.id.BtnLogin);
+        b1 = findViewById(R.id.BtnDimenticata);
         t1 = findViewById(R.id.textView2);
         t2 = findViewById(R.id.textView3);
         b1.setOnClickListener(new View.OnClickListener() {
