@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +36,12 @@ public class Fattorino implements Serializable {
 
 	//bi-directional many-to-one association to Chiedef
 	@OneToMany(mappedBy="fattorino")
+	@JsonBackReference
 	private List<Chiedef> chiedefs;
 
 	//bi-directional many-to-one association to Ordine
 	@OneToMany(mappedBy="fattorino")
+	@JsonBackReference
 	private List<Ordine> ordines;
 
 	public Fattorino() {

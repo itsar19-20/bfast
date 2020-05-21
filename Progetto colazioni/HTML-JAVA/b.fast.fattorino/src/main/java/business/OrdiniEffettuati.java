@@ -1,28 +1,80 @@
 package business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.Fattorino;
+import model.Bar;
+import model.Ordine;
 import utils.JPAUtil;
+import utils.OrdineJSON;
 
 public class OrdiniEffettuati {
 	
-	public Query storico(String s) {
+	public OrdineJSON[] storico(String s) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Fattorino f = cerca(s);
-		Query Ris = em.createQuery("SELECT o.ID,o.Data,o.ValutazioneFatt,i.via,i.civico,i.cap,i.citta,p.PosXFA,p.PosYFA FROM `ordine` as o,indirizzo as i,posfatt as p,fattorino as f"
-				+ "WHERE o.IDinFK = i.ID AND o.IDpoFK = p.ID AND o.IDfaFK = f.ID AND f.ID = id " + 
-				"").setParameter("f.ID", f.getId());
-		return Ris;
+		int ID = Integer.parseInt(s);
+	    List<Integer> id = new ArrayList<Integer>();
+	    Ordine ord = null;
+		Query Ris = em.createNativeQuery("SELECT o.ID FROM `ordine` as o,indirizzo as i,posfatt as p,fattorino as f "
+				+ "WHERE f.id ="+ID+" AND o.IDinFK = i.ID AND o.IDpoFK = p.ID AND o.IDfatFK = f.ID");
+		id = Ris.getResultList();
+		int count = id.size();
+	    OrdineJSON[] o = new OrdineJSON[count];
+		for(int i=0; i<count ;i++) {
+			o[i] = new OrdineJSON();
+			ord = em.find(Ordine.class, id.get(i));
+			Bar b = ord.getBar();
+			int f = b.getId();
+			o[i].setId(f);
+			o[i].setProdotto(CercaProdotti(em,b,ord.getId()));
+		}
+		
+		return o;
 	}
 	
-	public Fattorino cerca (String id) {
-		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
-		Fattorino _return = new Fattorino();
-		Integer ID = Integer.parseInt(id);
-		_return = em.find(Fattorino.class, ID);
-		return _return;
+	private String CercaProdotti(EntityManager em,Bar b,int id) {
+		int chk=0;
+		List<Integer> listquan = new ArrayList<Integer> (); 
+		List<String> listing = new ArrayList<String> ();
+		try {
+			em.getTransaction().begin();
+			Query Ris = em.createNativeQuery("SELECT p.Nome FROM ordine as o, bar as b,contiene as c,prodotto as p\r\n" + 
+					"WHERE o.ID = c.IDorFK AND p.Nome = c.IDprFK AND o.ID = "+id+" AND b.ID = "+b.getId()+" AND b.ID = o.IDbarFK");
+			Query Ris2 = em.createNativeQuery("SELECT c.Quantita FROM ordine as o, bar as b,contiene as c\r\n" + 
+					"WHERE o.ID = c.IDorFK AND o.ID = "+id+" AND b.ID = "+b.getId()+" AND b.ID = o.IDbarFK");
+			listing = Ris.getResultList();
+			listquan = Ris2.getResultList(); //lista di interi
+			em.getTransaction().commit();
+		}catch (Exception e){
+            chk=-1;
+             System.out.println("HibernateException Occured!!"+e);
+            e.printStackTrace();
+    }
+	if(chk==0)
+	{
+		 if(listing.isEmpty() || listquan.isEmpty())
+		 {
+		        return (null);
+		 }
+		 else
+		 {
+		    int count = listquan.size();
+			String concatena ="";
+	    	for(int i=0;i<count;i++) {
+		    	concatena += listquan.get(i)+listing.get(i);
+		    }
+	    	return concatena;
+		 }
+		}
+		else
+		{
+		    return (null);
+		}
 	}
+	
+
 }
 

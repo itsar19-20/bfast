@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.RegistrazioneFattorino;
 import model.Fattorino;
 
@@ -28,7 +30,6 @@ public class RegistrazioneControllerFattorino extends HttpServlet{
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		HttpSession ses = request.getSession();
 		RegistrazioneFattorino au = new RegistrazioneFattorino();
 		Fattorino b = null;
 		try {
@@ -40,9 +41,9 @@ public class RegistrazioneControllerFattorino extends HttpServlet{
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
-			int id = b.getId();
-			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));
 		}
 	}
 

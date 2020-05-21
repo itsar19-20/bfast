@@ -15,18 +15,10 @@ import java.util.List;
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-
-
-	private String cognome;
-
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="`Data di nascita`")
-	private Date data_di_nascita;
-
 	@Id
 	private String email;
 
+	private String cognome;
 
 	@Temporal(TemporalType.DATE)
 	private Date nascità;
@@ -34,10 +26,6 @@ public class Utente implements Serializable {
 	private String nome;
 
 	private String password;
-
-	public int getTelefono() {
-		return telefono;
-	}
 
 	private int telefono;
 
@@ -56,6 +44,13 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getCognome() {
 		return this.cognome;
@@ -63,23 +58,6 @@ public class Utente implements Serializable {
 
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-
-
-	public Date getData_di_nascita() {
-		return this.data_di_nascita;
-	}
-
-	public void setData_di_nascita(Date data_di_nascita) {
-		this.data_di_nascita = data_di_nascita;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Date getNascità() {
@@ -98,18 +76,21 @@ public class Utente implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getPassword() {
-		return this.password;
+	public int getTelefono() {
+		return this.telefono;
 	}
 
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-
 
 	public List<Chiedeu> getChiedeus() {
 		return this.chiedeus;

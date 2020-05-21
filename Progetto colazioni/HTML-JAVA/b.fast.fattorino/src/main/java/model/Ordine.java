@@ -18,7 +18,7 @@ public class Ordine implements Serializable {
 	@Id
 	private int id;
 
-	private byte confermato;
+	private int confermato;
 
 	@Temporal(TemporalType.DATE)
 	private Date data;
@@ -74,11 +74,11 @@ public class Ordine implements Serializable {
 		this.id = id;
 	}
 
-	public byte getConfermato() {
+	public int getConfermato() {
 		return this.confermato;
 	}
 
-	public void setConfermato(byte confermato) {
+	public void setConfermato(int confermato) {
 		this.confermato = confermato;
 	}
 

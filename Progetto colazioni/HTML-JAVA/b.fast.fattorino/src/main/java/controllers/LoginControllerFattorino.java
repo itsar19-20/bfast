@@ -7,7 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.AutenticazioneFattorino;
 import model.Fattorino;
@@ -29,16 +30,14 @@ public class LoginControllerFattorino extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession ses = request.getSession();
 		AutenticazioneFattorino am = new AutenticazioneFattorino();
 		Fattorino b = am.login(request.getParameter("ID"), request.getParameter("password"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			String id2 = request.getParameter("ID");
-			Integer id = Integer.parseInt(id2);
-			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));
 		}
 	}
 

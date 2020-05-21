@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.persistence.Query;
 
 
 import business.OrdiniEffettuati;
+import utils.OrdineJSON;
 
-@WebServlet("/ordiniEffettuati")
+@WebServlet("/OrdiniEffettuati")
 public class OrdiniEffettuatiController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	/**
@@ -30,13 +34,15 @@ public class OrdiniEffettuatiController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		OrdiniEffettuati au = new OrdiniEffettuati();
-		String s = (String) ses.getAttribute("ID");
-		Query b = null;
+		String s = request.getParameter("ID");
+		OrdineJSON[] b = null;
 		b = au.storico(s);
 		if (b == null) {
 			request.getRequestDispatcher("/registrazione.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));
 		}
 	}
 

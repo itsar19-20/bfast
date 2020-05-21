@@ -13,7 +13,7 @@ public class JPAUtil {
 	 * 
 	 */
 	private JPAUtil() {
-		this.emf = Persistence.createEntityManagerFactory("b.fast");
+		this.emf = Persistence.createEntityManagerFactory("bfast");
 	}
 
 	public static JPAUtil getInstance() {

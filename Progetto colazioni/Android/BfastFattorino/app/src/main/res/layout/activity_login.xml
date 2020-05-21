@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#304A58"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="164dp"
+        android:layout_height="21dp"
+        android:text="@string/password_dimenticata"
+        android:textColor="#fff"
+        android:textColorLink="#fff"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <EditText
+        android:id="@+id/ETid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="ID"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textColorHighlight="#fff"
+        android:textColorHint="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETid" />
+
+    <Button
+        android:id="@+id/BtnLog"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="122dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="124dp"
+        android:background="@drawable/mybutton"
+        android:shadowColor="@color/colorAccent"
+        android:shadowRadius="@android:integer/config_shortAnimTime"
+        android:text="Sign in"
+        android:textColor="#0A0A0A"
+        android:textColorHint="#00F5EDED"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETpass"
+        tools:text="Sign In" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="114dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="88dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text="@string/devi_registrati"
+        android:textColor="#fff"
+        android:textColorLink="#fff"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnLog" />
+</androidx.constraintlayout.widget.ConstraintLayout>

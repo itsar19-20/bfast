@@ -17,16 +17,12 @@ public class Indirizzo implements Serializable {
 	@Id
 	private int id;
 
-	private String cap;
+	private double x;
 
-	private String citta;
-
-	private String civico;
-
-	private String via;
+	private double y;
 
 	//bi-directional many-to-one association to Bar
-	@OneToMany(mappedBy="indirizzoBean")
+	@OneToMany(mappedBy="indirizzo")
 	private List<Bar> bars;
 
 	//bi-directional many-to-one association to Ordine
@@ -48,36 +44,20 @@ public class Indirizzo implements Serializable {
 		this.id = id;
 	}
 
-	public String getCap() {
-		return this.cap;
+	public double getX() {
+		return this.x;
 	}
 
-	public void setCap(String cap) {
-		this.cap = cap;
+	public void setX(double x) {
+		this.x = x;
 	}
 
-	public String getCitta() {
-		return this.citta;
+	public double getY() {
+		return this.y;
 	}
 
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
-
-	public String getCivico() {
-		return this.civico;
-	}
-
-	public void setCivico(String civico) {
-		this.civico = civico;
-	}
-
-	public String getVia() {
-		return this.via;
-	}
-
-	public void setVia(String via) {
-		this.via = via;
+	public void setY(double y) {
+		this.y = y;
 	}
 
 	public List<Bar> getBars() {
@@ -90,14 +70,14 @@ public class Indirizzo implements Serializable {
 
 	public Bar addBar(Bar bar) {
 		getBars().add(bar);
-		bar.setIndirizzoBean(this);
+		bar.setIndirizzo(this);
 
 		return bar;
 	}
 
 	public Bar removeBar(Bar bar) {
 		getBars().remove(bar);
-		bar.setIndirizzoBean(null);
+		bar.setIndirizzo(null);
 
 		return bar;
 	}

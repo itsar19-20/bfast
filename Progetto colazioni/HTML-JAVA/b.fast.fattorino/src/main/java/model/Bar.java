@@ -21,11 +21,6 @@ public class Bar implements Serializable {
 
 	private float fascia;
 
-	@Lob
-	private byte[] immagine;
-
-	private String indirizzo;
-
 	private String nome;
 
 	private String orarioApertura;
@@ -39,7 +34,7 @@ public class Bar implements Serializable {
 	//bi-directional many-to-one association to Indirizzo
 	@ManyToOne
 	@JoinColumn(name="IDinFK")
-	private Indirizzo indirizzoBean;
+	private Indirizzo indirizzo;
 
 	//bi-directional many-to-one association to Classificato
 	@OneToMany(mappedBy="bar")
@@ -80,22 +75,6 @@ public class Bar implements Serializable {
 		this.fascia = fascia;
 	}
 
-	public byte[] getImmagine() {
-		return this.immagine;
-	}
-
-	public void setImmagine(byte[] immagine) {
-		this.immagine = immagine;
-	}
-
-	public String getIndirizzo() {
-		return this.indirizzo;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-
 	public String getNome() {
 		return this.nome;
 	}
@@ -103,7 +82,6 @@ public class Bar implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getOrarioApertura() {
 		return this.orarioApertura;
@@ -137,12 +115,12 @@ public class Bar implements Serializable {
 		this.valutazione = valutazione;
 	}
 
-	public Indirizzo getIndirizzoBean() {
-		return this.indirizzoBean;
+	public Indirizzo getIndirizzo() {
+		return this.indirizzo;
 	}
 
-	public void setIndirizzoBean(Indirizzo indirizzoBean) {
-		this.indirizzoBean = indirizzoBean;
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
 	}
 
 	public List<Classificato> getClassificatos() {

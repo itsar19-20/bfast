@@ -16,7 +16,7 @@ public class Menu implements Serializable {
 	@Id
 	private int id;
 
-	private byte disponibilita;
+	private int disponibilita;
 
 	//bi-directional many-to-one association to Bar
 	@ManyToOne
@@ -39,11 +39,11 @@ public class Menu implements Serializable {
 		this.id = id;
 	}
 
-	public byte getDisponibilita() {
+	public int getDisponibilita() {
 		return this.disponibilita;
 	}
 
-	public void setDisponibilita(byte disponibilita) {
+	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
 	}
 
