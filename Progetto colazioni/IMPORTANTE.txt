@@ -1,0 +1,11 @@
+Per problemi ho cancellato la vecchia versione e ho uppato una ver 2.0.
+La versione vecchia la potete eliminare dal vostro PC.
+
+Per creare delle applicazioni in maniere corretta ed efficace ho cancellato le due vecchie app e inserito quelle nuove
+
+TUTORIAL:
+Per far partire l'app serve stare attenti alle seguenti cose:
+Avere tutte e 2 le applicazioni android e i 3 maven project aggiornati
+Server tomcat accesso e con tutti e 3 i progetti backend abilitati
+Xampp acceso e collegato a eclipse
+Controllare il vostro ip e cambiarlo su android in Utils->RetrofitUtils
