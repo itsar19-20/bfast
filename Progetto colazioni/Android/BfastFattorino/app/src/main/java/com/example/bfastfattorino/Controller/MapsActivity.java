@@ -2,13 +2,20 @@ package com.example.bfastfattorino.Controller;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import java.util.ArrayList;
 import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 // classes needed to initialize map
+import com.example.bfastfattorino.Model.Indirizzo;
 import com.example.bfastfattorino.R;
+import com.example.bfastfattorino.Session.SessionMarker;
+import com.example.bfastfattorino.Utils.BfastFattorinoApi;
+import com.example.bfastfattorino.Utils.RetrofitUtils;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -25,6 +32,7 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -61,6 +69,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NavigationMapRoute navigationMapRoute;
     // variables needed to initialize navigation
     private Button button;
+    BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
+    List<Indirizzo> ordineJSON;
+    SessionMarker sessionMarker;
+    private static final String MARKER_SOURCE = "markers-source";
+    private static final String MARKER_STYLE_LAYER = "markers-style-layer";
+    private static final String MARKER_IMAGE = "custom-marker";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +92,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(getString(R.string.navigation_guidance_day), new Style.OnStyleLoaded() {
             @Override
-            public void onStyleLoaded(@NonNull Style style) {
+            public void onStyleLoaded(@NonNull final Style style) {
                 enableLocationComponent(style);
+
+                addMarkers(style);
 
                 addDestinationIconSymbolLayer(style);
 
@@ -92,7 +109,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 .directionsRoute(currentRoute)
                                 .shouldSimulateRoute(simulateRoute)
                                 .build();
-                        // Call this method with Context from within an Activity
                         NavigationLauncher.startNavigation(MapsActivity.this, options);
                     }
                 });
@@ -114,7 +130,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         loadedMapStyle.addLayer(destinationSymbolLayer);
     }
 
-    @SuppressWarnings( {"MissingPermission"})
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
 
@@ -172,19 +187,55 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
-        // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
-            // Activate the MapboxMap LocationComponent to show user location
-            // Adding in LocationComponentOptions is also an optional parameter
             locationComponent = mapboxMap.getLocationComponent();
             locationComponent.activateLocationComponent(this, loadedMapStyle);
             locationComponent.setLocationComponentEnabled(true);
-            // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING);
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(this);
         }
+    }
+
+    private void addMarkers(@NonNull Style loadedMapStyle) {
+        final List<Feature> features = new ArrayList<>();
+        sessionMarker = new SessionMarker(MapsActivity.this);
+
+        Call<List<Indirizzo>> callUpdateProdotto = apiService.markerBU(String.valueOf(sessionMarker.getIDBar()),String.valueOf(sessionMarker.getIDOrd()));
+        callUpdateProdotto.enqueue(new Callback<List<Indirizzo>>() {
+
+            @Override
+            public void onResponse(Call<List<Indirizzo>> call, Response<List<Indirizzo>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
+                } else if(response.body().size()!=0){
+                    ordineJSON = response.body();
+                    Point bar = Point.fromLngLat(ordineJSON.get(0).getX(), ordineJSON.get(0).getY());
+                    Point ute = Point.fromLngLat(ordineJSON.get(1).getX(), ordineJSON.get(1).getY());
+                    features.add(Feature.fromGeometry(bar));
+                    features.add(Feature.fromGeometry(ute));
+
+                }else{
+                    Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Indirizzo>> call, Throwable t) {
+                Toast.makeText(MapsActivity.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        loadedMapStyle.addSource(new GeoJsonSource(MARKER_SOURCE, FeatureCollection.fromFeatures(features)));
+
+        loadedMapStyle.addLayer(new SymbolLayer(MARKER_STYLE_LAYER, MARKER_SOURCE)
+                .withProperties(
+                        PropertyFactory.iconAllowOverlap(true),
+                        PropertyFactory.iconIgnorePlacement(true),
+                        PropertyFactory.iconImage(MARKER_IMAGE)
+                ));
     }
 
     @Override
@@ -206,6 +257,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             finish();
         }
     }
+
 
     @Override
     protected void onStart() {

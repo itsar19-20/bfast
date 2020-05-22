@@ -41,6 +41,7 @@
         <activity android:name=".Controller.RegistrazioneActivity" />
         <activity android:name=".Controller.MapsActivity"/>
         <activity android:name=".Controller.ListaConfermare"/>
+        <activity android:name=".Controller.ConfermaOrdine" />
 
 
     </application>

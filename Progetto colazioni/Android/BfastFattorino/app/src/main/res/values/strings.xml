@@ -20,7 +20,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Ordini effettuati</string>
     <string name="menu_slideshow">Impostazioni</string>
-    <string name="access_token" translatable="false">YOUR_MAPBOX_ACCESS_TOKEN</string>
+    <string name="access_token" translatable="false">pk.eyJ1IjoiY2lrbzk5IiwiYSI6ImNrYWh4b3I0czBjczEzNnRpZjZtbjFuZXYifQ.xmHJ-ZviVe_q-LFYvTuaLQ</string>
     <string name="home_second">Home Second</string>
     <string name="title_activity_maps">Map</string>
 </resources>

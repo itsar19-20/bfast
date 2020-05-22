@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bfastfattorino.R;
+import com.example.bfastfattorino.Session.SessionMarker;
 import com.example.bfastfattorino.Utils.BfastFattorinoApi;
 import com.example.bfastfattorino.Utils.OrdineJSON;
 import com.example.bfastfattorino.Utils.RetrofitUtils;
@@ -31,6 +32,7 @@ public class ListaConfermare extends AppCompatActivity {
     List<OrdineJSON> ordineJSON;
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     CustomAdapter customAdapter;
+    SessionMarker sessionMarker;
 
 
     @Override
@@ -45,7 +47,7 @@ public class ListaConfermare extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<OrdineJSON>> call, Response<List<OrdineJSON>> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(ListaConfermare.this, "Problemi con la rispota del server per i Prodotti", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListaConfermare.this, "Problemi con la risposta del server per gli ordini", Toast.LENGTH_SHORT).show();
                 } else if(response.body().size()!=0){
                     ordineJSON = response.body();
                     customAdapter = new CustomAdapter(ordineJSON, ListaConfermare.this);
@@ -101,13 +103,17 @@ public class ListaConfermare extends AppCompatActivity {
             tx1 = view.findViewById(R.id.prodotto);
             tx2 = view.findViewById(R.id.ingredienti);
 
-            tx1.setText(lista2.get(position).getId());
-            tx2.setText(lista2.get(position).getProdotto());
+            tx1.setText("Bar: "+String.valueOf(lista2.get(position).getId()));
+            tx2.setText("Prodotti: "+lista2.get(position).getProdotto());
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ListaConfermare.this, "Tentativo di accettare la consegna", Toast.LENGTH_SHORT).show();
+                    sessionMarker = new SessionMarker(ListaConfermare.this);
+                    sessionMarker.setIDBar(lista2.get(position).getId());
+                    sessionMarker.setIDOrd(lista2.get(position).getIdord());
+                    Intent ord = new Intent(ListaConfermare.this, ConfermaOrdine.class);
+                    startActivity(ord);
                 }
             });
 

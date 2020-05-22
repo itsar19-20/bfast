@@ -3,7 +3,9 @@ package com.example.bfastfattorino.Utils;
 public class OrdineJSON {
 
     private int id;
+    private int idord;
     private String prodotto;
+
     public int getId() {
         return id;
     }
@@ -17,5 +19,11 @@ public class OrdineJSON {
         this.prodotto = prodotto;
     }
 
+    public int getIdord() {
+        return idord;
+    }
 
+    public void setIdord(int idord) {
+        this.idord = idord;
+    }
 }

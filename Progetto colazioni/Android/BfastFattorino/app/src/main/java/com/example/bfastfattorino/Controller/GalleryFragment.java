@@ -112,8 +112,8 @@ public class GalleryFragment extends Fragment {
             tx1 = view.findViewById(R.id.prodotto);
             tx2 = view.findViewById(R.id.ingredienti);
 
-            tx1.setText(lista2.get(position).getId());
-            tx2.setText(lista2.get(position).getProdotto());
+            tx1.setText("Bar: "+String.valueOf(lista2.get(position).getId()));
+            tx2.setText("Prodotti: "+lista2.get(position).getProdotto());
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

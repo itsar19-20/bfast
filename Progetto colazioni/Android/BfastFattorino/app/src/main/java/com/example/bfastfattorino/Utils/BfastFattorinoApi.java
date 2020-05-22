@@ -1,6 +1,7 @@
 package com.example.bfastfattorino.Utils;
 
 import com.example.bfastfattorino.Model.Fattorino;
+import com.example.bfastfattorino.Model.Indirizzo;
 
 import java.util.List;
 
@@ -28,6 +29,9 @@ public interface BfastFattorinoApi {
 
     @GET("OrdiniEffettuati")
     Call<List<OrdineJSON>> OrdiniEffettuati(@Query("ID")String id);
+
+    @GET("MarkerBarUtente")
+    Call<List<Indirizzo>> markerBU(@Query("bar")String idbar,@Query("ordine")String idord);
 
     @POST("CancellazioneFattorino")
     @FormUrlEncoded
