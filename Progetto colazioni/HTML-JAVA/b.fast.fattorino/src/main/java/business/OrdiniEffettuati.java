@@ -29,6 +29,7 @@ public class OrdiniEffettuati {
 			Bar b = ord.getBar();
 			int f = b.getId();
 			o[i].setId(f);
+			o[i].setIdord(id.get(i));
 			o[i].setProdotto(CercaProdotti(em,b,ord.getId()));
 		}
 		

@@ -3,7 +3,10 @@ package utils;
 public class OrdineJSON {
 	
 	private int id;
+	private int idord;
 	private String prodotto;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -15,6 +18,12 @@ public class OrdineJSON {
 	}
 	public void setProdotto(String prodotto) {
 		this.prodotto = prodotto;
+	}
+	public int getIdord() {
+		return idord;
+	}
+	public void setIdord(int idord) {
+		this.idord = idord;
 	}
 
 	
