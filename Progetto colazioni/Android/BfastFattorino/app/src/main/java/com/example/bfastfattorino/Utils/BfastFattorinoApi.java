@@ -50,7 +50,7 @@ public interface BfastFattorinoApi {
 
     @POST("PasswordDimenticata")
     @FormUrlEncoded
-    Call<Fattorino> PasswordDimenticata(@Query("id") int id);
+    Call<Fattorino> PasswordDimenticata(@Query("id") String id,@Query("password") String pass,@Query("copassword") String copass);
 
 
 
