@@ -32,6 +32,7 @@ public class CambioPassword extends AppCompatActivity {
         setContentView(R.layout.activity_cambiopassword);
         final EditText etpass = findViewById(R.id.coemail);
         final EditText etcopass = findViewById(R.id.coemail);
+        b1 = findViewById(R.id.BtnCamMail);
          session = new SessionUte(CambioPassword.this);
              b1.setOnClickListener(new View.OnClickListener() {
                 final String mail = session.getMailUt();

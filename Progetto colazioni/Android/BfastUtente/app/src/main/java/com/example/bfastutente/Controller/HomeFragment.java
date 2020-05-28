@@ -76,28 +76,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         CameraUpdate point = CameraUpdateFactory.newLatLng(new LatLng(45, 9));
         mMap.moveCamera(point);
         mMap.setMinZoomPreference(7);
-        sessionUte = new SessionUte(getActivity());
-        String mail = sessionUte.getMailUt();
-        Call<OrdineJson> call = apiService.Inizio(mail);
-        call.enqueue(new Callback<OrdineJson>(){
-                         @Override
-                         public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
-                             if (!response.isSuccessful()) {
-                                 Toast.makeText(getActivity(), "Errore di sistema! Ordini non disponibili", Toast.LENGTH_SHORT).show();
-                             }else{
-                                 Toast.makeText(getActivity(), "Benvenuto nella nostra APP seleziona pure il Bar", Toast.LENGTH_SHORT).show();
-                                 OrdineJson o = response.body();
-                                 int id = Integer.parseInt(o.getId());
-                                 sessionOrdine = new SessionOrdine(getActivity());
-                                 sessionOrdine.setIDOrd(id);
-                             }
-                         }
-
-                         @Override
-                         public void onFailure(Call<OrdineJson> call, Throwable t) {
-                             Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
-                         }
-                     });
+        Toast.makeText(getActivity(), "Benvenuto nella nostra APP seleziona pure il Bar", Toast.LENGTH_SHORT).show();
         context = this.getContext();
         bdb = new BarDBAdapter(context);
         idb = new IndirizzoDBAdapter(context);
@@ -144,6 +123,27 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                     markerUtente.remove();
                 }
                 markerUtente = mMap.addMarker(new MarkerOptions().position(latLng).title("Posizione selezionata"));
+                sessionUte = new SessionUte(getActivity());
+                String mail = sessionUte.getMailUt();
+                Call<OrdineJson> call = apiService.Inizio(mail);
+                call.enqueue(new Callback<OrdineJson>(){
+                    @Override
+                    public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getActivity(), "Errore di sistema! Ordini non disponibili", Toast.LENGTH_SHORT).show();
+                        }else{
+                            OrdineJson o = response.body();
+                            int id = Integer.parseInt(o.getId());
+                            sessionOrdine = new SessionOrdine(getActivity());
+                            sessionOrdine.setIDOrd(id);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrdineJson> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 double x = latLng.latitude;
                 double y = latLng.longitude;
 

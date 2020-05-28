@@ -18,18 +18,19 @@ public class OrdiniDaFare {
 	    List<Integer> id = new ArrayList<Integer>();
 	    Ordine ord = null;
 		Query Ris = em.createNativeQuery("SELECT o.ID FROM `ordine` as o "
-				+ "WHERE o.IDfatFK is NULL");
+				+ "WHERE o.IDfatFK is NULL AND o.Confermato=1");
 		id = Ris.getResultList();
 		int count = id.size();
 	    OrdineJSON[] o = new OrdineJSON[count];
 		for(int i=0; i<count ;i++) {
-			o[i] = new OrdineJSON();
 			ord = em.find(Ordine.class, id.get(i));
+			o[i] = new OrdineJSON();
 			Bar b = ord.getBar();
 			int f = b.getId();
 			o[i].setId(f);
 			o[i].setIdord(id.get(i));
 			o[i].setProdotto(CercaProdotti(em,b,ord.getId()));
+		
 		}
 		
 		return o;

@@ -48,10 +48,6 @@ public class Ordine implements Serializable {
 	@JoinColumn(name="IDfatFK")
 	private Fattorino fattorino;
 
-	//bi-directional many-to-one association to Posfatt
-	@ManyToOne
-	@JoinColumn(name="IDpoFK")
-	private Posfatt posfatt;
 
 	//bi-directional many-to-one association to Tipopagamento
 	@ManyToOne
@@ -158,14 +154,6 @@ public class Ordine implements Serializable {
 
 	public void setFattorino(Fattorino fattorino) {
 		this.fattorino = fattorino;
-	}
-
-	public Posfatt getPosfatt() {
-		return this.posfatt;
-	}
-
-	public void setPosfatt(Posfatt posfatt) {
-		this.posfatt = posfatt;
 	}
 
 	public Tipopagamento getTipopagamento() {

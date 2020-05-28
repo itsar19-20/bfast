@@ -52,11 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Credenziali errate", Toast.LENGTH_LONG).show();
                         }else{
                             int id = Integer.parseInt(text1.getText().toString());
-                            try{
-                                Fattorino f = (Fattorino) fdb.getUserLogin(id);
-                            }catch(Exception e){
-
-                            }
                             session = new SessionFat(LoginActivity.this);
                             session.setIDfatt(id);
                             Intent cambia = new Intent(LoginActivity.this, DashboardActivity.class);

@@ -38,26 +38,25 @@ public interface BfastFattorinoApi {
     Call<Fattorino> Cancellazione(@Field("id") int id);
 
 
-    @POST("CambioMail")
-    @FormUrlEncoded
+    @GET("CambioMail")
     Call<Fattorino> CambioMail(@Query("mail") String mail);
 
 
-    @POST("CambioPassword")
-    @FormUrlEncoded
+    @GET("CambioPassword")
     Call<Fattorino> CambioPassword(@Query("password") String pass);
 
 
-    @POST("PasswordDimenticata")
-    @FormUrlEncoded
+    @GET("PasswordDimenticata")
     Call<Fattorino> PasswordDimenticata(@Query("id") String id,@Query("password") String pass,@Query("copassword") String copass);
 
 
 
-
-    @POST("ConfermaID")
-    @FormUrlEncoded
+    @GET("ConfermaID")
     Call<Fattorino> ConfermoID(@Query("fattorino") int id);
+
+
+    @GET("ConfermaOrdine")
+    Call<Fattorino> ConfermaOrdine(@Query("ordine")String ord,@Query("fattorino") String id);
 
 
 
@@ -73,6 +72,4 @@ public interface BfastFattorinoApi {
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("idRisposta") String idRisposta);
 
-    @POST("ConfermaOrdine")
-    @FormUrlEncoded
-    Call<Ordine> ConfermaOrdine(@Query("fattorino") int id);*/
+*/

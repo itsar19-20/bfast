@@ -1,7 +1,5 @@
 package business;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +10,7 @@ import javax.persistence.Query;
 import model.Ordine;
 import model.Tipopagamento;
 import model.Bar;
+import model.Indirizzo;
 import model.Utente;
 import utils.JPAUtil;
 
@@ -22,9 +21,10 @@ public class Ordini {
 		Ordine o = new Ordine();
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Utente u = em.find(Utente.class, idu);
+		Indirizzo i = em.find(Indirizzo.class, 22);
 		List<Integer> id = new ArrayList<Integer>();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
+		o.setIndirizzo(i);
 		o.setUtente(u);
 		o.setData(date);
 		em.getTransaction().begin();

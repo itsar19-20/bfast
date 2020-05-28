@@ -12,7 +12,6 @@
 		<class>model.Indirizzo</class>
 		<class>model.Menu</class>
 		<class>model.Ordine</class>
-		<class>model.Posfatt</class>
 		<class>model.Possiede</class>
 		<class>model.Prodotto</class>
 		<class>model.Risposta</class>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 18, 2020 alle 13:48
+-- Creato il: Mag 28, 2020 alle 10:23
 -- Versione del server: 10.1.36-MariaDB
 -- Versione PHP: 7.2.10
 
@@ -142,7 +142,19 @@ INSERT INTO `contiene` (`ID`, `IDprFK`, `IDorFK`, `Quantita`) VALUES
 (2, 'brioche', 1, 1),
 (3, 'cheesecake', 2, 4),
 (4, 'pancetta', 2, 2),
-(5, 'succo di arancia', 2, 2);
+(5, 'succo di arancia', 2, 2),
+(6, 'croissant', 30, 2),
+(22, 'caffe', 30, 2),
+(24, 'croissant', 31, 3),
+(25, 'torta al cioccolato', 34, 2),
+(26, 'cheesecake', 34, 1),
+(27, 'croissant', 36, 2),
+(28, 'succo di arancia', 36, 2),
+(31, 'croissant', 56, 2),
+(32, 'torta al cioccolato', 57, 2),
+(33, 'cheesecake', 58, 2),
+(34, 'torta al cioccolato', 59, 2),
+(35, 'cheesecake', 59, 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +256,8 @@ INSERT INTO `indirizzo` (`ID`, `x`, `y`) VALUES
 (17, 45.23, 9),
 (18, 43, 11.53),
 (20, 45, 8.97),
-(21, 45, 9.32);
+(21, 45, 9.38),
+(22, 45.8, 9.055);
 
 -- --------------------------------------------------------
 
@@ -281,7 +294,6 @@ CREATE TABLE `ordine` (
   `IDfatFK` int(11) DEFAULT NULL,
   `IDbarFK` int(11) DEFAULT NULL,
   `IDtiFK` int(11) DEFAULT NULL,
-  `IDpoFK` int(11) DEFAULT NULL,
   `IDinFK` int(11) DEFAULT NULL,
   `Orario` varchar(50) DEFAULT NULL,
   `Note` varchar(200) DEFAULT NULL,
@@ -294,28 +306,17 @@ CREATE TABLE `ordine` (
 -- Dump dei dati per la tabella `ordine`
 --
 
-INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDpoFK`, `IDinFK`, `Orario`, `Note`, `Data`, `Confermato`, `ValutazioneFatt`) VALUES
-(1, 'da@gmail.com', NULL, 1, 1, 1, 7, '9:00', '', '2020-05-05', 1, NULL),
-(2, 'alex@ffff.it', NULL, 1, 1, 1, 2, '10:00', 'Non va il citofono', '2020-05-07', 0, NULL);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `posfatt`
---
-
-CREATE TABLE `posfatt` (
-  `ID` int(8) NOT NULL,
-  `PosXFA` double NOT NULL DEFAULT '0',
-  `PosYFA` double NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Dump dei dati per la tabella `posfatt`
---
-
-INSERT INTO `posfatt` (`ID`, `PosXFA`, `PosYFA`) VALUES
-(1, 0, 0);
+INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDinFK`, `Orario`, `Note`, `Data`, `Confermato`, `ValutazioneFatt`) VALUES
+(1, 'da@gmail.com', 1, 1, 2, 22, '9', '', '2020-05-05', 1, 0),
+(2, 'alex@ffff.it', NULL, 1, 1, 22, '10:00', 'Non va il citofono', '2020-05-07', 1, 4),
+(30, 'bubu@gmail.com', NULL, 1, 1, 22, '9', '', '2020-05-20', 1, 0),
+(31, 'bubu@gmail.com', 1, 1, 1, 22, '9', '', '2020-05-20', 1, 0),
+(34, 'bubu@gmail.com', 1, 1, 3, 22, '11', 'Per favore con molto cioccolato', '2020-05-20', 1, 0),
+(36, 'bubu@gmail.com', NULL, 1, 2, 22, '3', 'Per favore croissont alla crema', '2020-05-20', 0, 0),
+(56, 'bubu@gmail.com', NULL, 1, 2, 22, '9', '', '2020-05-26', 0, 0),
+(57, 'bubu@gmail.com', NULL, 1, 3, 22, '9', 'Questa. una prova', '2020-05-27', 0, 0),
+(58, 'bubu@gmail.com', NULL, 1, 2, 22, '7', '', '2020-05-27', 0, 0),
+(59, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-27', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -445,11 +446,10 @@ INSERT INTO `utente` (`Email`, `Nome`, `Cognome`, `Nascità`, `Password`, `Telef
 ('alex@ffff.it', 'Alex', 'Rusei', '2000-05-25', '5625', 12054256),
 ('bubu@gmail.com', 'Guglielmo', 'Strambini', '1999-12-19', '333', 34252432),
 ('cri@gmai.com', 'Cristiano', 'Ronaldo', '1985-02-05', 'cri00', 56423158),
-('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '464748', 35663535),
+('da@gmail.com', 'Daniela', 'De Pascali', '2001-07-03', '2442', 35663535),
 ('eater@gnam.com', 'Ither', 'Khaza', '2000-02-04', '45678', 35489259),
 ('leo@gmail.com', 'Leonardo', 'DiCaprio', '1974-11-11', 't1t4n1c', 33302526),
 ('nico@asd.it', 'Nicolò', 'Zaniolo', '1999-07-02', 'r0m4', 12345985),
-('prova@error.com', 'prova', 'prova', '2000-11-11', '333', 43255315),
 ('sabba@ilrosso.it', 'Samuele', 'Sabbatini', '2000-11-22', '98722', 20338228),
 ('simo@asd.it', 'Simone', 'Barzaghi', '1997-08-24', '666', 21474836),
 ('sofia@g.it', 'Sofia', 'Goggia', '1992-11-05', 'kkk555', 66823749),
@@ -539,14 +539,7 @@ ALTER TABLE `ordine`
   ADD KEY `IDfatFK` (`IDfatFK`),
   ADD KEY `IDbarFK` (`IDbarFK`),
   ADD KEY `IDtiFK` (`IDtiFK`),
-  ADD KEY `IDinFK` (`IDpoFK`),
   ADD KEY `FK_ordine_indirizzo` (`IDinFK`);
-
---
--- Indici per le tabelle `posfatt`
---
-ALTER TABLE `posfatt`
-  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indici per le tabelle `possiede`
@@ -596,7 +589,7 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `bar`
 --
 ALTER TABLE `bar`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT per la tabella `chiedef`
@@ -620,7 +613,7 @@ ALTER TABLE `classificato`
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT per la tabella `domanda`
@@ -644,7 +637,7 @@ ALTER TABLE `filtro`
 -- AUTO_INCREMENT per la tabella `indirizzo`
 --
 ALTER TABLE `indirizzo`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT per la tabella `menu`
@@ -656,13 +649,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT per la tabella `posfatt`
---
-ALTER TABLE `posfatt`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT per la tabella `possiede`
@@ -740,7 +727,6 @@ ALTER TABLE `ordine`
   ADD CONSTRAINT `FK_ordine_indirizzo` FOREIGN KEY (`IDinFK`) REFERENCES `indirizzo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDbarFK` FOREIGN KEY (`IDbarFK`) REFERENCES `bar` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDfatFK` FOREIGN KEY (`IDfatFK`) REFERENCES `fattorino` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `IDinFK` FOREIGN KEY (`IDpoFK`) REFERENCES `posfatt` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDtiFK` FOREIGN KEY (`IDtiFK`) REFERENCES `tipopagamento` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `IDutFK` FOREIGN KEY (`IDutFK`) REFERENCES `utente` (`Email`) ON DELETE CASCADE ON UPDATE CASCADE;
 

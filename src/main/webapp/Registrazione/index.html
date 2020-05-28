@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it-it">
+
+<head>
+    <title>Bfast</title>
+
+
+
+    <meta charset="utf-8">
+
+    <!-- Serve per ottimizzare prima i dispositi mobili e poi in base alla necessità utilizzando 
+                le query multimediali CSS. 
+                Per garantire il rendering corretto e lo zoom tattile per tutti i dispositivi  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Collegamento con Style.css -->
+    <link rel="stylesheet" type="text/css" href="Style.css">
+
+</head>
+
+
+
+
+
+
+<body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <script src="Regole.js"></script>
+
+    <!--
+    <div class="btn-group">
+        <button id="Cliente" type="button" class="btn btn-primary">Customer</button>       
+        <button id="Ristorante" type="button" class="btn btn-primary">Ristorante</button>
+        <button id="Fattorino" type="button" class="btn btn-primary">Delivery man</button>
+    </div>
+    -->
+    <!--Navigation-->
+	<div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="d-inline-flex justify-content-between w-100 align-items-center">
+				<div>
+                    <button type="button" id="sidebarCollapse" class="btn">
+                        <img src="../img/logo4.png" class="img-fluid">
+                    </button>
+				</div>	
+					<div>
+						<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item">
+								<a class="nav-link text-dark" href="../">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" href="../Login/index.html">Sign In</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+            </nav>
+    <!--End Navigation-->
+
+
+    <form action="registrazione" method="POST">
+        <div class="sign_up">
+            <div class="sign_up-screen">
+                <div class="app-title">
+                    <h1>Create your account</h1>
+                </div>
+
+                <form action="" style="border:1px solid #ccc">
+                <div class="singup-form">
+
+                    <!--Nome del Locale-->
+                    <div class="control-group">
+                        <label for="nomeL"><b>Nome del Locale </b></label>
+                        <input type="text" id="nomeL" placeholder="Nome del Locale" name="nome" required
+                            style="width: 100%;">
+                    </div>
+
+
+                    <!--Email-->
+                    <div class="control-group">
+                        <label for="emailL"><b>Email</b></label>
+                        <input type="text" id="emailL" placeholder="Inserire un Email Valida" name="mail" required
+                            style="width: 100%;">
+                    </div>
+
+                    <!--Password-->
+                    <div class="control-group">
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" id="password" placeholder="Password" name="pass" required
+                            style="width: 100%;">
+                    </div>
+
+                    <!--Pepeat Password-->
+                    <div class="control-group">
+                        <label for="passwordR"><b>Repeat Password</b></label>
+                        <input type="password" id="passwordR" placeholder="Repeat Password" name="copass" required
+                            style="width: 100%;">
+                    </div>
+                </form>
+
+
+
+                    <input type="submit" onclick="validazione(event);" value="Create account"
+                        class="btn btn-primary btn-large btn-block">
+
+                    <input type="submit" onclick="validazione(event);" value="Cancel"
+                        class="btn btn-primary btn-large btn-block" style="background-color: #f44336; border-color: #f44336;">
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </form>
+	</div>
+
+
+
+</body>

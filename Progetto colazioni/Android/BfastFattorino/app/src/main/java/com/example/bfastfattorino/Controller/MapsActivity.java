@@ -33,8 +33,13 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import static com.example.bfastfattorino.R.drawable.map_marker_dark;
+import static com.example.bfastfattorino.R.drawable.map_marker_light;
+import static com.example.bfastfattorino.R.drawable.mapbox_marker_icon_default;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
@@ -72,9 +77,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     List<Indirizzo> ordineJSON;
     SessionMarker sessionMarker;
-    private static final String MARKER_SOURCE = "markers-source";
-    private static final String MARKER_STYLE_LAYER = "markers-style-layer";
-    private static final String MARKER_IMAGE = "custom-marker";
 
 
     @Override
@@ -89,13 +91,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        this.mapboxMap = mapboxMap;
+        MapsActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(getString(R.string.navigation_guidance_day), new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull final Style style) {
+
                 enableLocationComponent(style);
 
-                addMarkers(style);
+                sessionMarker = new SessionMarker(MapsActivity.this);
+                Call<List<Indirizzo>> callUpdateProdotto = apiService.markerBU(String.valueOf(sessionMarker.getIDBar()),String.valueOf(sessionMarker.getIDOrd()));
+                callUpdateProdotto.enqueue(new Callback<List<Indirizzo>>() {
+
+                    @Override
+                    public void onResponse(Call<List<Indirizzo>> call, Response<List<Indirizzo>> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
+                        } else if(response.body().size()!=0){
+                            List<Feature> featuresBar = new ArrayList<>();
+                            List<Feature> featuresUte = new ArrayList<>();
+                            ordineJSON = response.body();
+                            featuresBar.add(Feature.fromGeometry(Point.fromLngLat(ordineJSON.get(0).getY(), ordineJSON.get(0).getX())));
+                            featuresUte.add(Feature.fromGeometry(Point.fromLngLat(ordineJSON.get(1).getY(), ordineJSON.get(1).getX())));
+                            addMarkersBar(style,featuresBar);
+                            addMarkersUte(style,featuresUte);
+                            Toast.makeText(MapsActivity.this, "Quello blu è il bar quello azzurro è l'utente", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Indirizzo>> call, Throwable t) {
+                        Toast.makeText(MapsActivity.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
                 addDestinationIconSymbolLayer(style);
 
@@ -115,10 +145,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
-
     private void addDestinationIconSymbolLayer(@NonNull Style loadedMapStyle) {
         loadedMapStyle.addImage("destination-icon-id",
-                BitmapFactory.decodeResource(this.getResources(), R.drawable.mapbox_marker_icon_default));
+                BitmapFactory.decodeResource(this.getResources(), mapbox_marker_icon_default));
         GeoJsonSource geoJsonSource = new GeoJsonSource("destination-source-id");
         loadedMapStyle.addSource(geoJsonSource);
         SymbolLayer destinationSymbolLayer = new SymbolLayer("destination-symbol-layer-id", "destination-source-id");
@@ -198,43 +227,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void addMarkers(@NonNull Style loadedMapStyle) {
-        final List<Feature> features = new ArrayList<>();
-        sessionMarker = new SessionMarker(MapsActivity.this);
+    private void addMarkersBar(@NonNull Style loadedMapStyle,List<Feature> features2) {
+        List<Feature> features = features2;
+        loadedMapStyle.addImage("prova-icon-id",
+                BitmapFactory.decodeResource(this.getResources(), map_marker_light));
 
-        Call<List<Indirizzo>> callUpdateProdotto = apiService.markerBU(String.valueOf(sessionMarker.getIDBar()),String.valueOf(sessionMarker.getIDOrd()));
-        callUpdateProdotto.enqueue(new Callback<List<Indirizzo>>() {
+        loadedMapStyle.addSource(new GeoJsonSource("bar-source-id", FeatureCollection.fromFeatures(features)));
 
-            @Override
-            public void onResponse(Call<List<Indirizzo>> call, Response<List<Indirizzo>> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
-                } else if(response.body().size()!=0){
-                    ordineJSON = response.body();
-                    Point bar = Point.fromLngLat(ordineJSON.get(0).getX(), ordineJSON.get(0).getY());
-                    Point ute = Point.fromLngLat(ordineJSON.get(1).getX(), ordineJSON.get(1).getY());
-                    features.add(Feature.fromGeometry(bar));
-                    features.add(Feature.fromGeometry(ute));
-
-                }else{
-                    Toast.makeText(MapsActivity.this, "Problemi con la risposta del server per le posizioni", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Indirizzo>> call, Throwable t) {
-                Toast.makeText(MapsActivity.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        loadedMapStyle.addSource(new GeoJsonSource(MARKER_SOURCE, FeatureCollection.fromFeatures(features)));
-
-        loadedMapStyle.addLayer(new SymbolLayer(MARKER_STYLE_LAYER, MARKER_SOURCE)
+        loadedMapStyle.addLayer(new SymbolLayer("bar-symbol-layer-id", "bar-source-id")
                 .withProperties(
                         PropertyFactory.iconAllowOverlap(true),
                         PropertyFactory.iconIgnorePlacement(true),
-                        PropertyFactory.iconImage(MARKER_IMAGE)
+                        PropertyFactory.iconImage("prova-icon-id"),
+                        PropertyFactory.iconOffset(new Float[] {0f, -9f})
+                ));
+    }
+
+    private void addMarkersUte(@NonNull Style loadedMapStyle,List<Feature> features2) {
+        List<Feature> features = features2;
+        loadedMapStyle.addImage("utepro-icon-id",
+                BitmapFactory.decodeResource(this.getResources(), map_marker_dark));
+
+        loadedMapStyle.addSource(new GeoJsonSource("ute-source-id", FeatureCollection.fromFeatures(features)));
+
+        loadedMapStyle.addLayer(new SymbolLayer("ute-symbol-layer-id", "ute-source-id")
+                .withProperties(
+                        PropertyFactory.iconAllowOverlap(true),
+                        PropertyFactory.iconIgnorePlacement(true),
+                        PropertyFactory.iconImage("utepro-icon-id"),
+                        PropertyFactory.iconOffset(new Float[] {0f, -9f})
                 ));
     }
 
