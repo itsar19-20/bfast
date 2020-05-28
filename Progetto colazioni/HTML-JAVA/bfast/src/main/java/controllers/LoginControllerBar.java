@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,7 +49,9 @@ public class LoginControllerBar extends HttpServlet {
 			String id2 = request.getParameter("ID");
 			Integer id = Integer.parseInt(id2);
 			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
+	        PrintWriter writer = response.getWriter();
+	        String htmlRespone = "<script> alert(\"Benvenuto:"+b.getNome()+"\"); window.location = '../Dashboard/index.html'  </script> ";
+	        writer.println(htmlRespone);
 		}
 	}
 }

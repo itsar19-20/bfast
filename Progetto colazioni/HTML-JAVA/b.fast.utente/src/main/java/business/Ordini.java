@@ -31,7 +31,7 @@ public class Ordini {
 	    em.persist(o);
 	    em.getTransaction().commit();
 	    try {
-	    	Query Ris = em.createNativeQuery("SELECT o.ID FROM ordine as o ORDER BY o.ID ASC");
+	    	Query Ris = em.createNativeQuery("SELECT o.ID FROM ordine as o");
 			id = Ris.getResultList();
 			int count = id.size();
 			o.setId(id.get(count-1));
