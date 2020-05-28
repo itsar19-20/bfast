@@ -1,6 +1,7 @@
 package com.example.bfastfattorino.Controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,7 +119,8 @@ public class GalleryFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Tutto ok", Toast.LENGTH_SHORT).show();
+                    Intent cambia = new Intent(getActivity(), Ringraziamento.class);
+                    startActivity(cambia);
                 }
             });
 

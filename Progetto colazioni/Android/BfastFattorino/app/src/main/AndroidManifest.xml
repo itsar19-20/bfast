@@ -46,6 +46,7 @@
         <activity android:name=".Controller.CambioPassword" />
         <activity android:name=".Controller.ControlloID" />
         <activity android:name=".Controller.pswDimenticata" />
+        <activity android:name=".Controller.Ringraziamento" />
 
 
     </application>
