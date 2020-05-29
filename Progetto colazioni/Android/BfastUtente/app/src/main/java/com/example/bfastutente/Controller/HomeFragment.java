@@ -20,6 +20,7 @@ import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
 import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
+import com.example.bfastutente.Session.SessionSomma;
 import com.example.bfastutente.Session.SessionUte;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.OrdineJson;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     SessionUte sessionUte;
     SessionProdotto sessionProdotto;
     SessionOrdine sessionOrdine;
+    SessionSomma sessionSomma;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -156,6 +158,8 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                                 session = new SessionBar(getActivity());
                                 int id = Integer.parseInt(marker.getTitle());
                                 session.setIDInd(id);
+                                sessionSomma = new SessionSomma(getActivity());
+                                sessionSomma.setSomma(0);
                                 Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
                                 callBar.enqueue(new Callback<OrdineJson>() {
                                                  @Override

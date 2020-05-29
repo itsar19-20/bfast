@@ -13,7 +13,7 @@ public class ValutazioneFattorino {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Integer id = Integer.parseInt(ID);
 		_return = em.find(Ordine.class, id);
-		float val = Float.valueOf(val2);
+		float val = Float.parseFloat(val2);
 		em.getTransaction().begin();
 		_return.setValutazioneFatt(val);
 		em.getTransaction().commit();

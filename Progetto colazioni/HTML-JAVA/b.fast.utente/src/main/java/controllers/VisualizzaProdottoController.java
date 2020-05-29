@@ -10,18 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import business.ValutazioneFattorino;
-import model.Ordine;
-import utils.OrdineJson;
+import business.VisualizzaProdotto;
+import model.Prodotto;
 
-@WebServlet("/ValutazioneFattorino")
-public class ValutazioneFattorinoController extends HttpServlet {
+@WebServlet("/CostoProdotto")
+public class VisualizzaProdottoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ValutazioneFattorinoController() {
+	public VisualizzaProdottoController() {
 		super();
 	}
 
@@ -31,16 +30,14 @@ public class ValutazioneFattorinoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ValutazioneFattorino au = new ValutazioneFattorino();
-		Ordine b = au.cerca(request.getParameter("ordine"), request.getParameter("valutazione"));
+		VisualizzaProdotto au = new VisualizzaProdotto();
+		Prodotto b = au.cerca(request.getParameter("nome"));
 		if (b == null) {
 			request.getRequestDispatcher("/").forward(request, response);
 		} else {
-			OrdineJson o = new OrdineJson();
-			o.setId(request.getParameter("ordine"));
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
-			response.getWriter().append(om.writeValueAsString(o));		
+			response.getWriter().append(om.writeValueAsString(b));		
 			}
 	}
 

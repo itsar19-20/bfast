@@ -99,4 +99,7 @@ public interface BfastUtenteApi {
     @GET("ValutazioneFattorino")
     Call<OrdineJson> ValutazioneFattorino(@Query("ordine")String id,@Query("valutazione") String valutazione);
 
+    @GET("CostoProdotto")
+    Call<Prodotto>  CostoProdotto(@Query("nome") String nome);
+
 }
