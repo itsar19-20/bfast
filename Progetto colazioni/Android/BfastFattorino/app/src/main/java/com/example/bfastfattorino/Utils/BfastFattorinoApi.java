@@ -58,7 +58,8 @@ public interface BfastFattorinoApi {
     @GET("ConfermaOrdine")
     Call<Fattorino> ConfermaOrdine(@Query("ordine")String ord,@Query("fattorino") String id);
 
-
+    @GET("ValutazioneFattorino")
+    Call<ValutazioneFattJSON> ValutazioneFattorino(@Query("id") String id);
 
 
 }

@@ -47,6 +47,7 @@
         <activity android:name=".Controller.ControlloID" />
         <activity android:name=".Controller.pswDimenticata" />
         <activity android:name=".Controller.Ringraziamento" />
+        <activity android:name=".Controller.VisualizzaValutazione" />
 
 
     </application>

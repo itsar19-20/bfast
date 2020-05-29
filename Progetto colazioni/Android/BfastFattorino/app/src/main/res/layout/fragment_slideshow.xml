@@ -14,25 +14,23 @@
         android:text="Chiedi aiuto"
         android:textColor="#0626F0"
         android:textColorLink="#0728EE"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Txtpassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/Txtpassword" />
 
     <TextView
         android:id="@+id/TxtCambiaMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="212dp"
         android:text="Cambia Mail"
         android:textColor="#0626F0"
         android:textColorLink="#0728EE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Txtpassword"
@@ -46,13 +44,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TxtCambiaMail" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="133dp"
-        android:layout_height="166dp"
-        android:layout_marginTop="84dp"
-        android:src="@mipmap/ic_launcher"
+    <TextView
+        android:id="@+id/Txvalutazione"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Visualizza Valutazione"
+        android:textColor="#0626F0"
+        android:textColorLink="#0728EE"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtaiuto"
+        app:layout_constraintVertical_bias="0.006" />
 </androidx.constraintlayout.widget.ConstraintLayout>

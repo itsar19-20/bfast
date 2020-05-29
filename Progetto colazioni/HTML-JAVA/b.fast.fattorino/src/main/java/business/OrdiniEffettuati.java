@@ -18,8 +18,8 @@ public class OrdiniEffettuati {
 		int ID = Integer.parseInt(s);
 	    List<Integer> id = new ArrayList<Integer>();
 	    Ordine ord = null;
-		Query Ris = em.createNativeQuery("SELECT o.ID FROM `ordine` as o,indirizzo as i,posfatt as p,fattorino as f "
-				+ "WHERE f.id ="+ID+" AND o.IDinFK = i.ID AND o.IDpoFK = p.ID AND o.IDfatFK = f.ID");
+		Query Ris = em.createNativeQuery("SELECT o.ID FROM `ordine` as o,indirizzo as i,fattorino as f "
+				+ "WHERE f.id ="+ID+" AND o.IDinFK = i.ID AND o.IDfatFK = f.ID");
 		id = Ris.getResultList();
 		int count = id.size();
 	    OrdineJSON[] o = new OrdineJSON[count];

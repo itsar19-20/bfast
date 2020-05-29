@@ -17,7 +17,7 @@ import com.example.bfastfattorino.R;
 
 public class SlideshowFragment extends Fragment {
 
-    private TextView t1,t2,t3;
+    private TextView t1,t2,t3,t4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class SlideshowFragment extends Fragment {
         t1 = view.findViewById(R.id.TxtCambiaMail);
         t2 = view.findViewById(R.id.Txtpassword);
         t3 = view.findViewById(R.id.txtaiuto);
+        t4 = view.findViewById(R.id.Txvalutazione);
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +52,13 @@ public class SlideshowFragment extends Fragment {
             public void onClick(View v) {
                 /* Intent pass = new Intent(getActivity(), CambioPassword.class);
                 startActivity(pass);*/
+            }
+        });
+        t4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pass = new Intent(getActivity(), VisualizzaValutazione.class);
+                startActivity(pass);
             }
         });
 
