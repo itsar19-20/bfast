@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 28, 2020 alle 10:23
+-- Creato il: Mag 29, 2020 alle 12:37
 -- Versione del server: 10.1.36-MariaDB
 -- Versione PHP: 7.2.10
 
@@ -151,10 +151,15 @@ INSERT INTO `contiene` (`ID`, `IDprFK`, `IDorFK`, `Quantita`) VALUES
 (27, 'croissant', 36, 2),
 (28, 'succo di arancia', 36, 2),
 (31, 'croissant', 56, 2),
-(32, 'torta al cioccolato', 57, 2),
-(33, 'cheesecake', 58, 2),
 (34, 'torta al cioccolato', 59, 2),
-(35, 'cheesecake', 59, 1);
+(35, 'cheesecake', 59, 1),
+(36, 'torta al cioccolato', 60, 2),
+(37, 'succo di arancia', 60, 1),
+(38, 'cheesecake', 61, 1),
+(39, 'succo di arancia', 61, 1),
+(40, 'torta al cioccolato', 65, 1),
+(41, 'torta al cioccolato', 66, 2),
+(42, 'succo di arancia', 66, 2);
 
 -- --------------------------------------------------------
 
@@ -280,7 +285,21 @@ INSERT INTO `menu` (`ID`, `IDbaFK`, `IDprFK`, `Disponibilita`) VALUES
 (1, 1, 'succo di arancia', 1),
 (2, 1, 'cheesecake', 1),
 (3, 1, 'croissant', 1),
-(5, 1, 'torta al cioccolato', 1);
+(5, 1, 'torta al cioccolato', 1),
+(6, 2, 'caffe', 1),
+(7, 3, 'crostata alla frutta', 1),
+(8, 4, 'avocado toast', 1),
+(9, 3, 'uova', 1),
+(10, 3, 'muffin', 1),
+(11, 2, 'torta al cioccolato', 1),
+(13, 6, 'pasticciotto', 1),
+(14, 5, 'torta alle mele', 1),
+(15, 7, 'pancake', 1),
+(16, 5, 'cappuccino', 1),
+(17, 1, 'caffe', 1),
+(18, 6, 'caffe', 1),
+(20, 7, 'tiramisù', 1),
+(21, 1, 'tiramisù', 1);
 
 -- --------------------------------------------------------
 
@@ -307,16 +326,18 @@ CREATE TABLE `ordine` (
 --
 
 INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDinFK`, `Orario`, `Note`, `Data`, `Confermato`, `ValutazioneFatt`) VALUES
-(1, 'da@gmail.com', 1, 1, 2, 22, '9', '', '2020-05-05', 1, 0),
-(2, 'alex@ffff.it', NULL, 1, 1, 22, '10:00', 'Non va il citofono', '2020-05-07', 1, 4),
+(1, 'da@gmail.com', 1, 1, 2, 22, '9', '', '2020-05-05', 1, 3),
+(2, 'alex@ffff.it', NULL, 1, 1, 22, '10:00', 'Non va il citofono', '2020-05-07', 1, 0),
 (30, 'bubu@gmail.com', NULL, 1, 1, 22, '9', '', '2020-05-20', 1, 0),
-(31, 'bubu@gmail.com', 1, 1, 1, 22, '9', '', '2020-05-20', 1, 0),
-(34, 'bubu@gmail.com', 1, 1, 3, 22, '11', 'Per favore con molto cioccolato', '2020-05-20', 1, 0),
-(36, 'bubu@gmail.com', NULL, 1, 2, 22, '3', 'Per favore croissont alla crema', '2020-05-20', 0, 0),
-(56, 'bubu@gmail.com', NULL, 1, 2, 22, '9', '', '2020-05-26', 0, 0),
-(57, 'bubu@gmail.com', NULL, 1, 3, 22, '9', 'Questa. una prova', '2020-05-27', 0, 0),
-(58, 'bubu@gmail.com', NULL, 1, 2, 22, '7', '', '2020-05-27', 0, 0),
-(59, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-27', 0, 0);
+(31, 'bubu@gmail.com', 1, 1, 1, 22, '9', '', '2020-05-20', 1, 5),
+(34, 'bubu@gmail.com', 1, 1, 3, 22, '11', 'Per favore con molto cioccolato', '2020-05-20', 1, 2),
+(36, 'bubu@gmail.com', NULL, 1, 2, 22, '3', 'Per favore croissont alla crema', '2020-05-20', 1, 0),
+(56, 'bubu@gmail.com', NULL, 1, 2, 22, '9', '', '2020-05-26', 1, 0),
+(59, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-27', 0, 0),
+(60, 'bubu@gmail.com', 1, 1, 1, 22, '10', '', '2020-05-27', 1, 4),
+(61, 'bubu@gmail.com', 1, 1, 3, 22, '10:30', '2 bustine di zucchero', '2020-05-27', 1, 3.5),
+(65, 'bubu@gmail.com', NULL, 1, 2, 22, '9', '', '2020-05-28', 0, 0),
+(66, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-28', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -613,7 +634,7 @@ ALTER TABLE `classificato`
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT per la tabella `domanda`
@@ -643,13 +664,13 @@ ALTER TABLE `indirizzo`
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT per la tabella `possiede`
