@@ -1,19 +1,25 @@
 package com.example.bfastfattorino.Controller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.bfastfattorino.Model.Fattorino;
 import com.example.bfastfattorino.R;
+import com.example.bfastfattorino.Session.SessionFat;
 import com.example.bfastfattorino.Session.SessionMarker;
 import com.example.bfastfattorino.Utils.BfastFattorinoApi;
 import com.example.bfastfattorino.Utils.OrdineJSON;
@@ -33,7 +39,8 @@ public class ListaConfermare extends AppCompatActivity {
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     CustomAdapter customAdapter;
     SessionMarker sessionMarker;
-
+    Dialog myDialog;
+    SessionFat sessionFat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +106,7 @@ public class ListaConfermare extends AppCompatActivity {
             View view = convertView;
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_itemeff,null);
+            myDialog = new Dialog(context);
 
             tx1 = view.findViewById(R.id.prodotto);
             tx2 = view.findViewById(R.id.ingredienti);
@@ -106,20 +114,62 @@ public class ListaConfermare extends AppCompatActivity {
             tx1.setText("Bar: "+String.valueOf(lista2.get(position).getId()));
             tx2.setText("Prodotti: "+lista2.get(position).getProdotto());
 
+            final View finalView = view;
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sessionMarker = new SessionMarker(ListaConfermare.this);
                     sessionMarker.setIDBar(lista2.get(position).getId());
                     sessionMarker.setIDOrd(lista2.get(position).getIdord());
-                    Intent ord = new Intent(ListaConfermare.this, ConfermaOrdine.class);
-                    startActivity(ord);
+                    ShowPopup(finalView,lista2.get(position).getIdord());
                 }
             });
 
             return view;
         }
     }
+
+    public void ShowPopup(View v, final int id) {
+        myDialog.setContentView(R.layout.poppupord);
+        TextView txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+        Button b1 = (Button) myDialog.findViewById(R.id.btnvalid);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionFat = new SessionFat(ListaConfermare.this);
+                String val = String.valueOf(id);
+                Call<Fattorino> call = apiService.ConfermaOrdine(val,String.valueOf(sessionFat.getIDfatt()));
+                call.enqueue(new Callback<Fattorino>() {
+
+                    @Override
+                    public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
+                        if(!response.isSuccessful()){
+                            Toast.makeText(ListaConfermare.this, "Impossibile confermare l'ordine", Toast.LENGTH_LONG).show();
+                        }else{
+                            Intent ord = new Intent(ListaConfermare.this, MapsActivity.class);
+                            startActivity(ord);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Fattorino> call, Throwable t) {
+                        Toast.makeText(ListaConfermare.this, "Errore nella comunicazione col server", Toast.LENGTH_LONG).show();
+                    }
+
+                });
+            }
+        });
+
+}
 
     @Override
     protected void onDestroy() {
