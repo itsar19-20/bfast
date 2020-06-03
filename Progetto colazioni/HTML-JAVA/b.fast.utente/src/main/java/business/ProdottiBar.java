@@ -18,7 +18,7 @@ public class ProdottiBar {
 	    List<String> nome = new ArrayList<String>();
 	    List<Prodotto> pro = new ArrayList<Prodotto>();
 	    try {
-			Query Ris1 = em.createNativeQuery("SELECT p.Nome FROM prodotto as p,bar as b,menu as m WHERE b.id = "+id+" AND b.id=m.IDbaFK AND p.Nome = m.IDprFK");
+			Query Ris1 = em.createNativeQuery("SELECT p.Nome FROM prodotto as p,bar as b,menu as m WHERE b.id = "+id+" AND b.id=m.IDbaFK AND p.Nome = m.IDprFK AND m.Disponibilita = 1");
 			nome = Ris1.getResultList();
 	    	int count = nome.size();
 	    	for(int i=0;i<count;i++) {

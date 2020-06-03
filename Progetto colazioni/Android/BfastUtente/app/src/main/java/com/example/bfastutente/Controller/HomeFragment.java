@@ -1,12 +1,17 @@
 package com.example.bfastutente.Controller;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +27,7 @@ import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
 import com.example.bfastutente.Session.SessionSomma;
 import com.example.bfastutente.Session.SessionUte;
+import com.example.bfastutente.Utils.BarJson;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
@@ -57,6 +63,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     SessionProdotto sessionProdotto;
     SessionOrdine sessionOrdine;
     SessionSomma sessionSomma;
+    Dialog myDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +75,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment fragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.mapView);
+        myDialog = new Dialog(getContext());
         fragment.getMapAsync(this);
     }
 
@@ -155,49 +163,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
                             if(marker.getTitle().equals("Posizione selezionata")){
                                 Toast.makeText(getActivity(), "Seleziona un bar e non la tua attuale posizione", Toast.LENGTH_SHORT).show();
                             }else{
-                                session = new SessionBar(getActivity());
-                                int id = Integer.parseInt(marker.getTitle());
-                                session.setIDInd(id);
-                                sessionSomma = new SessionSomma(getActivity());
-                                sessionSomma.setSomma(0);
-                                Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
-                                callBar.enqueue(new Callback<OrdineJson>() {
-                                                 @Override
-                                                 public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
-                                                     if (!response.isSuccessful()) {
-                                                         Toast.makeText(getActivity(), "Impossibile selezionare il bar", Toast.LENGTH_SHORT).show();
-                                                     }else{
-                                                         sessionProdotto = new SessionProdotto(getActivity());
-                                                         sessionProdotto.confermarto(0);
-                                                         Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
-                                                         startActivity(selezione);                                                     }
-                                                 }
-
-                                                 @Override
-                                                 public void onFailure(Call<OrdineJson> call, Throwable t) {
-                                                     Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
-                                                 }
-                                             });
-                                    /*LatLng pos = markerUtente.getPosition();
-                                    String x = String.valueOf(pos.latitude);
-                                    String y = String.valueOf(pos.longitude);
-                                    Call<Indirizzo> callPos = apiService.SelezionePosizione(sessionUte.getMailUt(),x,y);
-                                    callPos.enqueue(new Callback<Indirizzo>() {
-                                                 @Override
-                                                 public void onResponse(Call<Indirizzo> call, Response<Indirizzo> response) {
-                                                     if (!response.isSuccessful()) {
-                                                         Toast.makeText(getActivity(), "Impossibile trovare la posizione", Toast.LENGTH_SHORT).show();
-                                                     }else{
-                                                         Toast.makeText(getActivity(), "Perfetto! Posizione settata", Toast.LENGTH_SHORT).show();
-                                                     }
-                                                 }
-
-                                                 @Override
-                                                 public void onFailure(Call<Indirizzo> call, Throwable t) {
-                                                     Toast.makeText(getActivity(), "Impossibile collegari al server", Toast.LENGTH_SHORT).show();
-                                                 }
-                                             });*/
-
+                                ShowPopup(getView(),marker);
                             }
                         return false;
                     }
@@ -222,4 +188,92 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         }
       return false;
     }
+
+    public void ShowPopup(View v, final Marker marker) {
+        TextView txtclose;
+        Button btnSel;
+        myDialog.setContentView(R.layout.popupbar);
+        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        final TextView tbar = myDialog.findViewById(R.id.TvxBar);
+        final TextView tval = myDialog.findViewById(R.id.TvxVal);
+        Call<BarJson> popup = apiService.barpopup(marker.getTitle());
+        popup.enqueue(new Callback<BarJson>() {
+            @Override
+            public void onResponse(Call<BarJson> call, Response<BarJson> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Errore di sistema! Ordini non disponibili", Toast.LENGTH_SHORT).show();
+                }else{
+                    BarJson bj = response.body();
+                    marker.setTitle(String.valueOf(bj.getId()));
+                    tbar.setText(bj.getNome());
+                    tval.setText(String.valueOf(bj.getVal()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BarJson> call, Throwable t) {
+
+            }
+        });
+        btnSel = (Button) myDialog.findViewById(R.id.btnvalid);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+        btnSel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session = new SessionBar(getActivity());
+                int id = Integer.parseInt(marker.getTitle());
+                session.setIDInd(id);
+                sessionSomma = new SessionSomma(getActivity());
+                sessionSomma.setSomma(0);
+                Call<OrdineJson> callBar = apiService.SelezioneBar(String.valueOf(sessionOrdine.getIDOrd()),marker.getTitle());
+                callBar.enqueue(new Callback<OrdineJson>() {
+                    @Override
+                    public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getActivity(), "Impossibile selezionare il bar", Toast.LENGTH_SHORT).show();
+                        }else{
+                            sessionProdotto = new SessionProdotto(getActivity());
+                            sessionProdotto.confermarto(0);
+                            Intent selezione = new Intent(getView().getContext(), ListaProdotti.class);
+                            startActivity(selezione);                                                     }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrdineJson> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Problema col server", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                                    /*LatLng pos = markerUtente.getPosition();
+                                    String x = String.valueOf(pos.latitude);
+                                    String y = String.valueOf(pos.longitude);
+                                    Call<Indirizzo> callPos = apiService.SelezionePosizione(sessionUte.getMailUt(),x,y);
+                                    callPos.enqueue(new Callback<Indirizzo>() {
+                                                 @Override
+                                                 public void onResponse(Call<Indirizzo> call, Response<Indirizzo> response) {
+                                                     if (!response.isSuccessful()) {
+                                                         Toast.makeText(getActivity(), "Impossibile trovare la posizione", Toast.LENGTH_SHORT).show();
+                                                     }else{
+                                                         Toast.makeText(getActivity(), "Perfetto! Posizione settata", Toast.LENGTH_SHORT).show();
+                                                     }
+                                                 }
+
+                                                 @Override
+                                                 public void onFailure(Call<Indirizzo> call, Throwable t) {
+                                                     Toast.makeText(getActivity(), "Impossibile collegari al server", Toast.LENGTH_SHORT).show();
+                                                 }
+                                             });*/
+
+            }
+        });
+
+    }
+
 }

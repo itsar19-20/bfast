@@ -12,15 +12,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
+import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
 import com.example.bfastutente.Utils.BfastUtenteApi;
+import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class ListaProdotti extends AppCompatActivity {
     BfastUtenteApi apiService = RetrofitUtils.getInstance().getBfastUtenteApi();
     SessionBar session;
     SessionProdotto sessionPro;
+    SessionOrdine sessionOrdine;
 
 
     @Override
@@ -167,9 +169,24 @@ public class ListaProdotti extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        pdb.close();
-        Intent toHome = new Intent(ListaProdotti.this, MapActivity.class);
-        startActivity(toHome);
+        sessionOrdine = new SessionOrdine(this);
+        Call<OrdineJson> cancellazione = apiService.cancellazione(String.valueOf(sessionOrdine.getIDOrd()));
+        cancellazione.enqueue(new Callback<OrdineJson>() {
+            @Override
+            public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ListaProdotti.this, "Errore nel server", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent toHome = new Intent(ListaProdotti.this, MapActivity.class);
+                    startActivity(toHome);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrdineJson> call, Throwable t) {
+                Toast.makeText(ListaProdotti.this, "Errore nel server", Toast.LENGTH_SHORT).show();
+            }
+        });
         super.onDestroy();
     }
 

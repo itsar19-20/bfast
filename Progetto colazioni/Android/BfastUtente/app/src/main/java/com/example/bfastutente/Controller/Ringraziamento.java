@@ -22,7 +22,7 @@ public class Ringraziamento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ringraziamento);
         sessionSomma = new SessionSomma(Ringraziamento.this);
-        String totale = "Il totale è "+sessionSomma.getSomma();
+        String totale = "Il totale è "+sessionSomma.getSomma()+"€";
         t1 = findViewById(R.id.TXtotale);
         t1.setText(totale);
         b1 = findViewById(R.id.BTNfvalu);
