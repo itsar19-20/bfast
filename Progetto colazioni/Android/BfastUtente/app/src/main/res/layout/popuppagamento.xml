@@ -38,9 +38,11 @@
             android:layout_marginTop="5dp"
             android:ems="16"
             android:gravity="left"
+            android:focusable="true"
             android:inputType="numberDecimal"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
 
     </LinearLayout>
 
@@ -65,9 +67,11 @@
             android:layout_marginTop="5dp"
             android:ems="4"
             android:gravity="left"
+            android:focusable="true"
             android:inputType="numberDecimal"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints=""  />
 
     </LinearLayout>
 
@@ -91,9 +95,11 @@
             android:layout_marginTop="5dp"
             android:ems="3"
             android:gravity="left"
+            android:focusable="true"
             android:inputType="numberDecimal"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:autofillHints="" />
 
     </LinearLayout>
 

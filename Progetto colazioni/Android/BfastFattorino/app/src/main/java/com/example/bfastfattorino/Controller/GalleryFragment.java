@@ -1,12 +1,17 @@
 package com.example.bfastfattorino.Controller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +25,7 @@ import com.example.bfastfattorino.Session.SessionFat;
 import com.example.bfastfattorino.Utils.BfastFattorinoApi;
 import com.example.bfastfattorino.Utils.OrdineJSON;
 import com.example.bfastfattorino.Utils.RetrofitUtils;
+import com.example.bfastfattorino.Utils.ValutazioneFattJSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +43,7 @@ public class GalleryFragment extends Fragment {
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     SessionFat sessionFat;
     CustomAdapter customAdapter;
+    Dialog myDialog;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -119,8 +126,36 @@ public class GalleryFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent cambia = new Intent(getActivity(), Ringraziamento.class);
-                    startActivity(cambia);
+                    myDialog = new Dialog(getContext());
+                    int id=lista2.get(position).getId();
+                    myDialog.setContentView(R.layout.popupvalutazione);
+                    TextView txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
+                    txtclose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myDialog.dismiss();
+                        }
+                    });
+                    final TextView t1 = myDialog.findViewById(R.id.Txval);
+                    Call<ValutazioneFattJSON> valutazione = apiService.ValutazioneOrdine(String.valueOf(id));
+                    valutazione.enqueue(new Callback<ValutazioneFattJSON>() {
+                        @Override
+                        public void onResponse(Call<ValutazioneFattJSON> call, Response<ValutazioneFattJSON> response) {
+                            if(!response.isSuccessful()){
+                                Toast.makeText(getActivity(), "Errore con la risposta del server ", Toast.LENGTH_LONG).show();
+                            }else{
+                                ValutazioneFattJSON vfj = response.body();
+                                t1.setText(String.valueOf(vfj.getVal()));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ValutazioneFattJSON> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Errore con la risposta del server ", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    myDialog.show();
                 }
             });
 

@@ -21,9 +21,13 @@ public class GestioneMenu {
 		m.setBar(b);
 		m.setProdotto(p);
 		m.setDisponibilita(1);
-		em.getTransaction().begin();
-		em.persist(m);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			em.persist(m);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			m = null;
+		}
 		return m;
 	}
 	
