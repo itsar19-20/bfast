@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         TextView txtclose;
         Button btnSel;
         myDialog.setContentView(R.layout.popupbar);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
         final TextView tbar = myDialog.findViewById(R.id.TvxBar);
         final TextView tval = myDialog.findViewById(R.id.TvxVal);
         Call<BarJson> popup = apiService.barpopup(marker.getTitle());

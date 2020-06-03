@@ -46,7 +46,6 @@
         <activity android:name=".Controller.Carrello" />
         <activity android:name=".Controller.InserisciValutazione" />
         <activity android:name=".Controller.Ringraziamento" />
-        <activity android:name=".Controller.VisualizzazioneProdotto" />
     </application>
 
 </manifest>

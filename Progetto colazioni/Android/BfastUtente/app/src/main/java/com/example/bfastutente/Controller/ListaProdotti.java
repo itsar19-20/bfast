@@ -1,13 +1,17 @@
 package com.example.bfastutente.Controller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,7 @@ import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
 import com.example.bfastutente.Session.SessionOrdine;
 import com.example.bfastutente.Session.SessionProdotto;
+import com.example.bfastutente.Session.SessionSomma;
 import com.example.bfastutente.Utils.BfastUtenteApi;
 import com.example.bfastutente.Utils.OrdineJson;
 import com.example.bfastutente.Utils.RetrofitUtils;
@@ -42,6 +47,12 @@ public class ListaProdotti extends AppCompatActivity {
     SessionBar session;
     SessionProdotto sessionPro;
     SessionOrdine sessionOrdine;
+    SessionSomma sessionSomma;
+    TextView tx,t2;
+    EditText et;
+    Button b1;
+    private int quantita;
+    Dialog myDialog;
 
 
     @Override
@@ -124,6 +135,7 @@ public class ListaProdotti extends AppCompatActivity {
             View view = convertView;
             LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_item,null);
+            myDialog = new Dialog(context);
 
             tx1 = view.findViewById(R.id.prodotto);
             tx2 = view.findViewById(R.id.ingredienti);
@@ -131,14 +143,13 @@ public class ListaProdotti extends AppCompatActivity {
             tx1.setText(lista2.get(position).getNome());
             tx2.setText(lista2.get(position).getIngredienti());
 
+            final View finalView = view;
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     sessionPro = new SessionProdotto(ListaProdotti.this);
                     String nome = lista2.get(position).getNome();
-                    sessionPro.setNomeProdotto(nome);
-                    Intent selezione = new Intent(ListaProdotti.this, VisualizzazioneProdotto.class);
-                    startActivity(selezione);
+                    ShowPopup(finalView,nome);
                 }
             });
 
@@ -167,7 +178,91 @@ public class ListaProdotti extends AppCompatActivity {
 
     }
 
-    @Override
+    public void ShowPopup(View v,String Nome) {
+        myDialog.setContentView(R.layout.popupprodotto);
+        tx = (TextView) myDialog.findViewById(R.id.Prodotto);
+        t2 = (TextView) myDialog.findViewById(R.id.TXcosto);
+        TextView txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
+        sessionPro = new SessionProdotto(ListaProdotti.this);
+        final String nome = Nome;
+        Call<Prodotto> call = apiService.CostoProdotto(nome);
+        call.enqueue(new Callback<Prodotto>(){
+            @Override
+            public void onResponse(Call<Prodotto> call, Response<Prodotto> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ListaProdotti.this, "Impossibile visualizzare il prezzo", Toast.LENGTH_SHORT).show();
+                }else{
+                    Prodotto p = response.body();
+                    t2.setText(String.valueOf(p.getPrezzo()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Prodotto> call, Throwable t) {
+                Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
+            }
+        });
+        et = (EditText) myDialog.findViewById(R.id.Quantita);
+        tx.setText(nome);
+        b1 = (Button) myDialog.findViewById(R.id.btnvalid);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String check = et.getText().toString();
+                if(check.equals("")){
+                    Toast.makeText(ListaProdotti.this, "Non hai selezionato nessuna quantita", Toast.LENGTH_SHORT).show();
+                }else{
+                    sessionSomma = new SessionSomma(ListaProdotti.this);
+                    sessionOrdine = new SessionOrdine(ListaProdotti.this);
+                    Call<OrdineJson> call = apiService.SelezioneProdotto(String.valueOf(sessionOrdine.getIDOrd()),nome,check);
+                    call.enqueue(new Callback<OrdineJson>(){
+                        @Override
+                        public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(ListaProdotti.this, "Impossibile aggiungerlo al carrello", Toast.LENGTH_SHORT).show();
+                            }else{
+                                float costo = 0;
+                                try{
+                                    costo = Float.parseFloat(t2.getText().toString());
+                                }catch(Exception e){
+
+                                }
+                                float somma = sessionSomma.getSomma();
+                                somma = somma + (costo*quantita);
+                                sessionSomma.setSomma(somma);
+                                Toast.makeText(ListaProdotti.this, "Aggiunto al tuo carrello", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<OrdineJson> call, Throwable t) {
+                            Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    quantita =Integer.parseInt(check);
+                    sessionPro = new SessionProdotto(ListaProdotti.this);
+                    sessionPro.confermarto(1);
+                    Intent toHome = new Intent(ListaProdotti.this, ListaProdotti.class);
+                    startActivity(toHome);
+                }
+
+            }
+
+
+        });
+    }
+
+
+        @Override
     protected void onDestroy() {
         sessionOrdine = new SessionOrdine(this);
         Call<OrdineJson> cancellazione = apiService.cancellazione(String.valueOf(sessionOrdine.getIDOrd()));
