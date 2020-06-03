@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
@@ -49,10 +51,11 @@ public class ListaProdotti extends AppCompatActivity {
     SessionOrdine sessionOrdine;
     SessionSomma sessionSomma;
     TextView tx,t2;
-    EditText et;
     Button b1;
+    ElegantNumberButton but;
     private int quantita;
     Dialog myDialog;
+    String et ="0";
 
 
     @Override
@@ -202,7 +205,7 @@ public class ListaProdotti extends AppCompatActivity {
                 Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
             }
         });
-        et = (EditText) myDialog.findViewById(R.id.Quantita);
+        but = (ElegantNumberButton ) myDialog.findViewById(R.id.Quantita);
         tx.setText(nome);
         b1 = (Button) myDialog.findViewById(R.id.btnvalid);
         txtclose.setOnClickListener(new View.OnClickListener() {
@@ -212,13 +215,20 @@ public class ListaProdotti extends AppCompatActivity {
             }
         });
 
+        but.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et = but.getNumber();
+            }
+        });
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String check = et.getText().toString();
-                if(check.equals("")){
+                String check = et;
+                if(check.equals("0")){
                     Toast.makeText(ListaProdotti.this, "Non hai selezionato nessuna quantita", Toast.LENGTH_SHORT).show();
                 }else{
                     sessionSomma = new SessionSomma(ListaProdotti.this);

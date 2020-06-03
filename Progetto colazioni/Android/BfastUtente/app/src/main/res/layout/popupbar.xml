@@ -3,74 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="250dp"
     android:layout_height="200dp"
-    android:background="@color/colorPrimaryDark"
-    android:padding="5dp"
     android:layout_gravity="center"
-    >
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/txtclose"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:textColor="#F44336"
-        android:text="X"
-        android:textStyle="bold"
         android:layout_gravity="end"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="X"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="30dp">
 
         <TextView
             android:id="@+id/TvxBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:text="Bar"
             android:textColor="#FFF"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:textColor="#FFF"
-            android:text="Valutazione:"
-            android:textStyle="bold" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="40dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Valutazione:"
+            android:textColor="#FFF"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TvxVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:textColor="#FFF"
+            android:layout_marginTop="20dp"
             android:text="Valutazione"
+            android:textColor="#FFF"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnvalid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/mybutton"
-            android:text="Seleziona"
-            android:textColor="#FFF" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnvalid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/mybutton"
+        android:text="Seleziona"
+        android:textColor="#FFF" />
 
 
 

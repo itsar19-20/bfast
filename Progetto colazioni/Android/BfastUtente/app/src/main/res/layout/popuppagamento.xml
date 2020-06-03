@@ -20,17 +20,27 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="35dp">
+        android:layout_height="25dp">
 
         <TextView
-            android:id="@+id/Prodotto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:text="Prodotto"
+            android:text="Numero:"
             android:textColor="#FFF"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/Numero"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="16"
+            android:gravity="left"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -43,55 +53,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Costo:"
+            android:layout_marginTop="5dp"
+            android:text="Scadenza:"
             android:textColor="#FFF"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/TXcosto"
+        <EditText
+            android:id="@+id/Scadenza"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Costo"
-            android:textColor="#FFF"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="€"
-            android:textColor="#FFF"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="4"
+            android:gravity="left"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="203dp"
-        android:layout_height="29dp">
+        android:layout_width="wrap_content"
+        android:layout_height="25dp">
 
-        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-            android:id="@+id/Quantita"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:gravity="center"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+            android:text="CVC:"
+            android:textColor="#FFF"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/CVC"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:ems="3"
+            android:gravity="left"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
     </LinearLayout>
-
 
     <Button
         android:id="@+id/btnvalid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/mybutton"
-        android:text="Conferma"
+        android:text="Seleziona"
         android:textColor="#FFF" />
+
+
+
 
 </LinearLayout>
