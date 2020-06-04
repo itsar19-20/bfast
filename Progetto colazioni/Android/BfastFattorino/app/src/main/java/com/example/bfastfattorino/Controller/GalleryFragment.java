@@ -126,8 +126,8 @@ public class GalleryFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int id=lista2.get(position).getIdord();
                     myDialog = new Dialog(getContext());
-                    int id=lista2.get(position).getId();
                     myDialog.setContentView(R.layout.popupvalutazione);
                     TextView txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
                     txtclose.setOnClickListener(new View.OnClickListener() {
