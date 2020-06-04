@@ -110,4 +110,7 @@ public interface BfastUtenteApi {
     @GET("CancellazioneOrdine")
     Call<OrdineJson> cancellazione (@Query("ordine") String idord);
 
+    @GET("PopUpCarrello")
+    Call<OrdineJson> CarrelloProdotti(@Query("ordine") String idord);
+
 }
