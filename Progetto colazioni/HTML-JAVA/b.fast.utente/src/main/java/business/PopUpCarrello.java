@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import model.Prodotto;
 import utils.JPAUtil;
 import utils.OrdineJson;
 
@@ -43,7 +44,8 @@ public class PopUpCarrello {
 			    int count = listquan.size();
 				String concatena ="";
 		    	for(int i=0;i<count;i++) {
-			    	concatena += listquan.get(i)+" "+listing.get(i)+"  ";
+		    		Prodotto p = em.find(Prodotto.class, listing.get(i));
+			    	concatena += listquan.get(i)+" "+listing.get(i)+" Costo:"+p.getPrezzo()*listquan.get(i)+"   ";
 			    }
 		    	o.setId(concatena);
 		    	return o;

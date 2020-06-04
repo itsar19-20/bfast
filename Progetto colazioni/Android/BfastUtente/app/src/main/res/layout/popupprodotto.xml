@@ -4,7 +4,7 @@
     android:layout_width="250dp"
     android:layout_height="200dp"
     android:layout_gravity="center"
-    android:background="@color/colorPrimaryDark"
+    android:background="#FFF"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:text="Prodotto"
-            android:textColor="#FFF"
+            android:textColor="#000"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -45,7 +45,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo:"
-            android:textColor="#FFF"
+            android:textColor="#000"
             android:textStyle="bold" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo"
-            android:textColor="#FFF"
+            android:textColor="#000"
             android:textStyle="bold" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="€"
-            android:textColor="#FFF"
+            android:textColor="#000"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -79,7 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
-            android:gravity="center"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+            android:gravity="center">
+        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
     </LinearLayout>
 

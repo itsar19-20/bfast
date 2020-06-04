@@ -37,7 +37,8 @@ public class PopUpCarrelloController extends HttpServlet {
 		} else {
 			ObjectMapper om = new ObjectMapper();
 			response.setContentType("application/json");
-			response.getWriter().append(om.writeValueAsString(b));		}
+			response.getWriter().append(om.writeValueAsString(b));	
+			}
 	}
 
 	/**

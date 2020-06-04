@@ -1,7 +1,9 @@
 package com.example.bfastfattorino.Utils;
 
+import com.example.bfastfattorino.Model.Domanda;
 import com.example.bfastfattorino.Model.Fattorino;
 import com.example.bfastfattorino.Model.Indirizzo;
+import com.example.bfastfattorino.Model.Risposta;
 
 import java.util.List;
 
@@ -39,15 +41,15 @@ public interface BfastFattorinoApi {
 
 
     @GET("CambioMail")
-    Call<Fattorino> CambioMail(@Query("mail") String mail);
+    Call<Fattorino> CambioMail(@Query("id") String id,@Query("mail") String mail,@Query("comail") String  comail);
 
 
     @GET("CambioPassword")
-    Call<Fattorino> CambioPassword(@Query("password") String pass);
+    Call<Fattorino> CambioPassword(@Query("id") String id,@Query("pass") String pass,@Query("copass") String copass);
 
 
     @GET("PasswordDimenticata")
-    Call<Fattorino> PasswordDimenticata(@Query("id") String id,@Query("password") String pass,@Query("copassword") String copass);
+    Call<Fattorino> PasswordDimenticata(@Query("id") String id,@Query("pass") String pass,@Query("copass") String copass);
 
 
 
@@ -64,9 +66,7 @@ public interface BfastFattorinoApi {
     @GET("ValutazioneOrdine")
     Call<ValutazioneFattJSON> ValutazioneOrdine(@Query("id") String id);
 
-}
-
-/*    @POST("ScriviDomanda")
+    @POST("ScriviDomanda")
     @FormUrlEncoded
     Call<Domanda> ScriviDomanda(@Query("idDomanda") String idDomanda);
 
@@ -75,4 +75,4 @@ public interface BfastFattorinoApi {
     @FormUrlEncoded
     Call<Risposta> ScriviRisposta(@Query("idRisposta") String idRisposta);
 
-*/
+}

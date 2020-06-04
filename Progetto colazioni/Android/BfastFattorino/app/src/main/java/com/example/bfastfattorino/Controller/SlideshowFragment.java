@@ -51,22 +51,22 @@ public class SlideshowFragment extends Fragment {
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent mail= new Intent(getActivity(), CambioMail.class);
-                startActivity(mail);*/
+                Intent mail= new Intent(getActivity(), CambioMail.class);
+                startActivity(mail);
             }
         });
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent pass = new Intent(getActivity(), CambioPassword.class);
-                startActivity(pass);*/
+                Intent pass = new Intent(getActivity(), CambioPassword.class);
+                startActivity(pass);
             }
         });
         t3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* Intent pass = new Intent(getActivity(), CambioPassword.class);
-                startActivity(pass);*/
+                Intent pass = new Intent(getActivity(), ScriviDomanda.class);
+                startActivity(pass);
             }
         });
         t4.setOnClickListener(new View.OnClickListener() {

@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.CercaID;
 import model.Bar;
 
-@WebServlet("/mail")
+@WebServlet("/ControllaID")
 public class CercaidController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 
@@ -35,10 +37,9 @@ public class CercaidController extends HttpServlet {
 		if (b == null) {
 			request.getRequestDispatcher("/mail.html").forward(request, response);
 		} else {
-			String s = request.getParameter("ID");
-			Integer id=Integer.parseInt(s);
-			ses.setAttribute("ID",id);
-			request.getRequestDispatcher("/password.html").forward(request, response);
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));	
 		}
 	}
 

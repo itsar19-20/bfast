@@ -65,7 +65,7 @@ public class OrdiniEffettuati {
 		    int count = listquan.size();
 			String concatena ="";
 	    	for(int i=0;i<count;i++) {
-		    	concatena += listquan.get(i)+listing.get(i);
+		    	concatena += listquan.get(i)+" "+listing.get(i)+" ";
 		    }
 	    	return concatena;
 		 }

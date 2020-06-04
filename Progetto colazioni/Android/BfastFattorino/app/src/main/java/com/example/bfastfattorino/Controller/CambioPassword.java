@@ -1,6 +1,7 @@
 package com.example.bfastfattorino.Controller;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,20 +37,17 @@ public class CambioPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String password = etpass.getText().toString();
-                String Copassword = etcopass.getText().toString();        Integer id = session.getIDfatt();
-                Fattorino _return = null;
-                _return= (Fattorino) udba.getUserLogin(id);
+                String Copassword = etcopass.getText().toString();
+                session = new SessionFat(CambioPassword.this);
+                Integer id = session.getIDfatt();
 
                 if (password.equals(Copassword)) {
-                    _return.setPassword(password);
-                    Call<Fattorino> call = apiService.CambioPassword(password);
-                    final Fattorino final_return1 = _return;
+                    Call<Fattorino> call = apiService.CambioPassword(String.valueOf(id),password,Copassword);
                     call.enqueue(new Callback<Fattorino>() {
                         @Override
                         public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
-                            udba.open();
-                            udba.updateUser(final_return1.getMail(), final_return1.getPassword(), final_return1.getNome(), final_return1.getCognome(), final_return1.getId(), final_return1.getNascità());
-                            udba.close();
+                                Intent pass = new Intent(CambioPassword.this, DashboardActivity.class);
+                                startActivity(pass);
                         }
 
                         @Override

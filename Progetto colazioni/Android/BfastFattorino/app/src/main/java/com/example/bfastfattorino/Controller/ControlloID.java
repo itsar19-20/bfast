@@ -20,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ControlloID extends AppCompatActivity {
+
     FattorinoDBAdapter udba = new FattorinoDBAdapter(this);
     BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
     private SessionFat session;
@@ -37,10 +38,10 @@ public class ControlloID extends AppCompatActivity {
                 final int id = Integer.valueOf(etid.getText().toString());
                 Fattorino _return = null;
                 Call<Fattorino> call = apiService.ConfermoID(id);
-                final Fattorino final_return = _return;
                 call.enqueue(new Callback<Fattorino>() {
                     @Override
                     public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
+                        session = new SessionFat(ControlloID.this);
                         session.setIDfatt(id);
                         Intent cambia = new Intent(ControlloID.this, pswDimenticata.class);
                         startActivity(cambia);

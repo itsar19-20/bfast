@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import business.PasswordDimenticata;
 import model.Fattorino;
 
-@WebServlet("/password")
+@WebServlet("/PasswordDimenticata")
 public class PasswordDimenticataController extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
 	
@@ -31,13 +33,14 @@ public class PasswordDimenticataController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		PasswordDimenticata am = new PasswordDimenticata();
-		int s= (Integer) ses.getAttribute("ID");
+		int s= Integer.parseInt(request.getParameter("id"));
 		Fattorino b = am.cambio(s,request.getParameter("pass"), request.getParameter("copass"));
 		if (b == null) {
 			request.getRequestDispatcher("/password.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("/ok.html").forward(request, response);
-		}
+			ObjectMapper om = new ObjectMapper();
+			response.setContentType("application/json");
+			response.getWriter().append(om.writeValueAsString(b));			}
 	}
 
 	/**
