@@ -1,6 +1,7 @@
 package com.example.bfastutente.Utils;
 
 import com.example.bfastutente.Model.Bar;
+import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.Model.Domanda;
 import com.example.bfastutente.Model.Indirizzo;
 import com.example.bfastutente.Model.Prodotto;
@@ -112,5 +113,11 @@ public interface BfastUtenteApi {
 
     @GET("PopUpCarrello")
     Call<OrdineJson> CarrelloProdotti(@Query("ordine") String idord);
+
+    @GET("CercaCarrello")
+    Call<Contiene>  CercaCarrello(@Query("ordine")String idord,@Query("nome") String nome);
+
+    @GET("RimuoviCarrello")
+    Call<Contiene>  RimuoviCarrello(@Query("ordine")String idord,@Query("nome") String nome);
 
 }

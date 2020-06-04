@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="250dp"
+    android:layout_width="410dp"
     android:layout_height="200dp"
-    android:layout_gravity="center"
+    android:layout_gravity="bottom"
     android:background="#FFF"
     android:orientation="vertical"
     android:padding="5dp">
@@ -19,8 +19,8 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="30dp">
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,17 +28,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo:"
+            android:layout_marginLeft="100dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TXcosto"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo"
+            android:layout_marginLeft="10dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -47,23 +51,25 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="€"
+            android:layout_marginLeft="10dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="239dp"
-        android:layout_height="117dp">
+        android:layout_width="410dp"
+        android:layout_height="110dp">
 
         <TextView
             android:id="@+id/TXprodotti"
-            android:layout_width="match_parent"
+            android:layout_width="410dp"
             android:layout_height="117dp"
             android:layout_marginTop="10dp"
             android:text="TextView"
             android:textColor="#000"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 

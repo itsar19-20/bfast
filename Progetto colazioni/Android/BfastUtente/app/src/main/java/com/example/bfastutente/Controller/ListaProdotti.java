@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
+import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
@@ -50,7 +53,7 @@ public class ListaProdotti extends AppCompatActivity {
     SessionProdotto sessionPro;
     SessionOrdine sessionOrdine;
     SessionSomma sessionSomma;
-    TextView tx,t2;
+    TextView tx,t2,t3;
     Button b1;
     ElegantNumberButton but;
     private int quantita;
@@ -151,8 +154,29 @@ public class ListaProdotti extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     sessionPro = new SessionProdotto(ListaProdotti.this);
-                    String nome = lista2.get(position).getNome();
-                    ShowPopup(finalView,nome);
+                    final String nome = lista2.get(position).getNome();
+                    sessionOrdine = new SessionOrdine(ListaProdotti.this);
+                    Call<Contiene> presente = apiService.CercaCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
+                    presente.enqueue(new Callback<Contiene>() {
+                        @Override
+                        public void onResponse(Call<Contiene> call, Response<Contiene> response) {
+                            if (!response.isSuccessful()) {
+                                ShowPopup(finalView,nome,0);
+                            }else {
+                                Contiene c = response.body();
+                                if(c==null){
+                                    ShowPopup(finalView,nome,0);
+                                }else{
+                                    ShowPopup(finalView,nome,1);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Contiene> call, Throwable t) {
+                            Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
 
@@ -181,10 +205,15 @@ public class ListaProdotti extends AppCompatActivity {
 
     }
 
-    public void ShowPopup(View v,String Nome) {
+    public void ShowPopup(View v,String Nome,int set) {
         myDialog.setContentView(R.layout.popupprodotto);
         tx = (TextView) myDialog.findViewById(R.id.Prodotto);
         t2 = (TextView) myDialog.findViewById(R.id.TXcosto);
+        t3 = (TextView) myDialog.findViewById(R.id.Rimuovi);
+        if(set==1){
+            t3.setCursorVisible(true);
+            t3.setVisibility(View.VISIBLE);
+        }
         TextView txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
         sessionPro = new SessionProdotto(ListaProdotti.this);
         final String nome = Nome;
@@ -215,6 +244,30 @@ public class ListaProdotti extends AppCompatActivity {
             }
         });
 
+        t3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionOrdine = new SessionOrdine(ListaProdotti.this);
+                Call<Contiene> rimuovi = apiService.RimuoviCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
+                rimuovi.enqueue(new Callback<Contiene>() {
+                    @Override
+                    public void onResponse(Call<Contiene> call, Response<Contiene> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(ListaProdotti.this, "Impossibile cancellare il prodotto", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(ListaProdotti.this, "Prodotto cancellato", Toast.LENGTH_SHORT).show();
+                            myDialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Contiene> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
         but.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,6 +276,11 @@ public class ListaProdotti extends AppCompatActivity {
         });
 
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Window window = myDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.BOTTOM;
+        window.setAttributes(wlp);
         myDialog.show();
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,8 +319,7 @@ public class ListaProdotti extends AppCompatActivity {
                     quantita =Integer.parseInt(check);
                     sessionPro = new SessionProdotto(ListaProdotti.this);
                     sessionPro.confermarto(1);
-                    Intent toHome = new Intent(ListaProdotti.this, ListaProdotti.class);
-                    startActivity(toHome);
+                    myDialog.dismiss();
                 }
 
             }

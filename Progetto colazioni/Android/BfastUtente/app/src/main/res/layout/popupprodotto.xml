@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="250dp"
-    android:layout_height="200dp"
-    android:layout_gravity="center"
+    android:layout_width="410dp"
+    android:layout_height="300dp"
+    android:layout_gravity="bottom"
     android:background="#FFF"
     android:orientation="vertical"
     android:padding="5dp">
@@ -19,25 +19,26 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="35dp">
+        android:layout_width="fill_parent"
+        android:layout_height="60dp">
 
         <TextView
             android:id="@+id/Prodotto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="5dp"
             android:text="Prodotto"
             android:textColor="#000"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="25dp">
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,17 +46,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo:"
+            android:layout_marginLeft="100dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TXcosto"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="Costo"
+            android:layout_marginLeft="10dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -64,35 +69,43 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="€"
+            android:layout_marginLeft="10dp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="203dp"
-        android:layout_height="29dp">
 
-        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-            android:id="@+id/Quantita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:gravity="center">
-        </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
-
-    </LinearLayout>
-
+    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+        android:id="@+id/Quantita"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:scrollbarSize="30dp">
+    </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
     <Button
         android:id="@+id/btnvalid"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/mybutton"
         android:text="Conferma"
         android:textColor="#FFF" />
+
+    <TextView
+        android:id="@+id/Rimuovi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:cursorVisible="false"
+        android:text="Rimuovi dall'ordine"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
 </LinearLayout>

@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -93,6 +96,11 @@ public class Carrello extends AppCompatActivity {
                     }
                 });
                 prodotti.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Window window = prodotti.getWindow();
+                WindowManager.LayoutParams wlp = window.getAttributes();
+
+                wlp.gravity = Gravity.BOTTOM;
+                window.setAttributes(wlp);
                 prodotti.show();
             }
         });
@@ -126,10 +134,11 @@ public class Carrello extends AppCompatActivity {
                 b2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(Carrello.this, "Carta di credito accettata! Schiaccia la x e completa il tuo ordine", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Carrello.this, "Carta di credito accettata!", Toast.LENGTH_SHORT).show();
                         cb2.setChecked(false);
                         cb3.setChecked(false);
                         paga=1;
+                        myDialog.dismiss();
                     }
                 });
             }
@@ -189,6 +198,11 @@ public class Carrello extends AppCompatActivity {
                                              });
                                              Button continua = conferma.findViewById(R.id.btnvalid);
                                              conferma.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                             Window window = conferma.getWindow();
+                                             WindowManager.LayoutParams wlp = window.getAttributes();
+
+                                             wlp.gravity = Gravity.BOTTOM;
+                                             window.setAttributes(wlp);
                                              conferma.show();
                                              continua.setOnClickListener(new View.OnClickListener() {
                                                  @Override
