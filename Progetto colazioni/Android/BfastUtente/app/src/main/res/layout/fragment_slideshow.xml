@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controller.SlideshowFragment"
-    android:background="#304A58"
+    android:background="#fff"
     >
 
     <TextView
@@ -27,11 +27,12 @@
         android:id="@+id/BTNcerca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="208dp"
+        android:background="@drawable/mybutton"
         android:text="Cerca"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ETdoma"
         app:layout_constraintVertical_bias="0.31" />

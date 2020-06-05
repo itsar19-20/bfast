@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="250dp"
-    android:layout_height="200dp"
-    android:layout_gravity="center"
-    android:background="@color/colorPrimaryDark"
+    android:layout_width="410dp"
+    android:layout_height="150dp"
+    android:layout_gravity="bottom"
+    android:background="#fff"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -19,18 +19,20 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="75dp">
+        android:layout_width="410dp"
+        android:layout_height="43dp">
 
         <TextView
             android:id="@+id/TvxBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="100dp"
             android:height="20dp"
+            android:fontFamily="@font/open_sans_light"
             android:text="Conferma l'incarico"
-            android:textColor="#FFF"
+            android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -38,7 +40,7 @@
 
     <Button
         android:id="@+id/btnvalid"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"

@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#304A58"
+    android:background="#fff"
     tools:context=".Controller.MainActivity">
 
     <Button
         android:id="@+id/BtnLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:background="@drawable/mybutton"
+        android:textColor="#FFF"
         android:text="Login"
         app:layout_constraintBottom_toTopOf="@+id/BtnSign"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +23,11 @@
 
     <Button
         android:id="@+id/BtnSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="240dp"
         android:background="@drawable/mybutton"
+        android:textColor="#FFF"
         android:text="Registrati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

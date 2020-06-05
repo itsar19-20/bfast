@@ -5,7 +5,7 @@
     android:id="@+id/Txprod"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#B1D816"
+    android:background="#FBF5F5"
     android:theme="@style/AppTheme.NoActionBar">
 
 
@@ -13,7 +13,8 @@
         android:id="@+id/ingredienti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/open_sans_light"
         android:text="Ingredienti"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,8 +28,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/open_sans_light"
         android:text="Nome"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

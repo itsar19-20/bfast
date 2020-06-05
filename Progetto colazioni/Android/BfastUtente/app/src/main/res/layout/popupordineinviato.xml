@@ -19,7 +19,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="70dp">
 
         <TextView
@@ -27,8 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="120dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/open_sans_light"
             android:text="Ordine inviato"
             android:textColor="#000"
             android:textSize="24sp"

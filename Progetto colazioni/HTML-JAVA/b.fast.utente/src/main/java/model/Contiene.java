@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 /**
  * The persistent class for the contiene database table.
@@ -21,11 +23,13 @@ public class Contiene implements Serializable {
 	//bi-directional many-to-one association to Ordine
 	@ManyToOne
 	@JoinColumn(name="IDorFK")
+	@JsonBackReference
 	private Ordine ordine;
 
 	//bi-directional many-to-one association to Prodotto
 	@ManyToOne
 	@JoinColumn(name="IDprFK")
+	@JsonBackReference
 	private Prodotto prodotto;
 
 	public Contiene() {

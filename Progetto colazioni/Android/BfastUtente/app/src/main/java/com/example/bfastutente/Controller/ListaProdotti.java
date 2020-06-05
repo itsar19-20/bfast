@@ -23,7 +23,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.bfastutente.Adapter.ProdottoDBAdapter;
-import com.example.bfastutente.Model.Contiene;
 import com.example.bfastutente.Model.Prodotto;
 import com.example.bfastutente.R;
 import com.example.bfastutente.Session.SessionBar;
@@ -156,14 +155,14 @@ public class ListaProdotti extends AppCompatActivity {
                     sessionPro = new SessionProdotto(ListaProdotti.this);
                     final String nome = lista2.get(position).getNome();
                     sessionOrdine = new SessionOrdine(ListaProdotti.this);
-                    Call<Contiene> presente = apiService.CercaCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
-                    presente.enqueue(new Callback<Contiene>() {
+                    Call<OrdineJson> presente = apiService.CercaCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
+                    presente.enqueue(new Callback<OrdineJson>() {
                         @Override
-                        public void onResponse(Call<Contiene> call, Response<Contiene> response) {
+                        public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                             if (!response.isSuccessful()) {
                                 ShowPopup(finalView,nome,0);
                             }else {
-                                Contiene c = response.body();
+                                OrdineJson c = response.body();
                                 if(c==null){
                                     ShowPopup(finalView,nome,0);
                                 }else{
@@ -173,7 +172,7 @@ public class ListaProdotti extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Contiene> call, Throwable t) {
+                        public void onFailure(Call<OrdineJson> call, Throwable t) {
                             Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -247,22 +246,33 @@ public class ListaProdotti extends AppCompatActivity {
         t3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sessionSomma = new SessionSomma(ListaProdotti.this);
                 sessionOrdine = new SessionOrdine(ListaProdotti.this);
-                Call<Contiene> rimuovi = apiService.RimuoviCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
-                rimuovi.enqueue(new Callback<Contiene>() {
+                Call<OrdineJson> rimuovi = apiService.RimuoviCarrello(String.valueOf(sessionOrdine.getIDOrd()),nome);
+                rimuovi.enqueue(new Callback<OrdineJson>() {
                     @Override
-                    public void onResponse(Call<Contiene> call, Response<Contiene> response) {
+                    public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(ListaProdotti.this, "Impossibile cancellare il prodotto", Toast.LENGTH_SHORT).show();
                         }else{
+                            float costo = 0;
+                            try{
+                                costo = Float.parseFloat(t2.getText().toString());
+                            }catch(Exception e){
+
+                            }
                             Toast.makeText(ListaProdotti.this, "Prodotto cancellato", Toast.LENGTH_SHORT).show();
+                            OrdineJson oj = response.body();
+                            float somma = sessionSomma.getSomma();
+                            somma = somma - (costo*Integer.parseInt(oj.getId()));
+                            sessionSomma.setSomma(somma);
                             myDialog.dismiss();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Contiene> call, Throwable t) {
-
+                    public void onFailure(Call<OrdineJson> call, Throwable t) {
+                        Toast.makeText(ListaProdotti.this, "Problema col server", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

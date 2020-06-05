@@ -115,9 +115,9 @@ public interface BfastUtenteApi {
     Call<OrdineJson> CarrelloProdotti(@Query("ordine") String idord);
 
     @GET("CercaCarrello")
-    Call<Contiene>  CercaCarrello(@Query("ordine")String idord,@Query("nome") String nome);
+    Call<OrdineJson>  CercaCarrello(@Query("ordine")String idord,@Query("nome") String nome);
 
     @GET("RimuoviCarrello")
-    Call<Contiene>  RimuoviCarrello(@Query("ordine")String idord,@Query("nome") String nome);
+    Call<OrdineJson>  RimuoviCarrello(@Query("ordine")String idord,@Query("nome") String nome);
 
 }

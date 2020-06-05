@@ -89,7 +89,6 @@ public class HomeFragment extends Fragment implements  OnMapReadyCallback, Googl
         CameraUpdate point = CameraUpdateFactory.newLatLng(new LatLng(45, 9));
         mMap.moveCamera(point);
         mMap.setMinZoomPreference(7);
-        Toast.makeText(getActivity(), "Benvenuto nella nostra APP seleziona pure il Bar", Toast.LENGTH_SHORT).show();
         context = this.getContext();
         bdb = new BarDBAdapter(context);
         idb = new IndirizzoDBAdapter(context);
