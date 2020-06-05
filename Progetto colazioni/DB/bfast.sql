@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 29, 2020 alle 12:37
+-- Creato il: Giu 05, 2020 alle 12:00
 -- Versione del server: 10.1.36-MariaDB
 -- Versione PHP: 7.2.10
 
@@ -47,18 +47,18 @@ CREATE TABLE `bar` (
 INSERT INTO `bar` (`ID`, `IDinFK`, `Nome`, `OrarioApertura`, `OrarioChiusura`, `Valutazione`, `email`, `password`, `Fascia`) VALUES
 (1, 1, 'Bar pippo', '5', '13', 3, 'prova@gmail.com', '333', 0),
 (2, 10, 'Bar rum', '', '', 1, 'ciao@yt.it', '123', 0),
-(3, 2, 'Bar ciko', '', '', 0, 'dfagdfg@ssad.com', '333', 0),
+(3, 2, 'Bar ciko', '', '', 3.2, 'dfagdfg@ssad.com', '333', 0),
 (4, 9, 'Bar Uno', '', '', 5, 'baruno@gmail.com', '123', 0),
 (5, 8, 'Bar Due', '', '', 2.5, 'bardue@blabla.it', '456', 0),
 (6, 4, 'Bar Tre', '', '', 3.6, 'bartre@sdfgh.it', '789', 0),
 (7, 6, 'Bar Quattro', '', '', 4, 'barquattro@opop.it', '852', 0),
 (8, 7, 'Bar Cinque', '', '', 4.5, 'barcinque@asd.com', '147', 0),
 (9, 3, 'Bar Sei', '', '', 5, 'barsei@fgh.com', '654', 0),
-(10, 1, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', 0),
-(31, 17, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', 0),
-(32, 20, 'Bar prova', NULL, NULL, 0, 'prova@gmail.com', '333', 0),
-(33, 18, 'Bar ciko', NULL, NULL, 0, 'dfagdfg@ssad.com', '232', 0),
-(34, 21, 'prova', NULL, NULL, 0, 'nonna@diaz.com', '333', 0);
+(10, 5, 'Bar Sette', '', '', 3.7, 'barsette@yh.com', '321', 0),
+(31, 17, 'Bar prova', NULL, NULL, 1, 'prova@gmail.com', '333', 0),
+(32, 20, 'Bar prova', NULL, NULL, 0.5, 'prova@gmail.com', '333', 0),
+(33, 18, 'Bar ciko', NULL, NULL, 5, 'dfagdfg@ssad.com', '232', 0),
+(34, 21, 'prova', NULL, NULL, 4, 'nonna@diaz.com', '333', 0);
 
 -- --------------------------------------------------------
 
@@ -159,7 +159,29 @@ INSERT INTO `contiene` (`ID`, `IDprFK`, `IDorFK`, `Quantita`) VALUES
 (39, 'succo di arancia', 61, 1),
 (40, 'torta al cioccolato', 65, 1),
 (41, 'torta al cioccolato', 66, 2),
-(42, 'succo di arancia', 66, 2);
+(42, 'succo di arancia', 66, 2),
+(43, 'muffin', 67, 1),
+(44, 'tiramisù', 67, 1),
+(45, 'succo di arancia', 67, 2),
+(47, 'tiramisù', 85, 3),
+(48, 'succo di arancia', 85, 1),
+(53, 'torta al cioccolato', 91, 2),
+(55, 'torta al cioccolato', 93, 2),
+(56, 'torta al cioccolato', 95, 2),
+(73, 'tiramisù', 104, 1),
+(80, 'tiramisù', 109, 1),
+(81, 'caffe', 109, 1),
+(82, 'torta al cioccolato', 110, 1),
+(83, 'brioche', 110, 2),
+(90, 'caffe', 122, 2),
+(91, 'torta al cioccolato', 122, 1),
+(93, 'brioche', 124, 1),
+(94, 'caffe', 124, 1),
+(95, 'cheesecake', 128, 1),
+(100, 'caffe', 131, 1),
+(102, 'brioche', 132, 1),
+(107, 'muffin', 135, 1),
+(108, 'caffe', 135, 1);
 
 -- --------------------------------------------------------
 
@@ -284,7 +306,6 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`ID`, `IDbaFK`, `IDprFK`, `Disponibilita`) VALUES
 (1, 1, 'succo di arancia', 1),
 (2, 1, 'cheesecake', 1),
-(3, 1, 'croissant', 1),
 (5, 1, 'torta al cioccolato', 1),
 (6, 2, 'caffe', 1),
 (7, 3, 'crostata alla frutta', 1),
@@ -299,7 +320,10 @@ INSERT INTO `menu` (`ID`, `IDbaFK`, `IDprFK`, `Disponibilita`) VALUES
 (17, 1, 'caffe', 1),
 (18, 6, 'caffe', 1),
 (20, 7, 'tiramisù', 1),
-(21, 1, 'tiramisù', 1);
+(21, 1, 'tiramisù', 1),
+(22, 1, 'brioche', 1),
+(23, 1, 'cappuccino', 1),
+(24, 1, 'muffin', 1);
 
 -- --------------------------------------------------------
 
@@ -336,8 +360,22 @@ INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDinFK`, 
 (59, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-27', 0, 0),
 (60, 'bubu@gmail.com', 1, 1, 1, 22, '10', '', '2020-05-27', 1, 4),
 (61, 'bubu@gmail.com', 1, 1, 3, 22, '10:30', '2 bustine di zucchero', '2020-05-27', 1, 3.5),
-(65, 'bubu@gmail.com', NULL, 1, 2, 22, '9', '', '2020-05-28', 0, 0),
-(66, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-28', 0, 0);
+(65, 'bubu@gmail.com', 1, 1, 2, 22, '9', '', '2020-05-28', 1, 5),
+(66, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-05-28', 1, 0),
+(67, 'bubu@gmail.com', NULL, 1, 2, 22, '10', 'Ottimo upgrade del menu', '2020-05-28', 1, 0),
+(85, 'bubu@gmail.com', 1, 1, 1, 22, '9', '', '2020-06-02', 1, 4.5),
+(91, 'bubu@gmail.com', NULL, 1, 1, 22, '10', 'Ottimo update dell\'app', '2020-06-02', 1, 0),
+(93, 'bubu@gmail.com', NULL, 1, 1, 22, '9', '', '2020-06-02', 1, 0),
+(95, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-06-02', 0, 0),
+(104, 'bubu@gmail.com', NULL, 1, 1, 22, '9', 'Servizio migliorato', '2020-06-03', 1, 0),
+(109, 'bubu@gmail.com', 1, 1, 1, 22, '10', '', '2020-06-03', 1, 5),
+(110, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-06-03', 0, 0),
+(122, 'bubu@gmail.com', NULL, 1, 1, 22, '10', 'Ottimizazione app', '2020-06-04', 1, 0),
+(124, 'bubu@gmail.com', NULL, 1, 1, 22, '9', '', '2020-06-04', 0, 0),
+(128, 'bubu@gmail.com', NULL, 1, 2, 22, '10', '', '2020-06-04', 0, 0),
+(131, 'bubu@gmail.com', NULL, 1, 1, 22, '9', 'Rimozione funzionante', '2020-06-04', 0, 0),
+(132, 'bubu@gmail.com', 1, 1, 1, 22, '11', '', '2020-06-04', 1, 4),
+(135, 'bubu@gmail.com', 1, 1, 1, 22, '11', '', '2020-06-04', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -634,7 +672,7 @@ ALTER TABLE `classificato`
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT per la tabella `domanda`
@@ -664,13 +702,13 @@ ALTER TABLE `indirizzo`
 -- AUTO_INCREMENT per la tabella `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT per la tabella `possiede`
