@@ -39,12 +39,11 @@ public class VisualizzazioneProdotti extends HttpServlet {
         String htmlRespone = "";
         PrintWriter writer = response.getWriter();
         htmlRespone += "<!doctype html>\r\n" + 
-        		"<html lang=\"it-it\">\r\n" + 
+        		"<html lang=\"it-it\" >\r\n" + 
         		"\r\n" + 
         		"<head>\r\n" + 
         		"    <title>Bfast</title>\r\n" + 
         		"\r\n" + 
-        		"<meta charset=\"UTF-8\">\r\n" + 
         		"\r\n" + 
         		"    <!-- Serve per ottimizzare prima i dispositi mobili e poi in base alla necessità utilizzando \r\n" + 
         		"                le query multimediali CSS. \r\n" + 
@@ -90,7 +89,7 @@ public class VisualizzazioneProdotti extends HttpServlet {
                 		" <p> Prezzo: "+pro.get(a).getPrezzo()+" Euro Ingredienti: "+pro.get(a).getIngredienti()+
                 		"                            <div class=\"login-form d-flex justify-content-center\">\r\n" + 
                         "<form action=\"Aggiungi\" method=\"POST\">"+
-                        "<input type=\"hidden\" name=\"nome\" value="+pro.get(a).getNome()+" />"+
+                        "<input type=\"hidden\" name=\"nome\" value= \""+pro.get(a).getNome()+"\" />"+
                 		"                                <input type=\"submit\" value=\"Mettilo nel menu\" class=\"btn btn-primary btn-large btn-block bg-success text-white\"> </form>\r\n" +  
                 		"                            </div>\r\n" + 
                 		"\r\n" + 
@@ -106,10 +105,10 @@ public class VisualizzazioneProdotti extends HttpServlet {
                 		"                            <div class=\"app-title\">\r\n" + 
                 		"                                <h1>Nome:"+prop.get(a).getNome() +"</h1>\r\n" + 
                 		"                            </div>\r\n" + 
-                		" <p> Prezzo: "+prop.get(a).getPrezzo()+"€ Ingredienti: "+prop.get(a).getIngredienti()+
+                		" <p> Prezzo: "+prop.get(a).getPrezzo()+" Euro Ingredienti: "+prop.get(a).getIngredienti()+
                 		"                            <div class=\"login-form d-flex justify-content-center\">\r\n" + 
                         "<form action=\"Rimuovi\" method=\"POST\">"+
-                        "<input type=\"hidden\" name=\"nome\" value="+prop.get(a).getNome()+" />"+
+                        "<input type=\"hidden\" name=\"nome\" value= \""+prop.get(a).getNome()+"\" />"+
                 		"                                <input type=\"submit\" value=\"Toglilo dal menu\" class=\"btn btn-primary btn-large btn-block bg-danger text-white\"> </form>\r\n" +  
                 		"                            </div>\r\n" + 
                 		"\r\n" + 

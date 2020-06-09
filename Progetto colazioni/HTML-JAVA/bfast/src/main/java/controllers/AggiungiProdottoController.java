@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +35,8 @@ public class AggiungiProdottoController extends HttpServlet {
 		HttpSession ses = request.getSession();
 		int s= (Integer) ses.getAttribute("ID");
 		GestioneMenu or = new GestioneMenu();
-		Menu o = or.Aggiungi(request.getParameter("nome"),s);
+		String result = request.getParameter("nome");
+		Menu o = or.Aggiungi(result,s);
 		if(o!=null) {
 	        PrintWriter writer = response.getWriter();
 	        String htmlRespone = "<script> alert('Prodotto aggiunto nel menu'); window.location = '../Dashboard/VisualizzazioneProdotti'  </script> ";

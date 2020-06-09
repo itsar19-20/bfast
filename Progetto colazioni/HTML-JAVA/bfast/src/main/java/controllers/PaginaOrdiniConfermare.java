@@ -43,7 +43,6 @@ public class PaginaOrdiniConfermare extends HttpServlet {
         		"<head>\r\n" + 
         		"    <title>Bfast</title>\r\n" + 
         		"\r\n" + 
-        		"    <meta charset=\"utf-8\">\r\n" + 
         		"\r\n" + 
         		"    <!-- Serve per ottimizzare prima i dispositi mobili e poi in base alla necessità utilizzando \r\n" + 
         		"                le query multimediali CSS. \r\n" + 

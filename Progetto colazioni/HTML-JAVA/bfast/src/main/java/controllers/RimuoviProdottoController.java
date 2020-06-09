@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,8 @@ public class RimuoviProdottoController extends HttpServlet {
 		HttpSession ses = request.getSession();
 		int s= (Integer) ses.getAttribute("ID");
 		GestioneMenu or = new GestioneMenu();
-		Menu o = or.Rimuovi(request.getParameter("nome"),s);
+		String result = (request.getParameter("nome"));
+		Menu o = or.Rimuovi(result,s);
 		if(o!=null) {
 	        PrintWriter writer = response.getWriter();
 	        String htmlRespone = "<script> alert('Prodotto rimosso correttamente dal menu'); window.location = '../Dashboard/VisualizzazioneProdotti'  </script> ";
