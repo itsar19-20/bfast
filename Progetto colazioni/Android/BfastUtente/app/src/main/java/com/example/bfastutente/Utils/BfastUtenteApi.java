@@ -120,4 +120,10 @@ public interface BfastUtenteApi {
     @GET("RimuoviCarrello")
     Call<OrdineJson>  RimuoviCarrello(@Query("ordine")String idord,@Query("nome") String nome);
 
+    @GET("OrdineConfermato")
+    Call<OrdineJson> OrdineConfermato(@Query("ordine") String idord);
+
+    @GET("FattorinoConfermato")
+    Call<OrdineJson> FattorinoConfermato(@Query("ordine") String idord);
+
 }

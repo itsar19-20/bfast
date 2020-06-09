@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 05, 2020 alle 12:00
+-- Creato il: Giu 09, 2020 alle 14:56
 -- Versione del server: 10.1.36-MariaDB
 -- Versione PHP: 7.2.10
 
@@ -171,17 +171,18 @@ INSERT INTO `contiene` (`ID`, `IDprFK`, `IDorFK`, `Quantita`) VALUES
 (73, 'tiramisù', 104, 1),
 (80, 'tiramisù', 109, 1),
 (81, 'caffe', 109, 1),
-(82, 'torta al cioccolato', 110, 1),
-(83, 'brioche', 110, 2),
 (90, 'caffe', 122, 2),
 (91, 'torta al cioccolato', 122, 1),
 (93, 'brioche', 124, 1),
 (94, 'caffe', 124, 1),
-(95, 'cheesecake', 128, 1),
 (100, 'caffe', 131, 1),
 (102, 'brioche', 132, 1),
 (107, 'muffin', 135, 1),
-(108, 'caffe', 135, 1);
+(108, 'caffe', 135, 1),
+(111, 'brioche', 138, 1),
+(112, 'cheesecake', 139, 1),
+(114, 'succo di arancia', 141, 1),
+(116, 'muffin', 141, 1);
 
 -- --------------------------------------------------------
 
@@ -369,13 +370,14 @@ INSERT INTO `ordine` (`ID`, `IDutFK`, `IDfatFK`, `IDbarFK`, `IDtiFK`, `IDinFK`, 
 (95, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-06-02', 0, 0),
 (104, 'bubu@gmail.com', NULL, 1, 1, 22, '9', 'Servizio migliorato', '2020-06-03', 1, 0),
 (109, 'bubu@gmail.com', 1, 1, 1, 22, '10', '', '2020-06-03', 1, 5),
-(110, 'bubu@gmail.com', NULL, 1, 1, 22, '10', '', '2020-06-03', 0, 0),
 (122, 'bubu@gmail.com', NULL, 1, 1, 22, '10', 'Ottimizazione app', '2020-06-04', 1, 0),
 (124, 'bubu@gmail.com', NULL, 1, 1, 22, '9', '', '2020-06-04', 0, 0),
-(128, 'bubu@gmail.com', NULL, 1, 2, 22, '10', '', '2020-06-04', 0, 0),
 (131, 'bubu@gmail.com', NULL, 1, 1, 22, '9', 'Rimozione funzionante', '2020-06-04', 0, 0),
 (132, 'bubu@gmail.com', 1, 1, 1, 22, '11', '', '2020-06-04', 1, 4),
-(135, 'bubu@gmail.com', 1, 1, 1, 22, '11', '', '2020-06-04', 1, 5);
+(135, 'bubu@gmail.com', 1, 1, 1, 22, '11', '', '2020-06-04', 1, 5),
+(138, 'bubu@gmail.com', NULL, 1, 2, 22, '10', '', '2020-06-08', 0, 0),
+(139, 'bubu@gmail.com', 1, 1, 2, 22, '10', '', '2020-06-08', 1, 4.5),
+(141, 'bubu@gmail.com', 1, 1, 1, 22, '10', '', '2020-06-08', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -672,7 +674,7 @@ ALTER TABLE `classificato`
 -- AUTO_INCREMENT per la tabella `contiene`
 --
 ALTER TABLE `contiene`
-  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `ID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT per la tabella `domanda`
@@ -708,7 +710,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT per la tabella `ordine`
 --
 ALTER TABLE `ordine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT per la tabella `possiede`

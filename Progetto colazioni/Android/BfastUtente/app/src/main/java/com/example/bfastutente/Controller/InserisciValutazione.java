@@ -40,7 +40,6 @@ public class InserisciValutazione extends AppCompatActivity {
         setContentView(R.layout.activity_valutazione);
         final EditText etval = findViewById(R.id.ETmail);
         rb = findViewById(R.id.RBval);
-        final float valutazione = rb.getRating();
         UserDBAdapter udb = new UserDBAdapter(this);
         final OrdineDBAdapter odb = new OrdineDBAdapter(this);
         session = new SessionUte(InserisciValutazione.this);
@@ -49,9 +48,10 @@ public class InserisciValutazione extends AppCompatActivity {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final float valutazione = rb.getRating();
                 String val = String.valueOf(valutazione);
                 sessionOrdine = new SessionOrdine(InserisciValutazione.this);
-               Call<OrdineJson> call = apiService.ValutazioneFattorino(String.valueOf(sessionOrdine.getIDOrd()),val);
+                Call<OrdineJson> call = apiService.ValutazioneFattorino(String.valueOf(sessionOrdine.getIDOrd()),val);
                 call.enqueue(new Callback<OrdineJson>() {
                     @Override
                     public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
