@@ -18,7 +18,7 @@ public class MarkerBarUtente {
 		Query Ris = em.createNativeQuery("SELECT b.IDinFK FROM bar as b,ordine as o "
 				+ "WHERE b.ID = "+idbar+" AND o.IDbarFK = b.ID AND o.ID = "+idord);
 		Query Ris2 = em.createNativeQuery("SELECT o.IDinFK FROM `ordine` as o "
-				+ "WHERE o.ID = "+idbar);
+				+ "WHERE o.ID = "+idord);
 		id = Ris.getResultList();
 		id2 = Ris2.getResultList();
 	    List<Indirizzo> i = new ArrayList<Indirizzo>();

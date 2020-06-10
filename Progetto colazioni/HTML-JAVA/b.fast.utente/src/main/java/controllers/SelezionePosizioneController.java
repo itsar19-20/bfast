@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import business.ConfermaPosizione;
-import model.Ordine;
+import business.Ordini;
+import model.Indirizzo;
 import utils.OrdineJson;
 
 @WebServlet("/SelezionePosizione")
@@ -32,16 +33,15 @@ public class SelezionePosizioneController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		String mail = request.getParameter("mail");
 		ConfermaPosizione au = new ConfermaPosizione();
-		Ordine b = null;
-		b = au.Seleziona(mail,request.getParameter("x"), request.getParameter("y"),request.getParameter("ordine"));
-		if (b == null) {
-			request.getRequestDispatcher("/prodotto.html").forward(request, response);
-		} else {
-			OrdineJson o = new OrdineJson();
-			o.setId(request.getParameter("ordine"));
-			ObjectMapper om = new ObjectMapper();
-			response.setContentType("application/json");
-			response.getWriter().append(om.writeValueAsString(b));			}
+		Ordini or = new Ordini();
+		Indirizzo b = null;
+		b = au.Seleziona(mail,request.getParameter("x"), request.getParameter("y"));
+		or.SetIndirizzo(b.getId(),request.getParameter("ordine"));
+		OrdineJson o = new OrdineJson();
+		o.setId(String.valueOf(b.getId()));
+		ObjectMapper om = new ObjectMapper();
+		response.setContentType("application/json");
+		response.getWriter().append(om.writeValueAsString(o));
 	}
 
 	/**

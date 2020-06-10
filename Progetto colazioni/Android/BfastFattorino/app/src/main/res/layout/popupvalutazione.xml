@@ -27,10 +27,10 @@
             android:layout_width="297dp"
             android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="100dp"
             android:height="20dp"
             android:fontFamily="@font/open_sans_light"
-            android:text="La tua valutazione media"
+            android:text="La tua valutazione "
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold" />

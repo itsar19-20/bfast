@@ -78,7 +78,7 @@ public interface BfastUtenteApi {
 
 
     @POST("SelezionePosizione")
-    Call<Indirizzo> SelezionePosizione(@Query("ordine")String id,@Query("x") String x, @Query("y") String y);
+    Call<OrdineJson> SelezionePosizione(@Query("mail")String mail,@Query("ordine")String id,@Query("x") String x, @Query("y") String y);
 
 
 

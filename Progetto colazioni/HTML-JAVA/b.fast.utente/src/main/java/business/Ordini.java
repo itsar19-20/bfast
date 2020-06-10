@@ -21,10 +21,8 @@ public class Ordini {
 		Ordine o = new Ordine();
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Utente u = em.find(Utente.class, idu);
-		Indirizzo i = em.find(Indirizzo.class, 22);
 		List<Integer> id = new ArrayList<Integer>();
 		Date date = new Date();
-		o.setIndirizzo(i);
 		o.setUtente(u);
 		o.setData(date);
 		em.getTransaction().begin();
@@ -40,6 +38,16 @@ public class Ordini {
 	        e.printStackTrace();
 	    }
 		return id;
+	}
+	
+	public void SetIndirizzo(int ind,String id) {
+		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+		Ordine o = em.find(Ordine.class, Integer.valueOf(id));
+		Indirizzo i = em.find(Indirizzo.class,ind);
+		em.getTransaction().begin();
+		o.setIndirizzo(i);
+	    em.getTransaction().commit();
+		
 	}
 	
 	public Ordine bar(int ido,int idb) {

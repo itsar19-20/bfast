@@ -15,7 +15,7 @@ public class TotaleOrdiniGiornalieri {
         int numero = 0;
         try {
     		Query Ris = em.createNativeQuery("SELECT COUNT(*) FROM ordine as o, bar as b\r\n" + 
-					"WHERE DAY(o.data) = DAY(CURRENT_DATE) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK  AND o.Confermato = 1");
+					"WHERE DAY(o.data) = DAY(CURRENT_DATE-1) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK  AND o.Confermato = 1");
     		numero = (Integer)Ris.getSingleResult();
         }catch (Exception e)
         {

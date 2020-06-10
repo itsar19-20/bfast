@@ -86,7 +86,7 @@ public class VisualizzazioneProdotti extends HttpServlet {
                 		"                            <div class=\"app-title\">\r\n" + 
                 		"                                <h1>Nome:"+pro.get(a).getNome() +"</h1>\r\n" + 
                 		"                            </div>\r\n" + 
-                		" <p> Prezzo: "+pro.get(a).getPrezzo()+" Euro Ingredienti: "+pro.get(a).getIngredienti()+
+                		" <p> Prezzo: "+pro.get(a).getPrezzo()+" &euro; Ingredienti: "+pro.get(a).getIngredienti()+
                 		"                            <div class=\"login-form d-flex justify-content-center\">\r\n" + 
                         "<form action=\"Aggiungi\" method=\"POST\">"+
                         "<input type=\"hidden\" name=\"nome\" value= \""+pro.get(a).getNome()+"\" />"+
@@ -105,7 +105,7 @@ public class VisualizzazioneProdotti extends HttpServlet {
                 		"                            <div class=\"app-title\">\r\n" + 
                 		"                                <h1>Nome:"+prop.get(a).getNome() +"</h1>\r\n" + 
                 		"                            </div>\r\n" + 
-                		" <p> Prezzo: "+prop.get(a).getPrezzo()+" Euro Ingredienti: "+prop.get(a).getIngredienti()+
+                		" <p> Prezzo: "+prop.get(a).getPrezzo()+" &euro; Ingredienti: "+prop.get(a).getIngredienti()+
                 		"                            <div class=\"login-form d-flex justify-content-center\">\r\n" + 
                         "<form action=\"Rimuovi\" method=\"POST\">"+
                         "<input type=\"hidden\" name=\"nome\" value= \""+prop.get(a).getNome()+"\" />"+

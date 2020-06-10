@@ -7,58 +7,64 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import model.Indirizzo;
-import model.Ordine;
-import model.Sceglie;
 import model.Utente;
 import utils.JPAUtil;
 
 public class ConfermaPosizione {
-	public Ordine Seleziona(String mail,String x1,String y1,String id) {
+	public Indirizzo Seleziona(String mail,String x1,String y1) {
 		Indirizzo _return = null;
 		Utente u = null;
 		double x = Double.parseDouble(x1);
 		double y = Double.parseDouble(y1);
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		u = em.find(Utente.class, mail);
-		Ordine o = em.find(Ordine.class, Integer.valueOf(id));
 		if (u != null) {
-			_return = cerca(x,y,em);		
-			em.getTransaction().begin();
-			o.setIndirizzo(_return);
-		    em.getTransaction().commit();
+			_return = cerca(x,y,em);	
 		}
 		
-		return o;
+		return _return;
 	}
 	
 	public Indirizzo cerca(double x, double y,EntityManager em) {
-		 int chk=0;
+			int chk=0;
 			Indirizzo i = null;
 			List<Integer> listid = new ArrayList<Integer> (); 
+			List<Integer> id = new ArrayList<Integer>();
 			try {
 				Query Ris = em.createNativeQuery("SELECT i.id FROM Indirizzo as i "
 						+ "WHERE i.x = "+x+" AND i.y = "+y+"");
 				listid = Ris.getResultList(); 
-				int id = listid.get(0);
-				i= em.find(Indirizzo.class, id);
+				int idz = listid.get(0);
+				i= em.find(Indirizzo.class, idz);
 			}catch (Exception e)
-	        {
+		    {
 	            chk=-1;
 	             System.out.println("HibernateException Occured!!"+e);
 	            e.printStackTrace();
-		    }
-			if(chk==0)
+			}
+			if(chk==0 && i!=null)
 			{
-			    return (i);
+				return (i);
 			}
 			else
 			{
-				try {
+			try {
 					i = new Indirizzo(); 
-					em.getTransaction().begin();
 					i.setX(x);
 					i.setY(y);
+					em.getTransaction().begin();
+					em.persist(i);
 					em.getTransaction().commit();
+					em.clear();
+				    try {
+				    	Query Ris = em.createNativeQuery("SELECT i.ID FROM indirizzo as i ORDER BY i.ID ASC");
+						id = Ris.getResultList();
+						int count = id.size();
+						i.setId(id.get(count-1));
+				    }catch(Exception e) {
+				        System.out.println("HibernateException Occured!!"+e);
+				        e.printStackTrace();
+				    }
 				    return (i);
 				}catch (NullPointerException e)
 		        {
