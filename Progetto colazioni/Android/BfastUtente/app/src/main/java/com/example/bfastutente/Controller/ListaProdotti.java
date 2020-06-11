@@ -81,9 +81,25 @@ public class ListaProdotti extends AppCompatActivity {
                     customAdapter = new CustomAdapter(lista, ListaProdotti.this);
                     listview.setAdapter(customAdapter);
                 }else{
-                    Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
-                    Intent selezione = new Intent(ListaProdotti.this, MapActivity.class);
-                    startActivity(selezione);
+                    sessionOrdine = new SessionOrdine(ListaProdotti.this);
+                    Call<OrdineJson> cancellazione = apiService.cancellazione(String.valueOf(sessionOrdine.getIDOrd()));
+                    cancellazione.enqueue(new Callback<OrdineJson>() {
+                        @Override
+                        public void onResponse(Call<OrdineJson> call, Response<OrdineJson> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(ListaProdotti.this, "Errore nel server", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(ListaProdotti.this, "Nessun prodotto attualmente disponibile", Toast.LENGTH_SHORT).show();
+                                Intent toHome = new Intent(ListaProdotti.this, MapActivity.class);
+                                startActivity(toHome);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<OrdineJson> call, Throwable t) {
+                            Toast.makeText(ListaProdotti.this, "Errore nel server", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
 

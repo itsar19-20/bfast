@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Bar;
+import model.Indirizzo;
 import business.RegistrazioneBar;
 
 
@@ -43,11 +44,16 @@ public class ConfermaRegistrazione extends HttpServlet{
 		RegistrazioneBar au = new RegistrazioneBar();
 		int s = (Integer) ses.getAttribute("ID"); 
 		Bar b = null;
-		b = au.Conregistrazione(s,request.getParameter("orarioap"),request.getParameter("orarioch"),request.getParameter("x"),request.getParameter("y"));
+		b = au.Conregistrazione(s,request.getParameter("orarioap"),request.getParameter("orarioch"));
+		Indirizzo i = null;
+		i = au.cerca(Double.parseDouble(request.getParameter("x")),Double.parseDouble(request.getParameter("y")));
+		b = au.Indirizzoreg(s, i);
 		if (b == null) {
 			request.getRequestDispatcher("../GestioneIndirizzoOrario/SetInizio.html").forward(request, response);
 		} else {
-			request.getRequestDispatcher("../Dashboard/index.html").forward(request, response);
+	        PrintWriter writer = response.getWriter();
+	        String htmlRespone = "<script> alert(\"Benvenuto:"+b.getNome()+"\"); window.location = '../Dashboard/index.html'  </script> ";
+	        writer.println(htmlRespone);
 		}
 	}
 }
