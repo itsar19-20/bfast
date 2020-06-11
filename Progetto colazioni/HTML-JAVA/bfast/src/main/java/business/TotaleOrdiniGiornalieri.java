@@ -8,15 +8,15 @@ import utils.JPAUtil;
 
 public class TotaleOrdiniGiornalieri {
 	
-	public int  Visualizza(int id) {
+	public long Visualizza(int id) {
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		Bar b = em.find(Bar.class, id);
         int chk=0;
-        int numero = 0;
+        long numero = 0;
         try {
     		Query Ris = em.createNativeQuery("SELECT COUNT(*) FROM ordine as o, bar as b\r\n" + 
 					"WHERE DAY(o.data) = DAY(CURRENT_DATE-1) AND b.id ="+b.getId()+"  AND b.id= o.IDbarFK  AND o.Confermato = 1");
-    		numero = (Integer)Ris.getSingleResult();
+    		numero = (Long)Ris.getSingleResult();
         }catch (Exception e)
         {
             chk=-1;

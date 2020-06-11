@@ -32,7 +32,7 @@ public class PaginaOrdiniGiornalieri extends HttpServlet {
 		HttpSession ses = request.getSession();
 		TotaleOrdiniGiornalieri am = new TotaleOrdiniGiornalieri();
 		int s= (Integer) ses.getAttribute("ID");
-		int t = am.Visualizza(s);
+		long t = am.Visualizza(s);
         PrintWriter writer = response.getWriter();
         String htmlRespone = "<script> alert("+t+"); window.location = '../Dashboard/index.html'  </script> ";
         writer.println(htmlRespone);
