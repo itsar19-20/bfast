@@ -53,12 +53,14 @@ public class RegistrazioneBar {
 
 	public Bar Conregistrazione(int s, String orarioap, String orarioch) {
 		Bar _return = null;
-		Indirizzo i = null;
 		EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
 		_return = em.find(Bar.class, s);
 		if (_return != null) {
+			double val = Math.random()*4+1;
+			float valu = Float.parseFloat(String.valueOf(val));
 			_return.setOrarioApertura(orarioap);
 			_return.setOrarioChiusura(orarioch);
+			_return.setValutazione(valu);
 			em.getTransaction().begin();
 		    em.persist(_return);
 		    em.getTransaction().commit();
