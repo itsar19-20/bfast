@@ -1,5 +1,6 @@
 package com.example.bfastfattorino.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
 
         final BfastFattorinoApi apiService = RetrofitUtils.getInstance().getBfastFattorinoApi();
         Button button = findViewById(R.id.Registrazione);
-        final EditText etmail = findViewById(R.id.ETpass);
+        final EditText etmail = findViewById(R.id.Etmail);
         final EditText etnome = findViewById(R.id.ETnome);
         final EditText etcognome = findViewById(R.id.ETcognome);
         final EditText etpassword = findViewById(R.id.ETpass);
@@ -50,7 +51,7 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     u.setNome(nome);
                     final String cognome=etcognome.getText().toString();
                     u.setCognome(cognome);
-                    final String nascita=etcognome.getText().toString();
+                    final String nascita=etnascita.getText().toString();
                     u.setCognome(nascita);
                     final String email=etmail.getText().toString();
                     u.setCognome(email);
@@ -58,24 +59,35 @@ public class RegistrazioneActivity extends AppCompatActivity {
                     u.setPassword(password);
                     String copass = etconfpass.getText().toString();
 
-                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass==password && nascita.length()>0 && email.length()>0) {
-                        Call<Fattorino> call = apiService.registrazione(email,password,nome,cognome,nascita);
+                    if (nome.length()>0 && cognome.length()>0 && password.length()>0 && copass.equals(password) && nascita.length()>0 && email.length()>0) {
+                        Call<Fattorino> call = apiService.registrazione(email,password,copass,nome,cognome,nascita);
                         call.enqueue(new Callback<Fattorino>() {
                                          @Override
                                          public void onResponse(Call<Fattorino> call, Response<Fattorino> response) {
-                                             Fattorino f = response.body();
-                                             udba.open();
-                                             udba.addUser(email,password,nome,cognome,nascita);
-                                             udba.close();
-                                             session.setIDfatt(f.getId());
+                                             if(response.isSuccessful()){
+                                                 Fattorino f = response.body();
+                                                 try{
+                                                     udba.open();
+                                                     udba.addUser(email,password,nome,cognome,nascita);
+                                                     udba.close();
+                                                 }catch(Exception e){
+
+                                                 }
+                                                 session = new SessionFat(RegistrazioneActivity.this);
+                                                 session.setIDfatt(f.getId());
+                                                 Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
+                                                 Intent cambia = new Intent(RegistrazioneActivity.this, DashboardActivity.class);
+                                                 startActivity(cambia);
+                                             }else{
+                                                 Toast.makeText(RegistrazioneActivity.this, "Errore di connessione col server", Toast.LENGTH_LONG).show();
+                                             }
                                          }
 
                                          @Override
                                          public void onFailure(Call<Fattorino> call, Throwable t) {
-
+                                             Toast.makeText(RegistrazioneActivity.this, "Errore di connessione col server", Toast.LENGTH_LONG).show();
                                          }
                                      });
-                        Toast.makeText(RegistrazioneActivity.this, "Creazione avvenuta",Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(RegistrazioneActivity.this, "Errore, compila tutti i campi", Toast.LENGTH_LONG).show();
                     }

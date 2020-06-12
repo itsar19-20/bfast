@@ -22,8 +22,8 @@ public interface BfastFattorinoApi {
                           @Query("password") String pwd);
 
     @GET("registrazione")
-    Call<Fattorino> registrazione(@Query("mail") String mail, @Query("password") String pwd, @Query("nome") String nome,
-                                  @Query("cognome") String cognome, @Query("data") String data);
+    Call<Fattorino> registrazione(@Query("mail") String mail, @Query("pass") String pwd,@Query("copass") String copwd,
+                                  @Query("nome") String nome, @Query("cognome") String cognome, @Query("nascita") String data);
 
 
     @GET("OrdiniDaFare")
